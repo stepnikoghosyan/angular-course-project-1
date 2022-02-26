@@ -1,0 +1,41 @@
+.header {
+  overflow: hidden;
+  background-color: #ffff;
+  padding: 20px 10px;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.header a {
+  color: black;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.header-left {
+  font-size: 25px;
+  float: left;
+  padding: 0 20px;
+}
+
+.header-right {
+  float: right;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+  cursor: pointer;
+}
+
+.active {
+  background-color: lightskyblue;
+  color: white !important;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: #cccccc !important;
+}
