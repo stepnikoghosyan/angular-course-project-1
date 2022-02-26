@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {VerifyAccountComponent} from "./verify-account/verify-account.component";
-import {NotFoundComponent} from "./not-found/not-found.component";
-import {HomeComponent} from "./home/home.component";
-
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import { HomeComponent } from "./home/home.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import { VerifyAccountComponent } from "./verify-account/verify-account.component";
 
 const routes: Routes = [
   {
@@ -19,15 +19,16 @@ const routes: Routes = [
     path: 'auth/verify-account/:access-token',
     component: VerifyAccountComponent
   },
+  { path: 'auth/reset-password/:token',
+    component: ResetPasswordComponent
+  },
   {
     path: '**',
     component: NotFoundComponent
   }
-];
-
+]
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }
