@@ -1,0 +1,12 @@
+<form [formGroup]="userRegister">
+    <label class="display">First Name</label>
+    <input formControlName="firstName">
+    <label class="display">Last Name</label>
+    <input formControlName="lastName">
+    <label class="display">Email</label>
+    <input formControlName="email">
+    <label class="display">Password</label>
+    <input formControlName="password">
+    <button (click)="register()" class="display">Sign Up</button>
+</form>
+Already a member? <a routerLink="/auth/login">Sign In</a>
