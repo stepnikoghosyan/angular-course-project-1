@@ -25,9 +25,17 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
   }
+
+  initForm(): void {
+    this.passwordForm = this.formBuilder.group({
+      newPassword: [null, [Validators.required, Validators.minLength(6)]]
+    })
+  }
+
   changePasswordType(): void {
     this.isShowPassword = !this.isShowPassword;
   }
+  
   resetPassword(): void {
     if (this.passwordForm.valid) {
       this.isLoading = true;
@@ -39,27 +47,21 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         newPassword: this.passwordForm.value.newPassword
       }
       this.resetPasswordService.resetPassword(sendObject).pipe(takeUntil(this.unsubscribe$),
-        finalize(() => { this.isLoading = false; this.passwordForm.enable() })
+        finalize(() => { this.isLoading = false; this.passwordForm.enable() }),
       )
-        .subscribe(
-          () => {
+        .subscribe({
+          next: () => {
             this.router.navigateByUrl('/home');
           },
-          (err) => {
-            this.errorMessage = err.message;
+          error: (err) => {
+            this.errorMessage = err.error.message;
           }
-        )
+        })
     }
-  }
-  initForm(): void {
-    this.passwordForm = this.formBuilder.group({
-      newPassword: [null, [Validators.required, Validators.minLength(6)]]
-    })
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

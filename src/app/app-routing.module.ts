@@ -1,10 +1,11 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 import { AuthPublicGuard } from "./auth-public.guard";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
+import { AuthGuard } from "./guards/auth.guard";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
-import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { VerifyAccountComponent } from "./verify-account/verify-account.component";
 
 const routes: Routes = [
@@ -15,13 +16,15 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth/verify-account/:access-token',
     component: VerifyAccountComponent
   },
-  { path: 'auth/reset-password/:token',
+  {
+    path: 'auth/reset-password/:token',
     component: ResetPasswordComponent
   },
   {
@@ -35,7 +38,7 @@ const routes: Routes = [
   }
 ]
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

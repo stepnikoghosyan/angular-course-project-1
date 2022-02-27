@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { AuthPublicGuard } from './auth-public.guard';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { AuthService } from './auth.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [ResetPasswordService, AuthService, AuthPublicGuard],
+  providers: [ResetPasswordService, AuthService, AuthPublicGuard, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
