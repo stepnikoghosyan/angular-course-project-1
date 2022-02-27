@@ -14,8 +14,8 @@ export class RegisterComponent {
   form: FormGroup = this.fb.group ({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required]
+    email: ['', Validators.required, Validators.email],
+    password: ['', Validators.required, Validators.minLength(5)]
   })
   
 
@@ -24,7 +24,9 @@ export class RegisterComponent {
 
   register() {
     const register = new Register(this.form.value);
-    this.authService.register(register).subscribe;
+    this.authService.register(register).subscribe();
+    console.log(123);
+    
   }
   
     

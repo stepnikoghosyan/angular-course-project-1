@@ -19,8 +19,10 @@ const routes: Routes = [
   {path:'auth/register', component:RegisterComponent},
   {path:'auth/forgot-password', component: ForgotPasswordComponent},
   {path:'auth/reset-password', component: ResetPasswordComponent},
-  {path:'auth/verify-account', component: VerifyAccountComponent, children:childRoutes},
+  {path:'auth/verify-account/:token', component: VerifyAccountComponent, children:childRoutes},
   {path:'auth/login', component:LoginComponent},
+  
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
