@@ -14,13 +14,14 @@ const childRoutes: Routes = [
   {path:'users', component: UsersComponent},
   {path:'posts', component:PostsComponent},
 ]
+
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   {path:'auth/register', component:RegisterComponent},
   {path:'auth/forgot-password', component: ForgotPasswordComponent},
   {path:'auth/reset-password', component: ResetPasswordComponent},
-  {path:'auth/verify-account/:token', component: VerifyAccountComponent, children:childRoutes},
-  {path:'auth/login', component:LoginComponent},
+  {path:'auth/verify-account/:token', component: VerifyAccountComponent},
+  {path:'auth/login', component:LoginComponent, children:childRoutes},
   
 
 ];

@@ -3,19 +3,44 @@
   <div class="form-control">
     <label>E-mail</label>
     <input  type="email" formControlName="email" />
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      <span *ngIf="form.get('email')?.hasError('email')" class="errors">
+      invalid Email
+      </span>
+      <span *ngIf="form.get('email')?.hasError('required')" class="errors">
+        Required
+      </span>
+
+    </div>
+
+ 
   </div>
   <div class="form-control">
     <label>Password</label>
     <input  type="password" formControlName="password" />
+    <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+      <span *ngIf="form.get('password')?.hasError('required')" class="errors">
+        Required
+      </span>
+    </div>
   </div>
   <div class="action">
     <button (click)="login()" class="display">Sign In</button>
+
+
   </div>
+  
+  <span class="errors">{{errorMsg}}</span>
+
   <div class="forgot">
-    <label><input type="checkbox"  >Remember me</label>
-   <a routerLink="/auth/forgot-password">forgot password </a>
+
+     <label><input type="checkbox"  >Remember me</label>
+     <a routerLink="/auth/forgot-password" >
+      forgot password 
+     </a>
   </div>
   <div class="sign-up">
     Not a member? <a routerLink="/auth/register">Register</a>
   </div>
 </form>
+<router-outlet></router-outlet>
