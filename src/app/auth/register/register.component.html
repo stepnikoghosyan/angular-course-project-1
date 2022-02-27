@@ -1,18 +1,27 @@
-<h2>register</h2>
 <form [formGroup]="form">
+  <h2>Register</h2>
   <div class="form-control">
-    <input placeholder="First Name" type="text" formControlName="firstName" />
+    <label>First Name</label>
+    <input  type="text" formControlName="firstName" />
   </div>
   <div class="form-control">
-    <input placeholder="Last Name" type="text" formControlName="lastName" />
+    <label>Last Name</label>
+    <input  type="text" formControlName="lastName" />
   </div>
   <div class="form-control">
-    <input placeholder="E-mail" type="email" formControlName="email" />
+    <label>E-mail</label>
+    <input  type="email" formControlName="email" />
   </div>
   <div class="form-control">
-    <input placeholder="Password" type="password" formControlName="password" />
+    <label>Password</label>
+    <input  type="password" formControlName="password" />
   </div>
-
+<div class="action">
   <button (click)="register()" class="display">Sign Up</button>
+ <div class="sign-in">
+  Already a member? <a routerLink="/auth/login">Sign In</a>
+ </div>
+</div>
+
+ 
 </form>
-Already a member? <a routerLink="/auth/login">Sign In</a>
