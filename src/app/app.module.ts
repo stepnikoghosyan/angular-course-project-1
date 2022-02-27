@@ -7,8 +7,8 @@ import { PostsComponent } from './posts/posts.component';
 import { AuthComponent } from './auth/auth.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './auth/login/login.component';
-import { ForgotPassvordComponent } from './auth/forgot-passvord/forgot-passvord.component';
-import { ResetPassvordComponent } from './auth/reset-passvord/reset-passvord.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
@@ -27,8 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthComponent,
     ProfileComponent,
     LoginComponent,
-    ForgotPassvordComponent,
-    ResetPassvordComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     VerifyAccountComponent,
     HeaderComponent,
     RegisterComponent

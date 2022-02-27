@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from '../auth/register/register.component'
-import { ForgotPassvordComponent } from '../auth/forgot-passvord/forgot-passvord.component';
-import { ResetPassvordComponent } from '../auth/reset-passvord/reset-passvord.component';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from '../auth/reset-password/reset-password.component';
 import { VerifyAccountComponent } from '../auth/verify-account/verify-account.component';
 import { HomeComponent } from '../home/home.component';
 import { PostsComponent } from '../posts/posts.component';
@@ -17,8 +17,8 @@ const childRoutes: Routes = [
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   {path:'auth/register', component:RegisterComponent},
-  {path:'auth/forgot-passvord', component: ForgotPassvordComponent},
-  {path:'auth/reset-passvord', component: ResetPassvordComponent},
+  {path:'auth/forgot-password', component: ForgotPasswordComponent},
+  {path:'auth/reset-password', component: ResetPasswordComponent},
   {path:'auth/verify-account', component: VerifyAccountComponent, children:childRoutes},
   {path:'auth/login', component:LoginComponent},
 ];

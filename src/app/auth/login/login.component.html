@@ -1,13 +1,21 @@
-<h2>Sign Up</h2>
-<form [formGroup]="form">
-    <div class="form-control">
-      <input placeholder="E-mail" type="email" formControlName="email" />
-    </div>
-    <div class="form-control">
-      <input placeholder="Password" type="password" formControlName="password" />
-    </div>
-  
+<form class="form" [formGroup]="form">
+  <h2>Sign Up</h2>
+  <div class="form-control">
+    <label>E-mail</label>
+    <input  type="email" formControlName="email" />
+  </div>
+  <div class="form-control">
+    <label>Password</label>
+    <input  type="password" formControlName="password" />
+  </div>
+  <div class="action">
     <button (click)="login()" class="display">Sign Up</button>
-  </form>
-<br>
-Not a member <a routerLink="/auth/register">Register?</a>
+  </div>
+  <div class="forgot">
+    <label><input type="checkbox"  >Remember me</label>
+   <a routerLink="/auth/forgot-password">forgot password </a>
+  </div>
+  <div class="sign-up">
+    Not a member? <a routerLink="/auth/register">Register</a>
+  </div>
+</form>
