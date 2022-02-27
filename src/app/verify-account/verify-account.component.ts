@@ -2,14 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotificationService} from '../services/notification.service';
 import {ActivatedRoute, Router} from "@angular/router";
-import {VerifyAccountService} from "../services/verify-account.service";
 import {catchError, Observable, of, switchMap, take} from "rxjs";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-verify-account',
   templateUrl: './verify-account.component.html',
-  styleUrls: ['./verify-account.component.scss'],
-  providers: [VerifyAccountService]
+  styleUrls: ['./verify-account.component.scss']
 })
 export class VerifyAccountComponent implements OnInit {
 
@@ -26,8 +25,8 @@ export class VerifyAccountComponent implements OnInit {
 
   constructor(private notifyService: NotificationService,
               public router: Router,
-              private verifyAccountService: VerifyAccountService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService) {
     this.validationErrors.set('required', 'Email is required')
     this.validationErrors.set('email', 'Invalid email address.')
   }
@@ -42,7 +41,7 @@ export class VerifyAccountComponent implements OnInit {
 
   onSendEmail(): void {
     this.showLoader = true;
-    this.verifyAccountService.resendActivationToken(this.emailFormGroup.value.email)
+    this.authService.resendActivationToken(this.emailFormGroup.value.email)
       .pipe(take(1),
         catchError(err => {
           this.error = err.error.message;
@@ -67,7 +66,7 @@ export class VerifyAccountComponent implements OnInit {
 
   private verifyAccount(): Observable<any> {
     return this.activatedRoute.params.pipe(take(1), switchMap(params =>
-      this.verifyAccountService.verifyAccount(params['access-token'])
+      this.authService.verifyAccount(params['access-token'])
         .pipe(take(1))
     ), catchError(err => {
       this.error = err.error.message;

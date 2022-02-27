@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthService } from '../auth.service';
-// import { ForgotPasswordDto } from '../models/auth.model';
+import { AuthService } from '../services/auth.service';
+import {NotificationService} from "../services/notification.service";
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +16,8 @@ export class ForgotPasswordComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private notifyService: NotificationService) { }
 
   ngOnInit(): void {
     this.formInit();
@@ -27,7 +28,7 @@ export class ForgotPasswordComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     })
   }
-  
+
   private formReset(): void {
     this.submitted = false;
     this.resetPasswordForm.reset();
@@ -39,25 +40,12 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.resetPasswordForm.valid) {
       this.authService.forgotPassword(this.resetPasswordForm.value).subscribe({
         error: (err: HttpErrorResponse) => {
-          switch (err.status) {
-            case 400:
-              this.errors.push(err.error.message);
-              break;
-            case 401:
-            case 403:
-              this.errors.push(err.error.message);
-              break;
-            default:
-              this.errors.push('Something went wrong');
-          }
+          this.notifyService.showError("Error", err.error.message);
         },
         next: ()=> {
           this.formReset();
         }
       })
     }
-   
   }
-
-
 }

@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, Subject, takeUntil } from 'rxjs';
-import { ResetPassword } from '../models/reset-password.model';
-import { ResetPasswordService } from '../services/reset-password.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {finalize, Subject, takeUntil} from 'rxjs';
+import {ResetPassword} from '../models/reset-password.model';
+import {AuthService} from "../services/auth.service";
+import {NotificationService} from "../services/notification.service";
 
 @Component({
   selector: 'app-reset-password',
@@ -16,11 +17,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public errorMessage!: string;
   public isShowPassword: boolean = false;
   public isLoading: boolean = false;
+
   constructor(private activatedRoute: ActivatedRoute,
-    private resetPasswordService: ResetPasswordService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) { }
+              private authService: AuthService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private notifyService: NotificationService) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -35,7 +38,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   changePasswordType(): void {
     this.isShowPassword = !this.isShowPassword;
   }
-  
+
   resetPassword(): void {
     if (this.passwordForm.valid) {
       this.isLoading = true;
@@ -46,15 +49,18 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         token: token,
         newPassword: this.passwordForm.value.newPassword
       }
-      this.resetPasswordService.resetPassword(sendObject).pipe(takeUntil(this.unsubscribe$),
-        finalize(() => { this.isLoading = false; this.passwordForm.enable() }),
+      this.authService.resetPassword(sendObject).pipe(takeUntil(this.unsubscribe$),
+        finalize(() => {
+          this.isLoading = false;
+          this.passwordForm.enable()
+        }),
       )
         .subscribe({
           next: () => {
             this.router.navigateByUrl('/home');
           },
           error: (err) => {
-            this.errorMessage = err.error.message;
+            this.notifyService.showError("Error", err.error.message);
           }
         })
     }

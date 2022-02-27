@@ -5,20 +5,21 @@
   <div *ngIf="showLoader" class="loader">
     <app-loader></app-loader>
   </div>
-  <button type="button" class="re-send-button" (click)="onResendClick()">Re-send activation token</button>
+  <button type="button" class="btn-primary btn re-send-button" (click)="onResendClick()">Re-send activation token</button>
 
   <form *ngIf="expandEmailGroup"
         [formGroup]="emailFormGroup" (ngSubmit)="onSendEmail()">
-    <span>Email</span>
+    <label>Email</label>
     <input placeholder="Email" type="email" formControlName="email"/>
     <ng-container *ngIf="isMailInvalid()">
-      <div *ngFor="let validation of getValidationError()" class="error-message">
+      <div *ngFor="let validation of getValidationError()" class="error-message error">
         {{validation}}
       </div>
     </ng-container>
-    <button type="submit" class="send-email-button">Send Email</button>
+    <button type="submit" class="btn-primary btn send-email-button">Send Email</button>
   </form>
-
-  <button type="button" class="sign-in-button" (click)="router.navigateByUrl('/login')">Sign In</button>
-  <button type="button" class="sign-up-button" (click)="router.navigateByUrl('/registration')">Sign Up</button>
+  <div class="btn-group justify-content">
+    <button type="button" class="btn-secondary btn" (click)="router.navigateByUrl('/login')">Sign In</button>
+    <button type="button" class="btn-secondary btn" (click)="router.navigateByUrl('/registration')">Sign Up</button>
+  </div>
 </form>

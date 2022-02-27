@@ -1,10 +1,9 @@
 .verify-account-form {
-  border: 1px solid #BFBFBF;
   padding: 15px 26px;
   border-radius: 5px;
-  box-shadow: 3px 5px 26px 8px #888888;
-  font-family: 'Trebuchet MS', sans-serif;
-  margin: 10% 35% 0 35%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  margin: 15% 35% 0 35%;
+  background-color: white;
   display: inline-block;
 }
 
@@ -16,47 +15,13 @@ div {
   text-align: center;
 }
 
-button {
-  display: inline;
-  padding: 14px 14px;
-  margin: 4% auto;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: 'Trebuchet MS', sans-serif;
-  background-color: dodgerblue;
-  color: black;
-  width: 30%;
+form .btn-group {
+  margin-top: 30px;
 }
-
 .re-send-button {
-  display: block;
   background-color: #888888;
-  color: white;
   padding: 4% 18%;
-  font-size: 18px;
-  width: 100%;
-}
-
-.sign-in-button {
-  float: left;
-}
-.sign-up-button {
-  float: right;
-}
-
-.loader {
-  margin: 6% 0 15% 40%;
-}
-
-input {
-  width: 100%;
-  padding: 12px 10px;
-  margin: 6px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 5px;
+  margin: 4% auto;
 }
 
 .send-email-button {
@@ -65,7 +30,7 @@ input {
   width: 100%;
 }
 
-.error-message {
-  color: red;
-  text-align: left;
+.error {
+ text-align: left;
+  margin: 6% auto;
 }

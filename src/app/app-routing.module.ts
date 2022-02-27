@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthPublicGuard } from "./auth-public.guard";
+import { AuthPublicGuard } from "./guards/auth-public.guard";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { HomeComponent } from "./home/home.component";
@@ -11,7 +11,7 @@ import { VerifyAccountComponent } from "./verify-account/verify-account.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: 'auth/login',
     pathMatch: 'full'
   },
   {
@@ -21,11 +21,13 @@ const routes: Routes = [
   },
   {
     path: 'auth/verify-account/:access-token',
-    component: VerifyAccountComponent
+    component: VerifyAccountComponent,
+    canActivate: [AuthPublicGuard]
   },
   {
     path: 'auth/reset-password/:token',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
+    canActivate: [AuthPublicGuard],
   },
   {
     path: 'auth/forgot-password',
