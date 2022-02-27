@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Register } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,42 +8,24 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  userRegister = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
-  })
-  get fisrtName() {
-    return this.userRegister.get('firstName')
-  }
-  get lastName() {
-    return this.userRegister.get('lastName')
-  }
-  get email() {
-    return this.userRegister.get('email')
-  }
-  get password() {
-    return this.userRegister.get('password')
-  }
+export class RegisterComponent {
 
-  constructor(private registerService: AuthService) { }
+
+  form: FormGroup = this.fb.group ({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  })
+  
+
+
+  constructor(private authService: AuthService, private fb: FormBuilder) { }
 
   register() {
-    const register = {
-      email: this.email!.value,
-      password: this.password!.value,
-      firstName: this.fisrtName!.value,
-      lastName: this.lastName!.value
-    }
-    if(this.userRegister.valid) {
-      this.registerService.register(register).subscribe()
-    }
+    const register = new Register(this.form.value);
+    this.authService.register(register).subscribe;
+  }
+  
     
-  }
-
-  ngOnInit(): void {
-  }
-
 }

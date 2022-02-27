@@ -1,14 +1,13 @@
-<h1>Sign Up</h1>
-<form [formGroup]="userData">
-    <label>Email</label>
-    <input formControlName="email">
-    <span *ngIf="email!.hasError('email') && email!.touched && email!.dirty">please giv the mail</span>
-    <br>
-    <label>Password</label>
-    <input formControlName="password" type="password">
-    <span *ngIf="password!.hasError('minlength') && password!.touched">min length password 5</span>
-    <br>
-    <button (click)="login()">Sign in</button>
-</form>
+<h2>Sign Up</h2>
+<form [formGroup]="form">
+    <div class="form-control">
+      <input placeholder="E-mail" type="email" formControlName="email" />
+    </div>
+    <div class="form-control">
+      <input placeholder="Password" type="password" formControlName="password" />
+    </div>
+  
+    <button (click)="login()" class="display">Sign Up</button>
+  </form>
 <br>
 Not a member <a routerLink="/auth/register">Register?</a>

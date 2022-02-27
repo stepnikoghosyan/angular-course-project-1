@@ -8,7 +8,7 @@ import { Login, Register } from '../models/auth.model';
 export class AuthService {
 
   constructor(private http:HttpClient) { }
-  postLogin(body:Login) {
+  login(body:Login) {
     return this.http.post('https://angular-course-1.herokuapp.com/auth/login',body)
   }
 
