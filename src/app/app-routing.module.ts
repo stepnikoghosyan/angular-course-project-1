@@ -1,5 +1,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
+import { AuthPublicGuard } from "./auth-public.guard";
+import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
@@ -21,6 +23,11 @@ const routes: Routes = [
   },
   { path: 'auth/reset-password/:token',
     component: ResetPasswordComponent
+  },
+  {
+    path: 'auth/forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [AuthPublicGuard],
   },
   {
     path: '**',
