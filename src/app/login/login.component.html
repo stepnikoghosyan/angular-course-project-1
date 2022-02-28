@@ -23,6 +23,9 @@
       </div>
     </div>
     <button class="btn-primary btn sign-in-button">Sign In</button>
+    <div *ngIf="isLoading" class="loader">
+      <app-loader></app-loader>
+    </div>
     <div class="remember-forgot">
       <input class="checkbox" type="checkbox" formControlName="remember">
       <span>Remember me</span>

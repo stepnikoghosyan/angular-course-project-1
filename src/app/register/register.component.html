@@ -33,6 +33,9 @@
       </div>
     </div>
     <button class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
+    <div *ngIf="isLoading" class="loader">
+      <app-loader></app-loader>
+    </div>
   </form>
   <div class="already-member">
     <span>Already a member?  </span><a routerLink="/login">Sign in</a>

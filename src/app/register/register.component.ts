@@ -4,6 +4,7 @@ import {RegisterDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -21,19 +22,24 @@ export class RegisterComponent {
 
   errors: string[] = [];
 
+  public isLoading: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private router: Router) {
   }
 
   onSubmit(): void {
     const dto = new RegisterDto(this.form.value);
+    this.isLoading = true;
     this.authService.register(dto).subscribe({
       next: (data) => {
-        console.log(data);
-        this.errors = [];
+        this.isLoading = false;
+        this.router.navigateByUrl('/login');
       },
       error: (err: HttpErrorResponse) => {
+        this.isLoading = false;
         this.notifyService.showError("Error", err.error.message);
       }
     });

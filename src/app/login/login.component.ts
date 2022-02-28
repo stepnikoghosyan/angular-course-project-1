@@ -4,6 +4,7 @@ import {LoginDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -18,17 +19,24 @@ export class LoginComponent {
     remember: ['']
   });
   showPass: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private router: Router) {
   }
 
   onSubmit(): void {
     const dto = new LoginDto(this.form.value);
+    this.isLoading = true;
     this.authService.login(dto).subscribe({
       error: (err: HttpErrorResponse) => {
+        this.isLoading = false;
         this.notifyService.showError("Error", err.error.message);
+      }, next: () => {
+        this.isLoading = false;
+        this.router.navigateByUrl('/home');
       }
     })
   }
