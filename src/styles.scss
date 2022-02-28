@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import '~ngx-toastr/toastr';
 .errors{
     color: rgb(204, 9, 9);
     margin-left: 100px;

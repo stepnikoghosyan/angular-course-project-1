@@ -23,16 +23,19 @@ export class LoginComponent implements OnInit {
     private router:Router
   ) { }
   ngOnInit(): void {
+ 
     this.errorMsg = '';
   }
 
 
   login() {
+
+    const auth = localStorage.getItem('token');
     const login = new Login(this.form.value);
     this.authService.login(login).subscribe(
       () => {
 
-       //  this.router.navigate(['/home'])
+         this.router.navigate(['/home'])
 
        
       }, (error: any) => {

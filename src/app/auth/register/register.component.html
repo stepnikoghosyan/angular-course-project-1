@@ -46,6 +46,8 @@
 <div class="action">
   <button (click)="register()" class="display" >Sign Up</button>
   <p class="errors">{{errorMsg }}</p>
+  <p class="errors">{{message}}</p>
+  <p style="color:green;">{{successMsg}}</p>
  <div class="sign-in">
   Already a member? <a routerLink="/auth/login">Sign In</a>
  </div>
