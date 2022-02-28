@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotificationService} from '../services/notification.service';
 import {ActivatedRoute, Router} from "@angular/router";
-import {catchError, Observable, of, switchMap, take} from "rxjs";
+import {Observable, switchMap, take} from "rxjs";
 import {AuthService} from "../services/auth.service";
 
 @Component({
@@ -20,7 +20,6 @@ export class VerifyAccountComponent implements OnInit {
 
   public validationErrors: Map<string, string> = new Map();
   public expandEmailGroup: boolean = false;
-  public error: string = '';
   public showLoader: boolean = true;
 
   constructor(private notifyService: NotificationService,
@@ -32,7 +31,12 @@ export class VerifyAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.verifyAccount().subscribe(response => this.showNotifications(response))
+    this.verifyAccount()
+      .subscribe(_ => {
+        this.showNotifications(true);
+      }, (err => {
+        this.showNotifications(false, err.error.message);
+      }));
   }
 
   onResendClick(): void {
@@ -42,13 +46,13 @@ export class VerifyAccountComponent implements OnInit {
   onSendEmail(): void {
     this.showLoader = true;
     this.authService.resendActivationToken(this.emailFormGroup.value.email)
-      .pipe(take(1),
-        catchError(err => {
-          this.error = err.error.message;
-          return of(false);
-        })).subscribe(success => {
-      this.showNotifications(success)
-    });
+      .pipe(
+        take(1))
+      .subscribe(_ => {
+        this.showNotifications(true);
+      }, (err => {
+        this.showNotifications(false, err.error.message);
+      }));
   }
 
   isMailInvalid(): boolean {
@@ -67,20 +71,16 @@ export class VerifyAccountComponent implements OnInit {
   private verifyAccount(): Observable<any> {
     return this.activatedRoute.params.pipe(take(1), switchMap(params =>
       this.authService.verifyAccount(params['access-token'])
-        .pipe(take(1))
-    ), catchError(err => {
-      this.error = err.error.message;
-      return of(false);
-    }))
+        .pipe(take(1))));
   }
 
-  private showNotifications(success: any): void {
+  private showNotifications(success: boolean, errorMessage?: string): void {
     this.showLoader = false;
     if (success) {
       this.notifyService.showSuccess("Success", "Account verified");
       this.router.navigateByUrl('/login');
     } else {
-      this.notifyService.showError("Error", this.error);
+      this.notifyService.showError("Error", errorMessage!);
     }
   }
 }

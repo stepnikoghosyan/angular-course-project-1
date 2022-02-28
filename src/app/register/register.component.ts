@@ -5,6 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,7 @@ export class RegisterComponent {
   onSubmit(): void {
     const dto = new RegisterDto(this.form.value);
     this.isLoading = true;
-    this.authService.register(dto).subscribe({
+    this.authService.register(dto).pipe(take(1)).subscribe({
       next: (data) => {
         this.isLoading = false;
         this.router.navigateByUrl('/login');

@@ -5,6 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,7 @@ export class LoginComponent {
   onSubmit(): void {
     const dto = new LoginDto(this.form.value);
     this.isLoading = true;
-    this.authService.login(dto).subscribe({
+    this.authService.login(dto).pipe(take(1)).subscribe({
       error: (err: HttpErrorResponse) => {
         this.isLoading = false;
         this.notifyService.showError("Error", err.error.message);
