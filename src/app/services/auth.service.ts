@@ -1,11 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
 import {ForgotPasswordModel} from '../models/forgot.password.model';
 import {ResetPassword} from "../models/reset-password.model";
+import {LoginDto, LoginResponse, RegisterDto} from "../models/auth.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,28 @@ import {ResetPassword} from "../models/reset-password.model";
 export class AuthService {
   constructor(private httpClient: HttpClient,
               private router: Router) {
+  }
+
+  login(loginDto: LoginDto): Observable<LoginResponse> {
+    return this.httpClient
+      .post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginDto)
+      .pipe(
+        tap((data: LoginResponse) => {
+            localStorage.setItem('auth', JSON.stringify(data));
+            this.router.navigateByUrl('/home');
+          }
+        )
+      );
+  }
+
+  register(registerDto: RegisterDto): Observable<void> {
+    return this.httpClient.post<void>(`${environment.apiUrl}/auth/register`, registerDto);
+  }
+
+
+  logout() {
+    localStorage.removeItem('auth');
+    this.router.navigateByUrl('/login');
   }
 
   forgotPassword(model: ForgotPasswordModel): Observable<void> {

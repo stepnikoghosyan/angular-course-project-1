@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../auth.service";
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RegisterDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NotificationService} from "../services/notification.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -19,9 +20,13 @@ export class RegisterComponent {
   });
 
   errors: string[] = [];
-  constructor(private formBuilder: FormBuilder,private authService: AuthService) {}
 
-  onSubmit() : void {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private notifyService: NotificationService) {
+  }
+
+  onSubmit(): void {
     const dto = new RegisterDto(this.form.value);
     this.authService.register(dto).subscribe({
       next: (data) => {
@@ -29,17 +34,7 @@ export class RegisterComponent {
         this.errors = [];
       },
       error: (err: HttpErrorResponse) => {
-        switch (err.status) {
-          case 400:
-            this.errors = err.error.message;
-            break;
-          case 409:
-            this.errors.push('Email is already exists.');
-            break;
-          default:
-            this.errors.push("Something went wrong.");
-        }
-        this.errors = err.error.message;
+        this.notifyService.showError("Error", err.error.message);
       }
     });
   }

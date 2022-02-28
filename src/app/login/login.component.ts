@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../auth.service";
 import {LoginDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NotificationService} from "../services/notification.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -16,32 +17,20 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
     remember: ['']
   });
-  errors: string[] = [];
   showPass: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private notifyService: NotificationService) {
   }
 
   onSubmit(): void {
-    this.errors = [];
     const dto = new LoginDto(this.form.value);
-    this.authService.login(dto).subscribe(
-      {
-        error: (err: HttpErrorResponse) => {
-          switch (err.status) {
-            case 400:
-              this.errors = err.error.message;
-              break;
-            case 401:
-            case 403:
-              this.errors.push('Email is already exists.');
-              break;
-            default:
-              this.errors.push("Something went wrong.");
-          }
-        }
-      })
+    this.authService.login(dto).subscribe({
+      error: (err: HttpErrorResponse) => {
+        this.notifyService.showError("Error", err.error.message);
+      }
+    })
   }
 
   togglePass(): void {
