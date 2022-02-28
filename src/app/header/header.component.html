@@ -3,7 +3,7 @@
     <a routerLink="/" class="title"> Angular Course</a>
   </div>
   <div class="flex-container push">
-    <a routerLink="/home" > Home </a>
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" > Home </a>
     <a routerLink="" (click)="onLogout($event)"> Logout </a>
   </div>
 </header>
