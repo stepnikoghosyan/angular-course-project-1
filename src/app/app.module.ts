@@ -14,6 +14,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {AuthGuard} from './guards/auth.guard';
     VerifyAccountComponent,
     HeaderComponent,
     HomeComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
