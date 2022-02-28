@@ -1,7 +1,8 @@
 .login-container {
   position: relative;
-  width: 22%;
-  margin: 20vh auto;
+  max-width: 35%;
+  min-width: 350px;
+  margin: 8vh auto;
   background-color: #fff;
   padding: 50px;
   border-radius: 5px;
@@ -28,20 +29,36 @@
 }
 
 .remember-forgot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   font-size: 14px;
   margin: 20px auto;
-
   span {
     padding: 0 10% 0 3%;
   }
 }
-
+.flex-container {
+  width: 50%;
+}
+.flex-container:first-child {
+  display: flex;
+  align-items: baseline;
+  & > label {
+    margin-left: 10px;
+  }
+}
+.flex-container:last-child {
+  display: flex;
+  justify-content: end;
+}
 .not-member {
-  text-align: center;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
   font-size: 14px;
-  margin: 20px auto;
 
   span {
-    padding: 0 10% 0 3%;
+    margin-right: 5px;
   }
 }

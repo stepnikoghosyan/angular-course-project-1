@@ -9,10 +9,10 @@ export class NotificationService {
   }
 
   showSuccess(title: string, message: string) {
-    this.toastr.success(message, title, {timeOut: 2000});
+    this.toastr.success(message, title, {timeOut: 5000});
   }
 
   showError(title: string, message: string) {
-    this.toastr.error(message, title, {timeOut: 2000});
+    this.toastr.error(message, title, {timeOut: 5000});
   }
 }

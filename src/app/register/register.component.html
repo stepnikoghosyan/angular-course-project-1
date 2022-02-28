@@ -32,7 +32,7 @@
           Min length should be at least {{form.controls['password'].getError('minlength').requiredLength}} digites</p>
       </div>
     </div>
-    <button class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
+    <button [disabled]="form.invalid" class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
     <div *ngIf="isLoading" class="loader">
       <app-loader></app-loader>
     </div>

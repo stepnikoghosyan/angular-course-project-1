@@ -1,7 +1,9 @@
-<header class="header">
-  <div class="header-left">Angular Course</div>
-
-  <div class="header-right">
-    <a routerLink="home">Home</a>
+<header>
+  <div>
+    <a routerLink="/" class="title"> Angular Course</a>
+  </div>
+  <div class="flex-container push">
+    <a routerLink="/home" > Home </a>
+    <a routerLink="" (click)="onLogout($event)"> Logout </a>
   </div>
 </header>

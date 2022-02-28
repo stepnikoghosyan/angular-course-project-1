@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent {
 
-  form: FormGroup = this.formBuilder.group({
+  form = this.formBuilder.group({
     firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
@@ -31,17 +31,19 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    const dto = new RegisterDto(this.form.value);
-    this.isLoading = true;
-    this.authService.register(dto).subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        this.router.navigateByUrl('/login');
-      },
-      error: (err: HttpErrorResponse) => {
-        this.isLoading = false;
-        this.notifyService.showError("Error", err.error.message);
-      }
-    });
+    if(this.form.valid){
+      const dto = new RegisterDto(this.form.value);
+      this.isLoading = true;
+      this.authService.register(dto).subscribe({
+        next: (data) => {
+          this.isLoading = false;
+          this.router.navigateByUrl('/login');
+        },
+        error: (err: HttpErrorResponse) => {
+          this.isLoading = false;
+          this.notifyService.showError("Error", err.error.message);
+        }
+      });
+    }
   }
 }

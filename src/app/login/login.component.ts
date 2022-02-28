@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  form: FormGroup = this.formBuilder.group({
+  form = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     remember: ['']
@@ -28,17 +28,20 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    const dto = new LoginDto(this.form.value);
-    this.isLoading = true;
-    this.authService.login(dto).subscribe({
-      error: (err: HttpErrorResponse) => {
-        this.isLoading = false;
-        this.notifyService.showError("Error", err.error.message);
-      }, next: () => {
-        this.isLoading = false;
-        this.router.navigateByUrl('/home');
-      }
-    })
+    console.log(this.form.controls['remember'].value);
+    if(this.form.valid){
+      const dto = new LoginDto(this.form.value);
+      this.isLoading = true;
+      this.authService.login(dto,this.form.controls['remember'].value).subscribe({
+        error: (err: HttpErrorResponse) => {
+          this.isLoading = false;
+          this.notifyService.showError("Error", err.error.message);
+        }, next: () => {
+          this.isLoading = false;
+          this.router.navigateByUrl('/home');
+        }
+      })
+    }
   }
 
   togglePass(): void {
