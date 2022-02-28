@@ -1,0 +1,28 @@
+<div class="login-container">
+  <h2>Sign Up</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <div class="label">First name</div>
+      <input type="text" formControlName="firstName">
+    </div>
+    <div class="form-control">
+       <div class="label">Last name</div>
+      <input type="text" formControlName="lastName">
+    </div>
+    <div class="form-control">
+       <div class="label">Email</div>
+      <input type="email"  formControlName="email">
+    </div>
+    <div class="form-control">
+       <div class="label">Password</div>
+      <input type="password"  formControlName="password">
+    </div>
+    <button>Submit</button>
+    <ul class="error">
+      <li *ngFor="let err of errors">{{err}}</li>
+    </ul>
+  </form>
+  <div class="form-control">
+    <span>Already a member?  </span><a routerLink="/login">Sign in</a>
+  </div>
+</div>

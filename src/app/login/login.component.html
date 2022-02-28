@@ -1,0 +1,38 @@
+<div class="login-container">
+  <h2>Sign In</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <div class="label">Email</div>
+      <input type="email" formControlName="email">
+      <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+        <p class="error" *ngIf="form.controls['email'].errors?.['required']">Email is required </p>
+        <p class="error" *ngIf="form.controls['email'].errors?.['email']">Incorect Email address</p>
+      </div>
+    </div>
+    <div class="form-control">
+      <div class="label">Password</div>
+      <input [type]="showPass ? 'text' : 'password'"  formControlName="password">
+      <i *ngIf="!showPass"  class="far fa-eye" (click)="togglePass()"></i>
+      <i *ngIf="showPass" class="fas fa-eye-slash fa-fw" (click)="togglePass()"></i>
+      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+        <p class="error" *ngIf="form.controls['password'].errors?.['required']">Password is required </p>
+        <p class="error" *ngIf="form.controls['password'].errors?.['minLength']">
+          Min langth should be atleast {{form.controls['password'].getError('minLenght').requiredLength}} digites</p>
+      </div>
+    </div>
+    <div class="form-control">
+      <div class="label">Remember me</div>
+      <input class="checkbox" type="checkbox" formControlName="remember">
+    </div>
+    <div class="form-control">
+      <a routerLink="/forgot_password">Forgot password?</a>
+    </div>
+    <div class="form-control">
+      <span>Not a member?  </span><a routerLink="/register">Register</a>
+    </div>
+    <button>Submit</button>
+    <ul class="error">
+      <li *ngFor="let err of errors">{{err}}</li>
+    </ul>
+  </form>
+</div>
