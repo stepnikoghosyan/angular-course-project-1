@@ -7,12 +7,24 @@ import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { VerifyAccountComponent } from "./verify-account/verify-account.component";
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/login',
+    redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component : LoginComponent,
+    canActivate: [AuthPublicGuard]
+  },
+  {
+    path: 'register',
+    component : RegisterComponent,
+    canActivate: [AuthPublicGuard]
   },
   {
     path: 'home',

@@ -1,28 +1,43 @@
-<div class="login-container">
+<div class="register-container">
   <h2>Sign Up</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-control">
-      <div class="label">First name</div>
-      <input type="text" formControlName="firstName">
+    <div>
+      <label>First Name</label>
+      <input type="text" formControlName="firstName" placeholder="First Name">
+      <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
+        <p class="error-message" *ngIf="form.controls['firstName'].errors?.['required']">First Name is required </p>
+      </div>
     </div>
-    <div class="form-control">
-       <div class="label">Last name</div>
-      <input type="text" formControlName="lastName">
+    <div>
+      <label>Last Name</label>
+      <input type="text" formControlName="lastName" placeholder="Last Name">
+      <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
+        <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required </p>
+      </div>
     </div>
-    <div class="form-control">
-       <div class="label">Email</div>
-      <input type="email"  formControlName="email">
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Email">
+      <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required </p>
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Incorrect Email address</p>
+      </div>
     </div>
-    <div class="form-control">
-       <div class="label">Password</div>
-      <input type="password"  formControlName="password">
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="Password">
+      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+        <p class="error-message" *ngIf="form.controls['password'].errors?.['required']">Password is required </p>
+        <p class="error-message" *ngIf="form.controls['password'].errors?.['minlength']">
+          Min length should be at least {{form.controls['password'].getError('minlength').requiredLength}} digites</p>
+      </div>
     </div>
-    <button>Submit</button>
-    <ul class="error">
+    <button class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
+    <ul class="error-message">
       <li *ngFor="let err of errors">{{err}}</li>
     </ul>
   </form>
-  <div class="form-control">
+  <div class="already-member">
     <span>Already a member?  </span><a routerLink="/login">Sign in</a>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {RegisterDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -12,10 +12,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class RegisterComponent {
 
   form: FormGroup = this.formBuilder.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
-    password: [''],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   errors: string[] = [];

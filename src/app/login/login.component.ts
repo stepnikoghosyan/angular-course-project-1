@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
-import {LoginDto, LoginResponse} from "../models/auth.model";
-import {Router} from "@angular/router";
+import {LoginDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
@@ -10,18 +9,19 @@ import {HttpErrorResponse} from "@angular/common/http";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent{
+export class LoginComponent {
 
   form: FormGroup = this.formBuilder.group({
-    email: [''],
-    password: [''],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     remember: ['']
   });
   errors: string[] = [];
   showPass: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService,
-             ) { }
+              private authService: AuthService) {
+  }
 
   onSubmit(): void {
     this.errors = [];
@@ -47,5 +47,4 @@ export class LoginComponent{
   togglePass(): void {
    this.showPass = !this.showPass;
   }
-
 }
