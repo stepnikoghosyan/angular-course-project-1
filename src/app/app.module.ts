@@ -1,33 +1,44 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {VerifyAccountComponent} from './verify-account/verify-account.component';
+import {SharedModule} from "./shared.module";
+import {HomeComponent} from './home/home.component';
+import {HeaderComponent} from './header/header.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
+import {AuthPublicGuard} from './guards/auth-public.guard';
+import {AuthGuard} from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {AppRoutingModule} from "./app.routing.module";
-import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
-import {AuthService} from "./auth.service";
-import { HomeComponent } from './home/home.component';
-import {AuthGuard} from "./auth.guard";
-import {AuthPublicGuard} from "./auth-public.guard";
-import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ResetPasswordComponent,
+    VerifyAccountComponent,
+    HeaderComponent,
+    HomeComponent,
+    ForgotPasswordComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
-    VerifyAccountComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    SharedModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [AuthService,AuthGuard,AuthPublicGuard],
+  providers: [AuthPublicGuard, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

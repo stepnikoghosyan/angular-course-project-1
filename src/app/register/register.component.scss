@@ -1,48 +1,23 @@
-.login-container {
+.register-container {
   position: relative;
-  width: 320px;
+  width: 22%;
   margin: 20vh auto;
   background-color: #fff;
-  padding: 32px;
-}
-.login-container h2 {
-  text-align: center;
-}
-.login-container .label {
-  margin-bottom: 8px;
-}
-.form-control {
-  position: relative;
-  margin-bottom: 16px;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-input {
-  font-size: 18px;
-  padding: 5px 10px;
-  width: 93%;
-  border-radius: 4px;
-  outline: 0;
-  border: 1px solid #cbc2c2;
-}
-form i {
-  margin-left: -30px;
-  cursor: pointer;
-}
-.error{
-  color:red;
-  font-size: 12px;
-}
-.checkbox {
-  width: auto;
-}
-
-button {
-  position: relative;
+.sign-up-button {
   width: 100%;
-  font-size: 18px;
-  background-color: #5482eb;
-  border: 0;
-  border-radius: 3px;
-  padding: 14px;
-  cursor: pointer;
+  margin: 8% auto
+}
+
+.already-member {
+  text-align: center;
+  font-size: 14px;
+
+  span {
+    padding: 0 10% 0 3%;
+  }
 }

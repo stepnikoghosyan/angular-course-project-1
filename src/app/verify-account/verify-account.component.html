@@ -1,1 +1,25 @@
-<p>verify-account works!</p>
+<form class="verify-account-form">
+  <h2>Verify Account</h2>
+  <div>Verifying your account, please wait...</div>
+
+  <div *ngIf="showLoader" class="loader">
+    <app-loader></app-loader>
+  </div>
+  <button type="button" class="btn-primary btn re-send-button" (click)="onResendClick()">Re-send activation token</button>
+
+  <form *ngIf="expandEmailGroup"
+        [formGroup]="emailFormGroup" (ngSubmit)="onSendEmail()">
+    <label>Email</label>
+    <input placeholder="Email" type="email" formControlName="email"/>
+    <ng-container *ngIf="isMailInvalid()">
+      <div *ngFor="let validation of getValidationError()" class="error-message error">
+        {{validation}}
+      </div>
+    </ng-container>
+    <button type="submit" class="btn-primary btn send-email-button">Send Email</button>
+  </form>
+  <div class="btn-group justify-content">
+    <button type="button" class="btn-secondary btn" (click)="router.navigateByUrl('/login')">Sign In</button>
+    <button type="button" class="btn-secondary btn" (click)="router.navigateByUrl('/registration')">Sign Up</button>
+  </div>
+</form>

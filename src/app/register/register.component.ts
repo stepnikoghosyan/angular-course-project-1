@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {AuthService} from "../auth.service";
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RegisterDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NotificationService} from "../services/notification.service";
+import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -12,34 +14,33 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class RegisterComponent {
 
   form: FormGroup = this.formBuilder.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
-    password: [''],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   errors: string[] = [];
-  constructor(private formBuilder: FormBuilder,private authService: AuthService) {}
 
-  onSubmit() : void {
+  public isLoading: boolean = false;
+
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private notifyService: NotificationService,
+              private router: Router) {
+  }
+
+  onSubmit(): void {
     const dto = new RegisterDto(this.form.value);
+    this.isLoading = true;
     this.authService.register(dto).subscribe({
       next: (data) => {
-        console.log(data);
-        this.errors = [];
+        this.isLoading = false;
+        this.router.navigateByUrl('/login');
       },
       error: (err: HttpErrorResponse) => {
-        switch (err.status) {
-          case 400:
-            this.errors = err.error.message;
-            break;
-          case 409:
-            this.errors.push('Email is already exists.');
-            break;
-          default:
-            this.errors.push("Something went wrong.");
-        }
-        this.errors = err.error.message;
+        this.isLoading = false;
+        this.notifyService.showError("Error", err.error.message);
       }
     });
   }

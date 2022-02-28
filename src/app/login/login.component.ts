@@ -1,51 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {AuthService} from "../auth.service";
-import {LoginDto, LoginResponse} from "../models/auth.model";
-import {Router} from "@angular/router";
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LoginDto} from "../models/auth.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NotificationService} from "../services/notification.service";
+import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent{
+export class LoginComponent {
 
   form: FormGroup = this.formBuilder.group({
-    email: [''],
-    password: [''],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     remember: ['']
   });
-  errors: string[] = [];
   showPass: boolean = false;
+  public isLoading: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-             ) { }
+              private notifyService: NotificationService,
+              private router: Router) {
+  }
 
   onSubmit(): void {
-    this.errors = [];
     const dto = new LoginDto(this.form.value);
-    this.authService.login(dto).subscribe(
-      {
-        error: (err: HttpErrorResponse) => {
-          switch (err.status) {
-            case 400:
-              this.errors = err.error.message;
-              break;
-            case 401:
-            case 403:
-              this.errors.push('Email is already exists.');
-              break;
-            default:
-              this.errors.push("Something went wrong.");
-          }
-        }
-      })
+    this.isLoading = true;
+    this.authService.login(dto).subscribe({
+      error: (err: HttpErrorResponse) => {
+        this.isLoading = false;
+        this.notifyService.showError("Error", err.error.message);
+      }, next: () => {
+        this.isLoading = false;
+        this.router.navigateByUrl('/home');
+      }
+    })
   }
 
   togglePass(): void {
    this.showPass = !this.showPass;
   }
-
 }
