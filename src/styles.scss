@@ -95,6 +95,11 @@
   .btn-group button ~ button {
     margin-left: 35px;
   }
+.btn-primary:disabled,
+.btn-primary[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
   .error-message {
     color: red;
     font-size: 14px;
@@ -115,4 +120,10 @@ input {
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
+}
+.container {
+  position: relative;
+  width: 90%;
+  margin: 100px auto 0 auto;
+  padding: 20px;
 }

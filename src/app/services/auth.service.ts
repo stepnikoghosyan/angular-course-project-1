@@ -17,12 +17,16 @@ export class AuthService {
               private router: Router) {
   }
 
-  login(loginDto: LoginDto): Observable<LoginResponse> {
+  login(loginDto: LoginDto, rememberMe: boolean): Observable<LoginResponse> {
     return this.httpClient
       .post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginDto)
       .pipe(
         tap((data: LoginResponse) => {
-            localStorage.setItem('auth', JSON.stringify(data));
+            if(rememberMe){
+              localStorage.setItem('auth', JSON.stringify(data));
+            }else{
+              sessionStorage.setItem('auth',JSON.stringify(data));
+            }
             this.router.navigateByUrl('/home');
           }
         )
@@ -36,6 +40,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('auth');
+    sessionStorage.removeItem('auth');
     this.router.navigateByUrl('/login');
   }
 

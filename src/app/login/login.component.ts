@@ -5,7 +5,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ import { take } from 'rxjs';
 })
 export class LoginComponent {
 
-  form: FormGroup = this.formBuilder.group({
+  form = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     remember: ['']
@@ -29,17 +28,19 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    const dto = new LoginDto(this.form.value);
-    this.isLoading = true;
-    this.authService.login(dto).pipe(take(1)).subscribe({
-      error: (err: HttpErrorResponse) => {
-        this.isLoading = false;
-        this.notifyService.showError("Error", err.error.message);
-      }, next: () => {
-        this.isLoading = false;
-        this.router.navigateByUrl('/home');
-      }
-    })
+    if(this.form.valid){
+      const dto = new LoginDto(this.form.value);
+      this.isLoading = true;
+      this.authService.login(dto,this.form.controls['remember'].value).subscribe({
+        error: (err: HttpErrorResponse) => {
+          this.isLoading = false;
+          this.notifyService.showError("Error", err.error.message);
+        }, next: () => {
+          this.isLoading = false;
+          this.router.navigateByUrl('/home');
+        }
+      })
+    }
   }
 
   togglePass(): void {

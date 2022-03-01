@@ -1,7 +1,8 @@
 .register-container {
   position: relative;
-  width: 22%;
-  margin: 20vh auto;
+  max-width: 35%;
+  min-width: 350px;
+  margin: 2vh auto;
   background-color: #fff;
   padding: 50px;
   border-radius: 5px;
@@ -14,10 +15,11 @@
 }
 
 .already-member {
-  text-align: center;
-  font-size: 14px;
-
-  span {
-    padding: 0 10% 0 3%;
-  }
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    font-size: 14px;
+    span {
+      margin-right: 5px;
+    }
 }
