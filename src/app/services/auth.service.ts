@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Login, Register } from '../models/auth.model';
+import { Login, Register, Forgot, Reset } from '../models/auth.model';
 import {environment} from '../../environments/environment'
 
 
@@ -28,4 +28,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}auth/resend-activation-token`,body)
   }
 
+  forgotPassword(body: Forgot){
+    return this.http.post(`${this.baseUrl}auth/forgot-password`,body)
+  }
+  resetPassword(activationToken:Reset) {
+    return this.http.post(`${this.baseUrl}auth/reset-password?activationToken=${activationToken}`, activationToken)
+  }
 }

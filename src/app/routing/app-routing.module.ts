@@ -16,6 +16,7 @@ const routes: Routes = [
   {path:'auth/forgot-password', component: ForgotPasswordComponent},
   {path:'auth/reset-password', component: ResetPasswordComponent},
   {path:'auth/verify-account/:token', component: VerifyAccountComponent},
+  {path:'auth/reset-password/:token', component: ResetPasswordComponent},
   {path:'auth/login', component:LoginComponent},
 
   {path:'home', component: HomeComponent,canActivate:[AuthGuard]},

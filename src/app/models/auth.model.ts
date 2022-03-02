@@ -21,3 +21,19 @@ export class Login {
         this.password = data.password;
     }
 }
+
+export class Forgot {
+    email: string;
+
+    constructor(data: any) {
+        this.email = data.email
+    }
+}
+
+export class Reset {
+    newPassword: string;
+
+    constructor(data: any) {
+        this.newPassword = data.passvord
+    }
+}

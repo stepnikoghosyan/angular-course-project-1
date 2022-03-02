@@ -2,9 +2,8 @@ import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { ToastrService } from 'ngx-toastr';
 import { FormControl, Validators } from '@angular/forms';
-
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-verify-account',
@@ -20,7 +19,7 @@ export class VerifyAccountComponent implements OnInit {
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService) {
+    private notifyService: NotificationService) {
 
   }
 
@@ -30,13 +29,6 @@ export class VerifyAccountComponent implements OnInit {
     this.emailError = false;
   }
 
-  showSuccess() {
-    this.toastr.success('Account verified', 'Succes', { timeOut: 2000 });
-  }
-
-  showErrore() {
-    this.toastr.error('invalid activation token', 'Error', { timeOut: 2000 })
-  }
 
   getToken() {
 
@@ -48,12 +40,12 @@ export class VerifyAccountComponent implements OnInit {
       })).subscribe(() => {
         this.authService.verifyAccount(this.token).subscribe(
           () => {
-            this.showSuccess();
+            this.notifyService.showSuccess();
             setTimeout(() => {
               this.router.navigate(['auth/login'])
             }, 1000)
 
-          },()=>{this.showErrore()}
+          },()=>{this.notifyService.showError()}
         );
       })
 
@@ -66,7 +58,7 @@ export class VerifyAccountComponent implements OnInit {
     }
 
     this.authService.resendActivation(email).subscribe(()=>{
-      this.showSuccess()
+      this.notifyService.showSuccess()
       this.signIn()
     })
   }
