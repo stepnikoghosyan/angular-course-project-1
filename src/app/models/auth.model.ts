@@ -1,30 +1,20 @@
-export class ResetPasswordDto{
-    newPassword: string;
-    token: string;
-
-    constructor(data:any){
-        this.newPassword = data.newPassword;
-        this.token = data.token 
-    }
-}
-export class ForgotPasswordDto{
+export class LoginDto {
     email: string;
-    
-    constructor(data:any){
-        this.email = data.email
+    password: string
+
+    constructor(data: any) {
+        this.email = data.email,
+        this.password = data.password
     }
 }
 
-
-
-
-export class RegisterDto {
+export class registerDto {
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
+    password: string
 
-    constructor(data:any){
+    constructor(data: any) {
         this.firstName = data.firstName,
         this.lastName = data.lastName,
         this.email = data.email,
@@ -32,16 +22,12 @@ export class RegisterDto {
     }
 }
 
-export class LoginDto {
-    email: string;
-    password: string;
 
-    constructor(data: any){
-        this.email = data.email;
-        this.password = data.password;
-    }
+export interface LoginResponse {
+    accessToken:  string,
+    refreshToken: string,
 }
-export interface LoginResponse{
-    accessToken: string,
-    refreshToken: string
+export interface registerResponse {
+    accessToken:  string,
+    refreshToken: string,
 }
