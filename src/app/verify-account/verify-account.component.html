@@ -1,0 +1,22 @@
+<div class="textSuccess" *ngIf="showSuccess">
+    Success<br>
+    Account Verified
+</div>
+<div class="textError" *ngIf="showError">
+    Error<br>
+   invalid activation token
+</div>    
+<mat-card class="card">
+ <mat-card-title class="title">Verify Account</mat-card-title>
+<form>
+    <mat-card-subtitle  class="subtitle">Verifying Your account, please wait...</mat-card-subtitle>
+    <button type="button" (click) = "onClick()" mat-raised-button color="black" class="re-send">Re-send activation token</button>
+    <input  *ngIf="showEmail" matInput placeholder="email" formControlName = "email">
+<mat-spinner class="loading" [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+<button *ngIf="showButtons" class="send-mail" type="button" mat-raised-button color="primary">Send mail</button>
+<div>
+    <button *ngIf="showButtons" class="button" type="button" mat-raised-button color="primary" routerLink="/login">Sign In</button>
+    <button *ngIf="showButtons"type="button" mat-raised-button color="primary" routerLink="/register">Sign Up</button>
+</div>
+</form>
+</mat-card>

@@ -1,48 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { UsersComponent } from './users/users.component';
-import { PostsComponent } from './posts/posts.component';
-import { AuthComponent } from './auth/auth.component';
-import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './auth/login/login.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
-import { AppRoutingModule } from './routing/app-routing.module';
-import { HeaderComponent } from './header/header.component';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInput, MatInputModule} from '@angular/material/input'
+import { RouterModule } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    UsersComponent,
-    PostsComponent,
-    AuthComponent,
-    ProfileComponent,
     LoginComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
+    RegisterComponent,
     VerifyAccountComponent,
-    HeaderComponent,
-    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
-    FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    HttpClientModule
-
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    RouterModule,
+    MatIconModule,
+    NoopAnimationsModule
   ],
-  providers: [],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,42 @@
+.re-send {
+    margin-bottom: 20px
+}
+.card {
+    height: 300px;
+    width: 240px;
+    margin: 0 auto; 
+     float: none; 
+     margin-bottom:10px;
+}
+
+.title {
+    margin-top: 20px;
+    text-align: center;
+}
+.loading {
+    margin: 0 auto;     
+}
+.button {
+margin-top: 30px;
+margin-right: 40px;
+}
+.send-mail {
+    margin-top: 25px;
+    width: 195px;
+}
+.textSuccess {
+    border:solid;
+    color: white;
+    background-color: green;
+    width: 120px;
+    text-align: center;
+    margin-left: auto;
+}
+.textError {
+    border:solid;
+    color: white;
+    background-color: red;
+    width: 150px;
+    text-align: center;
+    margin-left: auto;
+}
