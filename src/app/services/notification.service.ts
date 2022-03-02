@@ -7,11 +7,11 @@ import { ToastrService } from 'ngx-toastr';
 export class NotificationService {
 
   constructor(private toastr: ToastrService) { }
-  showSuccess() {
-    this.toastr.success('Account verified', 'Succes', { timeOut: 2000 });
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title, { timeOut: 3000 });
   }
 
-  showError() {
-    this.toastr.error('invalid activation token', 'Error', { timeOut: 2000 })
+  showError(message: string, title: string) {
+    this.toastr.error(message, title, { timeOut: 3000 })
   }
 }

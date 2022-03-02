@@ -30,6 +30,11 @@ export class Forgot {
     }
 }
 
+export interface LoginResponse {
+    accessToken: string;
+    refreshToken: string;
+}
+
 export class Reset {
     newPassword: string;
 

@@ -33,11 +33,9 @@ export class LoginComponent implements OnInit {
     const auth = localStorage.getItem('token');
     const login = new Login(this.form.value);
     this.authService.login(login).subscribe(
-      () => {
-
-         this.router.navigate(['/home'])
-
-       
+      (res) => {
+       const accessToken = res.accessToken;
+       const refreshToken = res.refreshToken;
       }, (error: any) => {
         this.errorMsg = error.error.message;
       });

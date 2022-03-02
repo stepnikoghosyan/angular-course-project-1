@@ -12,30 +12,29 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./forgot-passvord.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-
-
+  
+  isTouched = false;
+  errMessage!: string;
   constructor(private router: Router, private authService: AuthService, private notifyService: NotificationService) { }
   
 
   email = new FormControl('', [Validators.required, Validators.email])
-  isTouched = false;
 
   sendEmail() {
     this.isTouched = true;
     // const forgot = new Forgot(this.email.value)
     if(this.email.valid) {
+      this.errMessage = '';
       const forgot = {email: this.email.value}
       this.authService.forgotPassword(forgot).subscribe(() => {
-      error: (err:HttpErrorResponse) => {
-        this.notifyService.showError()
-      };
-      next: () => {
-        this.router.navigateByUrl('/home')
-      }
+        this.router.navigate(['/home'])
+      },
+      (err) => {
         
-      })
-    }
+      }
+      )
   }
+}
 
   signIn() {
     this.router.navigate(['auth/login'])

@@ -14,6 +14,7 @@ export class VerifyAccountComponent implements OnInit {
 
   token = '';
   emailError = false;
+  errMessage!: string;
   email = new FormControl('',[Validators.required,Validators.email])
   constructor(
     private authService: AuthService,
@@ -31,7 +32,7 @@ export class VerifyAccountComponent implements OnInit {
 
 
   getToken() {
-
+    this.errMessage = '';
     this.activeRoute.params
       .pipe(map((res: any) => {
         this.token = res.token;
@@ -40,12 +41,12 @@ export class VerifyAccountComponent implements OnInit {
       })).subscribe(() => {
         this.authService.verifyAccount(this.token).subscribe(
           () => {
-            this.notifyService.showSuccess();
+            this.notifyService.showSuccess('Your verification Succeded', 'Succes');
             setTimeout(() => {
               this.router.navigate(['auth/login'])
             }, 1000)
 
-          },()=>{this.notifyService.showError()}
+          },()=>{this.notifyService.showError(this.errMessage, 'Error')}
         );
       })
 
@@ -58,7 +59,7 @@ export class VerifyAccountComponent implements OnInit {
     }
 
     this.authService.resendActivation(email).subscribe(()=>{
-      this.notifyService.showSuccess()
+      this.notifyService.showSuccess('Your verification Succeded', 'Succes')
       this.signIn()
     })
   }
