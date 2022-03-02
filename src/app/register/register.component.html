@@ -5,37 +5,40 @@
       <label>First Name</label>
       <input type="text" formControlName="firstName" placeholder="First Name">
       <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
-        <p class="error-message" *ngIf="form.controls['firstName'].errors?.['required']">First Name is required </p>
+        <p class="error-message" *ngIf="form.controls['firstName'].errors?.['required']">First Name is required.</p>
       </div>
     </div>
     <div>
       <label>Last Name</label>
       <input type="text" formControlName="lastName" placeholder="Last Name">
       <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
-        <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required </p>
+        <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required.</p>
       </div>
     </div>
     <div>
       <label>Email</label>
       <input type="email" formControlName="email" placeholder="Email">
       <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
-        <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required </p>
-        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Incorrect Email address</p>
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required.</p>
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Please enter a valid email
+          address.</p>
       </div>
     </div>
     <div>
       <label>Password</label>
-      <input type="password" formControlName="password" placeholder="Password">
+      <div class="password-content">
+        <input [type]="showPass ? 'text' : 'password'" formControlName="password" placeholder="Password">
+        <i (click)="togglePass()" [ngClass]="showPass ?'fa-eye':'fa-eye-slash'"
+           class="fa eye-icon"></i>
+      </div>
       <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
         <p class="error-message" *ngIf="form.controls['password'].errors?.['required']">Password is required </p>
         <p class="error-message" *ngIf="form.controls['password'].errors?.['minlength']">
-          Min length should be at least {{form.controls['password'].getError('minlength').requiredLength}} digites</p>
+          Min length should be at least {{form.controls['password'].getError('minlength').requiredLength}} digits.</p>
       </div>
     </div>
-    <button [disabled]="form.invalid" class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
-    <div *ngIf="isLoading" class="loader">
-      <app-loader></app-loader>
-    </div>
+    <app-loader *ngIf="isLoading"></app-loader>
+    <button [disabled]="form.invalid || submitted" class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
   </form>
   <div class="already-member">
     <span>Already a member?  </span><a routerLink="/login">Sign in</a>

@@ -83,11 +83,23 @@
     font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
+
+    &:hover,
+    &:disabled,
+    &:focus {
+      opacity: 0.5;
+    }
   }
   .btn-secondary {
-    background-color: rgb(93,202,239);
+    background-color: rgb(93, 202, 239);
     padding: 10px 15px;
     font-size: 16px;
+
+    &:hover,
+    &:disabled,
+    &:focus{
+      opacity: 0.5;
+    }
   }
   .btn-group {
     display: flex;
@@ -100,17 +112,13 @@
   opacity: 0.6;
   cursor: default;
 }
+
   .error-message {
     color: red;
     font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     display: block;
   }
-
-.loader {
-  margin: 6% 0 15% 25%;
-}
 
 input {
   width: 100%;
@@ -121,6 +129,7 @@ input {
   box-sizing: border-box;
   border-radius: 5px;
 }
+
 .container {
   position: relative;
   width: 90%;

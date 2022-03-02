@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {NotificationService} from '../services/notification.service';
+import {finalize, Subject, takeUntil} from "rxjs";
+import {NotificationService} from "../services/notification.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Observable, switchMap, take} from "rxjs";
 import {AuthService} from "../services/auth.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-verify-account',
@@ -11,32 +11,33 @@ import {AuthService} from "../services/auth.service";
   styleUrls: ['./verify-account.component.scss']
 })
 export class VerifyAccountComponent implements OnInit {
+  private unsubscribe$ = new Subject<void>();
+  emailFormGroup!: FormGroup;
+  expandEmailGroup = false;
+  isLoading = true;
+  submitted = false;
 
-  emailFormGroup: FormGroup = new FormGroup({
-    email: new FormControl('', {
-      validators: [Validators.required, Validators.email]
-    })
-  });
-
-  public validationErrors: Map<string, string> = new Map();
-  public expandEmailGroup: boolean = false;
-  public showLoader: boolean = true;
-
-  constructor(private notifyService: NotificationService,
+  constructor(private formBuilder: FormBuilder,
+              private notifyService: NotificationService,
               public router: Router,
               private activatedRoute: ActivatedRoute,
               private authService: AuthService) {
-    this.validationErrors.set('required', 'Email is required')
-    this.validationErrors.set('email', 'Invalid email address.')
+    this.initForm();
   }
 
   ngOnInit(): void {
-    this.verifyAccount()
-      .subscribe(_ => {
-        this.showNotifications(true);
-      }, (err => {
-        this.showNotifications(false, err.error.message);
-      }));
+    this.verifyAccount();
+  }
+
+  private initForm() {
+    this.emailFormGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onResendClick(): void {
@@ -44,43 +45,49 @@ export class VerifyAccountComponent implements OnInit {
   }
 
   onSendEmail(): void {
-    this.showLoader = true;
-    this.authService.resendActivationToken(this.emailFormGroup.value.email)
-      .pipe(
-        take(1))
-      .subscribe(_ => {
-        this.showNotifications(true);
-      }, (err => {
-        this.showNotifications(false, err.error.message);
-      }));
-  }
-
-  isMailInvalid(): boolean {
-    return this.emailFormGroup.controls['email'].invalid &&
-      (this.emailFormGroup.controls['email'].touched || this.emailFormGroup.controls['email'].dirty);
-  }
-
-  getValidationError(): any[] {
-    let validations = [];
-    for (let key in this.emailFormGroup.controls['email'].errors) {
-      validations.push(this.validationErrors.get(key));
+    if (!this.submitted) {
+      this.isLoading = true;
+      this.submitted = true;
+      this.authService.resendActivationToken(this.emailFormGroup.value.email)
+        .pipe(takeUntil(this.unsubscribe$),
+          finalize(() => {
+            this.isLoading = false;
+            this.submitted = false;
+          }))
+        .subscribe({
+          next: () => {
+            this.showNotifications(true, "Account verified");
+          },
+          error: (err) => {
+            this.showNotifications(false, err.error.message);
+          }
+        });
     }
-    return validations;
   }
 
-  private verifyAccount(): Observable<any> {
-    return this.activatedRoute.params.pipe(take(1), switchMap(params =>
-      this.authService.verifyAccount(params['access-token'])
-        .pipe(take(1))));
+  private verifyAccount() {
+    const accessToken = this.activatedRoute.snapshot.params['accessToken'];
+    return this.authService.verifyAccount(accessToken)
+      .pipe(takeUntil(this.unsubscribe$),
+        finalize(() => {
+          this.isLoading = false;
+        }))
+      .subscribe({
+        next: () => {
+          this.showNotifications(true, "Account verified");
+        },
+        error: (err) => {
+          this.showNotifications(false, err.error.message);
+        }
+      });
   }
 
-  private showNotifications(success: boolean, errorMessage?: string): void {
-    this.showLoader = false;
+  private showNotifications(success: boolean, message: string): void {
     if (success) {
-      this.notifyService.showSuccess("Success", "Account verified");
+      this.notifyService.showSuccess("Success", message);
       this.router.navigateByUrl('/login');
     } else {
-      this.notifyService.showError("Error", errorMessage!);
+      this.notifyService.showError("Error", message);
     }
   }
 }

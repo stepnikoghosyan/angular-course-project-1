@@ -1,31 +1,27 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {finalize, Subject, takeUntil} from 'rxjs';
-import {ResetPassword} from '../models/reset-password.model';
 import {AuthService} from "../services/auth.service";
 import {NotificationService} from "../services/notification.service";
+import {ResetPasswordDto} from "../models/auth.model";
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit, OnDestroy {
+export class ResetPasswordComponent implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  public passwordForm!: FormGroup;
-  public errorMessage!: string;
-  public isShowPassword: boolean = false;
-  public isLoading: boolean = false;
+  passwordForm!: FormGroup;
+  isShowPassword = false;
+  isLoading = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private authService: AuthService,
               private formBuilder: FormBuilder,
               private router: Router,
               private notifyService: NotificationService) {
-  }
-
-  ngOnInit(): void {
     this.initForm();
   }
 
@@ -42,27 +38,36 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   resetPassword(): void {
     if (this.passwordForm.valid) {
       this.isLoading = true;
-      this.errorMessage = '';
       this.passwordForm.disable();
       const token = this.activatedRoute.snapshot.params['token'];
-      const sendObject: ResetPassword = {
+      const resetPasswordDto: ResetPasswordDto = {
         token: token,
         newPassword: this.passwordForm.value.newPassword
       }
-      this.authService.resetPassword(sendObject).pipe(takeUntil(this.unsubscribe$),
-        finalize(() => {
-          this.isLoading = false;
-          this.passwordForm.enable()
-        }),
-      )
+      this.authService.resetPassword(resetPasswordDto)
+        .pipe(takeUntil(this.unsubscribe$),
+          finalize(() => {
+            this.isLoading = false;
+            this.passwordForm.enable()
+          })
+        )
         .subscribe({
           next: () => {
-            this.router.navigateByUrl('/home');
+            this.showNotifications(true, "Password is changed.");
           },
           error: (err) => {
-            this.notifyService.showError("Error", err.error.message);
+            this.showNotifications(false, err.error.message);
           }
         })
+    }
+  }
+
+  private showNotifications(success: boolean, message: string): void {
+    if (success) {
+      this.notifyService.showSuccess("Success", message);
+      this.router.navigateByUrl('/home');
+    } else {
+      this.notifyService.showError("Error", message);
     }
   }
 

@@ -2,11 +2,8 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, tap} from 'rxjs';
-
 import {environment} from 'src/environments/environment';
-import {ForgotPasswordModel} from '../models/forgot.password.model';
-import {ResetPassword} from "../models/reset-password.model";
-import {LoginDto, LoginResponse, RegisterDto} from "../models/auth.model";
+import {EmailDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto} from "../models/auth.model";
 
 @Injectable({
   providedIn: 'root'
@@ -44,25 +41,28 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }
 
-  forgotPassword(model: ForgotPasswordModel): Observable<void> {
+  forgotPassword(emailDto: EmailDto): Observable<void> {
     return this.httpClient.post<void>(
       `${environment.apiUrl}/auth/forgot-password`,
-      model
-    )
+      emailDto
+    );
   }
 
   verifyAccount(token: string): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/auth/verify-account?activationToken=${token}`);
+    return this.httpClient.get(`${environment.apiUrl}/auth/verify-account`, {
+      params: {
+        activationToken: token
+      }
+    });
   }
 
-  resendActivationToken(email: string): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/auth/resend-activation-token`,
-      {
-        email: email
-      });
+  resendActivationToken(emailDto: EmailDto): Observable<void> {
+    return this.httpClient.post<void>(`${environment.apiUrl}/auth/resend-activation-token`,
+      emailDto
+    );
   }
 
-  public resetPassword(body: ResetPassword): Observable<void> {
-    return this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, body)
+  public resetPassword(resetPasswordDto: ResetPasswordDto): Observable<void> {
+    return this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
   }
 }

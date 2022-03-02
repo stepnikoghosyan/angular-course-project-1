@@ -1,25 +1,41 @@
 <form class="verify-account-form">
   <h2>Verify Account</h2>
-  <div>Verifying your account, please wait...</div>
-
-  <div *ngIf="showLoader" class="loader">
-    <app-loader></app-loader>
+  <div *ngIf="isLoading" class="verify-account">
+    Verifying your account, please wait...
   </div>
-  <button type="button" class="btn-primary btn re-send-button" (click)="onResendClick()">Re-send activation token</button>
-
+  <app-loader *ngIf="isLoading"></app-loader>
+  <button type="button"
+          class="btn-primary btn re-send-button"
+          (click)="onResendClick()"
+          [disabled]="expandEmailGroup">
+    Re-send activation token
+  </button>
   <form *ngIf="expandEmailGroup"
-        [formGroup]="emailFormGroup" (ngSubmit)="onSendEmail()">
+        [formGroup]="emailFormGroup"
+        (ngSubmit)="onSendEmail()">
     <label>Email</label>
     <input placeholder="Email" type="email" formControlName="email"/>
-    <ng-container *ngIf="isMailInvalid()">
-      <div *ngFor="let validation of getValidationError()" class="error-message error">
-        {{validation}}
-      </div>
-    </ng-container>
-    <button type="submit" class="btn-primary btn send-email-button">Send Email</button>
+    <div *ngIf="emailFormGroup.controls['email'].invalid && emailFormGroup.controls['email'].touched">
+      <p class="error-message" *ngIf="emailFormGroup.controls['email'].errors?.['required']">
+        Email is required.
+      </p>
+      <p class="error-message" *ngIf="emailFormGroup.controls['email'].errors?.['email']">
+        Please enter a valid email address.
+      </p>
+    </div>
+    <button type="submit" class="btn-primary btn send-email-button"
+            [disabled]="emailFormGroup.invalid || submitted">
+      Send Email
+    </button>
   </form>
   <div class="btn-group justify-content">
-    <button type="button" class="btn-secondary btn" (click)="router.navigateByUrl('/login')">Sign In</button>
-    <button type="button" class="btn-secondary btn" (click)="router.navigateByUrl('/registration')">Sign Up</button>
+    <button type="button" class="btn-secondary btn"
+            (click)="router.navigateByUrl('/login')">
+      Sign In
+    </button>
+    <button type="button" class="btn-secondary btn"
+            (click)="router.navigateByUrl('/register')">
+      Sign Up
+    </button>
   </div>
 </form>

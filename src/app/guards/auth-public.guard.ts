@@ -17,7 +17,7 @@ export class AuthPublicGuard implements CanActivate {
     | UrlTree {
     const authLocale = localStorage.getItem('auth');
     const authSession = sessionStorage.getItem('auth');
-    if ((authLocale && JSON.parse(authLocale!).accessToken) || (authSession && JSON.parse(authSession!).accessToken)) {
+    if ((authLocale && JSON.parse(authLocale).accessToken) || (authSession && JSON.parse(authSession).accessToken)) {
       return this.router.parseUrl('/home');
     }
     return true;
