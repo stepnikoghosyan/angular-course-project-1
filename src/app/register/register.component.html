@@ -1,3 +1,22 @@
-<h3>Register</h3>
 
-
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h3>Register</h3>
+    <div class="forms">
+        <input type="text" placeholder="First name" formControlName = "firstName">
+    </div>
+    <br>
+    <div class="forms">
+        <input type="text" placeholder="Last name" formControlName = "lastName">
+    </div>
+    <br>
+    <div class="forms">
+        <input type="text" placeholder="Email" formControlName = "email">
+    </div>
+    <br>
+    <div class="forms">
+        <input type="password" placeholder="Password" formControlName = "password">
+    </div>
+    <br>
+    <button >Register</button>
+     
+</form>

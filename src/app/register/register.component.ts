@@ -1,21 +1,36 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { RegisterDto } from '../models/auth.model';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth.service';
+import { registerDto } from '../models/auth.model';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
-    constructor() {}
-    ngOnInit(): void {
-        throw new Error('Method not implemented.');
-    }
+  form: FormGroup = this.formBuilder.group({
+    firstName: [""],
+    lastName: [""],
+    email: [""],
+    password: [""]
+  })
 
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService) { }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(): void {
     
+    const dto = new registerDto(this.form.value);
+    this.authService.register(dto).subscribe({
+      next: (data) => {
+        console.log(data)
+      }
+    })
+  }
 
 }

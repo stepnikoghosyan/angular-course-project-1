@@ -1,1 +1,39 @@
-<p>login works!</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h3 class="signin">Sign In</h3>
+    <div class="forms">
+       
+        <input 
+        [ngClass]="loginForm.controls['email'].invalid && loginForm.controls['email'].touched ? 'invalid-control': ''" 
+        type="text" placeholder="email" formControlName = "email">
+        <div class="invalid-text" *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched" >
+            <span *ngIf="loginForm.controls['email'].errors?.['required']">invalid email</span>
+        </div>   
+    </div>
+
+    <br>
+
+    <div class="forms" >
+        <input
+        [ngClass]="loginForm.controls['password'].invalid && loginForm.controls['password'].touched ? 'invalid-control': ''"
+         type="password" placeholder="password" formControlName = "password">
+        <div class="invalid-text"  *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
+            <span *ngIf="loginForm.controls['password'].errors?.['required']">required</span>
+            <span *ngIf="loginForm.controls['password'].errors?.['minlength']">required</span>
+        
+        </div>  
+    </div>
+    <br>
+    <div>
+        <button>Sign In</button>
+    </div>
+    <br>
+    <div>
+        <input type="checkbox" checked = "checked" name="remember">
+         Remember me  <a class="forPas" routerLink=""> Forgot password</a>
+    </div>
+    <div>
+        Not a member? 
+        <a class="forPas" routerLink="/register">Register</a>
+    </div>
+</form>
