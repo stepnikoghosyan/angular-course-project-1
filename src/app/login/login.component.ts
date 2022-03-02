@@ -6,6 +6,7 @@ import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {finalize, Subject, takeUntil} from "rxjs";
+import {emailValidator} from "../validators/email-validator";
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnDestroy {
 
   private formInit(): void {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, emailValidator()]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       remember: ['']
     });

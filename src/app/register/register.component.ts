@@ -6,6 +6,7 @@ import {NotificationService} from "../services/notification.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {finalize, Subject, takeUntil} from "rxjs";
+import {emailValidator} from "../validators/email-validator";
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnDestroy {
     this.form = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, emailValidator()]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }

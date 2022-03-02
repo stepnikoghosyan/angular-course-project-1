@@ -7,6 +7,7 @@ import {NotificationService} from "../services/notification.service";
 import {Router} from "@angular/router";
 import {finalize, Subject, takeUntil} from "rxjs";
 import {EmailDto} from "../models/auth.model";
+import {emailValidator} from "../validators/email-validator";
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,7 +34,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 
   private formInit(): void {
     this.resetPasswordForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, emailValidator()]],
     });
   }
 

@@ -4,6 +4,7 @@ import {NotificationService} from "../services/notification.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {emailValidator} from "../validators/email-validator";
 
 @Component({
   selector: 'app-verify-account',
@@ -31,7 +32,7 @@ export class VerifyAccountComponent implements OnInit {
 
   private initForm() {
     this.emailFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, emailValidator()]],
     });
   }
 
