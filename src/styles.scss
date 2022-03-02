@@ -1,41 +1,72 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$posts-course-project-primary: mat.define-palette(mat.$indigo-palette);
-$posts-course-project-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$posts-course-project-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$posts-course-project-theme: mat.define-light-theme((
-  color: (
-    primary: $posts-course-project-primary,
-    accent: $posts-course-project-accent,
-    warn: $posts-course-project-warn,
-  )
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($posts-course-project-theme);
-
 /* You can add global styles to this file, and also import other style files */
-.form-control {
-    margin-bottom: 16px;
+*{
+    margin: auto;
+    font-family: Arial;
+    padding: 10px 0px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button{
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.container{
+    width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 26px 50px rgb(0 0 0 / 0.3);
+    border: none;
+    margin-top: 150px;
+    padding: 20px 0px;
+
+    .main-container{
+        width: 85%;
+
+        .forgot-password{
+            text-align: center;
+
+            span{
+                margin-top: 10px;
+                display: inline-block;
+                font-size: 18px;
+            }
+        }
+
+        .form-control{
+            width: 100%;
+            input{
+                width: 100%;
+                height: 30px;
+                border-radius: 4px;
+                border: 1px solid lightgray;
+            }
+        }
+        .buttons{
+            margin-top: 25px;
+
+            .reset-button{
+                width: 100%;
+                padding: 9px 14px;
+                background-color: #51bbc5;
+                
+            }
+            .link-buttons{
+                width: 55%;
+                display: flex;
+                padding: 27px 0px;
+                justify-content: space-around;
+                
+                .button{
+                    padding: 9px 14px;
+                    background-color: #236d74;
+                    
+                }
+            }
+        }
+        .errors{
+            span{
+                color: red;
+                font-size: 10px;
+            }
+        }
+    }
+}
