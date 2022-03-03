@@ -1,0 +1,19 @@
+.remember-block, 
+.remember-block__content,
+.register {
+    display:flex;
+    align-items: center;
+} 
+.remember-block label {
+    cursor:pointer;
+}
+
+.remember-block {
+    justify-content: space-between;
+    width:80%;
+    margin-top:30px;
+}
+.register {
+    justify-content: space-around;
+    width:55%;
+}

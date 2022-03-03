@@ -1,1 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: auto;
+    font-family: Arial;
+    padding: 10px 0px;
+}
+button{
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        color: black;
+    }
+}
+.error-message{
+    font-size: 10px;
+    color: red;
+}
+.notification{
+    width: 170px;
+    height: 40px;
+    background-color: #71c471;
+    color: white;
+    border: 1px solid darkgray;
+    border-radius: 2px;
+    margin-right: 0px;
+    margin-top: 20px;
+    text-align: center;
+
+}
+.container{
+    width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 26px 50px rgb(0 0 0 / 0.3);
+    border: none;
+    margin-top: 100px;
+    padding: 20px 0px;
+
+    .main-container{
+        width: 85%;
+
+        .forgot-password{
+            text-align: center;
+
+            span{
+                margin-top: 10px;
+                display: inline-block;
+                font-size: 18px;
+            }
+        }
+
+        .form-control{
+            width: 100%;
+            input{
+                width: 100%;
+                height: 30px;
+                border-radius: 4px;
+                border: 1px solid lightgray;
+            }
+        }
+        .buttons{
+            margin-top: 25px;
+
+            .reset-button{
+                width: 100%;
+                padding: 9px 14px;
+                background-color: #51bbc5;
+                
+            }
+            .link-buttons{
+                width: 55%;
+                display: flex;
+                padding: 27px 0px;
+                justify-content: space-around;
+                
+                .button{
+                    padding: 9px 14px;
+                    background-color: #236d74;
+                    
+                }
+            }
+        }
+        .errors{
+            span{
+                color: red;
+                font-size: 10px;
+            }
+        }
+    }
+}
+
+.invalid-text {
+    color: red;
+}
+.invalid-control {
+    border: 1px solid red
+}
