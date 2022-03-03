@@ -11,6 +11,7 @@ import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthModule} from "./auth.module";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import { PostCardComponent } from './post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
     HeaderComponent,
     HomeComponent,
     NotFoundComponent,
+    PostCardComponent
   ],
   imports: [
     AuthModule,

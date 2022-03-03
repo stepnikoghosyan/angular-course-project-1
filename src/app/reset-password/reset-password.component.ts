@@ -1,10 +1,11 @@
-import {Component, OnDestroy} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {finalize, Subject, takeUntil} from 'rxjs';
-import {AuthService} from "../services/auth.service";
-import {NotificationService} from "../services/notification.service";
-import {ResetPasswordDto} from "../models/auth.model";
+import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize, Subject, takeUntil } from 'rxjs';
+import { AuthService } from "../services/auth.service";
+import { NotificationService } from "../services/notification.service";
+import { ResetPasswordDto } from "../models/auth.model";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,10 +19,10 @@ export class ResetPasswordComponent implements OnDestroy {
   isLoading = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private authService: AuthService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private notifyService: NotificationService) {
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private notifyService: NotificationService) {
     this.initForm();
   }
 
@@ -40,10 +41,10 @@ export class ResetPasswordComponent implements OnDestroy {
       this.isLoading = true;
       this.passwordForm.disable();
       const token = this.activatedRoute.snapshot.params['token'];
-      const resetPasswordDto: ResetPasswordDto = {
+      const resetPasswordDto: ResetPasswordDto = new ResetPasswordDto({
         token: token,
         newPassword: this.passwordForm.value.newPassword
-      }
+      })
       this.authService.resetPassword(resetPasswordDto)
         .pipe(takeUntil(this.unsubscribe$),
           finalize(() => {
@@ -55,7 +56,7 @@ export class ResetPasswordComponent implements OnDestroy {
           next: () => {
             this.showNotifications(true, "Password is changed.");
           },
-          error: (err) => {
+          error: (err: HttpErrorResponse) => {
             this.showNotifications(false, err.error.message);
           }
         })

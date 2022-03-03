@@ -1,0 +1,23 @@
+.post-card-content {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 12px 12px 0;
+    .post-top-content {
+        text-align: center;
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        .post-title{
+            margin-top: 10px;
+        }
+    }
+    .description{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+        font-size: 15px;
+        margin: 10px 0 20px;
+    }
+}
