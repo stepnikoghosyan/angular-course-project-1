@@ -1,68 +1,19 @@
-.main{
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-}
 
-form {
-    padding: 45px 10px 30px 10px;
-    border-radius: 10px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-h2, p {
-    text-align: center;
-}
-
-form .form-control{
+form .form-control, .send{
  padding: 20px 40px;
 
 }
 
 form .action{
- padding: 20px 80px;
  display: flex;
  justify-content: center;
-}
-
-
-
-form .form-control input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
 }
 
 .sendPassword{
     width: 100%;
 }
 
-button {
-    color: #fff;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1469d9;
-    font-size: 16px;
-    
-}
-
-.send {
-    width: 100%;
-    padding: 10px 40px;
-    width: 100%;
-}
-
 .signUp, .sign {
-    cursor: pointer;
     background-color: rgb(42, 172, 189);
     color: rgb(53, 50, 50);
     padding: 25px 20px;
@@ -73,6 +24,5 @@ button {
 
 
 .signUp{
-    margin-left: 30px;
-
+    margin-left: 60px;
 }

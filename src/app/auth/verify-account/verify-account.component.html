@@ -1,6 +1,7 @@
-<div class="block">
-    <h1>Verify Account</h1>
-    <span>Verifying Your account, please wait... </span>
+<div class="main">
+    <form>
+    <h2>Verify Account</h2>
+    <p>Verifying Your account, please wait... </p>
     <ng-template #indicatorTemplate>
         <i nz-icon nzType="loading"></i>
     </ng-template>
@@ -11,9 +12,9 @@
     <div *ngIf="emailError">
         <form class="form-control">
             
-            <div>
+            <div class="form-control">
                 <label class="email">E-mail</label>
-            </div>
+           
             
             <input  type="email" [formControl]="email" />
             
@@ -27,11 +28,11 @@
               </span>
         
             </div> 
-        
+             </div>
          
         </form>
         <div >
-            <button class="sign width" (click)="resendActivation()">Send Email</button>
+            <button class="sign width" (click)="resendActivation()">Re-send activation token</button>
         
         
         </div>
@@ -40,4 +41,6 @@
         <button class="sign" (click)="signIn()">Sign In</button>
         <button class="sign" (click)="signUp()">Sign Up</button>
     </div>
+</form>
+
 </div>

@@ -1,12 +1,4 @@
 
-.block{
-    width: 400px;
-    margin: 100px auto;
-    background-color: white;
-    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-    text-align: center;
-}
-
 i {
     font-size: 50px;
 }
@@ -15,14 +7,14 @@ i {
     background-color:rgb(145, 143, 143);
 }
 
-.sign, .verify{
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-}
+// .sign, .verify{
+//     color: #fff;
+//     border: none;
+//     border-radius: 5px;
+//     font-size: 16px;
+//     margin: 5px;
+//     cursor: pointer;
+// }
 
 .sign{
     background-color: #1469d9;
@@ -30,16 +22,6 @@ i {
 
 .width{
     width: 200px;
-}
-
-input {
-    width: 200px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
 }
 
 .email{

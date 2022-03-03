@@ -1,9 +1,10 @@
-<form class="form" [formGroup]="form">
+<div class=" main">
+  <form class="form" [formGroup]="form">
   <h2>Sign In</h2>
   <div class="form-control">
     <label>Email</label>
     <input  type="email" formControlName="email" />
-    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+    <div class="val" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
       <span *ngIf="form.get('email')?.hasError('email')" class="errors">
       invalid Email
       </span>
@@ -12,13 +13,11 @@
       </span>
 
     </div>
-
- 
   </div>
   <div class="form-control">
     <label>Password</label>
     <input  type="password" formControlName="password" />
-    <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+    <div class="val" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
       <span *ngIf="form.get('password')?.hasError('required')" class="errors">
         Required
       </span>
@@ -26,11 +25,11 @@
   </div>
   <div class="action">
     <button (click)="login()" class="display">Sign In</button>
-
-
+  </div>
+  <div class="val err">
+      <span class="errors">{{errorMsg}}</span>
   </div>
   
-  <span class="errors">{{errorMsg}}</span>
 
   <div class="forgot">
 
@@ -43,4 +42,6 @@
     Not a member? <a routerLink="/auth/register">Register</a>
   </div>
 </form>
+</div>
+
 <router-outlet></router-outlet>
