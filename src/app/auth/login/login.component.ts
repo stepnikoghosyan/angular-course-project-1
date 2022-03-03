@@ -10,6 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  showPassword = true;
+  text = 'password'
+
   form: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(5)]],
@@ -23,9 +27,20 @@ export class LoginComponent implements OnInit {
     private router:Router
   ) { }
   ngOnInit(): void {
- 
+    this.showPassword = true;
     this.errorMsg = '';
   }
+
+  showHidePass() {
+    this.showPassword = !this.showPassword
+    if (this.showPassword) {
+      this.text = 'password'
+    } else {
+      this.text = 'text'
+    }
+  }
+
+  
 
 
   login() {

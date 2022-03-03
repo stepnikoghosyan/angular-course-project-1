@@ -10,12 +10,15 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
+  showPassword = false;
+  text = 'password'
+  errMessage!: string;
+  isTouched = false;
 
   resetForm: FormGroup = this.fb.group({
     newPassword: ['', [Validators.required, Validators.minLength(5)]],
   })
-  errMessage!: string;
-  isTouched = false;
+
   constructor(private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private authService: AuthService,
@@ -41,7 +44,17 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
+  showHidePass() {
+    this.showPassword = !this.showPassword
+    if (this.showPassword) {
+      this.text = 'password'
+    } else {
+      this.text = 'text'
+    }
+  }
+
   ngOnInit(): void {
+    this.showPassword = true
   }
 
 }

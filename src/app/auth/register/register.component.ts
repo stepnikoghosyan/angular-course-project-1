@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
     }
     const register = new Register(this.form.value);
     this.authService.register(register).subscribe(() => {
-      // this.router.navigate(['auth/login'])
+      this.router.navigate(['auth/login'])
       this.successMsg = 'Your registration was successfully completed'
     },
       ((err: any) => {

@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VerifyAccountComponent,
     HeaderComponent,
     RegisterComponent,
+    NotFoundComponent,
     
   ],
   imports: [
