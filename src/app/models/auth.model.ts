@@ -19,14 +19,6 @@ export class RegisterDto extends LoginDto {
   }
 }
 
-export class PasswordDto {
-  password: string;
-
-  constructor(data: any) {
-    this.password = data.password;
-  }
-}
-
 export class EmailDto {
   email: string;
 

@@ -8,6 +8,7 @@ import {AuthService} from "../services/auth.service";
 })
 export class HeaderComponent {
   constructor(private authService: AuthService) {}
+
   onLogout(e: MouseEvent): void {
     e.preventDefault();
     this.authService.logout();

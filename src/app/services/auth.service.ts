@@ -62,7 +62,7 @@ export class AuthService {
     );
   }
 
-  public resetPassword(resetPasswordDto: ResetPasswordDto): Observable<void> {
+  resetPassword(resetPasswordDto: ResetPasswordDto): Observable<void> {
     return this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
   }
 }
