@@ -1,0 +1,45 @@
+
+.checkbox{  
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction:row;
+    justify-content: center;
+    align-items: stretch;
+    cursor: pointer;
+    margin: auto;
+  
+}
+
+.form-control-checkbox input{
+  
+    width: 19px;
+    height: 19px;
+    background-color: gray;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top:-12px;
+    left: -15px;
+    
+}
+
+p> a{
+    color: rgba(82, 82, 228, 0.425);
+    cursor: pointer;
+}
+
+.notNumber{
+   margin: 0 auto 20px;
+   font-size: 16px;
+   text-transform: none;
+}
+input[type=checkbox]:checked + label::before{
+    background-color: grey;
+    font-size: 60px;
+}
+.btn-login:disabled{
+    background-color: black;
+    color: white;
+}

@@ -1,0 +1,59 @@
+<form class ="form login-form" [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+    <div class="container">
+        <h2 class="form-header"> Sign in</h2>
+        <div class = "form-control" >
+            <label class="form-control-label" for ="email"> Email </label>
+                <input formControlName="email" name="email" type="email" id="email">
+                <div class="error-message" *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].touched|| loginForm.controls['email'].dirty)" >
+                    <span  *ngIf ="loginForm.controls['email'].hasError('email')"> Not an email </span>
+                    <span  *ngIf ="loginForm.controls['email'].errors?.['required']"> Please enter email </span>
+               </div>
+        </div>     
+        <div class = "form-control">
+            <label class="form-control-label" for ="password"> Password </label>
+                <input   formControlName="password" name="password" [type]="display ? 'text' : 'password'" id="password" >
+                <i (click)="onshowPasswordValue()"> 
+                    <span class="material-icons" *ngIf="display">
+                       visibility
+                       </span> 
+                   <span class="material-icons" *ngIf="!display" >
+                           visibility_off 
+                           </span> 
+                </i>
+         
+            <div class="error-message"  *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">
+                <span  *ngIf ="loginForm.controls['password'].errors?.['minlength']"> Password must have less then {{loginForm.controls['password'].getError('minlength').requiredLength}} characters </span>
+                <span  *ngIf ="loginForm.controls['password'].errors?.['required']"> Please enter Password </span>
+           </div>
+        </div> 
+ 
+        
+         
+            <button class="btn login-bth" > Login</button>
+         
+     
+        <div class="checkbox">
+        <div class = "form-control form-control-checkbox" >
+           <label for ="checkbox">   Remember Me  </label>
+                <input type="checkbox" for="checkbox" id="checkbox"  (change)="changeField($event)">
+           
+        </div>
+        <div class="form-control">
+            <a routerLink="/forgotPassword">Forgot Password</a>
+        </div>
+             
+        </div>  
+  
+        <div class="notNumber"> 
+        Not a member?
+            <a routerLink="/auth/register">Register</a>
+        </div>
+    </div>
+  
+</form>
+
+<div class="error-container">
+    <span class = "status-errors" *ngIf="isError">
+        {{errorMessage}}
+    </span>
+</div>

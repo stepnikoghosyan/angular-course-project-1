@@ -1,0 +1,60 @@
+<form class ="form register-form" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" >
+    <div class="container">
+        <h2 class="form-header"> Sign up</h2>
+        <div class = "form-control" >
+            <label class="form-control-label" for ="firstName"> firstName </label>
+                <input formControlName="firstName" name="firstName" type="text" id="firstName">
+                <div class="error-message" *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].touched|| registerForm.controls['firstName'].dirty)" >
+                    <span  *ngIf ="registerForm.controls['email'].errors?.['required']"> Please enter characters </span>
+               </div>
+              
+            
+            </div>
+        <div class = "form-control" >
+            <label class="form-control-label" for ="lastName"> lastName  </label>
+                <input formControlName="lastName" name="lastName" type="text" id="lastName">
+                <div class="error-message" *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].touched|| registerForm.controls['lastName'].dirty)" >
+                    <span  *ngIf ="registerForm.controls['email'].errors?.['required']"> Please enter characters </span>
+               </div>
+        </div>
+        <div class = "form-control" >
+            <label class="form-control-label" for ="email"> Email </label>
+                <input formControlName="email" name="email" type="email" id="email">
+                <div class="error-message" *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].touched|| registerForm.controls['email'].dirty)" >
+                    <span  *ngIf ="registerForm.controls['email'].hasError('email')"> Not an email </span>
+                    <span  *ngIf ="registerForm.controls['email'].errors?.['required']"> Please enter email </span>
+               </div>
+         </div>
+        <div class = "form-control">
+            <label class="form-control-label" for ="password"> Password    </label>
+                <input   formControlName="password" name="password" [type]="display ? 'text' : 'password'" id="password">
+         
+            <i (click)="onshowPasswordValue()"> 
+                <span class="material-icons" *ngIf="display">
+                   visibility
+                   </span> 
+               <span class="material-icons" *ngIf="!display" >
+                       visibility_off 
+                       </span> 
+            </i>
+            <div class="error-message"  *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].touched || registerForm.controls['password'].dirty)">
+                <span  *ngIf ="registerForm.controls['password'].errors?.['minlength']"> Password must have less then {{registerForm.controls['password'].getError('minlength').requiredLength}} characters </span>
+                <span  *ngIf ="registerForm.controls['password'].errors?.['required']"> Please enter Password </span>
+           </div>
+        </div>   
+       
+            <button class="btn login-bth" [disabled]="!registerForm.valid"> Sign Up</button>
+  
+        <div class="member"> 
+        Already a member?
+        <a routerLink="/auth/login">Sign in</a>
+        </div>
+    </div>
+</form>
+
+
+<div class="error-container">
+    <span class = "status-errors" *ngIf="isError">
+        {{errorMessage}}
+    </span>
+</div>

@@ -1,0 +1,152 @@
+/* You can add global styles to this file, and also import other style files */
+input{
+    outline: 0;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: aliceblue;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  
+}
+/* main navigation and Auth page navigation style*/
+
+.main-navigation{
+    display: flex;
+    background-color: cadetblue;
+    justify-content: flex-end;
+    
+  }
+  .main-navigation-list{
+      display: flex;
+      list-style: none;
+      padding: 25px 20px;
+  
+  }
+  .main-navigation-list li{
+      padding: 10px, 20px;
+      margin-left: 20px;
+      text-transform: uppercase;
+      background-color: aquamarine;
+      border: 2px solid transparent;
+      border-radius: 7px;
+     
+  }
+  .main-navigation-list li a{
+      padding: 15px 15px;
+      color: blue;
+      text-decoration: none;
+     
+  }
+
+/*form style*/
+
+.form{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    margin: 50px auto;
+    background-color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
+ 
+  
+ }
+ .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px 20px;
+    text-transform: capitalize;
+ }
+
+.form-control{
+    display: flex; 
+    flex-direction: column;
+    padding: 5px 7px;
+    margin-bottom: 10px;
+
+   
+}
+
+
+input{
+        min-height:40px;
+        margin-top:7px;
+        border: 1px solid rgb(183, 234, 250);
+        border-radius: 5px;
+        letter-spacing: 1px;
+        background-color: antiquewhite;
+}
+
+input:focus{
+    border: 2px solid blue;
+}
+.form-header{
+    margin: 30px auto;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 25px;
+}
+.btn{
+    font: inherit;
+    background-color: rgb(67, 91, 199);
+    color: white;
+    text-transform: capitalize;
+    margin: 20px 0;
+    cursor: pointer;
+    padding:10px 20px;
+    border-radius:8px;
+    
+
+}
+.btn:focus{
+    background-color: darkblue;
+}
+.checkbox>a{
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+
+}
+a:focus{
+    color: grey;
+    text-decoration: underline;
+}
+.error-message{
+    margin-top: 15px;
+    color:rgb(235, 75, 136);
+    font-size: 14px;
+    text-transform: none;
+   
+
+}
+/*eye*/
+
+.material-icons{
+    display: block;
+    margin-left: 320px;
+    margin-top: -33px;
+    cursor: pointer;
+    color: blue;
+}
+/*error massage for response state*/
+.error-container{
+    display: flex;
+    position: relative;
+    top:-580px;
+}
+.status-errors{
+    margin-left: auto;
+    padding: 5px 15px;;
+    width: 250px;
+    min-height: 250px;
+    background-color: rgb(231, 73, 73);
+    color: white;
+    border: 2px solid transparent;
+
+}
