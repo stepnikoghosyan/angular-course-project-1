@@ -23,6 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
         email: this.email
     });
     
+    
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService) { }
