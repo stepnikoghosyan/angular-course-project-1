@@ -23,7 +23,6 @@ export class AuthService {
         return  this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
         .pipe(
             tap(()=>{
-                console.log("Reset Pass Success");
                 this.router.navigateByUrl("/home")
             }))
     };
@@ -49,11 +48,6 @@ export class AuthService {
         this.router.navigateByUrl('/login');
       }
 
-
-    //   verifyAccount(activationToken: string){
-    //     return this.httpClient
-    //     .get(`https://angular-course-1.herokuapp.com/auth/verify-account?activationToken=${activationToken}`)
-    //   }
     
       verifyAccount(activationToken: string): Observable<void>{
         return this.httpClient

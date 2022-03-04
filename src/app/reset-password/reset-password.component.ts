@@ -14,11 +14,16 @@ export class ResetPasswordComponent implements OnInit {
     isSuccess = false;
     message!: string;
     errors: string[]= [];
-    token!: any;
+    token: string | undefined;
     newPassword = new FormControl('', [
         Validators.required,
         Validators.minLength(6)
       ]);
+        
+    resetPasForm: FormGroup = this.formBuilder.group({
+        newPassword: [''],
+        token: ['']
+    });
     
     constructor(  private authService: AuthService,
                 private formBuilder: FormBuilder,
@@ -29,11 +34,7 @@ export class ResetPasswordComponent implements OnInit {
     ngOnInit(): void {
        this.token = this.activatedRoute.snapshot.params['activationToken'];
     }
-  
-    resetPasForm: FormGroup = this.formBuilder.group({
-        newPassword: [''],
-        token: ['']
-    });
+
 
     formResetSubmit(){
         this.errors = [];

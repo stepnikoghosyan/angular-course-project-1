@@ -14,7 +14,7 @@ button{
     }
 }
 .error-message{
-    font-size: 10px;
+    font-size: 12px;
     color: red;
 }
 .notification{
@@ -84,7 +84,7 @@ button{
         .errors{
             span{
                 color: red;
-                font-size: 10px;
+                font-size: 12px;
             }
         }
     }
@@ -96,3 +96,7 @@ button{
 .invalid-control {
     border: 1px solid red
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

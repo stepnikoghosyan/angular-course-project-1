@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,6 @@ import { VerifyAccountComponent } from './verify-account/verify-account.componen
     MatProgressSpinnerModule,
     MatCardModule,
     MatIconModule,
-    NoopAnimationsModule,
     MatInputModule
   ],
   providers: [],

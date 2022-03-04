@@ -13,16 +13,10 @@ export class ForgotPasswordComponent implements OnInit {
     isSuccess = false;
     message!:string;
     errors:string[] = [];
-    email = new FormControl('', [
-                Validators.required,
-                Validators.email,
-                Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-      ]);
     
     forgotPasForm: FormGroup = this.formBuilder.group({
-        email: this.email
+        email: ['',[Validators.required,Validators.email]]
     });
-    
     
     constructor(
         private formBuilder: FormBuilder,
@@ -38,7 +32,6 @@ export class ForgotPasswordComponent implements OnInit {
                     
                     this.isSuccess = true;
                     this.message = "Success!";
-                    this.forgotPasForm.reset();
                     setTimeout(()=>  this.isSuccess = false, 3000);
 
                 },

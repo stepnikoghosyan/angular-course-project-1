@@ -11,7 +11,7 @@
 <form>
     <mat-card-subtitle  class="subtitle">Verifying Your account, please wait...</mat-card-subtitle>
     <button type="button" (click) = "onClick()" mat-raised-button color="black" class="re-send">Re-send activation token</button>
-    <input  *ngIf="showEmail" matInput placeholder="email" formControlName = "email">
+    <input class="input" *ngIf="showEmail" matInput placeholder="email" formControlName = "email">
 <mat-spinner class="loading" [diameter]="20" *ngIf="showSpinner"></mat-spinner>
 <button *ngIf="showButtons" class="send-mail" type="button" mat-raised-button color="primary">Send mail</button>
 <div>
