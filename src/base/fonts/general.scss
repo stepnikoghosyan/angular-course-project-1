@@ -136,3 +136,21 @@ input {
   margin: 100px auto 0 auto;
   padding: 20px;
 }
+.d-flex {
+  display: flex;
+}
+.m-l-auto {
+  margin-left: auto;
+}
+.flex-end {
+  justify-content: flex-end;
+}
+.row {
+  margin: 0 -10px;
+}
+
+.col-4 {
+  width: 33.3333%;
+  padding-left: 10px;
+  padding-right: 10px;
+}

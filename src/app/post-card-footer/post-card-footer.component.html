@@ -1,9 +1,13 @@
 <div class="card-footer">
-    <span class="icon-user"></span>
-    <span class="name-font">{{post.user.firstName}} {{post.user.lastName}}</span>
-    <div class="d-flex flex-end">
+    <p class="user-name">
+        <em class="icon-user"></em> 
+        {{post.user.firstName}} {{post.user.lastName}}
+    </p>
+    <div class="d-flex m-l-auto">
         <button class="icon-eye"></button>
-        <button class="icon-bubble"></button>
-        <span>{{post.comments.length}}</span>
+        <div class="comment-wrapper">
+            <button class="icon-bubble"></button>
+            <span>{{post.comments.length}}</span>
+        </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 .post-card-content {
     border-radius: 5px;
     border: 1px solid #ccc;
-    padding: 12px 12px 0;
+    background-color: white;
     .post-top-content {
         text-align: center;
         img {
@@ -19,5 +19,6 @@
         max-width: 100%;
         font-size: 15px;
         margin: 10px 0 20px;
+        padding: 10px 15px;
     }
 }

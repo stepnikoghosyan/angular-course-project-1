@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +7,4 @@ import { PostsService } from '../services/posts.service';
 })
 
 export class HomeComponent {
-  
 }
