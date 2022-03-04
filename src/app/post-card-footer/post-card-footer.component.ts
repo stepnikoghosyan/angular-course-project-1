@@ -8,5 +8,4 @@ import { PostModel } from "../models/post.model";
 })
 export class PostCardFooterComponent {
   @Input() post!: PostModel;
-    
 }

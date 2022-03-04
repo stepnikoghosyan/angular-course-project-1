@@ -10,9 +10,7 @@ export class PostCardComponent {
   @Input() post!: PostModel;
   defaultImage = 'assets/images/default.jpg';
 
-    constructor() { }
-
-    get postImage(): string {
-        return this.post?.imageUrl ? this.post?.imageUrl : this.defaultImage
-    }
+  get postImage(): string {
+    return this.post?.imageUrl ? this.post?.imageUrl : this.defaultImage
+  }
 }

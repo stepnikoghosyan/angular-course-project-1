@@ -1,11 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, Subject, takeUntil } from 'rxjs';
-import { AuthService } from "../services/auth.service";
-import { NotificationService } from "../services/notification.service";
-import { ResetPasswordDto } from "../models/auth.model";
-import { HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {finalize, Subject, takeUntil} from 'rxjs';
+import {AuthService} from "../services/auth.service";
+import {NotificationService} from "../services/notification.service";
+import {ResetPasswordDto} from "../models/auth.model";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-reset-password',
@@ -28,7 +28,8 @@ export class ResetPasswordComponent implements OnDestroy {
 
   initForm(): void {
     this.passwordForm = this.formBuilder.group({
-      newPassword: [null, [Validators.required, Validators.minLength(6)]]
+      newPassword: [null, [Validators.required, Validators.minLength(6)]],
+      token: this.activatedRoute.snapshot.params['token']
     })
   }
 
@@ -40,11 +41,7 @@ export class ResetPasswordComponent implements OnDestroy {
     if (this.passwordForm.valid) {
       this.isLoading = true;
       this.passwordForm.disable();
-      const token = this.activatedRoute.snapshot.params['token'];
-      const resetPasswordDto: ResetPasswordDto = new ResetPasswordDto({
-        token: token,
-        newPassword: this.passwordForm.value.newPassword
-      })
+      const resetPasswordDto: ResetPasswordDto = new ResetPasswordDto(this.passwordForm.value);
       this.authService.resetPassword(resetPasswordDto)
         .pipe(takeUntil(this.unsubscribe$),
           finalize(() => {
