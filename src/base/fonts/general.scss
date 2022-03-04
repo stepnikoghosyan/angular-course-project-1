@@ -147,6 +147,8 @@ input {
 }
 .row {
   margin: 0 -10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .col-4 {
