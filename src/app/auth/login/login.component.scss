@@ -1,16 +1,15 @@
 
-form .form-control, .action,  .sign-up, .err {
+.form-control, .action,  .sign-up, .err {
  padding: 20px 40px;
  }
-
-//  .form-control {
-//      display: flex;
-//      justify-content: center;
-//  }
 
  .forgot {
     display: flex;
     justify-content: center;
+}
+
+.forgot span {
+    margin-left: 5px;
 }
 
 .forgot a {
@@ -24,10 +23,6 @@ button {
 .val {
     display: flex;
     justify-content: left;
-}
-
-.err {
-    width: 60%;
 }
 
 .sign-up {

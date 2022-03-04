@@ -1,10 +1,10 @@
 
-form .form-control, .send{
+.form-control, .send{
  padding: 20px 40px;
 
 }
 
-form .action{
+.action{
  display: flex;
  justify-content: center;
 }
@@ -13,7 +13,7 @@ form .action{
     width: 100%;
 }
 
-.signUp, .sign {
+.sign {
     background-color: rgb(42, 172, 189);
     color: rgb(53, 50, 50);
     padding: 25px 20px;

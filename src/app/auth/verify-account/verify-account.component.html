@@ -6,13 +6,16 @@
         <i nz-icon nzType="loading"></i>
     </ng-template>
     <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
-    <button class="verify" (click)="showEmail()">
+    <div class="send">
+        <button class="verify" (click)="showEmail()">
         Re-send activation token
     </button>
+    </div>
+    
     <div *ngIf="emailError">
-        <form class="form-control">
+        <!-- <form class="form-control">-->
             
-            <div class="form-control">
+            <div class="form-control"> 
                 <label class="email">E-mail</label>
            
             
@@ -30,16 +33,15 @@
             </div> 
              </div>
          
-        </form>
-        <div >
-            <button class="sign width" (click)="resendActivation()">Re-send activation token</button>
-        
-        
+        <!-- </form> -->
+        <div class="send">
+            <button class="reSend" (click)="resendActivation()">Send email</button>
+               
         </div>
     </div>
-    <div>
+    <div class="action">
         <button class="sign" (click)="signIn()">Sign In</button>
-        <button class="sign" (click)="signUp()">Sign Up</button>
+        <button class="sign signUp" (click)="signUp()">Sign Up</button>
     </div>
 </form>
 

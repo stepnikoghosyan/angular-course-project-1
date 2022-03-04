@@ -21,7 +21,7 @@ form {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-form .form-control input {
+.form-control input {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -45,6 +45,5 @@ button {
 .errors{
     color: rgb(204, 9, 9);
     font-size: 14px;
-    // margin-left: 100px;
 }
 
