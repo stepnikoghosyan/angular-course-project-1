@@ -47,3 +47,19 @@ button {
     font-size: 14px;
 }
 
+.openedEye {
+    background: url('assets/outline_visibility_off_black_24dp.png'), no-repeat;
+}
+
+.closedEye {
+    background: url('assets/outline_visibility_black_24dp.png'), no-repeat;
+}
+
+.closedEye, .openedEye {
+    display: inline-block;
+    height: 22px;
+    width: 25px;
+    position: absolute;
+    left: 82%;
+    bottom: 30%;
+}
