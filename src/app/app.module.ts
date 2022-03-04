@@ -14,6 +14,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {PostsService} from "./services/posts.service";
 import { PostCardComponent } from './post-card/post-card.component';
+import { PostCardFooterComponent } from './post-card-footer/post-card-footer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PostCardComponent } from './post-card/post-card.component';
     HeaderComponent,
     HomeComponent,
     NotFoundComponent,
-    PostCardComponent
+    PostCardComponent,
+    PostCardFooterComponent
   ],
   imports: [
     AuthModule,
