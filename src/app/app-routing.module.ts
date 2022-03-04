@@ -9,6 +9,8 @@ import {ResetPasswordComponent} from "./reset-password/reset-password.component"
 import {VerifyAccountComponent} from "./verify-account/verify-account.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {PostCardComponent} from "./posts/post-card/post-card.component";
+import {PostsComponent} from "./posts/posts.component";
 
 const routes: Routes = [
   {
@@ -29,6 +31,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'posts',
+    component: PostsComponent,
     canActivate: [AuthGuard]
   },
   {

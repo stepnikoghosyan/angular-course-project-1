@@ -1,13 +1,13 @@
 <div class="card-footer">
     <p class="user-name">
-        <em class="icon-user"></em> 
-        {{post.user.firstName}} {{post.user.lastName}}
+        <em class="icon-user"></em>
+        {{post?.user?.firstName}} {{post?.user?.lastName}}
     </p>
     <div class="d-flex m-l-auto">
         <button class="icon-eye"></button>
         <div class="comment-wrapper">
             <button class="icon-bubble"></button>
-            <span>{{post.comments.length}}</span>
+            <span>{{post?.comments?.length}}</span>
         </div>
     </div>
 </div>

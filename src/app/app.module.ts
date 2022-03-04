@@ -13,8 +13,10 @@ import {AuthModule} from "./auth.module";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {PostsService} from "./services/posts.service";
-import { PostCardComponent } from './post-card/post-card.component';
-import { PostCardFooterComponent } from './post-card-footer/post-card-footer.component';
+import { PostCardComponent } from './posts/post-card/post-card.component';
+import { PostCardFooterComponent } from './posts/post-card-footer/post-card-footer.component';
+import { PostsComponent } from './posts/posts.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,10 @@ import { PostCardFooterComponent } from './post-card-footer/post-card-footer.com
     HeaderComponent,
     HomeComponent,
     NotFoundComponent,
+    PostsComponent,
     PostCardComponent,
-    PostCardFooterComponent
+    PostCardFooterComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     AuthModule,

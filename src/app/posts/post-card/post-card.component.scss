@@ -3,6 +3,8 @@
     border: 1px solid #ccc;
     background-color: white;
     margin: 10px 0;
+    width: 400px;
+
     .post-top-content {
         text-align: center;
         img {
@@ -22,4 +24,9 @@
         margin: 10px 0 20px;
         padding: 10px 15px;
     }
+
+  &:hover {
+    transition: all 0.5s;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  }
 }
