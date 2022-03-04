@@ -2,10 +2,12 @@
     <form>
     <h2>Verify Account</h2>
     <p>Verifying Your account, please wait... </p>
+
     <ng-template #indicatorTemplate>
         <i nz-icon nzType="loading"></i>
     </ng-template>
     <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+    
     <div class="send">
         <button class="verify" (click)="showEmail()">
         Re-send activation token

@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Login } from 'src/app/models/auth.model';
 import { Router } from '@angular/router';
+import { Subject} from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
+  unSubscribe$  = new Subject<void>();
   showPassword = true;
   text = 'password'
 
   form: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email, Validators.pattern( /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
     password: ['', [Validators.required, Validators.minLength(5)]],
+    checkBox:[false]
   })
 
 
@@ -26,9 +29,11 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router:Router
   ) { }
+ 
   ngOnInit(): void {
     this.showPassword = true;
     this.errorMsg = '';
+    this.rememberTocken()
   }
 
   showHidePass() {
@@ -41,18 +46,27 @@ export class LoginComponent implements OnInit {
   }
 
   
-
+  rememberTocken(){
+     this.form.get('checkBox')?.valueChanges
+     .subscribe((result:boolean)=>{
+       this.authService.isChecked = result
+     })
+  }
 
   login() {
 
-    const auth = localStorage.getItem('token');
     const login = new Login(this.form.value);
-    this.authService.login(login).subscribe(
-      (res) => {
-       const accessToken = res.accessToken;
-       const refreshToken = res.refreshToken;
+    this.authService.login(login)
+    .subscribe(
+      () => {
+      
       }, (error: any) => {
         this.errorMsg = error.error.message;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
   }
 }

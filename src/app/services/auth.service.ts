@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  isChecked = false;
   
   constructor(
     private httpClient:HttpClient,
@@ -23,8 +24,9 @@ export class AuthService {
       .post<LoginResponse>(`${this.baseUrl}auth/login`, loginDto)
       .pipe(
         tap((data: LoginResponse) => {
+        //  localStorage.removeItem('token');
           localStorage.setItem('auth', JSON.stringify(data));
-          this.router.navigateByUrl('/home');
+        this.router.navigate(['/home'])
         })
       );
   }

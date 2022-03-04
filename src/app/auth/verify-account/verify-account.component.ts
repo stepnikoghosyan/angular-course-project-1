@@ -1,16 +1,18 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import {  Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/services/notification.service';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-verify-account',
   templateUrl: './verify-account.component.html',
   styleUrls: ['./verify-account.component.scss'],
 })
-export class VerifyAccountComponent implements OnInit {
+export class VerifyAccountComponent implements OnInit, OnDestroy {
+  unSubscribe$ = new Subject<void>();
   token = '';
   emailError = false;
   errMessage!: string;
@@ -21,6 +23,7 @@ export class VerifyAccountComponent implements OnInit {
     private router: Router,
     private notifyService: NotificationService
   ) {}
+ 
 
   ngOnInit(): void {
     this.getToken();
@@ -31,7 +34,9 @@ export class VerifyAccountComponent implements OnInit {
     const token = this.activeRoute.snapshot.paramMap.get('token') as string;
     localStorage.setItem('token', JSON.stringify(token));
 
-    this.authService.verifyAccount(token).subscribe(
+    this.authService.verifyAccount(token)
+    .pipe((takeUntil(this.unSubscribe$)))
+    .subscribe(
       () => {
         this.notifyService.showSuccess('Your verification Succeded', 'Succes');
         setTimeout(() => {
@@ -49,7 +54,9 @@ export class VerifyAccountComponent implements OnInit {
       email: this.email.value,
     };
 
-    this.authService.resendActivation(email).subscribe(() => {
+    this.authService.resendActivation(email)
+    .pipe(takeUntil(this.unSubscribe$))
+    .subscribe(() => {
       this.notifyService.showSuccess('Your verification Succeded', 'Succes');
       this.signIn();
     });
@@ -64,5 +71,10 @@ export class VerifyAccountComponent implements OnInit {
 
   showEmail() {
     this.emailError = true;
+  }
+
+  ngOnDestroy(): void {
+   this.unSubscribe$.next();
+   this.unSubscribe$.complete();
   }
 }

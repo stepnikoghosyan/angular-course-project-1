@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
+@import "~ng-zorro-antd/button/style/index.min.css";
 @import '~ngx-toastr/toastr';
 .main{
   display: flex;
@@ -19,6 +21,10 @@ form {
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.formErr{
+    height: 20px;
 }
 
 .form-control input {
@@ -61,5 +67,5 @@ button {
     width: 25px;
     position: absolute;
     left: 82%;
-    bottom: 30%;
+    bottom: 42%;
 }

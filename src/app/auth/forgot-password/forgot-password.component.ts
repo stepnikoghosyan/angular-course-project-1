@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { Forgot } from 'src/app/models/auth.model';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({

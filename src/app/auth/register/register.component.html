@@ -4,51 +4,65 @@
   <div class="form-control">
     <label>First Name</label>
     <input  type="text" formControlName="firstName" />
-    <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
-      <span *ngIf="form.get('firstName')?.hasError('required')" class="errors">
-        Required
-      </span>
+    <div class="formErr">
+      <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
+        <span *ngIf="form.get('firstName')?.hasError('required')" class="errors">
+          Required
+        </span>
+      </div>
     </div>
   </div>
   <div class="form-control">
     <label>Last Name</label>
     <input  type="text" formControlName="lastName" />
-    <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
-      <span *ngIf="form.get('lastName')?.hasError('required')" class="errors">
-        Required
-      </span>
+    <div class="formErr">
+      <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+      
+        <span *ngIf="form.get('lastName')?.hasError('required')" class="errors">
+          Required
+        </span>
+      </div>
     </div>
   </div>
   <div class="form-control">
     <label>E-mail</label>
     <input  type="email" formControlName="email" />
-    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-      <span *ngIf="form.get('email')?.hasError('email')" class="errors">
-      invalid Email
-      </span>
-      <span *ngIf="form.get('email')?.hasError('required')" class="errors">
-        Required
-      </span>
+    <div class="formErr">
+      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      
+        <span *ngIf="form.get('email')?.hasError('email')" class="errors">
+        invalid Email
+        </span>
+        <span *ngIf="form.get('email')?.hasError('required')" class="errors">
+          Required
+        </span>
+      </div>
     </div>
   </div>
   <div class="form-control">
     <label>Password</label>
-    <input  type="password" formControlName="password" />
-    <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
-      <span *ngIf="form.get('password')?.hasError('required')" class="errors">
-        Required
-      </span>
-      <span *ngIf="form.get('password')?.hasError('minlength')" class="errors">
-        min length is 6 letter
-      </span>
+    <input  type="password" formControlName="password"/>
+    <div class="formErr">
+      <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+    
+        <span *ngIf="form.get('password')?.hasError('required')" class="errors">
+          Required
+        </span>
+        <span *ngIf="form.get('password')?.hasError('minlength')" class="errors">
+          min length is 6 letter
+        </span>
+      </div>
     </div>
+   
  
   </div>
 <div class="action">
   <button (click)="register()" class="display" >Sign Up</button>
-  <p class="errors">{{errorMsg }}</p>
-  <p class="errors">{{message}}</p>
-  <p style="color:green;">{{successMsg}}</p>
+  <div class="formErr">
+    <p class="errors">{{message}}</p>
+    <p style="color:green;">{{successMsg}}</p>
+  </div>
+
  <div class="sign-in">
   Already a member? <a routerLink="/auth/login">Sign In</a>
  </div>

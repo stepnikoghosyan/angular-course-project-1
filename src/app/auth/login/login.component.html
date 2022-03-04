@@ -1,48 +1,51 @@
 <div class=" main">
   <form class="form" [formGroup]="form">
-  <h2>Sign In</h2>
-  <div class="form-control">
-    <label>Email</label>
-    <input  type="email" formControlName="email" />
-    <div class="val" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-      <span *ngIf="form.get('email')?.hasError('email')" class="errors">
-      invalid Email
-      </span>
-      <span *ngIf="form.get('email')?.hasError('required')" class="errors">
-        Required
-      </span>
+    <h2>Sign In</h2>
+    <div class="form-control">
+      <label>Email</label>
+      <input  type="email" formControlName="email" />
+      <div class="formErr">
+        <div class="val" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+          <span *ngIf="form.get('email')?.hasError('email')" class="errors">
+          invalid Email
+          </span>
+          <span *ngIf="form.get('email')?.hasError('required')" class="errors">
+            Required
+          </span>
 
+        </div>
+     </div>
     </div>
-  </div>
-  <div class="form-control">
-    <label>Password</label>
-    <input  [type]="text" formControlName="password"/>
-    <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
-
-    <div class="val" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
-      <span *ngIf="form.get('password')?.hasError('required')" class="errors">
-        Required
-      </span>
+    <div class="form-control">
+      <label>Password</label>
+      <input  [type]="text" formControlName="password"/>
+      <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
+      <div class="formErr">
+        <div class="val" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+          <span *ngIf="form.get('password')?.hasError('required')" class="errors">
+            Required
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="action">
-    <button (click)="login()" class="display">Sign In</button>
-  </div>
-  <div class="val err">
-      <span class="errors">{{errorMsg}}</span>
-  </div>
+    <div class="action">
+      <button (click)="login()" class="display">Sign In</button>
+    </div>
+    <div class="val err">
+        <span class="errors">{{errorMsg}}</span>
+    </div>
   
 
-  <div class="forgot">
+    <div class="forgot">
 
-     <label><input type="checkbox"  /> <span>Remember me</span> </label>
-     <a routerLink="/auth/forgot-password" >
-      forgot password 
-     </a>
-  </div>
-  <div class="sign-up">
-    Not a member? <a routerLink="/auth/register">Register</a>
-  </div>
+      <label> <input type="checkbox" formControlName = 'checkBox' /> <span>Remember me</span> </label>
+      <a routerLink="/auth/forgot-password" >
+        forgot password 
+      </a>
+    </div>
+    <div class="sign-up">
+      Not a member? <a routerLink="/auth/register">Register</a>
+    </div>
 </form>
 </div>
 
