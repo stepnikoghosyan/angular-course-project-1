@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -12,44 +13,41 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
     hide = true
-    showSpinner = false
-    isSuccess = false;
-    message!:string
+    showSpinner = false;
     errors: string[] = [];
     registerForm: FormGroup = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required], 
-        email: ['',[Validators.required, Validators.email,] ], 
-        password: ['',[Validators.required,Validators.minLength(6)]]           
+        email: ['', [Validators.required, Validators.email] ], 
+        password: ['', [Validators.required, Validators.minLength(6)]]           
     });
 
     constructor(private formBuilder: FormBuilder,
                 private authService: AuthService,
-                private router:Router) {}
+                private router:Router,
+                private notifyService: NotificationService) {}
 
     ngOnInit(): void {}
 
     registerFormSubmit(){
         this.showSpinner = true
         const dto = new RegisterDto(this.registerForm.value);
-        if(this.registerForm){
+        if(this.registerForm.valid){
             this.authService.register(dto).subscribe({
                 next: (data)=> {
-                    this.isSuccess = true;
-                    this.message = "Success!";
-                    console.log("DATA", data);
-                    this.showSpinner=false
-                    this.registerForm.reset();
-                    setTimeout(()=>  this.isSuccess = false, 3000);
-                    this.router.navigateByUrl('/login')
+                    this.notifyService.success("Please check your email", "Succes!!")
+                    this.showSpinner = true;
+                    setTimeout(()=> this.router.navigateByUrl('/login'), 3000);
                 },
                 error: (err: HttpErrorResponse) => {
-                    this.showSpinner=false
                     this.errors = [];
                     switch(err.status){
                         case 400:
                             this.errors.push("Invalid request");
                             break;
+                        case 403:
+                            this.errors.push("Forbidden");
+                            break;                        
                         case 409:
                             this.errors.push("The email address is already used");
                             break;

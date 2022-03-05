@@ -2,7 +2,8 @@
 .remember-block__content,
 .register {
     display:flex;
-    align-items: center;
+    justify-content: space-between;
+    width: 165px;
 } 
 .remember-block label {
     cursor:pointer;
@@ -12,10 +13,18 @@
     justify-content: space-between;
     width:80%;
     margin-top:30px;
+    
+    input{
+        height: 17px;
+        width: 17px;
+    }
 }
 .register {
     justify-content: space-around;
     width:55%;
 }
-
+i{
+    margin-left: -30px; 
+    cursor: pointer
+}
 

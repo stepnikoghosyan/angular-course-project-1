@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForgotPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -10,30 +11,26 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-    isSuccess = false;
-    message!:string;
-    errors:string[] = [];
     
+    errors:string[] = [];
     forgotPasForm: FormGroup = this.formBuilder.group({
-        email: ['',[Validators.required,Validators.email]]
+        email: ['', [ Validators.required, Validators.email ]]
     });
     
     constructor(
         private formBuilder: FormBuilder,
-        private authService: AuthService) { }
+        private authService: AuthService,
+        private notifyService: NotificationService) {};
   
     ngOnInit(): void {}
   
     formSubmit(){
-        if(this.forgotPasForm){
-            const dto = new ForgotPasswordDto(this.forgotPasForm.value)
-        this.authService.forgotPassword(dto).subscribe({
-            next: ()=>{  
-                    
-                    this.isSuccess = true;
-                    this.message = "Success!";
-                    setTimeout(()=>  this.isSuccess = false, 3000);
-
+        if(this.forgotPasForm.valid){
+            const dto = new ForgotPasswordDto(this.forgotPasForm.value);
+            this.authService.forgotPassword(dto).subscribe({
+                next: ()=>{  
+                    this.notifyService.success("Check your email", "Success!");
+                    this.forgotPasForm.reset();
                 },
                 error: (err: HttpErrorResponse) => {
                     switch(err.status){

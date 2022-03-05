@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import {ThemePalette} from '@angular/material/core';
-import { RegisterDto } from '../models/auth.model';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-
-
+import { NotificationService } from '../services/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { EmailDto } from '../models/auth.model';
 
 @Component({
   selector: 'app-verify-account',
@@ -14,60 +12,69 @@ import { FormBuilder, FormGroup,Validators } from '@angular/forms';
   styleUrls: ['./verify-account.component.css']
 })
 export class VerifyAccountComponent implements OnInit {
-  showSpinner= false
-  showEmail = false
-  showButtons = false
-  showError = false
-  showSuccess = false  
+    showResendSpinner = false;
+    showSpinner = false;
+    showTitle = true;
+    showResendEmailForm = false;
 
-  @Output('reSend')
-  event = new EventEmitter()
-  
-  form : FormGroup = this.formBuilder.group({
-    email :['',[Validators.required,Validators.email]], 
-  })
+    @Output('reSend') event = new EventEmitter();
+    @ViewChild ('resendButton') resendButton!: ElementRef<HTMLButtonElement>;
+    
+    verifyForm : FormGroup = this.formBuilder.group({
+        email :['', [ Validators.required, Validators.email]], 
+    });
 
-
-  constructor(
-    private actacatedRoute:ActivatedRoute,
-     private authService:AuthService,
-     private router:Router, 
-     private formBuilder:FormBuilder,
-
-     ) {}
-
+    constructor(
+        private actacatedRoute:ActivatedRoute,
+        private authService:AuthService,
+        private router:Router, 
+        private formBuilder:FormBuilder,
+        private notifyService: NotificationService
+    ) {};
 
     ngOnInit(): void {
       this.showSpinner = true;
       const activationToken = this.actacatedRoute.snapshot.params['activationToken'];
       if (activationToken) {
         this.authService.verifyAccount(activationToken).subscribe({
-          next:() => {
-            this.showSuccess=true
-            this.router.navigateByUrl('login');
-
-          },
-         error :() => {
-           this.showError=true  
-         }
+            next:() => {
+                this.notifyService.success("Account verified", "Success")
+                this.router.navigateByUrl('login');
+            },
+            error :(err: HttpErrorResponse) => {
+                this.notifyService.error("Invalid activation token", "Error");
+                this.showTitle = false;
+                this.showSpinner = false;
+                this.resendButton.nativeElement.style.backgroundColor = "#183d40";
+            }
         });
       } 
-    }
-
+    };
 
     onClick() {
-    this.showSpinner=false
-    this.showEmail = true
-    this.showButtons = true
-    this.event.emit()
-    }
+        this.showResendEmailForm = true;
+        this.resendButton.nativeElement.style.backgroundColor = "gray";
+        this.event.emit();
+    };
 
     sendEmail() {
-      console.log("test!");
-      console.log(this.form.value.email);
-      
-     return this.authService.resendActivationToken(this.form.value).subscribe()
-    }
-
-
+        console.log("test!");
+        if(this.verifyForm.valid){
+            this.showResendSpinner = true;
+            const dto = new EmailDto(this.verifyForm.value);
+            this.authService.resendActivationToken(this.verifyForm.value).subscribe({
+                next: ()=>{
+                    this.notifyService.success("Please check your email", "Success!!");
+                    this.showResendSpinner = false;
+                },
+                error: (err: HttpErrorResponse)=> {
+                    if(err.status == 409){
+                        this.notifyService.error("Account is already verified", "Error");
+                        this.showResendSpinner = false;
+                        this.showTitle = false; 
+                    }
+                }
+            });
+        }
+    };
 }

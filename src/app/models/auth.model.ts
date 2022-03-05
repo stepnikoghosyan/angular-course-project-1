@@ -42,10 +42,10 @@ export interface LoginResponse{
     refreshToken: string
 }
 
-export class emailDto {
+export class EmailDto {
     email:string;
 
-   constructor(data:any) {
+    constructor(data:any) {
        this.email = data.email;
-   }
+    }
 }

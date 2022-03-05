@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { emailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto } from '../models/auth.model';
+import { EmailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto } from '../models/auth.model';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -23,8 +23,10 @@ export class AuthService {
         return  this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
         .pipe(
             tap(()=>{
-                this.router.navigateByUrl("/home")
-            }))
+                setTimeout(()=> this.router.navigateByUrl("/home"), 2000);
+                
+            })
+        );
     };
 
     login(loginDto: LoginDto, remember:boolean ): Observable<LoginResponse>{
@@ -33,43 +35,39 @@ export class AuthService {
         .pipe(
             tap((data: LoginResponse)=>{
                 if(remember) {
-                localStorage.setItem("auth", JSON.stringify(data))
-            } else {
-                 sessionStorage.setItem('auth', JSON.stringify(data))
-         }
-         this.router.navigateByUrl("home")
-            }
-            )
+                    localStorage.setItem("auth", JSON.stringify(data))
+                } else {
+                    sessionStorage.setItem('auth', JSON.stringify(data))
+                }
+                this.router.navigateByUrl("home")
+            })
         );
       };
 
-
-      register(registerDto: RegisterDto): Observable<void>{
+    register(registerDto: RegisterDto): Observable<void>{
         return this.httpClient
             .post<void>(`${environment.apiUrl}/auth/register`, registerDto);
       };
 
-      logout() {
+    logout() {
         localStorage.removeItem('auth');
         this.router.navigateByUrl('/login');
-      }
+    };
 
-    
-      verifyAccount(activationToken: string): Observable<void>{
+    verifyAccount(activationToken: string): Observable<void>{
         return this.httpClient
             .get<void>(`${environment.apiUrl}/auth/verify-account`,
             {
                params: {
                 activationToken 
                }
-            }
-        )
-      }
+            })
+        };
 
-      resendActivationToken(email:emailDto) {
-          return this.httpClient.post<void>(`${environment.apiUrl}/auth/resend-activation-token`,
-         email)
-      }
+      resendActivationToken(email: EmailDto) {
+          return this.httpClient
+            .post<void>(`${environment.apiUrl}/auth/resend-activation-token`, email)
+      };
 }
 
     

@@ -15,13 +15,14 @@
             </div>
             <div class="form-control">
                 <label>Password</label>
-                <input type="password" name="password" formControlName="password">
-                
-                
+                <input type="password" name="password" #showPassword formControlName="password">
+                <i class="far fa-eye" *ngIf="showEyeIcon" (click)="toggleShowPassoword()"></i>
+                <i class="far fa-eye-slash" *ngIf="!showEyeIcon" (click)="toggleShowPassoword()"></i>
                 <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
                     <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['required']">Password is required</span>
                     <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['minlength']">Password length must be equal or greater than 
-                        {{loginForm.controls['password'].getError('minlength').requiredLength}} characters</span>
+                        {{loginForm.controls['password'].getError('minlength').requiredLength}} characters
+                    </span>
                 </div>  
             </div>
             <div class="errors" *ngFor="let error of errors">
