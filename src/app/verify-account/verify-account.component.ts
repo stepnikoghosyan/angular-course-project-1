@@ -9,7 +9,7 @@ import { EmailDto } from '../models/auth.model';
 @Component({
   selector: 'app-verify-account',
   templateUrl: './verify-account.component.html',
-  styleUrls: ['./verify-account.component.css']
+  styleUrls: ['./verify-account.component.scss']
 })
 export class VerifyAccountComponent implements OnInit {
     showResendSpinner = false;
@@ -17,7 +17,6 @@ export class VerifyAccountComponent implements OnInit {
     showTitle = true;
     showResendEmailForm = false;
 
-    @Output('reSend') event = new EventEmitter();
     @ViewChild ('resendButton') resendButton!: ElementRef<HTMLButtonElement>;
     
     verifyForm : FormGroup = this.formBuilder.group({
@@ -42,6 +41,7 @@ export class VerifyAccountComponent implements OnInit {
                 this.router.navigateByUrl('login');
             },
             error :(err: HttpErrorResponse) => {
+                console.log(err)
                 this.notifyService.error("Invalid activation token", "Error");
                 this.showTitle = false;
                 this.showSpinner = false;
@@ -54,7 +54,6 @@ export class VerifyAccountComponent implements OnInit {
     onClick() {
         this.showResendEmailForm = true;
         this.resendButton.nativeElement.style.backgroundColor = "gray";
-        this.event.emit();
     };
 
     sendEmail() {
@@ -69,6 +68,7 @@ export class VerifyAccountComponent implements OnInit {
                 },
                 error: (err: HttpErrorResponse)=> {
                     if(err.status == 409){
+
                         this.notifyService.error("Account is already verified", "Error");
                         this.showResendSpinner = false;
                         this.showTitle = false; 

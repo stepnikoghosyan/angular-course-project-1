@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit{
 
 
     toggleShowPassoword(){
-        this.renderer.setAttribute(this.showPassword.nativeElement, 'type', 'string');
+        this.renderer.setAttribute(this.showPassword.nativeElement, 'type', 'text');
         this.showEyeIcon = !this.showEyeIcon;
     }
 }

@@ -34,7 +34,7 @@ export class ResetPasswordComponent implements OnInit {
             this.resetPasForm.controls['token'].setValue(this.token);
        }else{
            this.notifyService.error("Somthineg went wrong, try again", "Error!!");
-           setTimeout(()=> this.router.navigateByUrl('/forgot-password'), 3000);
+           this.router.navigateByUrl('/forgot-password');
        }
     };
 

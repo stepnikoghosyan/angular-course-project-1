@@ -23,7 +23,7 @@ export class AuthService {
         return  this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
         .pipe(
             tap(()=>{
-                setTimeout(()=> this.router.navigateByUrl("/home"), 2000);
+                this.router.navigateByUrl("/home");
                 
             })
         );
@@ -34,10 +34,11 @@ export class AuthService {
         return this.httpClient.post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginDto)
         .pipe(
             tap((data: LoginResponse)=>{
+                const item = JSON.stringify(data);
                 if(remember) {
-                    localStorage.setItem("auth", JSON.stringify(data))
+                    localStorage.setItem("auth", item);
                 } else {
-                    sessionStorage.setItem('auth', JSON.stringify(data))
+                    sessionStorage.setItem('auth', item);
                 }
                 this.router.navigateByUrl("home")
             })
@@ -51,6 +52,7 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('auth');
+        sessionStorage.removeItem('auth');
         this.router.navigateByUrl('/login');
     };
 

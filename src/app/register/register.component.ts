@@ -35,19 +35,16 @@ export class RegisterComponent implements OnInit {
         if(this.registerForm.valid){
             this.authService.register(dto).subscribe({
                 next: (data)=> {
-                    this.notifyService.success("Please check your email", "Succes!!")
-                    this.showSpinner = true;
-                    setTimeout(()=> this.router.navigateByUrl('/login'), 3000);
+                    this.notifyService.success("Please check your email", "Succes!!");
+                    this.router.navigateByUrl('/login');
                 },
                 error: (err: HttpErrorResponse) => {
+                    this.showSpinner = false;
                     this.errors = [];
                     switch(err.status){
                         case 400:
                             this.errors.push("Invalid request");
-                            break;
-                        case 403:
-                            this.errors.push("Forbidden");
-                            break;                        
+                            break;                     
                         case 409:
                             this.errors.push("The email address is already used");
                             break;
