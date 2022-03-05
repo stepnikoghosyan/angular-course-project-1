@@ -3,19 +3,14 @@
     <h2>Verify Account</h2>
     <p>Verifying Your account, please wait... </p>
 
-    <ng-template #indicatorTemplate>
-        <i nz-icon nzType="loading"></i>
-    </ng-template>
-    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
-    
     <div class="send">
         <button class="verify" (click)="showEmail()">
         Re-send activation token
     </button>
     </div>
-    
+    <div *ngIf="isLouder" class="lds-ring"><div></div><div></div><div></div><div></div></div>
     <div *ngIf="emailError">
-        <!-- <form class="form-control">-->
+       
             
             <div class="form-control"> 
                 <label class="email">E-mail</label>
@@ -34,11 +29,8 @@
         
             </div> 
              </div>
-         
-        <!-- </form> -->
         <div class="send">
             <button class="reSend" (click)="resendActivation()">Send email</button>
-               
         </div>
     </div>
     <div class="action">

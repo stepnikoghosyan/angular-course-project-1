@@ -12,52 +12,54 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  unSubscribe$  = new Subject<void>();
+  unSubscribe$ = new Subject<void>();
 
   form: FormGroup = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    email: ['', [Validators.required,Validators.email, Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+    email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
     password: ['', [Validators.required, Validators.minLength(5)]]
   })
 
   message = ''
   successMsg = ''
-
+  isLouder = false
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router:Router,
+    private router: Router,
     private notifyService: NotificationService
   ) { }
- 
+
   ngOnInit(): void {
-    this.message= '';
+    this.message = '';
     this.successMsg = '';
   }
 
   register() {
-
-    if (this.form.invalid) {
+    if (this.form.valid) {
+      this.isLouder = true
+      const register = new RegisterDto(this.form.value);
+      this.authService.register(register)
+        .pipe(takeUntil(this.unSubscribe$))
+        .subscribe(() => {
+          this.isLouder = false
+          this.notifyService.showSuccess('Please check your email for verification', 'Success')
+          this.router.navigate(['auth/login'])
+        },
+          ((err: any) => {
+            this.message = err.error.message
+          }));
+    } else {
       this.message = 'Please fill all fields';
       return
     }
-    const register = new RegisterDto(this.form.value);
-    this.authService.register(register)
-    .pipe(takeUntil(this.unSubscribe$))
-    .subscribe(() => {
-      this.notifyService.showSuccess('Please check your email for verification','Success')
-        this.router.navigate(['auth/login'])
-    },
-      ((err: any) => {
-        this.message = err.error.message
-      }));
 
   }
 
   ngOnDestroy(): void {
-   this.unSubscribe$.next();
-   this.unSubscribe$.complete();
-   
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
+
   }
 }

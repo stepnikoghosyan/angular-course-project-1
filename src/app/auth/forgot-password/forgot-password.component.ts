@@ -10,7 +10,7 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./forgot-passvord.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  
+  isLouder!: boolean
   isTouched = false;
   errMessage!: string;
   constructor(private router: Router, private authService: AuthService, private notifyService: NotificationService) { }
@@ -22,13 +22,15 @@ export class ForgotPasswordComponent implements OnInit {
     this.isTouched = true;
     // const forgot = new Forgot(this.email.value)
     if(this.email.valid) {
+      this.isLouder = true
       this.errMessage = '';
       const forgot = {email: this.email.value}
       this.authService.forgotPassword(forgot).subscribe(() => {
         this.router.navigate(['/home'])
       },
       (err) => {
-        
+        this.errMessage = err.error.message
+        this.isLouder = false
       }
       )
   }

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   errorMsg = '';
+  isLouder!: boolean
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -49,20 +50,23 @@ export class LoginComponent implements OnInit, OnDestroy {
   rememberTocken(){
      this.form.get('checkBox')?.valueChanges
      .subscribe((result:boolean)=>{
-       this.authService.isChecked = result
+       this.authService.isRemember = result
      })
   }
 
   login() {
-
-    const login = new LoginDto(this.form.value);
-    this.authService.login(login)
-    .subscribe(
-      () => {
-      
-      }, (error: any) => {
-        this.errorMsg = error.error.message;
-      });
+    if(this.form.valid) {
+      this.isLouder = true;
+      const login = new LoginDto(this.form.value);
+      this.authService.login(login)
+      .subscribe(
+        () => {
+        
+        }, (error: any) => {
+          this.errorMsg = error.error.message;
+          this.isLouder = false
+        });
+    }
   }
 
   ngOnDestroy(): void {
