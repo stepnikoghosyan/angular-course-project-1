@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit{
     
     loginForm: FormGroup = this.formBuilder.group({
         email: ['', [Validators.required,Validators.email]],
-        password: ['',[Validators.required,  Validators.minLength(6)],]
+        password: ['',[Validators.required,  Validators.minLength(6)]],
+        remember:['']
                      
                   
     })
@@ -30,10 +31,10 @@ export class LoginComponent implements OnInit{
         if(this.loginForm.valid){
             const dto = new LoginDto(this.loginForm.value);
             this.errors = [];
-            this.authService.login(dto).subscribe({
+            this.authService.login(dto,this.loginForm.controls['remember'].value).subscribe({ 
                 next: ()=> {    
                     this.showSpinner=true
-
+                    console.log(this.loginForm.controls['remember']);
                 },
                 error: (err: HttpErrorResponse) => {
                     this.showSpinner=false

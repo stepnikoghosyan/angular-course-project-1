@@ -20,7 +20,8 @@
                 
                 <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
                     <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['required']">Password is required</span>
-                    <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['minlength']">Password length must be equal or greater than {{loginForm.controls['password'].getError('minlength').requiredLength}} characters</span>
+                    <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['minlength']">Password length must be equal or greater than 
+                        {{loginForm.controls['password'].getError('minlength').requiredLength}} characters</span>
                 </div>  
             </div>
             <div class="errors" *ngFor="let error of errors">
@@ -31,7 +32,7 @@
                 <mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
                 <div class="remember-block">
                     <div class="remember-block__content">
-                        <input type="checkbox" id ="check" class="checkbox">
+                        <input type="checkbox" id ="check" class="checkbox" formControlName="remember">
                         <label for="check">  Remember Me </label>
                     </div>
                     <a routerLink="/forgot-password">Forgot Password</a>

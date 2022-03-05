@@ -16,8 +16,10 @@ export class AuthGuard implements CanActivate {
       | Promise<boolean | UrlTree>
       | boolean
       | UrlTree {
-      const auth = localStorage.getItem('auth');
-      if (auth && JSON.parse(auth!).accessToken) {
+      const local = localStorage.getItem('auth');
+      const session = sessionStorage.getItem('auth')
+
+      if ((local && JSON.parse(local).accessToken) || (session && JSON.parse(session).accessToken)) {
         return true;
       }
       return this.router.parseUrl('/login');

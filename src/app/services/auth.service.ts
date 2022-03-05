@@ -27,13 +27,19 @@ export class AuthService {
             }))
     };
 
-    login(loginDto: LoginDto): Observable<LoginResponse>{
+    login(loginDto: LoginDto, remember:boolean ): Observable<LoginResponse>{
+
         return this.httpClient.post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginDto)
         .pipe(
             tap((data: LoginResponse)=>{
-                localStorage.setItem("auth", JSON.stringify(data)),
-                this.router.navigateByUrl("/home")
-            })
+                if(remember) {
+                localStorage.setItem("auth", JSON.stringify(data))
+            } else {
+                 sessionStorage.setItem('auth', JSON.stringify(data))
+         }
+         this.router.navigateByUrl("home")
+            }
+            )
         );
       };
 
