@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Reset } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 @Component({
@@ -16,7 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   isTouched = false;
 
   resetForm: FormGroup = this.fb.group({
-    newPassword: ['', [Validators.required, Validators.minLength(5)]],
+    newPassword: ['', [Validators.required, Validators.minLength(6)]],
   })
 
   constructor(private fb: FormBuilder,

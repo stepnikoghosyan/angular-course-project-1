@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { Register } from 'src/app/models/auth.model';
+import { RegisterDto } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -39,14 +39,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   register() {
 
     if (this.form.invalid) {
-      this.message = 'please fill all fields correctly';
+      this.message = 'Please fill all fields';
       return
     }
-    const register = new Register(this.form.value);
+    const register = new RegisterDto(this.form.value);
     this.authService.register(register)
     .pipe(takeUntil(this.unSubscribe$))
     .subscribe(() => {
-      this.notifyService.showSuccess('Your registration was successfully completed,please check your email','Success')
+      this.notifyService.showSuccess('Please check your email for verification','Success')
         this.router.navigate(['auth/login'])
     },
       ((err: any) => {

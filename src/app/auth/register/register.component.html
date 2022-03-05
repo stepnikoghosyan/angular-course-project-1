@@ -25,13 +25,13 @@
     </div>
   </div>
   <div class="form-control">
-    <label>E-mail</label>
+    <label>Email</label>
     <input  type="email" formControlName="email" />
     <div class="formErr">
       <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
       
         <span *ngIf="form.get('email')?.hasError('email')" class="errors">
-        invalid Email
+        Invalid Email
         </span>
         <span *ngIf="form.get('email')?.hasError('required')" class="errors">
           Required
@@ -49,7 +49,7 @@
           Required
         </span>
         <span *ngIf="form.get('password')?.hasError('minlength')" class="errors">
-          min length is 6 letter
+          Min length is 6 letters
         </span>
       </div>
     </div>

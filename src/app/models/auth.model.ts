@@ -1,4 +1,4 @@
-export class Register {
+export class RegisterDto {
     firstName: string;
     lastName: string;
     email: string;
@@ -12,7 +12,7 @@ export class Register {
     }
 }
 
-export class Login {
+export class LoginDto {
     email: string;
     password: string;
 
@@ -22,7 +22,7 @@ export class Login {
     }
 }
 
-export class Forgot {
+export class ForgotDto {
     email: string;
 
     constructor(data: any) {
@@ -35,7 +35,7 @@ export interface LoginResponse {
     refreshToken: string;
 }
 
-export class Reset {
+export class ResetDto {
     newPassword: string;
 
     constructor(data: any) {

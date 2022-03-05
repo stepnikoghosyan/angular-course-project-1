@@ -7,7 +7,7 @@
       <div class="formErr">
         <div class="val" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
           <span *ngIf="form.get('email')?.hasError('email')" class="errors">
-          invalid Email
+          invalid email
           </span>
           <span *ngIf="form.get('email')?.hasError('required')" class="errors">
             Required
@@ -40,7 +40,7 @@
 
       <label> <input type="checkbox" formControlName = 'checkBox' /> <span>Remember me</span> </label>
       <a routerLink="/auth/forgot-password" >
-        forgot password 
+        Forgot password 
       </a>
     </div>
     <div class="sign-up">

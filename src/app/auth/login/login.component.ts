@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Login } from 'src/app/models/auth.model';
+import { LoginDto } from 'src/app/models/auth.model';
 import { Router } from '@angular/router';
 import { Subject} from 'rxjs';
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
 
-    const login = new Login(this.form.value);
+    const login = new LoginDto(this.form.value);
     this.authService.login(login)
     .subscribe(
       () => {
