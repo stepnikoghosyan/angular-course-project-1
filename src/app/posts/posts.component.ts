@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {catchError, finalize, map, Observable, of} from "rxjs";
+
 import {PostModel} from "../models/post.model";
 import {PostsService} from "../services/posts.service";
-import {finalize, Subject, takeUntil} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "../services/notification.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-posts',
@@ -12,35 +11,24 @@ import {Router} from "@angular/router";
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  private unsubscribe$ = new Subject<void>();
-  showSpinner = true;
-  posts: PostModel[] = [];
-  constructor(private postsService: PostsService,
-              private notifyService: NotificationService,
-              private router: Router) { }
+  isLoading = true;
+  posts$?: Observable<PostModel[]>;
 
-  ngOnInit(): void {
-   this.postsService.getPosts()
-     .pipe(takeUntil(this.unsubscribe$),
-     finalize(() => {
-       this.showSpinner = false;
-     }))
-     .subscribe({
-       error: (err: HttpErrorResponse) => {
-         this.showNotifications(false, err.error.message)
-       },
-       next: (data) => {
-         this.posts = data.results;
-       },
-       complete: () => {
-         this.showSpinner = false;
-       }
-     })
+  constructor(private postsService: PostsService,
+              private notifyService: NotificationService) {
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  ngOnInit(): void {
+    this.posts$ = this.postsService.getPosts()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }),
+        map(data => data.results),
+        catchError((err) => {
+          this.showNotifications(false, err.error.message);
+          return of([]);
+        }));
   }
 
   private showNotifications(success: boolean, message: string): void {
@@ -48,5 +36,4 @@ export class PostsComponent implements OnInit {
       this.notifyService.showError("Error", message);
     }
   }
-
 }

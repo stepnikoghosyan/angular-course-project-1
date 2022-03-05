@@ -2,9 +2,12 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree,} from '@angular/router';
 import {Observable} from 'rxjs';
 
+import {NotificationService} from "../services/notification.service";
+
 @Injectable()
 export class AuthPublicGuard implements CanActivate {
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private notifyService: NotificationService) {
   }
 
   canActivate(
@@ -15,11 +18,15 @@ export class AuthPublicGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const authLocale = localStorage.getItem('auth');
-    const authSession = sessionStorage.getItem('auth');
-    if ((authLocale && JSON.parse(authLocale).accessToken) || (authSession && JSON.parse(authSession).accessToken)) {
-      return this.router.parseUrl('/home');
+    const auth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
+    try {
+      if (auth && JSON.parse(auth).accessToken) {
+        return this.router.parseUrl('/home');
+      }
+      return true;
+    } catch (ex: any) {
+      this.notifyService.showError('Error', ex.message);
+      return true;
     }
-    return true;
   }
 }

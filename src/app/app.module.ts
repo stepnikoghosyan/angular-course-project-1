@@ -1,22 +1,25 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {HomeComponent} from './home/home.component';
-import {HeaderComponent} from './header/header.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+
+import {AppRoutingModule} from './app-routing.module';
+import {AuthModule} from "./auth.module";
+
+import {AppComponent} from './app.component';
+import {HomeComponent} from './home/home.component';
+import {HeaderComponent} from './header/header.component';
+import {NotFoundComponent} from "./not-found/not-found.component";
+import {PostsComponent} from './posts/posts.component';
+import {PostCardComponent} from './posts/post-card/post-card.component';
+import {PostCardFooterComponent} from './posts/post-card-footer/post-card-footer.component';
 import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
-import {AuthModule} from "./auth.module";
-import {NotFoundComponent} from "./not-found/not-found.component";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {PostsService} from "./services/posts.service";
-import { PostCardComponent } from './posts/post-card/post-card.component';
-import { PostCardFooterComponent } from './posts/post-card-footer/post-card-footer.component';
-import { PostsComponent } from './posts/posts.component';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import {ImageUrlPipe} from './pipes/image-url.pipe';
+import {FullNamePipe} from './pipes/full-name.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     PostsComponent,
     PostCardComponent,
     PostCardFooterComponent,
-    LoadingSpinnerComponent
+    ImageUrlPipe,
+    FullNamePipe,
   ],
   imports: [
     AuthModule,
