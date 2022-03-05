@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     const auth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
     try {
       if (auth && JSON.parse(auth).accessToken) {
-        return this.router.parseUrl('/home');
+        return true;
       }
       return this.router.parseUrl('/login');
     } catch (ex: any) {

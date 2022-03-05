@@ -6,7 +6,7 @@ import {ToastrModule} from "ngx-toastr";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from "./auth.module";
-
+import {MainComponent} from './main/main.component';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
@@ -32,6 +32,7 @@ import {FullNamePipe} from './pipes/full-name.pipe';
     PostCardFooterComponent,
     ImageUrlPipe,
     FullNamePipe,
+    MainComponent,
   ],
   imports: [
     AuthModule,
