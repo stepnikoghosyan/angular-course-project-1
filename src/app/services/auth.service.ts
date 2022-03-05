@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto } from '../models/auth.model';
+import { emailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto } from '../models/auth.model';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -66,6 +66,10 @@ export class AuthService {
         )
       }
 
+      resendActivationToken(email:emailDto) {
+          return this.httpClient.post<void>(`${environment.apiUrl}/auth/resend-activation-token`,
+         email)
+      }
 }
 
     

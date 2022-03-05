@@ -24,7 +24,7 @@ export class VerifyAccountComponent implements OnInit {
   event = new EventEmitter()
   
   form : FormGroup = this.formBuilder.group({
-    email :['',Validators.required,Validators.email], 
+    email :['',[Validators.required,Validators.email]], 
   })
 
 
@@ -62,7 +62,12 @@ export class VerifyAccountComponent implements OnInit {
     this.event.emit()
     }
 
-
+    sendEmail() {
+      console.log("test!");
+      console.log(this.form.value.email);
+      
+     return this.authService.resendActivationToken(this.form.value).subscribe()
+    }
 
 
 }

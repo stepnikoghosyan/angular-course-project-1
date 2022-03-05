@@ -41,3 +41,11 @@ export interface LoginResponse{
     accessToken: string,
     refreshToken: string
 }
+
+export class emailDto {
+    email:string;
+
+   constructor(data:any) {
+       this.email = data.email;
+   }
+}
