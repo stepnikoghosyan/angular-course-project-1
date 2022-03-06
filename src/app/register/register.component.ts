@@ -18,7 +18,6 @@ export class RegisterComponent implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   form!: FormGroup;
   isLoading = false;
-  showPass = false;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -77,7 +76,4 @@ export class RegisterComponent implements OnDestroy {
     }
   }
 
-  togglePass(): void {
-    this.showPass = !this.showPass;
-  }
 }

@@ -26,16 +26,7 @@
     </div>
     <div>
       <label>Password</label>
-      <div class="password-content">
-        <input [type]="showPass ? 'text' : 'password'" formControlName="password" placeholder="Password">
-        <i (click)="togglePass()" [ngClass]="showPass ?'fa-eye':'fa-eye-slash'"
-           class="fa eye-icon"></i>
-      </div>
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
-        <p class="error-message" *ngIf="form.controls['password'].errors?.['required']">Password is required </p>
-        <p class="error-message" *ngIf="form.controls['password'].errors?.['minlength']">
-          Min length should be at least {{form.controls['password'].getError('minlength').requiredLength}} digits.</p>
-      </div>
+      <app-password formControlName="password"></app-password>
     </div>
     <app-loader *ngIf="isLoading"></app-loader>
     <button [disabled]="form.invalid || submitted" class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>

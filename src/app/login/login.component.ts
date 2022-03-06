@@ -17,7 +17,6 @@ export class LoginComponent implements OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   form!: FormGroup;
-  showPass = false;
   isLoading = false;
   submitted = false;
 
@@ -75,7 +74,4 @@ export class LoginComponent implements OnDestroy {
     }
   }
 
-  togglePass(): void {
-    this.showPass = !this.showPass;
-  }
 }

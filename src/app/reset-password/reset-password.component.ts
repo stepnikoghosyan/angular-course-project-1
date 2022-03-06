@@ -15,7 +15,6 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class ResetPasswordComponent implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   passwordForm!: FormGroup;
-  isShowPassword = false;
   isLoading = false;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -31,10 +30,6 @@ export class ResetPasswordComponent implements OnDestroy {
       newPassword: [null, [Validators.required, Validators.minLength(6)]],
       token: this.activatedRoute.snapshot.params['token']
     })
-  }
-
-  changePasswordType(): void {
-    this.isShowPassword = !this.isShowPassword;
   }
 
   resetPassword(): void {

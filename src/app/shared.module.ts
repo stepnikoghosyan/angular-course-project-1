@@ -3,19 +3,24 @@ import {CommonModule} from '@angular/common';
 
 import {LoaderComponent} from './loader/loader.component';
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
+import { PasswordComponent } from './password/password.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     LoaderComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    PasswordComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
-  exports: [
-    LoaderComponent,
-    LoadingSpinnerComponent
-  ]
+    exports: [
+        LoaderComponent,
+        LoadingSpinnerComponent,
+        PasswordComponent
+    ]
 })
 export class SharedModule {
 }

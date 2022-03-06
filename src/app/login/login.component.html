@@ -9,21 +9,10 @@
         <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Please enter a valid email address.</p>
       </div>
     </div>
-    <div>
-      <label>Password</label>
-      <div class="password-content">
-        <input [type]="showPass ? 'text' : 'password'" formControlName="password" placeholder="Password">
-        <i (click)="togglePass()" [ngClass]="showPass?'fa-eye':'fa-eye-slash'"
-           class="fa eye-icon"></i>
-      </div>
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
-        <p class="error-message" *ngIf="form.controls['password'].errors?.['required']">Password is required.</p>
-        <p class="error-message" *ngIf="form.controls['password'].errors?.['minlength']">
-          Min length should be at least {{form.controls['password'].getError('minlength').requiredLength}} digits.</p>
-      </div>
-    </div>
+    <label>Password</label>
+    <app-password formControlName="password"></app-password>
     <app-loader *ngIf="isLoading"></app-loader>
-    <button [disabled]="form.invalid" class="btn-primary btn sign-in-button">Sign In</button>
+    <button  class="btn-primary btn sign-in-button">Sign In</button>
     <div class="remember-forgot">
       <div class="flex-container">
         <input id="remember" class="checkbox" type="checkbox" formControlName="remember">
