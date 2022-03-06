@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationResponseModel } from '../models/pagination-response';
 import { PostModel } from '../models/post.model';
-import { tap } from 'rxjs/operators';
+import { tap,map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,11 @@ export class PostsService {
     constructor(private httpClient: HttpClient) { };
 
 
-    getPosts(): Observable <PaginationResponseModel<PostModel>>{
-      return this.httpClient.get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`)
-            .pipe(tap((data )=> {
-                data.items = data.items.map((i)=> {
-                    return new PostModel(i);
-                });
-            }))
-    }
-
-
+    getPosts() : Observable <PaginationResponseModel<PostModel>>  {
+      return this.httpClient.get<PaginationResponseModel<PostModel>>
+      (`${environment.apiUrl}/posts`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }
