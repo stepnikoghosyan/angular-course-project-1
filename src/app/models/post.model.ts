@@ -1,2 +1,2 @@
-export class Post {
+export class PostModel {
 }
