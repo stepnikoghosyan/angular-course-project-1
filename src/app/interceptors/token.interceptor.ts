@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     `Bearer ${auth.accessToken}`
                     ),
                 });
-                return next.handle(request);
+                return next.handle(newReq);
             }
         }
         catch(err) {

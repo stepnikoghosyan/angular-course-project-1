@@ -15,7 +15,7 @@ export class PostsService {
 
 
     getPosts(): Observable <PaginationResponseModel<PostModel>>{
-      return this.httpClient.get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/auth`)
+      return this.httpClient.get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`)
             .pipe(tap((data )=> {
                 data.items = data.items.map((i)=> {
                     return new PostModel(i);
