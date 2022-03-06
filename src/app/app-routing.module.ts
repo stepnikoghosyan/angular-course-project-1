@@ -5,9 +5,12 @@ import { AuthPublicGuard } from './guards/auth-public.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PostsComponent } from './posts/posts.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UsersComponent } from './users/users.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 const routes: Routes = [
@@ -22,9 +25,26 @@ const routes: Routes = [
         canActivate: [AuthPublicGuard]
     },
     {
-        path: "home", 
-        component: HomeComponent,
-        canActivate: [AuthGuard]
+        path: "main", 
+        component: MainComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: "home", 
+                component: HomeComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: "posts", 
+                component: PostsComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'users',
+                component: UsersComponent,
+                canActivate: [AuthGuard]
+            },
+        ]
     },
     {
         path:"login",
@@ -48,7 +68,7 @@ const routes: Routes = [
     }, 
     {
         path:"**",
-        component:NotFoundComponent
+        component: NotFoundComponent
     }
 ];
 

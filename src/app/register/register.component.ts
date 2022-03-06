@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit(): void {}
 
     registerFormSubmit(){
-        this.showSpinner = true
+        this.showSpinner = true;
         const dto = new RegisterDto(this.registerForm.value);
         if(this.registerForm.valid){
             this.authService.register(dto).subscribe({

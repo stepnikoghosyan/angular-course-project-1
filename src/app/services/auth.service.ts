@@ -40,7 +40,7 @@ export class AuthService {
                 } else {
                     sessionStorage.setItem('auth', item);
                 }
-                this.router.navigateByUrl("home")
+                this.router.navigateByUrl("/main")
             })
         );
       };

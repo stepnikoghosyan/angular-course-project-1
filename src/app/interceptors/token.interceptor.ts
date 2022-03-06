@@ -24,22 +24,20 @@ export class AuthInterceptor implements HttpInterceptor {
         try {
           const auth  = JSON.parse(item)
 
-        if (auth) {
-          const newReq = request.clone({
-            headers: request.headers.set(
-              'Authorization',
-              `Bearer ${auth.accessToken}`
-            ),
-          });
-          return next.handle(request)
+            if (auth) {
+                const newReq = request.clone({
+                    headers: request.headers.set(
+                    'Authorization',
+                    `Bearer ${auth.accessToken}`
+                    ),
+                });
+                return next.handle(request);
+            }
         }
-    
-      }
-
-      catch(err) {
+        catch(err) {
+            return next.handle(request)
+        };
         return next.handle(request)
-      }
-      return next.handle(request)
     }
   }
 

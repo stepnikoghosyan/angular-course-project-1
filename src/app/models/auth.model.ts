@@ -6,14 +6,14 @@ export class ResetPasswordDto{
         this.newPassword = data.newPassword;
         this.token = data.token 
     }
-}
+};
 export class ForgotPasswordDto{
     email: string;
     
     constructor(data:any){
         this.email = data.email
     }
-}
+};
 export class RegisterDto {
     firstName: string;
     lastName: string;
@@ -26,7 +26,7 @@ export class RegisterDto {
         this.email = data.email,
         this.password = data.password
     }
-}
+};
 
 export class LoginDto {
     email: string;
@@ -36,11 +36,11 @@ export class LoginDto {
         this.email = data.email;
         this.password = data.password;
     }
-}
+};
 export interface LoginResponse{
     accessToken: string,
     refreshToken: string
-}
+};
 
 export class EmailDto {
     email:string;
@@ -48,4 +48,4 @@ export class EmailDto {
     constructor(data:any) {
        this.email = data.email;
     }
-}
+};
