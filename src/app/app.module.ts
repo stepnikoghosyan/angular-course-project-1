@@ -19,6 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { PostsComponent } from './posts/posts.component';
 
 
 
@@ -31,6 +33,8 @@ import { VerifyAccountComponent } from './verify-account/verify-account.componen
     LoginComponent,
     RegisterComponent,
     VerifyAccountComponent,
+    NotFoundComponent,
+    PostsComponent,
   ],
   imports: [
     BrowserModule,

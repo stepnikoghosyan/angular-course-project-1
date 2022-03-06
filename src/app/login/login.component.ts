@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit{
             this.authService.login(dto, this.loginForm.controls['remember'].value).subscribe({ 
                 next: ()=> { 
                     this.showSpinner = true;
-                    console.log(this.loginForm.controls['remember']);
                 },
                 error: (err: HttpErrorResponse) => {
                     switch(err.status){
