@@ -16,10 +16,11 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CardComponent } from './posts/card/card.component';
+import { CardFooterComponent } from './posts/card-footer/card-footer.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HeaderComponent,
     RegisterComponent,
     NotFoundComponent,
+    CardComponent,
+    CardFooterComponent,
     
   ],
   imports: [

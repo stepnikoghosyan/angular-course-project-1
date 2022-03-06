@@ -15,7 +15,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   token = '';
   emailError = false;
   errMessage!: string;
-  isLouder!: boolean
+  isLoader!: boolean
   email = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private authService: AuthService,
@@ -26,9 +26,9 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
  
 
   ngOnInit(): void {
-    // this.getToken();
+    this.getToken();
     this.emailError = false;
-    this.isLouder = true;
+    this.isLoader = true;
   }
 
   getToken() {
@@ -40,18 +40,18 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         this.notifyService.showSuccess('Your verification Succeded', 'Succes');
         setTimeout(() => {
           this.router.navigate(['auth/login']);
-          this.isLouder = false
+          this.isLoader = false
         }, 3000);
       },
       () => {
         this.notifyService.showError(this.errMessage, 'Error');
-        this.isLouder = false
+        this.isLoader = false
       }
     );
   }
 
   resendActivation() {
-    this.isLouder = true
+    this.isLoader = true
     const email = {
       email: this.email.value,
     };
@@ -60,7 +60,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unSubscribe$))
     .subscribe(() => {
       this.notifyService.showSuccess('Your verification Succeded', 'Succes');
-      // this.signIn();
+      this.signIn();
     });
   }
 
@@ -72,7 +72,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   }
 
   showEmail() {
-    this.isLouder = false
+    this.isLoader = false
     this.emailError = true;
   }
 

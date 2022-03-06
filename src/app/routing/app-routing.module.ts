@@ -11,6 +11,8 @@ import { LoginComponent } from '../auth/login/login.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AuthPublicGuard } from '../guards/auth-public.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { CardComponent } from '../posts/card/card.component';
+import { CardFooterComponent } from '../posts/card-footer/card-footer.component';
 
 const routes: Routes = [
   {
@@ -50,17 +52,30 @@ const routes: Routes = [
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'home', component: HomeComponent,
+    path:'home', 
+    component: HomeComponent,
     canActivate:[AuthGuard]
   },
   {
-    path:'users', component: UsersComponent,
+    path:'users', 
+    component: UsersComponent,
     canActivate:[AuthGuard]
   },
   {
-    path:'posts', component:PostsComponent,
+    path:'posts', 
+    component:PostsComponent,
     canActivate:[AuthGuard]
   },
+  // {
+  //   path:'posts/card', 
+  //   component: CardComponent,
+  //   canActivate:[AuthGuard]
+  // },
+  // {
+  //   path:'posts/card-footer', 
+  //   component: CardFooterComponent,
+  //   canActivate:[AuthGuard]
+  // },
   {
     path: '**',
     component: NotFoundComponent,

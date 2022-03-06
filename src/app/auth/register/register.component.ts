@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   message = ''
   successMsg = ''
-  isLouder = false
+  isLoader = false
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -38,12 +38,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   register() {
     if (this.form.valid) {
-      this.isLouder = true
+      this.isLoader = true
       const register = new RegisterDto(this.form.value);
       this.authService.register(register)
         .pipe(takeUntil(this.unSubscribe$))
         .subscribe(() => {
-          this.isLouder = false
+          this.isLoader = false
           this.notifyService.showSuccess('Please check your email for verification', 'Success')
           this.router.navigate(['auth/login'])
         },

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   errorMsg = '';
-  isLouder!: boolean
+  isLoader!: boolean
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     if(this.form.valid) {
-      this.isLouder = true;
+      this.isLoader = true;
       const login = new LoginDto(this.form.value);
       this.authService.login(login)
       .subscribe(
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         
         }, (error: any) => {
           this.errorMsg = error.error.message;
-          this.isLouder = false
+          this.isLoader = false
         });
     }
   }
