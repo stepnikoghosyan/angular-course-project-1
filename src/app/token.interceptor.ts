@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const auth =   sessionStorage.getItem('auth');
+    const auth = sessionStorage.getItem('auth') || localStorage.getItem('auth');
     if (auth) {
       const newReq = request.clone({
         headers: request.headers.set(

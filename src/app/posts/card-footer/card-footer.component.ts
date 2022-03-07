@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PostModel } from 'src/app/models/post.model';
 
 @Component({
   selector: 'app-card-footer',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class CardFooterComponent implements OnInit {
 
   constructor() { }
+
+ @Input() post!: PostModel;
 
   ngOnInit(): void {
   }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PostModel } from 'src/app/models/post.model';
 import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
@@ -12,14 +13,11 @@ export class CardComponent implements OnInit {
    private postsService: PostsService
   ) { }
 
+  @Input() post!: PostModel;
+
   ngOnInit(): void {
-    this.getPosts();
+    
   }
 
-  getPosts(){
-    this.postsService.getPosts()
-    .subscribe((res:any)=>{
-      console.log(res);
-    })
-  }
+
 }

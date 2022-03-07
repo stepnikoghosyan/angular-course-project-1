@@ -1,1 +1,9 @@
-<app-card> </app-card>
+<div>
+    <h1>Posts</h1>
+   <div>
+    <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
+</div> 
+</div>
+
+
+
