@@ -15,10 +15,11 @@ export class RegisterDto {
 export class LoginDto {
     email: string;
     password: string;
-
+    checkBox?:boolean
     constructor(data: any) {
         this.email = data.email;
         this.password = data.password;
+        this.checkBox = data.checkBox
     }
 }
 
@@ -39,6 +40,6 @@ export class ResetDto {
     newPassword: string;
 
     constructor(data: any) {
-        this.newPassword = data.passvord
+        this.newPassword = data.password
     }
 }

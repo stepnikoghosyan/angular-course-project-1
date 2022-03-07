@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit {
           this.routes.navigateByUrl('/home')
         };
         // error: (err:any) => {
-        //   this.notifyService.showError("Error", err.error.)
+        //   this.notifyService.showError("Error", err.error.message)
         // }
       })
     }

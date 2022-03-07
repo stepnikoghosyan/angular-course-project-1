@@ -20,7 +20,7 @@ export class AuthPublicGuard implements CanActivate {
     | boolean
     | UrlTree {
     const auth = localStorage.getItem('auth');
-    if (auth && JSON.parse(auth).accessToken) {
+    if (auth) {
       return this.router.parseUrl('/home');
     }
     return true;

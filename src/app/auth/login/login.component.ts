@@ -59,10 +59,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.isLoader = true;
       const login = new LoginDto(this.form.value);
       this.authService.login(login)
-      .subscribe(
-        () => {
+      .subscribe((res) => {
+        console.log(typeof(this.form.get('checkBox')?.value));
         
-        }, (error: any) => {
+        if(this.form.get('checkBox')?.value) {
+          localStorage.setItem('auth', res.accessToken)
+        } else {
+          sessionStorage.setItem('auth', res.accessToken)
+        }
+        this.router.navigate(['/home'])
+      }
+        , (error: any) => {
           this.errorMsg = error.error.message;
           this.isLoader = false
         });

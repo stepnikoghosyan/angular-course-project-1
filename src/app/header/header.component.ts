@@ -12,11 +12,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
+  
   logout () {
     localStorage.removeItem('auth');
     sessionStorage.removeItem('auth');
     this.router.navigateByUrl('/auth/login');
   }
+
  }
