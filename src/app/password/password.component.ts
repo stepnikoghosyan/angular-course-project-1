@@ -27,7 +27,7 @@ import {
 })
 export class PasswordComponent implements ControlValueAccessor, Validator {
   showPass = false;
-  pass = "";
+  password: string = '';
   passwordFormControl!: AbstractControl;
 
   onChange: any = () => {
@@ -35,16 +35,10 @@ export class PasswordComponent implements ControlValueAccessor, Validator {
   onTouch: any = () => {
   }
 
-  set password(value: string) {
-    if (this.pass !== value) {
-      this.pass = value
-      this.onChange(value)
-      this.onTouch(value)
-    }
-  }
-
-  get password() {
-    return this.pass;
+  onPasswordChange(event: string) {
+    this.password = event;
+    this.onChange(event);
+    this.onTouch(event);
   }
 
   writeValue(value: any) {
