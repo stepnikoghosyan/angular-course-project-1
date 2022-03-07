@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-card',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+   private postsService: PostsService
+  ) { }
 
   ngOnInit(): void {
+    this.getPosts();
   }
 
+  getPosts(){
+    this.postsService.getPosts()
+    .subscribe((res:any)=>{
+      console.log(res);
+    })
+  }
 }
