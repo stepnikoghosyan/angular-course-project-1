@@ -44,3 +44,8 @@ export interface LoginResponse{
     accessToken:"string",
     refreshToken:"string"
 }
+export class ResendActivationTokenDto extends LoginDto{
+    constructor(data :any){
+        super(data)
+    }
+}

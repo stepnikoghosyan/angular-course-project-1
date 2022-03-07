@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { ResendActivationTokenDto } from '../module/pages';
 
 @Component({
   selector: 'app-verify-account',
@@ -14,18 +15,34 @@ export class VerifyAccountComponent implements OnInit {
   constructor(private activatedRoute:ActivatedRoute, 
     private authService: AuthService, private router:Router,
     ) { }
-  isLoading: Subject <boolean> = this.authService.isLoading;
-  
-   email = new FormControl("", [Validators.email, Validators.required])
-   
+    isLoading: Subject<boolean> = this.authService.isLoading;
+    isActivationToken : boolean = false;
+    successMessage = '';
+    token = '';
   ngOnInit(): void {
-      const activationToken = this.activatedRoute.snapshot.params['activationToken']
-        if(activationToken){
-          this.authService.verifyAccount(activationToken).subscribe();
+      const activationToken = this.activatedRoute.snapshot.params['activationToken'];
    
-      }else{
-        this.router.navigateByUrl('regiter')
-      } 
+    this.authService.verifyAccount(activationToken).subscribe({
+          next:( resp)=>{
+            if(activationToken){
+              this.isActivationToken=true;
+              this.token = activationToken;
+              this.router.navigateByUrl('login');   
+            }
+           
+            resp.subscribe({
+              next:(v: any)=>{
+                console.log(v)
+              }
+            })
+          
+              
+          }, 
+          error:(err)=>{
+            console.log(err)
+          },
+         
+          });
 
   }
 }

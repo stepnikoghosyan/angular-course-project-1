@@ -40,10 +40,10 @@ export class RegisterComponent implements OnInit {
   onSubmitRegister(){
 
     if(this.registerForm.valid){
-      this.isLoading.subscribe()
        const dto = new RegisterDto(this.registerForm.value)
        this.authService.register(dto).subscribe({
             next:(res)=>{
+                console.log(res);
                 this.errorMessage = "";
                 this.router.navigateByUrl('/login')
              },

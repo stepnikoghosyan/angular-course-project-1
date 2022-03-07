@@ -43,7 +43,7 @@ const routes: Routes = [
     component:ResetPasswordComponent
   },
   {
-    path:'verify-account/:activationToken',
+    path:'auth/verify-account/:activationToken',
     component:VerifyAccountComponent,
     canActivate:[AuthPublicGuard]
 

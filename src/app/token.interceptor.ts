@@ -15,8 +15,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const auth = JSON.parse(localStorage.getItem('access_token')!); //vercnum em locali accept tokeni accept key
-
-    if(auth && auth.accesToken){
+      console.log(auth)
+    if(auth && auth.accessToken){
        const newReq = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ${accessToken}')
       })

@@ -1,13 +1,20 @@
 <form class="form forgetPasswordForm">
     <div class="container">
-        <h2 class="form-header"> Forgot Password</h2>
-        <p class="notify-message">  Enter your email address </p>
-      
+        <h2 class="form-header"> Verify-Account</h2>
+        <div *ngIf="isLoading |async" class="preloading" >
+
+                
+            <mat-progress-spinner mode="indeterminate" aria-valuemin="0" >
+
+            </mat-progress-spinner>
+
+        
+        </div>
         <div class = "form-control" >
             <button class = "btn btn-send-reset-password">Re send Activation Token</button>
         </div>
-      
-        <!-- <mat-progress-spinner [mode]="indeterminate" *ngIf="Isloading"></mat-progress-spinner> -->
+     
+
         <div class = "redirect" >
           
                 <a routerLink="/login"> Sign In </a>    
@@ -20,3 +27,9 @@
 
     </div>
 </form>
+<div class="error-container">
+    <span class = "status-errors" *ngIf="isActivationToken">
+        {{successMessage}}
+    </span>
+</div>
+
