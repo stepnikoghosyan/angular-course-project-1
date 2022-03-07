@@ -1,6 +1,6 @@
 
 .form-control, .action{
- padding: 10px 40px;
+ padding: 5px 40px;
  }
 
 button {
@@ -8,7 +8,8 @@ button {
 }
 
 .sign-in {
-    padding-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 

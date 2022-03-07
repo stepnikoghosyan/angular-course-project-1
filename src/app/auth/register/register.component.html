@@ -57,7 +57,10 @@
  
   </div>
 <div class="action">
-  <div *ngIf="isLoader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  <div class="loader">
+    <div *ngIf="isLoader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+  
   <button (click)="register()" class="display" >Sign Up</button>
   <div class="formErr">
     <p class="errors">{{message}}</p>

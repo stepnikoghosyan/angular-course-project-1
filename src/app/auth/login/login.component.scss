@@ -1,6 +1,6 @@
 
 .form-control, .action,  .sign-up, .err {
- padding: 20px 40px;
+ padding: 10px 40px;
  }
 
  .form-control {
@@ -30,6 +30,7 @@ button {
 }
 
 .sign-up {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
 }
