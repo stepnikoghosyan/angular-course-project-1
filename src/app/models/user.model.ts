@@ -2,7 +2,7 @@ export interface UserModel{
     userId: number;
     email: string;
     firstName: string;
-    lastname: string;
+    lastName: string;
     profilePicture: string;
 
 }
