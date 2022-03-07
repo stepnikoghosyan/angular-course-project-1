@@ -1,9 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-toastr/toastr';
 *{
-    margin: auto;
     font-family: Arial;
-    padding: 10px 0px;
+    padding: 0px;
 }
 button{
     margin-top: 25px;
@@ -38,13 +37,17 @@ button{
 
 }
 .container{
+    *{
+        padding: 10px 0px;
+        margin: auto;
+    }
+    
     width: 500px;
     border-radius: 8px;
     box-shadow: 0 26px 50px rgb(0 0 0 / 0.3);
     border: none;
     margin-top: 100px;
-    padding: 20px 0px;
-
+   
     .main-container{
         width: 85%;
 

@@ -1,0 +1,30 @@
+*{
+    margin: auto;
+    padding: 10px 0px;
+}
+:host{
+    margin-top: 20px;
+}
+.wrapper{
+    width: 500px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-shadow: 0 16px 16px -8px rgb(0 0 0 / 30%);
+
+    .post_content{
+        display: flex;
+        flex-direction: column;
+        padding: 0px;
+
+        .post_body{
+            width: 90%;
+            margin-top: 20px;
+
+            p{  
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

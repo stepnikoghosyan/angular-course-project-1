@@ -8,18 +8,17 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  posts : PostModel[]=[]
-  constructor(private postService:PostsService) { }
+    posts : PostModel[]=[]
+    constructor(private postService:PostsService) { }
 
-  ngOnInit(): void {
-    this.postService.getPosts().subscribe({
-      next: (data) => {
-        console.log(data.results);
-      }
-    })
-  ;
-    ;
-    
-  }
+    ngOnInit(): void {
+        this.postService.getPosts().subscribe({
+            next: (data) => {
+                this.posts = data.results.map((item)=> new PostModel(item));
+                console.log(data.results);
+                console.log("POSTS", this.posts);
+            }
+        })
+    }
 
 }

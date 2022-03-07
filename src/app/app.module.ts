@@ -6,11 +6,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule} from '@angular/material/input';
+// import { MatCardModule } from '@angular/material/card';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatIconModule } from '@angular/material/icon';
+// import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { MatInputModule} from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -25,6 +25,7 @@ import { MainComponent } from './main/main.component';
 import { HeaderComponent } from './header/header.component';
 import { UsersComponent } from './users/users.component';
 import { AuthInterceptor } from './interceptors/token.interceptor';
+import { PostCardComponent } from './posts/post-card/post-card.component';
 
 
 
@@ -42,18 +43,19 @@ import { AuthInterceptor } from './interceptors/token.interceptor';
     MainComponent,
     HeaderComponent,
     UsersComponent,
+    PostCardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatButtonModule,
+    //MatButtonModule,
     MatProgressSpinnerModule,
-    MatCardModule,
-    MatIconModule,
-    MatInputModule,
-    BrowserAnimationsModule,
+    // MatCardModule,
+    // MatIconModule,
+    // MatInputModule,
+    // BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [{
