@@ -1,1 +1,22 @@
-<p>verify-account works!</p>
+<form class="form forgetPasswordForm">
+    <div class="container">
+        <h2 class="form-header"> Forgot Password</h2>
+        <p class="notify-message">  Enter your email address </p>
+      
+        <div class = "form-control" >
+            <button class = "btn btn-send-reset-password">Re send Activation Token</button>
+        </div>
+      
+        <!-- <mat-progress-spinner [mode]="indeterminate" *ngIf="Isloading"></mat-progress-spinner> -->
+        <div class = "redirect" >
+          
+                <a routerLink="/login"> Sign In </a>    
+          
+         
+                <a routerLink="/auth/register"> Sign UP </a>
+        
+        </div>
+       
+
+    </div>
+</form>

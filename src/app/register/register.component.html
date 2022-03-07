@@ -6,9 +6,7 @@
                 <input formControlName="firstName" name="firstName" type="text" id="firstName">
                 <div class="error-message" *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].touched|| registerForm.controls['firstName'].dirty)" >
                     <span  *ngIf ="registerForm.controls['email'].errors?.['required']"> Please enter characters </span>
-               </div>
-              
-            
+               </div> 
             </div>
         <div class = "form-control" >
             <label class="form-control-label" for ="lastName"> lastName  </label>
@@ -44,11 +42,36 @@
         </div>   
        
             <button class="btn login-bth" [disabled]="!registerForm.valid"> Sign Up</button>
-  
+          
+            <!-- <div class = "spinner">
+                <ng-http-loader *ngIf="isSpinner">
+                    [backdrop]="true"
+                    [backgroundColor]="'#ff0000'"
+                    [debounceDelay]="100"
+                    [extraDuration]="300"
+                    [minDuration]="300"
+                    [opacity]=".6"
+                    [backdropBackgroundColor]="'#777777'"
+                    [spinner]="spinkit.skWave">
+                </ng-http-loader>
+                
+             
+            </div> -->
+            <div *ngIf="isLoading |async" class="preloading" >
+
+               
+                <mat-progress-spinner mode="indeterminate" aria-valuemin="0" >
+
+                </mat-progress-spinner>
+
+               
+            </div>
+     
         <div class="member"> 
         Already a member?
-        <a routerLink="/auth/login">Sign in</a>
+        <a routerLink="/login">Sign in</a>
         </div>
+
     </div>
 </form>
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-  import { Pages,PageModule } from './module/pages';
+import { Pages,PageModule } from './module/pages';
 
 
 @Component({
@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'menu';
-  notificationMessage:boolean=true;
-  //make array for view pages
+ 
+
   pages:PageModule[] = [
     { 
       id:Pages.Auth,
@@ -40,5 +40,6 @@ export class AppComponent {
 
 
 ]
+
 
 }

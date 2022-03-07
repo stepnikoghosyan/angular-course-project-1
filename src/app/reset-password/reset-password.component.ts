@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -7,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private authService: AuthService) { }
+    
+  isLoading: Subject<boolean> = this.authService.isLoading;
   ngOnInit(): void {
   }
 

@@ -26,12 +26,18 @@
                 <span  *ngIf ="loginForm.controls['password'].errors?.['required']"> Please enter Password </span>
            </div>
         </div> 
- 
-        
          
             <button class="btn login-bth" > Login</button>
-         
-     
+            <div *ngIf="isLoading |async" class="preloading" >
+
+               
+                <mat-progress-spinner mode="indeterminate" aria-valuemin="0" >
+        
+                </mat-progress-spinner>
+        
+               
+            </div>
+       
         <div class="checkbox">
         <div class = "form-control form-control-checkbox" >
            <label for ="checkbox">   Remember Me  </label>
@@ -39,7 +45,7 @@
            
         </div>
         <div class="form-control">
-            <a routerLink="/forgotPassword">Forgot Password</a>
+            <a routerLink="/auth/forgotPassword">Forgot Password</a>
         </div>
              
         </div>  
@@ -49,6 +55,7 @@
             <a routerLink="/auth/register">Register</a>
         </div>
     </div>
+
   
 </form>
 
