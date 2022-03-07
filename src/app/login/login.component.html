@@ -6,13 +6,15 @@
       <input type="email" formControlName="email" placeholder="Email">
       <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
         <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required.</p>
-        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Please enter a valid email address.</p>
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Please enter a valid email
+          address.</p>
       </div>
     </div>
-    <label>Password</label>
-    <app-password formControlName="password"></app-password>
+    <app-password formControlName="password"
+                  [label]="'Password'">
+    </app-password>
     <app-loader *ngIf="isLoading"></app-loader>
-    <button  class="btn-primary btn sign-in-button">Sign In</button>
+    <button class="btn-primary btn sign-in-button">Sign In</button>
     <div class="remember-forgot">
       <div class="flex-container">
         <input id="remember" class="checkbox" type="checkbox" formControlName="remember">

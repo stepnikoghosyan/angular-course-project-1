@@ -24,12 +24,12 @@
           address.</p>
       </div>
     </div>
-    <div>
-      <label>Password</label>
-      <app-password formControlName="password"></app-password>
-    </div>
+    <app-password formControlName="password"
+                  [label]="'Password'">
+    </app-password>
     <app-loader *ngIf="isLoading"></app-loader>
-    <button [disabled]="form.invalid || submitted" class="btn-primary btn sign-in-button sign-up-button">Sign Up</button>
+    <button [disabled]="form.invalid || submitted" class="btn-primary btn sign-in-button sign-up-button">Sign Up
+    </button>
   </form>
   <div class="already-member">
     <span>Already a member?  </span><a routerLink="/login">Sign in</a>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -26,13 +26,14 @@ import {
   ]
 })
 export class PasswordComponent implements ControlValueAccessor, Validator {
+  @Input() label = 'Password';
   showPass = false;
-  password: string = '';
+  password = '';
   passwordFormControl!: AbstractControl;
 
-  onChange: any = () => {
+  onChange: any = (password: string) => {
   }
-  onTouch: any = () => {
+  onTouch: any = (password: string) => {
   }
 
   onPasswordChange(event: string) {
