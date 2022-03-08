@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EmailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto } from '../models/auth.model';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
     constructor(private httpClient: HttpClient,
-        private router: Router) {}
+                private router: Router,
+                private notifyService: NotificationService) {}
 
 
     forgotPassword(forgotPasswordDto: ForgotPasswordDto): Observable<void>{
@@ -24,7 +26,6 @@ export class AuthService {
         .pipe(
             tap(()=>{
                 this.router.navigateByUrl("/home");
-                
             })
         );
     };
@@ -47,7 +48,12 @@ export class AuthService {
 
     register(registerDto: RegisterDto): Observable<void>{
         return this.httpClient
-            .post<void>(`${environment.apiUrl}/auth/register`, registerDto);
+            .post<void>(`${environment.apiUrl}/auth/register`, registerDto).pipe(
+                map(()=>{
+                    this.notifyService.success("Please check your email", "Succes!!");
+                    this.router.navigateByUrl('/login');
+                })
+            );
       };
 
     logout() {

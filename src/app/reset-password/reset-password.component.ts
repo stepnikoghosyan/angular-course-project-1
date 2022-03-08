@@ -52,7 +52,7 @@ export class ResetPasswordComponent implements OnInit {
                            this.errors = err.error.message;
                            break;
                        case 401: 
-                           this.errors.push(err.message);
+                           this.errors.push(err.error.message);
                            break;
                        default:
                            this.errors.push("Something went wrong")

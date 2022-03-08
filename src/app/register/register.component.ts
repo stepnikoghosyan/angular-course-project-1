@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { NotificationService } from '../services/notification.service';
+import { finalize } from 'rxjs';
+
 
 @Component({
   selector: 'app-register',
@@ -24,8 +25,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private authService: AuthService,
-                private router:Router,
-                private notifyService: NotificationService) {}
+                ) {}
 
     ngOnInit(): void {}
 
@@ -33,20 +33,20 @@ export class RegisterComponent implements OnInit {
         this.showSpinner = true;
         const dto = new RegisterDto(this.registerForm.value);
         if(this.registerForm.valid){
-            this.authService.register(dto).subscribe({
-                next: (data)=> {
-                    this.notifyService.success("Please check your email", "Succes!!");
-                    this.router.navigateByUrl('/login');
-                },
+            this.authService.register(dto).pipe(
+                finalize(()=>{
+                    this.showSpinner=false
+                })
+            )
+            .subscribe({
                 error: (err: HttpErrorResponse) => {
-                    this.showSpinner = false;
                     this.errors = [];
                     switch(err.status){
                         case 400:
-                            this.errors.push("Invalid request");
+                            this.errors.push(err.error.message);
                             break;                     
                         case 409:
-                            this.errors.push("The email address is already used");
+                            this.errors.push(err.error.message);
                             break;
                         default: 
                             this.errors.push('Something went wrong');

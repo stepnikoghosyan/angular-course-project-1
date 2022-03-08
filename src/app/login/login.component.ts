@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { LoginDto } from '../models/auth.model';
 import { NotificationService } from '../services/notification.service';
 import { IconOptions } from '@angular/material/icon';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -36,23 +37,26 @@ export class LoginComponent implements OnInit{
         if(this.loginForm.valid){
             const dto = new LoginDto(this.loginForm.value);
             this.errors = [];
-            this.authService.login(dto, this.loginForm.controls['remember'].value).subscribe({ 
-                next: ()=> { 
-                    this.showSpinner = true;
-                },
+            this.authService.login(dto, this.loginForm.controls['remember'].value).pipe(
+                finalize(()=>{
+                    this.showSpinner=false
+                })
+            )
+            .subscribe({ 
                 error: (err: HttpErrorResponse) => {
                     switch(err.status){
                         case 400: 
-                            this.errors= err.error.message;
+                            this.errors.push(err.error.message)
+                            // this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
                             break;
                         case 401: 
-                            this.errors.push(err.message);
+                            this.errors.push(err.error.message);
                             break;
                         case 403:
-                            this.errors.push(err.message)
+                            this.errors.push(err.error.message)
                             break
                         case 404:
-                            this.errors.push(err.message)
+                            this.errors.push(err.error.message)
                             break;
                         default:
                             this.errors.push("Something went wrong")
