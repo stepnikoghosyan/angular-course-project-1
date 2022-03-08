@@ -1,7 +1,7 @@
 .footer {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     border: grey solid 2px; 
 }
 
@@ -10,7 +10,17 @@
     width: 50%;
     justify-content: flex-end;
 }
-
+.icon {
+    border: 1px solid #1469d9;
+    color: #1469d9;
+    padding: 8px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+.comment{
+    margin-left: 4px;
+    margin-right: 8px;
+}
 .user {
     display: flex;
     align-items: center;

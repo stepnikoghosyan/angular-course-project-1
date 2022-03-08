@@ -4,6 +4,8 @@ import { PostModel } from '../models/post.model';
 import { NotificationService } from '../services/notification.service';
 import { PostsService } from '../services/posts.service';
 
+
+
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -11,6 +13,7 @@ import { PostsService } from '../services/posts.service';
 })
 export class PostsComponent implements OnInit {
 
+  
   isLoader = true;
   posts$!: Observable<PostModel[]>
 

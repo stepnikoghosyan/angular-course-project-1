@@ -22,6 +22,7 @@ import { CardComponent } from './posts/card/card.component';
 import { CardFooterComponent } from './posts/card-footer/card-footer.component';
 import { TokenInterceptor } from './token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FontAwesomeModule,
 
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
