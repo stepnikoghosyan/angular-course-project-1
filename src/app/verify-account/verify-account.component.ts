@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
@@ -17,8 +17,6 @@ export class VerifyAccountComponent implements OnInit {
     showTitle = true;
     showResendEmailForm = false;
 
-    @ViewChild ('resendButton') resendButton!: ElementRef<HTMLButtonElement>;
-    
     verifyForm : FormGroup = this.formBuilder.group({
         email :['', [ Validators.required, Validators.email]], 
     });
@@ -26,7 +24,6 @@ export class VerifyAccountComponent implements OnInit {
     constructor(
         private actacatedRoute:ActivatedRoute,
         private authService:AuthService,
-        private router:Router, 
         private formBuilder:FormBuilder,
         private notifyService: NotificationService
     ) {};
@@ -38,14 +35,13 @@ export class VerifyAccountComponent implements OnInit {
         this.authService.verifyAccount(activationToken).subscribe({
             next:() => {
                 this.notifyService.success("Account verified", "Success")
-                this.router.navigateByUrl('login');
+        
             },
             error :(err: HttpErrorResponse) => {
                 console.log(err)
                 this.notifyService.error("Invalid activation token", "Error");
                 this.showTitle = false;
                 this.showSpinner = false;
-                this.resendButton.nativeElement.style.backgroundColor = "#183d40";
             }
         });
       } 
@@ -53,7 +49,6 @@ export class VerifyAccountComponent implements OnInit {
 
     onClick() {
         this.showResendEmailForm = true;
-        this.resendButton.nativeElement.style.backgroundColor = "gray";
     };
 
     sendEmail() {

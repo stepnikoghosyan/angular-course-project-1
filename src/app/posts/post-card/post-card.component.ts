@@ -15,6 +15,5 @@ export class PostCardComponent implements OnInit {
 
     ngOnInit(): void {
         this.post.image? this.post.image : this.post.image = "../../assets/images/img.png"
-        
     };
 }

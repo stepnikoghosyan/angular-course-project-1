@@ -1,27 +1,3 @@
-<!-- <mat-card class="card">
-    <mat-card-title class="title">Verify Account</mat-card-title>
-    <form [formGroup]="form"
-        (ngSubmit)="sendEmail()"> 
-        <mat-card-subtitle  class="subtitle">Verifying Your account, please wait...</mat-card-subtitle>
-        <button type="button" (click) = "onClick()" mat-raised-button color="black" class="re-send">
-            Re-send activation token
-        </button>
-        <input  class="input" *ngIf="showEmail" matInput placeholder="email" formControlName = "email">
-        <mat-spinner class="loading" [diameter]="20" *ngIf="showSpinner"></mat-spinner>
-        <button [disabled]="form.invalid"  *ngIf="showButtons" class="send-mail"  mat-raised-button color="primary">
-            Send mail
-        </button>
-        <div>
-            <button *ngIf="showButtons" class="button" type="button" mat-raised-button color="primary" routerLink="/login">
-                Sign In
-            </button>
-            <button *ngIf="showButtons"type="button" mat-raised-button color="primary" routerLink="/register">
-                Sign Up
-            </button>
-        </div>
-    </form>
-</mat-card> -->
-
 <div class="container">
     <div class="main-container">
         <form [formGroup]="verifyForm" (ngSubmit)="sendEmail()">
@@ -31,14 +7,14 @@
                 <span *ngIf="!showTitle">Could not verify account</span>
             </div>
             <mat-spinner determinate class="loading" [diameter]="20" *ngIf="showSpinner"></mat-spinner>
-            <button class="reset-button" #resendButton (click) = "onClick()">
+            <button class="reset-button" (click) = "onClick()" [ngClass]="showTitle || showResendEmailForm? 'button-color':'back-color'">
                 Re-send activation token
             </button>
             <div class="form-control " *ngIf="showResendEmailForm">
                 <label>Email</label>
                 <input type="email" name="email" formControlName = "email">
                 <mat-spinner class="loading" [diameter]="20" *ngIf="showResendSpinner"></mat-spinner>
-                <button type = "submit" class="submit-email-button" [disabled]="verifyForm.invalid">
+                <button type = "submit" class="submit-email-button " [disabled]="verifyForm.invalid">
                     Send mail
                 </button>
             </div>

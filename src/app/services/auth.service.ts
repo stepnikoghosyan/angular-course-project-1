@@ -64,6 +64,9 @@ export class AuthService {
                 activationToken 
                }
             })
+            .pipe(tap(()=>{
+                this.router.navigateByUrl('login');
+            }))
         };
 
       resendActivationToken(email: EmailDto) {
