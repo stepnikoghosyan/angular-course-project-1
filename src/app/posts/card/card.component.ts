@@ -15,6 +15,9 @@ export class CardComponent implements OnInit {
 
   @Input() post!: PostModel;
 
+
+
+  
   ngOnInit(): void {
     
   }

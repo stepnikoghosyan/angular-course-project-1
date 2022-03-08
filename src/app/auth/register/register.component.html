@@ -41,7 +41,8 @@
   </div>
   <div class="form-control">
     <label>Password</label>
-    <input  type="password" formControlName="password"/>
+    <input  [type]="text" formControlName="password"/>
+    <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
     <div class="formErr">
       <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
     

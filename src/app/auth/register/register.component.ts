@@ -21,9 +21,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     password: ['', [Validators.required, Validators.minLength(5)]]
   })
 
-  message = ''
-  successMsg = ''
-  isLoader = false
+  message = '';
+  successMsg = '';
+  isLoader = false;
+  showPassword = true;
+  text = 'password'
+
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -34,6 +37,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.message = '';
     this.successMsg = '';
+  }
+
+  showHidePass() {
+    this.showPassword = !this.showPassword
+    if (this.showPassword) {
+      this.text = 'password'
+    } else {
+      this.text = 'text'
+    }
   }
 
   register() {
@@ -48,6 +60,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.router.navigate(['auth/login'])
         },
           ((err: any) => {
+            this.isLoader = false
             this.message = err.error.message
           }));
     } else {

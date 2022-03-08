@@ -1,9 +1,10 @@
-<div>
+<div class="header">
     <h1>Angular Course</h1>
-</div>
-<div>
-    <button routerLinkActive="active-link" routerLink="/home">home</button>
-    <button routerLinkActive="active-link" routerLink="/users">users</button>
-    <button routerLinkActive="active-link" routerLink="/posts">posts</button>
+
+<div class="routes">
+    <a routerLinkActive="active" routerLink="/home">home</a>
+    <a routerLinkActive="active" routerLink="/users">users</a>
+    <a routerLinkActive="active" routerLink="/posts">posts</a>
     <a (click)="logout()" > Logout </a>
+</div>
 </div>

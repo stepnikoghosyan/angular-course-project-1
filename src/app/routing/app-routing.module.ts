@@ -44,7 +44,6 @@ const routes: Routes = [
     path:'auth/reset-password/:token', 
     component: ResetPasswordComponent,
     canActivate: [AuthPublicGuard]
-
   },
   {
     path:'auth/login', 

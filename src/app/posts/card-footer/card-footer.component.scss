@@ -1,8 +1,48 @@
 .footer {
     display: flex;
-    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    border: grey solid 2px; 
 }
 
 .actions {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-start;
+}
+
+p {
+    font-size: 18px;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.user-icon {
+    background: url('../../../assets/user.png'), 0, 0, no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.comment-icon {
+    color: #1469d9;
+    background: url('../../../assets/comments.png'), 0, 0, no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-left: 20px;
+}
+
+.view-icon {
+    color: #1469d9;
+    background: url('../../../assets/view.png'), 0, 0, no-repeat;
+    height: 25px;
+    width: 25px;
     margin-left: 20px;
 }

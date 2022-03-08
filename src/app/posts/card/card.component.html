@@ -1,5 +1,13 @@
 <div>
-    <p>{{post?.body}}</p>
+    <div>
+<img [src]="post?.imageUrl || '../../../assets/default.png'">
+    </div>
+    <div>
+        {{post?.title}}
+    </div>
+    <div>
+        <p>{{post?.body}}</p>
+    </div>
+    
+    <app-card-footer [post]="post"></app-card-footer>
 </div>
-
-<app-card-footer [post]="post"></app-card-footer>
