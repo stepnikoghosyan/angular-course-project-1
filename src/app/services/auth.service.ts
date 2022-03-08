@@ -20,27 +20,7 @@ export class AuthService {
 
 
   login(loginDto: LoginDto): Observable<LoginResponse> {
-    // if (loginDto.checkBox) {
-      
       return this.httpClient.post<LoginResponse>(`${this.baseUrl}auth/login`, loginDto)
-    //   .pipe(
-    //     tap((data: LoginResponse) => {
-    //       console.log(data);
-          
-    //       localStorage.setItem('auth', JSON.stringify(data));
-    //       this.router.navigate(['/home'])
-    //     })
-    //   );
-    // } else {
-    //    return this.httpClient
-    //   .post<LoginResponse>(`${this.baseUrl}auth/login`, loginDto)
-    //   .pipe(
-    //     tap((data: LoginResponse) => {
-    //       sessionStorage.setItem('auth', JSON.stringify(data));
-    //       this.router.navigate(['/home'])
-    //     })
-    //   );
-    // }
   }
 
 
@@ -60,7 +40,7 @@ export class AuthService {
     return this.httpClient.post(`${this.baseUrl}auth/forgot-password`, body)
   }
   resetPassword(activationToken: ResetDto) {
-    return this.httpClient.post(`${this.baseUrl}auth/reset-password?activationToken=${activationToken}`, activationToken)
+    return this.httpClient.post(`${this.baseUrl}auth/reset-password?activationToken=${activationToken.token}`, activationToken)
   }
 
 }

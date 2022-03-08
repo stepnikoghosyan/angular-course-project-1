@@ -27,7 +27,7 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPassword() {
     if (this.resetForm.valid) {
-      const token = this.activeRoute.snapshot.params['token']
+      const token = this.activeRoute.snapshot.paramMap.get('token') as string;
       const resetPass = {
         newPassword: this.resetForm.get('newPassword')?.value,
         token: token,

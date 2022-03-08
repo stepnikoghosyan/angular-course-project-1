@@ -38,8 +38,10 @@ export interface LoginResponse {
 
 export class ResetDto {
     newPassword: string;
+    token: string
 
     constructor(data: any) {
         this.newPassword = data.password
+        this.token = data.token
     }
 }
