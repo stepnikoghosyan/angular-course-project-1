@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    console.log(this.form.get('password'))
     if(this.form.valid) {
       this.isLoader = true;
       const login = new LoginDto(this.form.value);

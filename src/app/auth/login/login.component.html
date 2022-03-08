@@ -3,7 +3,7 @@
     <h2>Sign In</h2>
     <div class="form-control">
       <label>Email</label>
-      <input  type="email" formControlName="email" />
+      <input  type="email" [disabled]="true" formControlName="email" />
       <div class="formErr">
         <div class="val" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
           <span *ngIf="form.get('email')?.hasError('email')" class="errors">
@@ -38,7 +38,7 @@
     <div class="loader"><div *ngIf="isLoader" class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     <div class="action">
       
-      <button (click)="login()" class="display">Sign In</button>
+      <button (click)="login()" [disabled]="isLoader" class="display">Sign In</button>
     </div>
     <div class="val err">
         <span class="errors">{{errorMsg}}</span>
