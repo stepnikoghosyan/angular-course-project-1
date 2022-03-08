@@ -45,18 +45,17 @@ export class LoginComponent implements OnInit{
             .subscribe({ 
                 error: (err: HttpErrorResponse) => {
                     switch(err.status){
-                        case 400: 
-                            this.errors.push(err.error.message)
-                            // this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
+                        case 400:  
+                             this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
                             break;
                         case 401: 
-                            this.errors.push(err.error.message);
+                        this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
                             break;
                         case 403:
-                            this.errors.push(err.error.message)
+                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
                             break
                         case 404:
-                            this.errors.push(err.error.message)
+                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
                             break;
                         default:
                             this.errors.push("Something went wrong")

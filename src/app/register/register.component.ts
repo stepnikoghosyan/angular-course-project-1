@@ -43,10 +43,10 @@ export class RegisterComponent implements OnInit {
                     this.errors = [];
                     switch(err.status){
                         case 400:
-                            this.errors.push(err.error.message);
+                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message]
                             break;                     
                         case 409:
-                            this.errors.push(err.error.message);
+                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message]
                             break;
                         default: 
                             this.errors.push('Something went wrong');
