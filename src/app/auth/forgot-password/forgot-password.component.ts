@@ -3,6 +3,7 @@ import { Validators, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-forgot-passvord',
@@ -13,6 +14,7 @@ export class ForgotPasswordComponent implements OnInit {
   isLoader!: boolean
   isTouched = false;
   errMessage!: string;
+  unSubscribe = new Subject();
   constructor(private router: Router, private authService: AuthService, private notifyService: NotificationService) { }
   
 
@@ -20,12 +22,12 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendEmail() {
     this.isTouched = true;
-    // const forgot = new Forgot(this.email.value)
     if(this.email.valid) {
       this.isLoader = true
       this.errMessage = '';
       const forgot = {email: this.email.value}
-      this.authService.forgotPassword(forgot).subscribe(() => {
+      this.authService.forgotPassword(forgot).pipe(takeUntil(this.unSubscribe)).
+      subscribe(() => {
         this.router.navigate(['/home'])
       },
       (err) => {

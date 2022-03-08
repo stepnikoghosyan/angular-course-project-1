@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginDto } from 'src/app/models/auth.model';
 import { Router } from '@angular/router';
-import { Subject} from 'rxjs';
+import { Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   form: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.pattern( /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
-    password: ['', [Validators.required, Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     checkBox:[false]
   })
 
@@ -48,19 +48,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   
   rememberTocken(){
-     this.form.get('checkBox')?.valueChanges
+     this.form.get('checkBox')?.valueChanges.pipe(takeUntil(this.unSubscribe$))
      .subscribe((result:boolean)=>{
        this.authService.isRemember = result
      })
   }
 
   login() {
+    console.log(this.form.get('password'))
     if(this.form.valid) {
       this.isLoader = true;
       const login = new LoginDto(this.form.value);
-      this.authService.login(login)
+      this.authService.login(login).pipe(takeUntil(this.unSubscribe$))
       .subscribe((res) => {
-        console.log(typeof(this.form.get('checkBox')?.value));
         
         if(this.form.get('checkBox')?.value) {
           localStorage.setItem('auth', res.accessToken)

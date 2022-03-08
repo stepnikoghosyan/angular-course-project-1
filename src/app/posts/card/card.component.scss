@@ -1,6 +1,8 @@
 .card{
-    border: 1px solid rgb(155, 153, 153);
+    border: 2px solid rgb(245, 242, 242);
+    border-radius: 2px;
 }
+
 
 .imgContent{
     display: flex;
@@ -8,10 +10,12 @@
     align-items: center;
 }
 .img{
-    border: 1px solid;
-    height: 225px;
-    width: 225px;
     margin: 0 auto;
+}
+
+.img img {
+    height: 100px;
+    width: 100px;
 }
 
 .cardBody{

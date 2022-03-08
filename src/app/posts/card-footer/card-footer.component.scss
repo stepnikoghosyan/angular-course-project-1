@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: grey solid 2px; 
+    border-top: rgb(233, 230, 230) solid 2px; 
+    background-color: rgb(250, 247, 247);
+    border-radius: 2px;
 }
 
 .actions {
@@ -44,7 +46,7 @@ p {
     color: #1469d9;
     background: url('../../../assets/comments.png'), 0, 0, no-repeat;
     height: 25px;
-    width: 25px;
+    width: 30px;
     margin-left: 20px;
 }
 
@@ -52,6 +54,22 @@ p {
     color: #1469d9;
     background: url('../../../assets/view.png'), 0, 0, no-repeat;
     height: 25px;
-    width: 25px;
+    width: 30px;
     margin-left: 20px;
+}
+
+.comment-length {
+    font-size: 12px;
+    display: block;
+    background-color: #1469d9;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+    height: 18px;
+    width: 25px;
+    text-align: center;
+    padding-top: 3px;
+    position: relative;
+    bottom: 10px;
+    right: 20px;
 }

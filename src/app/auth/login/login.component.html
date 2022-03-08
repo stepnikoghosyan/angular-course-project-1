@@ -25,6 +25,12 @@
           <span *ngIf="form.get('password')?.hasError('required')" class="errors">
             Required
           </span>
+          <span *ngIf="form.get('password')?.hasError('minlength')" class="errors">
+            Required {{
+            form.controls['password'].getError('minlength').requiredLength - 
+            form.controls['password'].getError('minlength').actualLength
+          }} more characters
+          </span>
         </div>
       </div>
     </div>

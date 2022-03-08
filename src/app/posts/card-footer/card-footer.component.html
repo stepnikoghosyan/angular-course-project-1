@@ -11,7 +11,11 @@
   <div class="actions">
     
     <fa-icon class="icon" [icon]="faEye"></fa-icon>
-    <fa-icon class="icon comment" [icon]="faComment"></fa-icon>
+    <fa-icon class="icon comment" [icon]="faComment">
+    </fa-icon>
+    <span class="comment-length">
+      {{post?.comments?.length}}
+    </span>
  
       <!-- <div class="view-icon"></div> -->
       <!-- <div class="comment-icon"></div> -->
