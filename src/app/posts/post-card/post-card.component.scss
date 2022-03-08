@@ -1,9 +1,12 @@
 *{
     margin: auto;
-    padding: 10px 0px;
 }
 :host{
     margin-top: 20px;
+}
+.img{
+    max-width: 200px;
+    width: 100%;
 }
 .wrapper{
     width: 500px;
@@ -15,6 +18,10 @@
         display: flex;
         flex-direction: column;
         padding: 0px;
+
+        .post_img{
+            padding-top: 10px;
+        }
 
         .post_body{
             width: 90%;

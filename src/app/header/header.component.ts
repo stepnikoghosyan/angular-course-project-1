@@ -16,5 +16,4 @@ export class HeaderComponent implements OnInit {
       this.navItems = getNavigationItems();
       console.log("NAVITEMS", this.navItems)
   }
-
 }

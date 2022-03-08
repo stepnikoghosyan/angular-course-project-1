@@ -3,19 +3,29 @@
     display: flex;  
     border-radius: 0 0 5px 5px;
     align-items: center;
-}
-.comments {
-    margin-right: 5px;
-    margin-left: auto;
-    margin-top:auto;
-    margin-bottom: 5px;
-}
+    justify-content: space-between;
+    padding: 0px 15px;
 
-.userName {
-    margin-top:auto;
-    margin-bottom: 5px;
+    .comments{
+        position: relative;
+        bottom: 12px;
+    }
 }
-.userIcon {
-    margin-top:auto;
-    margin-bottom: auto;
+button{
+    color: #5f9ea0;
+    padding: 5px;
+    border: 1px solid #5f9ea0;
+    margin-right: 5px;
+}
+.count{
+    padding: 3px;
+    border-radius: 50%;
+    font-size: 15px !important;
+    position: absolute;
+    right: -10px;
+    top: 12px;
+    background-color: #5f9ea0;
+    width: 18px;
+    height: 18px;
+    text-align: center;
 }

@@ -6,7 +6,7 @@ export class PostModel {
     title: string;
     body: string;
     image: string;
-    user:UserModel
+    user: UserModel
     comments: CommentModel[];
 
     constructor(data: any){

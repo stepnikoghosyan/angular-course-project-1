@@ -1,19 +1,19 @@
 <div class="card-footer">
     <div class="userName">
-<p >
-<mat-icon class="userIcon">perm_identity</mat-icon>
-{{post.user | userName}}
-</p>
-</div>
-<div class = "comments">
-    <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-	<mat-icon color="primary">remove_red_eye</mat-icon>
-</button>
-  <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-    <mat-icon color="primary">comment</mat-icon>
-    <span>{{post.comments.length}}</span>
-</button>
-</div>
-
+        <i class="far fa-user"></i>
+            <!-- <mat-icon class="userIcon">perm_identity</mat-icon> -->
+        <span>
+            {{post.user | userName}}
+        </span>
+    </div>
+    <div class = "comments">
+        <button type="button">
+            <i class="far fa-eye"></i>
+        </button>
+        <button>
+            <i class="far fa-comment"></i>
+        </button>
+        <div class="count">{{post.comments.length}}</div>
+    </div>
 </div>
 

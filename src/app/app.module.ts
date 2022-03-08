@@ -28,7 +28,7 @@ import { UsersComponent } from './users/users.component';
 import { AuthInterceptor } from './interceptors/token.interceptor';
 import { PostCardComponent } from './posts/post-card/post-card.component';
 import { CardFooterComponent } from './posts/card-footer/card-footer.component';
-import { UserNamePipe } from './user-name.pipe';
+import { UserNamePipe } from './pipes/user-name.pipe';
 
 
 
