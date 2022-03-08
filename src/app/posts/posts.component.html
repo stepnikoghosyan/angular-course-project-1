@@ -1,13 +1,17 @@
 <app-header></app-header>
 <div>
-
+  <div class="title">
     <h1>Posts</h1>
-   <div>
+  </div> 
+  <div>
     <div class="loader">
-        <div *ngIf="isLoader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      <div *ngIf="isLoader" class="lds-ring">
+        <div></div><div></div><div></div><div></div></div>
       </div>
-    <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
-</div> 
+    <div class="cards">
+      <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
+    </div>
+  </div> 
 </div>
 
 

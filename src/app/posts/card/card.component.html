@@ -1,11 +1,15 @@
-<div>
-    <div>
-<img [src]="post?.imageUrl || '../../../assets/default.png'">
+<div class="card">
+    <div class="imgContent">
+        <div class="img">
+            <img [src]="post?.imageUrl || '../../../assets/default.png'">
+        
+            
+        </div>
+        <div>
+            <p>{{post?.title}}</p> 
+        </div>
     </div>
-    <div>
-        {{post?.title}}
-    </div>
-    <div>
+    <div class="cardBody">
         <p>{{post?.body}}</p>
     </div>
     

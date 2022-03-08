@@ -1,11 +1,36 @@
 .header {
     display: flex;
     justify-content: space-between;
+    border-bottom: 2px solid rgb(206, 198, 198);
 }
 
 a {
     margin-left: 10px;
     text-decoration: none;
     font-size: 18px;
+
 }
 
+a:visited{
+    color: black;
+}
+
+
+.active{
+    background: #1469d9;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.active:visited{
+    color: white;
+}
+.routes{
+    align-items: center;
+    display: flex;
+}
+
+.logout{
+    cursor: pointer;
+}

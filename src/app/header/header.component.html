@@ -1,10 +1,11 @@
 <div class="header">
     <h1>Angular Course</h1>
 
-<div class="routes">
-    <a routerLinkActive="active" routerLink="/home">home</a>
-    <a routerLinkActive="active" routerLink="/users">users</a>
-    <a routerLinkActive="active" routerLink="/posts">posts</a>
-    <a (click)="logout()" > Logout </a>
-</div>
+    <div class="routes">
+        <a routerLinkActive="active" routerLink="/home" 
+        [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a routerLinkActive="active" routerLink="/users">Users</a>
+        <a routerLinkActive="active" routerLink="/posts">Posts</a>
+        <a (click)="logout()" class="logout"> Logout </a>
+    </div>
 </div>

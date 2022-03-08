@@ -3,3 +3,13 @@
     width: 150px !important;
     height: 150px !important;
 }
+
+.title{
+  text-align: center;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns:repeat(3,30%);
+    grid-gap:3%;
+}
