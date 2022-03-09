@@ -1,3 +1,11 @@
+ <div class="loader" *ngIf="isLoader">
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
 <div class="main">
   <form [formGroup]="form">
   <h2>Sign Up</h2>
@@ -61,9 +69,7 @@
  
   </div>
 <div class="action">
-  <div class="loader">
-    <div *ngIf="isLoader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
-  </div>
+ 
   
   <button (click)="register()" class="display" >Sign Up</button>
   <div class="formErr">

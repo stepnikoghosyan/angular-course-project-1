@@ -1,3 +1,11 @@
+<div class="loader" *ngIf="isLoader">
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
 <div class="main">
     <form>
     <h2>Verify Account</h2>
@@ -8,9 +16,7 @@
         Re-send activation token
     </button>
     </div>
-    <div class="loader">
-        <div *ngIf="isLoader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    </div>
+    
     
     <div *ngIf="emailError">
        
