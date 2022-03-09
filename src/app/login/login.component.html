@@ -15,8 +15,8 @@
             </div>
             <div class="form-control">
                 <label>Password</label>
-                <input type="password" name="password" #showPassword formControlName="password">
-                <i class="far fa-eye" *ngIf="showEyeIcon" (click)="toggleShowPassoword()"></i>
+                <input [type]="showEyeIcon? 'password':'text'" name="password" #showPassword formControlName="password">
+                <i class="far fa-eye" *ngIf="showEyeIcon" [ngClass]= "showEyeIcon? 'far fa-eye':'far fa-eye-slash'" (click)="toggleShowPassoword()"></i>
                 <i class="far fa-eye-slash" *ngIf="!showEyeIcon" (click)="toggleShowPassoword()"></i>
                 <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
                     <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['required']">Password is required</span>

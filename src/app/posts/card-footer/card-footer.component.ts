@@ -7,14 +7,9 @@ import { PostModel } from 'src/app/models/post.model';
   styleUrls: ['./card-footer.component.scss']
 })
 export class CardFooterComponent implements OnInit {
-  @Input('post') post!: PostModel;
+    @Input('post') post!: PostModel;
 
-  
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.post);
-    
-  }
-
+    ngOnInit(): void {}
 }

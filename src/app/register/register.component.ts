@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
+import { errorResponse } from '../configs/error-response.config';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
         if(this.registerForm.valid){
             this.authService.register(dto).pipe(
                 finalize(()=>{
-                    this.showSpinner=false
+                    this.showSpinner = false;
                 })
             )
             .subscribe({
@@ -43,10 +43,10 @@ export class RegisterComponent implements OnInit {
                     this.errors = [];
                     switch(err.status){
                         case 400:
-                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message]
+                            this.errors = errorResponse(err);
                             break;                     
                         case 409:
-                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message]
+                            this.errors = errorResponse(err);
                             break;
                         default: 
                             this.errors.push('Something went wrong');

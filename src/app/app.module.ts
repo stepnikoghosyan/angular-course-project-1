@@ -7,11 +7,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-// import { MatCardModule } from '@angular/material/card';
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatIconModule } from '@angular/material/icon';
-// import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatInputModule} from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -57,13 +52,8 @@ import { UserNamePipe } from './pipes/user-name.pipe';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    //MatButtonModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    // MatCardModule,
-    // MatIconModule,
-    // MatInputModule,
-    // BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [{

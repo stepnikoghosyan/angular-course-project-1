@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmailDto } from '../models/auth.model';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-verify-account',
@@ -32,19 +33,15 @@ export class VerifyAccountComponent implements OnInit {
       this.showSpinner = true;
       const activationToken = this.actacatedRoute.snapshot.params['activationToken'];
       if (activationToken) {
-        this.authService.verifyAccount(activationToken).subscribe({
-            next:() => {
-                this.notifyService.success("Account verified", "Success")
-        
-            },
-            error :(err: HttpErrorResponse) => {
-                console.log(err)
-                this.notifyService.error("Invalid activation token", "Error");
-                this.showTitle = false;
-                this.showSpinner = false;
-            }
-        });
-      } 
+        this.authService.verifyAccount(activationToken)
+            .subscribe({
+                error :(err: HttpErrorResponse) => {
+                    this.notifyService.error("Invalid activation token", "Error");
+                    this.showTitle = false;
+                    this.showSpinner = false;
+                }
+            });
+        } 
     };
 
     onClick() {
@@ -52,21 +49,23 @@ export class VerifyAccountComponent implements OnInit {
     };
 
     sendEmail() {
-        console.log("test!");
+        this.showResendSpinner = true;
         if(this.verifyForm.valid){
-            this.showResendSpinner = true;
             const dto = new EmailDto(this.verifyForm.value);
-            this.authService.resendActivationToken(this.verifyForm.value).subscribe({
+            this.authService.resendActivationToken(this.verifyForm.value)
+            .pipe(
+                finalize(()=>{
+                    this.showSpinner = false;
+                    this.showTitle = false; 
+                })
+            )
+            .subscribe({
                 next: ()=>{
                     this.notifyService.success("Please check your email", "Success!!");
-                    this.showResendSpinner = false;
                 },
                 error: (err: HttpErrorResponse)=> {
                     if(err.status == 409){
-
                         this.notifyService.error("Account is already verified", "Error");
-                        this.showResendSpinner = false;
-                        this.showTitle = false; 
                     }
                 }
             });

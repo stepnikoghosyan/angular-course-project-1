@@ -18,13 +18,19 @@ export class AuthService {
 
     forgotPassword(forgotPasswordDto: ForgotPasswordDto): Observable<void>{
         return this.httpClient
-        .post<void>(`${environment.apiUrl}/auth/forgot-password`, forgotPasswordDto)
+            .post<void>(`${environment.apiUrl}/auth/forgot-password`, forgotPasswordDto)
+                .pipe(
+                    tap(()=>{
+                        this.notifyService.success("Check your email", "Success!");
+                    })
+                )
     };
 
     resetPassword(resetPasswordDto: ResetPasswordDto): Observable<void>{
         return  this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
         .pipe(
             tap(()=>{
+                this.notifyService.success("", "Success!!");
                 this.router.navigateByUrl("/home");
             })
         );
@@ -71,6 +77,7 @@ export class AuthService {
                }
             })
             .pipe(tap(()=>{
+                this.notifyService.success("Account verified", "Success")
                 this.router.navigateByUrl('login');
             }))
         };

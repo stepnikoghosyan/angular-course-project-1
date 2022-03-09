@@ -16,9 +16,9 @@ export class PostsService {
 
     getPosts() : Observable <PaginationResponseModel<PostModel>>  {
       return this.httpClient.get<PaginationResponseModel<PostModel>>
-      (`${environment.apiUrl}/posts`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
+        (`${environment.apiUrl}/posts`)
+            .pipe(map (data => {
+                return data;
+            }));
+    }
 }

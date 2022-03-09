@@ -3,9 +3,8 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { LoginDto } from '../models/auth.model';
-import { NotificationService } from '../services/notification.service';
-import { IconOptions } from '@angular/material/icon';
 import { finalize } from 'rxjs';
+import { errorResponse } from '../configs/error-response.config';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit{
 
     constructor( private formBuilder: FormBuilder,
                  private authService: AuthService,
-                 private notifyService: NotificationService,
                  private renderer: Renderer2) {}
 
     ngOnInit(): void {}
@@ -39,35 +37,33 @@ export class LoginComponent implements OnInit{
             this.errors = [];
             this.authService.login(dto, this.loginForm.controls['remember'].value).pipe(
                 finalize(()=>{
-                    this.showSpinner=false
+                    this.showSpinner = false;
                 })
             )
             .subscribe({ 
                 error: (err: HttpErrorResponse) => {
                     switch(err.status){
-                        case 400:  
-                             this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
+                        case 400:
+                            this.errors = errorResponse(err);
                             break;
-                        case 401: 
-                        this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
+                        case 401:
+                            this.errors = errorResponse(err);
                             break;
                         case 403:
-                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
-                            break
+                            this.errors = errorResponse(err);
+                            break;
                         case 404:
-                            this.errors= Array.isArray(err.error.message)?err.error.message:[err.error.message];
+                            this.errors = errorResponse(err);
                             break;
                         default:
-                            this.errors.push("Something went wrong")
+                            this.errors.push("Something went wrong");
                     }
                 }
             })
         }
     };
 
-
     toggleShowPassoword(){
-        this.renderer.setAttribute(this.showPassword.nativeElement, 'type', 'text');
         this.showEyeIcon = !this.showEyeIcon;
     }
 }

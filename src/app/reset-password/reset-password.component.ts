@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { errorResponse } from '../configs/error-response.config';
 import { ResetPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
@@ -42,17 +43,15 @@ export class ResetPasswordComponent implements OnInit {
         if(this.resetPasForm.valid){
             const dto = new ResetPasswordDto(this.resetPasForm.value);
             this.authService.resetPassword(dto).subscribe({
-                next: () =>{ 
-                   this.notifyService.success("", "Success!!");
-                }, 
+                
                 error: (err: HttpErrorResponse) => {
                     this.errors = [];
                     switch(err.status){
                        case 400: 
-                           this.errors = err.error.message;
+                           this.errors = errorResponse(err);
                            break;
                        case 401: 
-                           this.errors.push(err.error.message);
+                           this.errors = errorResponse(err);
                            break;
                        default:
                            this.errors.push("Something went wrong")
