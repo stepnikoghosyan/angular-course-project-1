@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   successMsg = '';
   isLoader = false;
   showPassword = true;
-  text = 'password'
+  text = 'password';
 
   constructor(
     private authService: AuthService,
@@ -40,28 +40,28 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   showHidePass() {
-    this.showPassword = !this.showPassword
+    this.showPassword = !this.showPassword;
     if (this.showPassword) {
-      this.text = 'password'
+      this.text = 'password';
     } else {
-      this.text = 'text'
+      this.text = 'text';
     }
   }
 
   register() {
     if (this.form.valid) {
-      this.isLoader = true
+      this.isLoader = true;
       const register = new RegisterDto(this.form.value);
       this.authService.register(register)
         .pipe(takeUntil(this.unSubscribe$))
         .subscribe(() => {
-          this.isLoader = false
-          this.notifyService.showSuccess('Please check your email for verification', 'Success')
-          this.router.navigate(['auth/login'])
+          this.isLoader = false;
+          this.notifyService.showSuccess('Please check your email for verification', 'Success');
+          this.router.navigate(['auth/login']);
         },
           ((err: any) => {
-            this.isLoader = false
-            this.message = err.error.message
+            this.isLoader = false;
+            this.message = err.error.message;
           }));
     } else {
       this.message = 'Please fill all fields';

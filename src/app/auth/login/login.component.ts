@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   unSubscribe$  = new Subject<void>();
   showPassword = true;
-  text = 'password'
+  text = 'password';
 
   form: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.pattern( /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   errorMsg = '';
-  isLoader!: boolean
+  isLoader!: boolean;
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -34,15 +34,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.showPassword = true;
     this.errorMsg = '';
-    this.rememberTocken()
+    this.rememberTocken();
   }
 
   showHidePass() {
-    this.showPassword = !this.showPassword
+    this.showPassword = !this.showPassword;
     if (this.showPassword) {
-      this.text = 'password'
+      this.text = 'password';
     } else {
-      this.text = 'text'
+      this.text = 'text';
     }
   }
 
@@ -62,15 +62,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         
         if(this.form.get('checkBox')?.value) {
-          localStorage.setItem('auth', res.accessToken)
+          localStorage.setItem('auth', res.accessToken);
         } else {
-          sessionStorage.setItem('auth', res.accessToken)
+          sessionStorage.setItem('auth', res.accessToken);
         }
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
       }
         , (error: any) => {
           this.errorMsg = error.error.message;
-          this.isLoader = false
+          this.isLoader = false;
         });
     }
   }

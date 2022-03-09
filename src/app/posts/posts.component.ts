@@ -15,7 +15,7 @@ export class PostsComponent implements OnInit {
 
   
   isLoader = true;
-  posts$!: Observable<PostModel[]>
+  posts$!: Observable<PostModel[]>;
 
   constructor(
     private postsService: PostsService,
@@ -30,7 +30,7 @@ export class PostsComponent implements OnInit {
       map(data => data.results),
       catchError((error)=> {
          this.notifyService.showError(error.error.message, 'Error');
-         return of([])
+         return of([]);
       }))
     
 

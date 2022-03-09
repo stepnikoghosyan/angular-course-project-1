@@ -11,38 +11,39 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./forgot-passvord.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  isLoader!: boolean
+  isLoader!: boolean;
   isTouched = false;
   errMessage!: string;
   unSubscribe = new Subject();
   constructor(private router: Router, private authService: AuthService, private notifyService: NotificationService) { }
   
 
-  email = new FormControl('', [Validators.required, Validators.email])
+  email = new FormControl('', [Validators.required, Validators.email]);
 
   sendEmail() {
     this.isTouched = true;
     if(this.email.valid) {
-      this.isLoader = true
+      this.isLoader = true;
       this.errMessage = '';
       const forgot = {email: this.email.value}
       this.authService.forgotPassword(forgot).pipe(takeUntil(this.unSubscribe)).
       subscribe(() => {
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
+        this.notifyService.showSuccess('Your password was successfully reseted', 'success');
       },
       (err) => {
-        this.errMessage = err.error.message
-        this.isLoader = false
+        this.errMessage = err.error.message;
+        this.isLoader = false;
       }
       )
   }
 }
 
   signIn() {
-    this.router.navigate(['auth/login'])
+    this.router.navigate(['auth/login']);
   }
   signUp() {
-    this.router.navigate(['auth/register'])
+    this.router.navigate(['auth/register']);
   }
 
 

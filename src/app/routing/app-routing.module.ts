@@ -65,16 +65,6 @@ const routes: Routes = [
     component:PostsComponent,
     canActivate:[AuthGuard]
   },
-  // {
-  //   path:'posts/card', 
-  //   component: CardComponent,
-  //   canActivate:[AuthGuard]
-  // },
-  // {
-  //   path:'posts/card-footer', 
-  //   component: CardFooterComponent,
-  //   canActivate:[AuthGuard]
-  // },
   {
     path: '**',
     component: NotFoundComponent,

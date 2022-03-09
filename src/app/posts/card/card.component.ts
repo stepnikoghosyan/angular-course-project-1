@@ -10,7 +10,7 @@ import { PostsService } from 'src/app/services/posts.service';
 export class CardComponent implements OnInit {
 
   constructor(
-   private postsService: PostsService
+   private postsService: PostsService,
   ) { }
 
   @Input() post!: PostModel;

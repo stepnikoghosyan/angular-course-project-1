@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
   
       const auth = localStorage.getItem('auth');
       const auth1 = sessionStorage.getItem('auth');
-      // && JSON.parse(auth!).accessToken
       if (auth || auth1) {
         return true;
       }

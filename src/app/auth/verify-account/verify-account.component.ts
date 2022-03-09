@@ -15,7 +15,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   token = '';
   emailError = false;
   errMessage!: string;
-  isLoader!: boolean
+  isLoader!: boolean;
   email = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private authService: AuthService,
@@ -40,18 +40,18 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         this.notifyService.showSuccess('Your verification Succeded', 'Succes');
         setTimeout(() => {
           this.router.navigate(['auth/login']);
-          this.isLoader = false
+          this.isLoader = false;
         }, 3000);
       },
       () => {
         this.notifyService.showError(this.errMessage, 'Error');
-        this.isLoader = false
+        this.isLoader = false;
       }
     );
   }
 
   resendActivation() {
-    this.isLoader = true
+    this.isLoader = true;
     const email = {
       email: this.email.value,
     };
@@ -72,7 +72,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   }
 
   showEmail() {
-    this.isLoader = false
+    this.isLoader = false;
     this.emailError = true;
   }
 

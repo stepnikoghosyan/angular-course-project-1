@@ -15,11 +15,11 @@ export class RegisterDto {
 export class LoginDto {
     email: string;
     password: string;
-    checkBox?:boolean
+    checkBox?:boolean;
     constructor(data: any) {
         this.email = data.email;
         this.password = data.password;
-        this.checkBox = data.checkBox
+        this.checkBox = data.checkBox;
     }
 }
 
@@ -27,7 +27,7 @@ export class ForgotDto {
     email: string;
 
     constructor(data: any) {
-        this.email = data.email
+        this.email = data.email;
     }
 }
 
@@ -38,10 +38,10 @@ export interface LoginResponse {
 
 export class ResetDto {
     newPassword: string;
-    token: string
+    token: string;
 
     constructor(data: any) {
-        this.newPassword = data.password
-        this.token = data.token
+        this.newPassword = data.password;
+        this.token = data.token;
     }
 }
