@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { errorResponse } from '../configs/error-response.config';
 import { ResetPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
@@ -12,8 +13,8 @@ import { NotificationService } from '../services/notification.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
-    
+export class ResetPasswordComponent implements OnInit, OnDestroy {
+    private subscription!: Subscription
     errors: string[]= [];
     token: string | undefined;
         
@@ -42,7 +43,7 @@ export class ResetPasswordComponent implements OnInit {
     formResetSubmit(){
         if(this.resetPasForm.valid){
             const dto = new ResetPasswordDto(this.resetPasForm.value);
-            this.authService.resetPassword(dto).subscribe({
+          this.subscription =  this.authService.resetPassword(dto).subscribe({
                 
                 error: (err: HttpErrorResponse) => {
                     this.errors = [];
@@ -59,5 +60,10 @@ export class ResetPasswordComponent implements OnInit {
                 }
             });
         }  
+    }
+    ngOnDestroy(): void {
+        if(this.subscription){
+            this.subscription.unsubscribe()
+        }
     }
 }

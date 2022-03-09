@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { LoginDto } from '../models/auth.model';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { errorResponse } from '../configs/error-response.config';
 
 @Component({
@@ -11,7 +11,8 @@ import { errorResponse } from '../configs/error-response.config';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit, OnDestroy{
+    private subscription! :Subscription
     showSpinner = false;
     errors:string[] = [];
     showEyeIcon = true;
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit{
         if(this.loginForm.valid){
             const dto = new LoginDto(this.loginForm.value);
             this.errors = [];
-            this.authService.login(dto, this.loginForm.controls['remember'].value).pipe(
+           this.subscription=this.authService.login(dto, this.loginForm.controls['remember'].value).pipe(
                 finalize(()=>{
                     this.showSpinner = false;
                 })
@@ -65,5 +66,10 @@ export class LoginComponent implements OnInit{
 
     toggleShowPassoword(){
         this.showEyeIcon = !this.showEyeIcon;
+    }
+    ngOnDestroy(): void {
+        if(this.subscription){
+            this.subscription.unsubscribe()
+        }
     }
 }

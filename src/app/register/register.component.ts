@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { errorResponse } from '../configs/error-response.config';
 
 
@@ -12,7 +12,8 @@ import { errorResponse } from '../configs/error-response.config';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+    private subscription! :Subscription
     hide = true
     showSpinner = false;
     errors: string[] = [];
@@ -33,7 +34,7 @@ export class RegisterComponent implements OnInit {
         this.showSpinner = true;
         const dto = new RegisterDto(this.registerForm.value);
         if(this.registerForm.valid){
-            this.authService.register(dto).pipe(
+           this.subscription= this.authService.register(dto).pipe(
                 finalize(()=>{
                     this.showSpinner = false;
                 })
@@ -53,6 +54,11 @@ export class RegisterComponent implements OnInit {
                     }
                 } 
             })
+        }
+    }
+    ngOnDestroy(): void {
+        if(this.subscription){
+            this.subscription.unsubscribe()
         }
     }
 
