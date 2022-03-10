@@ -118,10 +118,6 @@ label {
   margin: 36px;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
 
-  &:disabled
-  {
-    opacity: 0.5;
-  }
   &{
     cursor: pointer;
     display: inline-block;
@@ -138,12 +134,14 @@ label {
     transition: 0.5s;
   }
 
-  &:hover{
+  &:hover,
+  &:focus {
     padding-right: 24px;
     padding-left:8px;
   }
 
-  &:hover:after {
+  &:hover:after,
+  &:focus:after {
     opacity: 1;
     right: 20px;
   }

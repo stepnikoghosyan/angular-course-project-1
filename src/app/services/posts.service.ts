@@ -12,9 +12,6 @@ export class PostsService {
   }
 
   getPosts(): Observable<PaginatedResponseModel<PostModel>> {
-    return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`)
-      .pipe(map(data => {
-        return data;
-      }));
+    return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`);
   }
 }

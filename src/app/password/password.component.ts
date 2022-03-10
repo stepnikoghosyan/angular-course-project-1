@@ -1,12 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {
-  AbstractControl,
-  ControlValueAccessor,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validator
-} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
 
 @Component({
   selector: 'app-password',
@@ -17,33 +10,25 @@ import {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: PasswordComponent
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: PasswordComponent
     }
   ]
 })
-export class PasswordComponent implements ControlValueAccessor, Validator {
+
+export class PasswordComponent implements ControlValueAccessor {
   @Input() label = 'Password';
+  @Input() errors: ValidationErrors | null = null;
+
   showPass = false;
   password = '';
-  passwordFormControl!: AbstractControl;
 
-  onChange: any = (password: string) => {
-  }
-  onTouch: any = (password: string) => {
-  }
+  onChange(password: string): any {
+  };
 
-  onPasswordChange(event: string) {
-    this.password = event;
-    this.onChange(event);
-    this.onTouch(event);
-  }
+  onTouch(): any {
+  };
 
   writeValue(value: any) {
-    this.password = value
+    this.password = value;
   }
 
   registerOnChange(fn: any) {
@@ -56,10 +41,5 @@ export class PasswordComponent implements ControlValueAccessor, Validator {
 
   togglePass() {
     this.showPass = !this.showPass;
-  }
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    this.passwordFormControl = control;
-    return null;
   }
 }

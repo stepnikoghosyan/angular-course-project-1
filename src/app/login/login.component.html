@@ -11,10 +11,11 @@
       </div>
     </div>
     <app-password formControlName="password"
-                  [label]="'Password'">
+                  [label]="'Password'"
+                  [errors]="(form.controls['password'].invalid && form.controls['password'].touched) ? form.controls['password'].errors: null">
     </app-password>
     <app-loader *ngIf="isLoading"></app-loader>
-    <button class="btn-primary btn sign-in-button">Sign In</button>
+    <button [disabled]="form.invalid" class="btn-primary btn sign-in-button">Sign In</button>
     <div class="remember-forgot">
       <div class="flex-container">
         <input id="remember" class="checkbox" type="checkbox" formControlName="remember">
