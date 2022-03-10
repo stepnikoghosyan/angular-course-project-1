@@ -1,25 +1,21 @@
-import {Component, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
+import {Component, Input, Optional, Self} from '@angular/core';
+import {ControlValueAccessor, NgControl} from "@angular/forms";
 
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: PasswordComponent
-    }
-  ]
+  styleUrls: ['./password.component.scss']
 })
 
 export class PasswordComponent implements ControlValueAccessor {
   @Input() label = 'Password';
-  @Input() errors: ValidationErrors | null = null;
 
   showPass = false;
   password = '';
+
+  constructor(@Self() @Optional() public control: NgControl) {
+    this.control && (this.control.valueAccessor = this);
+  }
 
   onChange(password: string): any {
   };

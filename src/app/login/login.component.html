@@ -11,8 +11,7 @@
       </div>
     </div>
     <app-password formControlName="password"
-                  [label]="'Password'"
-                  [errors]="(form.controls['password'].invalid && form.controls['password'].touched) ? form.controls['password'].errors: null">
+                  [label]="'Password'">
     </app-password>
     <app-loader *ngIf="isLoading"></app-loader>
     <button [disabled]="form.invalid" class="btn-primary btn sign-in-button">Sign In</button>
