@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Subject, takeUntil } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-verify-account',
@@ -14,8 +15,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   unSubscribe$ = new Subject<void>();
   token = '';
   emailError = false;
-  errMessage!: string;
-  isLoader!: boolean;
+  IsLoading = true;
   email = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private authService: AuthService,
@@ -27,31 +27,29 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getToken();
-    this.emailError = false;
-    this.isLoader = true;
   }
 
   getToken() {
     const token = this.activeRoute.snapshot.paramMap.get('token') as string;
     this.authService.verifyAccount(token)
     .pipe((takeUntil(this.unSubscribe$)))
-    .subscribe(
-      () => {
+    .subscribe({
+      next: () => {
         this.notifyService.showSuccess('Your verification Succeded', 'Succes');
         setTimeout(() => {
           this.router.navigate(['auth/login']);
-          this.isLoader = false;
+          this.IsLoading = false;
         }, 3000);
       },
-      () => {
-        this.notifyService.showError(this.errMessage, 'Error');
-        this.isLoader = false;
+      error: (err: HttpErrorResponse) => {
+        this.notifyService.showError(err.error.message, 'Error');
+        this.IsLoading = false;
       }
+    }
     );
   }
 
   resendActivation() {
-    this.isLoader = true;
     const email = {
       email: this.email.value,
     };
@@ -72,7 +70,6 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   }
 
   showEmail() {
-    this.isLoader = false;
     this.emailError = true;
   }
 

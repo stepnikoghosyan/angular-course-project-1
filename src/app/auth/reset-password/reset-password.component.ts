@@ -11,10 +11,10 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class ResetPasswordComponent implements OnInit {
   showPassword = false;
-  text = 'password';
+  inputType = 'password';
   errMessage!: string;
   isTouched = false;
-  isLoader = false;
+  IsLoading = false;
   unSubscribe$ = new Subject();
   
   resetForm: FormGroup = this.fb.group({
@@ -30,19 +30,19 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPassword() {
     if (this.resetForm.valid) {
-      this.isLoader = true;
+      this.IsLoading = true;
       const token = this.activedRoute.snapshot.paramMap.get('token') as string;
       const resetPass = {
         newPassword: this.resetForm.get('newPassword')?.value,
         token: token,
       }
       this.authService.resetPassword(resetPass).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
-        this.isLoader = false;
+        this.IsLoading = false;
         this.notifyService.showSuccess("Success", "Password is changed");
         this.routes.navigateByUrl('/home');
       },
       (err) => {
-        this.isLoader = false;
+        this.IsLoading = false;
         this.notifyService.showError("Error", err.error.message);
       }
       )
@@ -53,9 +53,9 @@ export class ResetPasswordComponent implements OnInit {
   showHidePass() {
     this.showPassword = !this.showPassword;
     if (this.showPassword) {
-      this.text = 'password';
+      this.inputType = 'password';
     } else {
-      this.text = 'text';
+      this.inputType = 'text';
     }
   }
 

@@ -14,7 +14,7 @@ import { PostsService } from '../services/posts.service';
 export class PostsComponent implements OnInit {
 
   
-  isLoader = true;
+  IsLoading = true;
   posts$!: Observable<PostModel[]>;
 
   constructor(
@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.posts$ = this.postsService.getPosts().pipe(
       finalize(() => {
-        this.isLoader = false;
+        this.IsLoading = false;
       }),
       map(data => data.results),
       catchError((error)=> {

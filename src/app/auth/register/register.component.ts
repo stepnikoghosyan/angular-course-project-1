@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ import { NotificationService } from 'src/app/services/notification.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnDestroy {
   unSubscribe$ = new Subject<void>();
 
   form: FormGroup = this.fb.group({
@@ -23,9 +24,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   message = '';
   successMsg = '';
-  isLoader = false;
+  IsLoading = false;
   showPassword = true;
-  text = 'password';
+  inputType = 'password';
 
   constructor(
     private authService: AuthService,
@@ -34,38 +35,33 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private notifyService: NotificationService
   ) { }
 
-  ngOnInit(): void {
-    this.message = '';
-    this.successMsg = '';
-  }
 
   showHidePass() {
     this.showPassword = !this.showPassword;
     if (this.showPassword) {
-      this.text = 'password';
+      this.inputType = 'password';
     } else {
-      this.text = 'text';
+      this.inputType = 'text';
     }
   }
 
   register() {
     if (this.form.valid) {
-      this.isLoader = true;
+      this.IsLoading = true;
       const register = new RegisterDto(this.form.value);
       this.authService.register(register)
         .pipe(takeUntil(this.unSubscribe$))
         .subscribe(() => {
-          this.isLoader = false;
+          this.IsLoading = false;
           this.notifyService.showSuccess('Please check your email for verification', 'Success');
           this.router.navigate(['auth/login']);
         },
-          ((err: any) => {
-            this.isLoader = false;
+          ((err: HttpErrorResponse) => {
+            this.IsLoading = false;
             this.message = err.error.message;
           }));
     } else {
       this.message = 'Please fill all fields';
-      return
     }
 
   }

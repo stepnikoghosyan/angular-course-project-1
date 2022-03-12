@@ -14,17 +14,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   unSubscribe$  = new Subject<void>();
   showPassword = true;
-  text = 'password';
+  inutType = 'password';
 
   form: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.pattern( /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', Validators.required],
     checkBox:[false]
   })
 
 
   errorMsg = '';
-  isLoader!: boolean;
+  IsLoading = false;
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -34,20 +34,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.showPassword = true;
     this.errorMsg = '';
-    this.rememberTocken();
+    this.rememberToken();
   }
 
   showHidePass() {
     this.showPassword = !this.showPassword;
     if (this.showPassword) {
-      this.text = 'password';
+      this.inutType = 'password';
     } else {
-      this.text = 'text';
+      this.inutType = 'text';
     }
   }
 
   
-  rememberTocken(){
+  rememberToken(){
      this.form.get('checkBox')?.valueChanges.pipe(takeUntil(this.unSubscribe$))
      .subscribe((result:boolean)=>{
        this.authService.isRemember = result
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     if(this.form.valid) {
-      this.isLoader = true;
+      this.IsLoading = true;
       const login = new LoginDto(this.form.value);
       this.authService.login(login).pipe(takeUntil(this.unSubscribe$))
       .subscribe((res) => {
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
         , (error: any) => {
           this.errorMsg = error.error.message;
-          this.isLoader = false;
+          this.IsLoading = false;
         });
     }
   }

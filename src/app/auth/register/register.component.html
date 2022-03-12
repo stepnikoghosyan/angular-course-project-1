@@ -1,4 +1,4 @@
- <div class="loader" *ngIf="isLoader">
+ <div class="loader" *ngIf="IsLoading">
   <div class="lds-ring">
     <div></div>
     <div></div>
@@ -49,7 +49,7 @@
   </div>
   <div class="form-control">
     <label>Password</label>
-    <input  [type]="text" formControlName="password"/>
+    <input  [type]="inputType" formControlName="password"/>
     <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
     <div class="formErr">
       <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">

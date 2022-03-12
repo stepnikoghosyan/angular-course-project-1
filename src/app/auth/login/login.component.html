@@ -1,4 +1,4 @@
-  <div class="loader" *ngIf="isLoader">
+  <div class="loader" *ngIf="IsLoading">
   <div class="lds-ring">
     <div></div>
     <div></div>
@@ -14,10 +14,10 @@
       <input  type="email" formControlName="email" />
       <div class="formErr">
         <div class="val" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-          <span *ngIf="form.get('email')?.hasError('email')" class="errors">
+          <span *ngIf="form.controls['email'].hasError('email')" class="errors">
           invalid email
           </span>
-          <span *ngIf="form.get('email')?.hasError('required')" class="errors">
+          <span *ngIf="form.controls['email'].hasError('required')" class="errors">
             Required
           </span>
 
@@ -26,18 +26,12 @@
     </div>
     <div class="form-control">
       <label>Password</label>
-      <input  [type]="text" formControlName="password"/>
+      <input  [type]="inutType" formControlName="password"/>
       <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
       <div class="formErr">
-        <div class="val" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
-          <span *ngIf="form.get('password')?.hasError('required')" class="errors">
+        <div class="val" *ngIf="form.controls['password'].invalid && form.get('password')?.touched">
+          <span *ngIf="form.controls['password'].hasError('required')" class="errors">
             Required
-          </span>
-          <span *ngIf="form.get('password')?.hasError('minlength')" class="errors">
-            Required {{
-            form.controls['password'].getError('minlength').requiredLength - 
-            form.controls['password'].getError('minlength').actualLength
-          }} more characters
           </span>
         </div>
       </div>

@@ -11,7 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./forgot-passvord.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  isLoader!: boolean;
+  IsLoading = false;
   isTouched = false;
   errMessage!: string;
   unSubscribe = new Subject();
@@ -23,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
   sendEmail() {
     this.isTouched = true;
     if(this.email.valid) {
-      this.isLoader = true;
+      this.IsLoading = true;
       this.errMessage = '';
       const forgot = {email: this.email.value}
       this.authService.forgotPassword(forgot).pipe(takeUntil(this.unSubscribe)).
@@ -33,7 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
       },
       (err) => {
         this.errMessage = err.error.message;
-        this.isLoader = false;
+        this.IsLoading = false;
       }
       )
   }
