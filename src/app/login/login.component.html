@@ -13,9 +13,9 @@
                     <span class="error-message" *ngIf="loginForm.controls['email'].errors?.['email']">Email must be an email</span>
                 </div>  
             </div>
-            <div class="form-control">
+            <!-- <div class="form-control">
                 <label>Password</label>
-                <input [type]="showEyeIcon? 'password':'text'" name="password" #showPassword formControlName="password">
+                <input [type]="showEyeIcon? 'password':'text'" name="password" formControlName="password">
                 <i class="far fa-eye" *ngIf="showEyeIcon" [ngClass]= "showEyeIcon? 'far fa-eye':'far fa-eye-slash'" (click)="toggleShowPassoword()"></i>
                 <i class="far fa-eye-slash" *ngIf="!showEyeIcon" (click)="toggleShowPassoword()"></i>
                 <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
@@ -24,7 +24,8 @@
                         {{loginForm.controls['password'].getError('minlength').requiredLength}} characters
                     </span>
                 </div>  
-            </div>
+            </div> -->
+            <app-password formControlName= "password"></app-password>
             <div class="errors" *ngFor="let error of errors">
                 <span>{{error}}</span>
             </div>

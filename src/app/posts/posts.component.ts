@@ -9,20 +9,20 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit, OnDestroy {
-    private subscription! :Subscription
+    private subscription? :Subscription
     posts : PostModel[]=[];
     showSpinner = false;
     constructor(private postService:PostsService) { }
 
     ngOnInit(): void {
         this.showSpinner = true;
-      this.subscription=  this.postService.getPosts().pipe(
+        this.subscription=  this.postService.getPosts().pipe(
             finalize(()=>{
-            this.showSpinner = false;
+                this.showSpinner = false;
             })
         ).subscribe({
             next: (data) => {          
-                this.posts = data.results.map((item)=> new PostModel(item));
+                this.posts = data.results;
             }
         })
     }

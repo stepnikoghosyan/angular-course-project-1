@@ -24,6 +24,8 @@ import { AuthInterceptor } from './interceptors/token.interceptor';
 import { PostCardComponent } from './posts/post-card/post-card.component';
 import { CardFooterComponent } from './posts/card-footer/card-footer.component';
 import { UserNamePipe } from './pipes/user-name.pipe';
+import { PasswordComponent } from './password/password.component';
+import { InputErrorsDirective } from './validators/input-errors.directive';
 
 
 
@@ -45,6 +47,8 @@ import { UserNamePipe } from './pipes/user-name.pipe';
     PostCardComponent,
     CardFooterComponent,
     UserNamePipe,
+    PasswordComponent,
+    InputErrorsDirective,
 
   ],
   imports: [

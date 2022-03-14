@@ -26,15 +26,7 @@
                     <span class="error-message" *ngIf="registerForm.controls['email'].errors?.['email']">Email must be an email</span>
                 </div>
             </div>
-            <div class="form-control">
-                <label>Password</label>
-                <input type="password" name="password" formControlName="password">
-                <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched" >
-                    <span class="error-message" class="error-message"*ngIf="registerForm.controls['password'].errors?.['required']">Password is required</span>
-                    <span class="error-message" class="error-message"*ngIf="registerForm.controls['password'].errors?.['minlength']">
-                        Password length must be equal or greater than {{registerForm.controls['password'].getError('minlength').requiredLength}} characters</span>
-                </div>  
-            </div>
+            <app-password formControlName= "password"></app-password>
             <div class="errors" *ngFor="let error of errors">
                 <span>{{error}}</span>
             </div>

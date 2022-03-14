@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize, Subscription } from 'rxjs';
-import { errorResponse } from '../configs/error-response.config';
+import { errorResponse } from '../../utils/error-response.utility';
 import { ForgotPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';

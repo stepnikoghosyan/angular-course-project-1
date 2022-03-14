@@ -6,7 +6,7 @@ import { UserModel } from '../models/user.model';
 })
 export class UserNamePipe implements PipeTransform {
 
-  transform(user: UserModel): string {
-    return   user.firstName + " " + user.lastName
+  transform(user?: UserModel): string {
+    return   user?.firstName + " " + user?.lastName
   }
 }

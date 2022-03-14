@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { errorResponse } from '../configs/error-response.config';
+import { errorResponse } from '../../utils/error-response.utility';
 import { ResetPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';

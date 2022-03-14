@@ -2,7 +2,7 @@
     <div class="userName">
         <i class="far fa-user"></i>
         <span>
-            {{post.user | userName}}
+            {{post?.user | userName}}
         </span>
     </div>
     <div class = "comments">
@@ -12,7 +12,7 @@
         <button>
             <i class="far fa-comment"></i>
         </button>
-        <div class="count">{{post.comments.length}}</div>
+        <div class="count">{{post?.comments?.length}}</div>
     </div>
 </div>
 

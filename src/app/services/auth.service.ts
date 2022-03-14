@@ -47,7 +47,7 @@ export class AuthService {
                 } else {
                     sessionStorage.setItem('auth', item);
                 }
-                this.router.navigateByUrl("/main")
+                this.router.navigateByUrl("/main/home")
             })
         );
       };
@@ -55,10 +55,11 @@ export class AuthService {
     register(registerDto: RegisterDto): Observable<void>{
         return this.httpClient
             .post<void>(`${environment.apiUrl}/auth/register`, registerDto).pipe(
-                map(()=>{
+                tap(()=>{
                     this.notifyService.success("Please check your email", "Succes!!");
                     this.router.navigateByUrl('/login');
                 })
+                // catchError
             );
       };
 

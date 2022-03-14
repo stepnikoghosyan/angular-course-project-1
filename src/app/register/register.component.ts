@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 import { finalize, Subscription } from 'rxjs';
-import { errorResponse } from '../configs/error-response.config';
+import { errorResponse } from '../../utils/error-response.utility';
 
 
 @Component({
