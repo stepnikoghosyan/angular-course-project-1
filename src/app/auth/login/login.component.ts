@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginDto } from 'src/app/models/auth.model';
-import { Router } from '@angular/router';
-import { Subject, takeUntil} from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,31 +12,28 @@ import { Subject, takeUntil} from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  unSubscribe$  = new Subject<void>();
+  unSubscribe$ = new Subject<void>();
   showPassword = true;
   inutType = 'password';
+  errorMsg = '';
+  isLoading = false;
 
   form: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email, Validators.pattern( /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+    email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
     password: ['', Validators.required],
-    checkBox:[false]
+    RememberMe: [false]
   })
 
-
-  errorMsg = '';
-  IsLoading = false;
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router:Router
   ) { }
- 
+
   ngOnInit(): void {
-    this.showPassword = true;
-    this.errorMsg = '';
     this.rememberToken();
   }
 
+  // create component
   showHidePass() {
     this.showPassword = !this.showPassword;
     if (this.showPassword) {
@@ -46,32 +43,27 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  
-  rememberToken(){
-     this.form.get('checkBox')?.valueChanges.pipe(takeUntil(this.unSubscribe$))
-     .subscribe((result:boolean)=>{
-       this.authService.isRemember = result
-     })
+  rememberToken() {
+    this.form.get('RememberMe')?.valueChanges
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe((result: boolean) => {
+        this.authService.isRemember = result
+      })
   }
 
   login() {
-    if(this.form.valid) {
-      this.IsLoading = true;
+    if (this.form.valid) {
+      this.isLoading = true;
       const login = new LoginDto(this.form.value);
       this.authService.login(login).pipe(takeUntil(this.unSubscribe$))
-      .subscribe((res) => {
-        
-        if(this.form.get('checkBox')?.value) {
-          localStorage.setItem('auth', res.accessToken);
-        } else {
-          sessionStorage.setItem('auth', res.accessToken);
-        }
-        this.router.navigate(['/home']);
-      }
-        , (error: any) => {
-          this.errorMsg = error.error.message;
-          this.IsLoading = false;
-        });
+        .subscribe(
+          {
+            error: (error: HttpErrorResponse) => {
+              this.errorMsg = error.error.message;
+              this.isLoading = false;
+            }
+          }
+        );
     }
   }
 

@@ -1,88 +1,71 @@
- <div class="loader" *ngIf="IsLoading">
-  <div class="lds-ring">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
+<app-loading *ngIf="isLoading"></app-loading>
 <div class="main">
   <form [formGroup]="form">
-  <h2>Sign Up</h2>
-  <div class="form-control">
-    <label>First Name</label>
-    <input class="inputName" type="text" formControlName="firstName" />
-    <div class="formErr">
-      <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
-        <span *ngIf="form.get('firstName')?.hasError('required')" class="errors">
-          Required
-        </span>
+    <h2>Sign Up</h2>
+    <div class="form-control">
+      <label class="margin">First Name</label>
+      <input  type="text" formControlName="firstName" />
+      <div class="formErr">
+        <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
+          <span *ngIf="form.controls['firstName'].hasError('required')" class="errors margin">
+            Required
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-control">
-    <label>Last Name</label>
-    <input class="inputName" type="text" formControlName="lastName" />
-    <div class="formErr">
-      <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
-      
-        <span *ngIf="form.get('lastName')?.hasError('required')" class="errors">
-          Required
-        </span>
+    <div class="form-control">
+      <label class="margin">Last Name</label>
+      <input  type="text" formControlName="lastName" />
+      <div class="formErr">
+        <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
+          <span *ngIf="form.controls['lastName'].hasError('required')" class="errors margin">
+            Required
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-control">
-    <label>Email</label>
-    <input class="inputName" type="email" formControlName="email" />
-    <div class="formErr">
-      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-      
-        <span *ngIf="form.get('email')?.hasError('email')" class="errors">
-        Invalid Email
-        </span>
-        <span *ngIf="form.get('email')?.hasError('required')" class="errors">
-          Required
-        </span>
+    <div class="form-control">
+      <label class="margin">Email</label>
+      <input  type="email" formControlName="email" />
+      <div class="formErr">
+        <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+        
+          <span *ngIf="form.controls['email'].hasError('email')" class="errors margin">
+          Invalid Email
+          </span>
+          <span *ngIf="form.controls['email'].hasError('required')" class="errors margin">
+            Required
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-control">
-    <label>Password</label>
-    <input class="inputName" [type]="inputType" formControlName="password"/>
-    <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
-    <div class="formErr">
-      <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
-    
-        <span *ngIf="form.get('password')?.hasError('required')" class="errors">
-          Required
-        </span>
-        <span *ngIf="form.get('password')?.hasError('minlength')" class="errors">
-          Required {{
-            form.controls['password'].getError('minlength').requiredLength - 
-            form.controls['password'].getError('minlength').actualLength
-          }} more characters
-        </span>
+    <div class="form-control">
+      <label class="margin">Password</label>
+      <input  [type]="inputType" formControlName="password"/>
+      <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
+      <div class="formErr">
+        <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+          <span *ngIf="form.controls['password'].hasError('required')" class="errors margin">
+            Required
+          </span>
+          <span *ngIf="form.controls['password'].hasError('minlength')" class="errors margin">
+            Required {{
+              form.controls['password'].getError('minlength').requiredLength - 
+              form.controls['password'].getError('minlength').actualLength
+            }} more characters
+          </span>
+        </div>
       </div>
     </div>
-   
- 
-  </div>
-<div class="action">
- 
-  
-  <button (click)="register()" class="display" >Sign Up</button>
-  <div class="formErr">
-    <p class="errors">{{message}}</p>
-    <p style="color:green;">{{successMsg}}</p>
-  </div>
-
- <div class="sign-in">
-  Already a member? <a routerLink="/auth/login">Sign In</a>
- </div>
-</div>
-
- 
-</form>
-
+    <div class="action">
+      <button (click)="register()" class="display" >Sign Up</button>
+      <div class="formErr">
+        <p class="errors">{{message}}</p>
+        <p style="color:green;">{{successMsg}}</p>
+      </div>
+      <div class="sign-in">
+        Already a member? <a routerLink="/auth/login">Sign In</a>
+      </div>
+    </div>
+  </form>
 </div>

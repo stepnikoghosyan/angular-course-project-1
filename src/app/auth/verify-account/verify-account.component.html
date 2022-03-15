@@ -1,51 +1,37 @@
-<div class="loader" *ngIf="IsLoading">
-  <div class="lds-ring">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
+<app-loading *ngIf="isLoading"></app-loading>
 <div class="main">
-    <form>
+  <div class="form">
     <h2>Verify Account</h2>
     <p>Verifying Your account, please wait... </p>
-
     <div class="send">
-        <button class="verify" (click)="showEmail()">
+      <button class="verify" (click)="showEmail()">
         Re-send activation token
-    </button>
+      </button>
     </div>
-    
-    
-    <div *ngIf="emailError">
-       
-            
-            <div class="form-control"> 
-                <label class="email">E-mail</label>
-           
-            
-            <input class="inputName" type="email" [formControl]="email" />
-            
+  
+    <div *ngIf="emailError">  
+              <div class="form-control"> 
+                <label class="email margin">E-mail</label>
+                <input  type="email" [formControl]="email" />
               
-             <div *ngIf="email?.invalid && email?.touched">
-              <span *ngIf="email?.hasError('email')" class="errors">
-              invalid Email
-              </span>
-              <span *ngIf="email?.hasError('required')" class="errors">
-                Required
-              </span>
-        
-            </div> 
-             </div>
-        <div class="send">
-            <button class="reSend" (click)="resendActivation()">Send email</button>
-        </div>
+                <div *ngIf="email?.invalid && email?.touched">
+                  <span *ngIf="email?.hasError('email')" class="errors margin">
+                  invalid Email
+                  </span>
+                  <span *ngIf="email?.hasError('required')" class="errors margin">
+                    Required
+                  </span>
+                </div> 
+              </div>
+          <div class="send">
+              <button class="reSend" (click)="resendActivation()">Send email</button>
+          </div>
+  
     </div>
-    <div class="action">
-        <button class="sign" (click)="signIn()">Sign In</button>
-        <button class="sign signUp" (click)="signUp()">Sign Up</button>
-    </div>
-</form>
 
+    <div class="action">
+      <a class="sign" routerLink = '/auth/login'>Sign In</a>
+      <a class="sign signUp" routerLink = '/auth/register'>Sign Up</a>
+    </div>
+  </div>
 </div>

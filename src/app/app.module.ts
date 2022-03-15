@@ -12,8 +12,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +22,7 @@ import { CardFooterComponent } from './posts/card-footer/card-footer.component';
 import { TokenInterceptor } from './token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NotFoundComponent,
     CardComponent,
     CardFooterComponent,
+    LoadingComponent,
     
   ],
   imports: [

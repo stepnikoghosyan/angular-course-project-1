@@ -11,8 +11,6 @@ import { LoginComponent } from '../auth/login/login.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AuthPublicGuard } from '../guards/auth-public.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
-import { CardComponent } from '../posts/card/card.component';
-import { CardFooterComponent } from '../posts/card-footer/card-footer.component';
 
 const routes: Routes = [
   {

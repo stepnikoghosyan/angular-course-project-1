@@ -24,7 +24,9 @@ i {
 .sign {
     background-color: rgb(42, 172, 189);
     color: rgb(53, 50, 50);
-    padding: 25px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
     align-items: center;
 }
 
@@ -33,3 +35,10 @@ i {
     margin-left: 60px;
 }
 
+.form{
+    padding: 50px 20px;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

@@ -1,11 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { RegisterDto } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -24,15 +22,13 @@ export class RegisterComponent implements OnDestroy {
 
   message = '';
   successMsg = '';
-  IsLoading = false;
+  isLoading = false;
   showPassword = true;
   inputType = 'password';
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router,
-    private notifyService: NotificationService
   ) { }
 
 
@@ -47,19 +43,18 @@ export class RegisterComponent implements OnDestroy {
 
   register() {
     if (this.form.valid) {
-      this.IsLoading = true;
+      this.isLoading = true;
       const register = new RegisterDto(this.form.value);
-      this.authService.register(register)
+      this.authService.register(register, this.isLoading)
         .pipe(takeUntil(this.unSubscribe$))
-        .subscribe(() => {
-          this.IsLoading = false;
-          this.notifyService.showSuccess('Please check your email for verification', 'Success');
-          this.router.navigate(['auth/login']);
-        },
-          ((err: HttpErrorResponse) => {
-            this.IsLoading = false;
-            this.message = err.error.message;
-          }));
+        .subscribe(
+          {
+            error: ((err: HttpErrorResponse) => {
+              this.isLoading = false;
+              this.message = err.error.message;
+            })
+          }
+        );
     } else {
       this.message = 'Please fill all fields';
     }
@@ -69,6 +64,5 @@ export class RegisterComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.unSubscribe$.next();
     this.unSubscribe$.complete();
-
   }
 }

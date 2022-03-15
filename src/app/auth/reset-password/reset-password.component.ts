@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { ActivatedRoute} from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { ResetDto } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 @Component({
@@ -9,44 +11,45 @@ import { NotificationService } from 'src/app/services/notification.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent {
   showPassword = false;
   inputType = 'password';
-  errMessage!: string;
+  errMessage = '';
   isTouched = false;
-  IsLoading = false;
+  isLoading = false;
   unSubscribe$ = new Subject();
-  
+
   resetForm: FormGroup = this.fb.group({
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
   })
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private activedRoute: ActivatedRoute,
     private authService: AuthService,
-    private routes: Router,
     private notifyService: NotificationService
   ) { }
 
   resetPassword() {
     if (this.resetForm.valid) {
-      this.IsLoading = true;
+      this.isLoading = true;
       const token = this.activedRoute.snapshot.paramMap.get('token') as string;
-      const resetPass = {
+
+      const resetPass:ResetDto = {
         newPassword: this.resetForm.get('newPassword')?.value,
         token: token,
       }
-      this.authService.resetPassword(resetPass).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
-        this.IsLoading = false;
-        this.notifyService.showSuccess("Success", "Password is changed");
-        this.routes.navigateByUrl('/home');
-      },
-      (err) => {
-        this.IsLoading = false;
-        this.notifyService.showError("Error", err.error.message);
-      }
-      )
 
+      this.authService.resetPassword(resetPass, this.isLoading)
+        .pipe(takeUntil(this.unSubscribe$))
+        .subscribe(
+          {
+            error: (err: HttpErrorResponse) => {
+              this.isLoading = false;
+              this.notifyService.showError("Error", err.error.message);
+            }
+          }
+        )
     }
   }
 
@@ -58,9 +61,4 @@ export class ResetPasswordComponent implements OnInit {
       this.inputType = 'text';
     }
   }
-
-  ngOnInit(): void {
-    this.showPassword = true;
-  }
-
 }
