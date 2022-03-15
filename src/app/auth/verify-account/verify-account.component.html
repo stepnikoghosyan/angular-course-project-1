@@ -15,10 +15,10 @@
                 <input  type="email" [formControl]="email" />
               
                 <div *ngIf="email?.invalid && email?.touched">
-                  <span *ngIf="email?.hasError('email')" class="errors margin">
+                  <span *ngIf="email.hasError('email')" class="errors margin">
                   invalid Email
                   </span>
-                  <span *ngIf="email?.hasError('required')" class="errors margin">
+                  <span *ngIf="email.hasError('required')" class="errors margin">
                     Required
                   </span>
                 </div> 

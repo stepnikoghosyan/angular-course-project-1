@@ -32,16 +32,9 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   getToken() {
     const token = this.activeRoute.snapshot.paramMap.get('token') as string;
-    this.authService.verifyAccount(token)
+    this.authService.verifyAccount(token, this.isLoading)
       .pipe((takeUntil(this.unSubscribe$)))
-      .subscribe({
-        next: () => {
-          this.notifyService.showSuccess('Your verification Succeded', 'Succes');
-          setTimeout(() => {
-            this.router.navigate(['auth/login']);
-            this.isLoading = false;
-          }, 3000);
-        },
+      .subscribe({  
         error: (err: HttpErrorResponse) => {
           this.notifyService.showError(err.error.message, 'Error');
           this.isLoading = false;
@@ -51,7 +44,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   }
 
   resendActivation() {
-    const email = new ForgotDto(this.email.value);
+    const email = {email: this.email.value};
     this.authService.resendActivation(email)
       .pipe(takeUntil(this.unSubscribe$))
       .subscribe({

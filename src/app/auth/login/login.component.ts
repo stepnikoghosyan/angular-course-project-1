@@ -54,8 +54,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     if (this.form.valid) {
       this.isLoading = true;
-      const login = new LoginDto(this.form.value);
-      this.authService.login(login).pipe(takeUntil(this.unSubscribe$))
+      const loginDto = new LoginDto(this.form.value);
+      this.authService.login(loginDto).pipe(takeUntil(this.unSubscribe$))
         .subscribe(
           {
             error: (error: HttpErrorResponse) => {

@@ -1,12 +1,5 @@
-<div class="loader" *ngIf="IsLoading">
-  <div class="lds-ring">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
 <app-header></app-header>
+<app-loading *ngIf="isLoading"></app-loading>
 <div>
   <div class="title">
     <h1>Posts</h1>

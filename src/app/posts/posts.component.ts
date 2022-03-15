@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { catchError, finalize, map, Observable, of } from 'rxjs';
 import { PostModel } from '../models/post.model';
@@ -14,7 +15,7 @@ import { PostsService } from '../services/posts.service';
 export class PostsComponent implements OnInit {
 
   
-  IsLoading = true;
+  isLoading = true;
   posts$!: Observable<PostModel[]>;
 
   constructor(
@@ -25,10 +26,10 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.posts$ = this.postsService.getPosts().pipe(
       finalize(() => {
-        this.IsLoading = false;
+        this.isLoading = false;
       }),
       map(data => data.results),
-      catchError((error)=> {
+      catchError((error: HttpErrorResponse)=> {
          this.notifyService.showError(error.error.message, 'Error');
          return of([]);
       }))

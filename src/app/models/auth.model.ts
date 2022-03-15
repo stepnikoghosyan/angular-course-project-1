@@ -41,7 +41,7 @@ export class ResetDto {
     token: string;
 
     constructor(data: any) {
-        this.newPassword = data.password;
+        this.newPassword = data.newPassword;
         this.token = data.token;
     }
 }

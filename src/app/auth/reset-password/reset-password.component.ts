@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl, MinLengthValidator } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ResetDto } from 'src/app/models/auth.model';
@@ -19,8 +19,11 @@ export class ResetPasswordComponent {
   isLoading = false;
   unSubscribe$ = new Subject();
 
-  resetForm: FormGroup = this.fb.group({
+  // resetForm = new FormControl('', [Validators.required, Validators.minLength(6)]);
+
+  form: FormGroup = this.fb.group({
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
+    token: this.activedRoute.snapshot.paramMap.get('token') as string,
   })
 
   constructor(
@@ -31,16 +34,10 @@ export class ResetPasswordComponent {
   ) { }
 
   resetPassword() {
-    if (this.resetForm.valid) {
+    if (this.form.valid) {
       this.isLoading = true;
-      const token = this.activedRoute.snapshot.paramMap.get('token') as string;
-
-      const resetPass:ResetDto = {
-        newPassword: this.resetForm.get('newPassword')?.value,
-        token: token,
-      }
-
-      this.authService.resetPassword(resetPass, this.isLoading)
+      const resetDto: ResetDto = new ResetDto(this.form.value);
+      this.authService.resetPassword(resetDto, this.isLoading)
         .pipe(takeUntil(this.unSubscribe$))
         .subscribe(
           {

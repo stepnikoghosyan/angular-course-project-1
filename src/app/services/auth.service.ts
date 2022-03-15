@@ -43,8 +43,15 @@ export class AuthService {
       }))
   }
 
-  verifyAccount(activationToken: string) {
-    return this.httpClient.get(`${this.baseUrl}auth/verify-account?activationToken=${activationToken}`);
+  verifyAccount(activationToken: string, isLoading: boolean) {
+    return this.httpClient.get(`${this.baseUrl}auth/verify-account?activationToken=${activationToken}`)
+    .pipe(tap(()=> {
+      this.notifyService.showSuccess('Your verification Succeded', 'Succes');
+      isLoading = false;
+      setTimeout(() => {
+        this.router.navigate(['auth/login']);
+      }, 3000);
+    }))
   }
 
   resendActivation(body: ForgotDto) {
@@ -52,11 +59,17 @@ export class AuthService {
     .pipe(tap(()=>{
       this.notifyService.showSuccess('Your verification Succeded', 'Succes');
       this.router.navigate(['auth/login']);
+      
     }))
   }
 
   forgotPassword(body: ForgotDto) {
-    return this.httpClient.post(`${this.baseUrl}auth/forgot-password`, body);
+    return this.httpClient.post(`${this.baseUrl}auth/forgot-password`, body)
+    .pipe(tap(() => {
+      this.notifyService.showSuccess('Your password was successfully reseted', 'success');
+      this.router.navigate(['/home']);
+    }))
+
   }
   resetPassword(activationToken: ResetDto, isLoading:boolean) {
     return this.httpClient.post(`${this.baseUrl}auth/reset-password?activationToken=${activationToken.token}`, activationToken)
