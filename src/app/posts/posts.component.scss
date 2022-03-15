@@ -7,5 +7,6 @@
 .cards{
     display: grid;
     grid-template-columns:repeat(3,31%);
-    grid-gap:3%;
+    grid-row-gap:7%;
+    grid-column-gap: 2%;
 }

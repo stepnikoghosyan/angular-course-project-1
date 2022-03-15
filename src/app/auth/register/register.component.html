@@ -11,7 +11,7 @@
   <h2>Sign Up</h2>
   <div class="form-control">
     <label>First Name</label>
-    <input  type="text" formControlName="firstName" />
+    <input class="inputName" type="text" formControlName="firstName" />
     <div class="formErr">
       <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
         <span *ngIf="form.get('firstName')?.hasError('required')" class="errors">
@@ -22,7 +22,7 @@
   </div>
   <div class="form-control">
     <label>Last Name</label>
-    <input  type="text" formControlName="lastName" />
+    <input class="inputName" type="text" formControlName="lastName" />
     <div class="formErr">
       <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
       
@@ -34,7 +34,7 @@
   </div>
   <div class="form-control">
     <label>Email</label>
-    <input  type="email" formControlName="email" />
+    <input class="inputName" type="email" formControlName="email" />
     <div class="formErr">
       <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
       
@@ -49,7 +49,7 @@
   </div>
   <div class="form-control">
     <label>Password</label>
-    <input  [type]="inputType" formControlName="password"/>
+    <input class="inputName" [type]="inputType" formControlName="password"/>
     <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
     <div class="formErr">
       <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
