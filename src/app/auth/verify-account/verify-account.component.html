@@ -11,14 +11,14 @@
   
     <div *ngIf="emailError">  
               <div class="form-control"> 
-                <label class="email margin">E-mail</label>
-                <input  type="email" [formControl]="email" />
+                <label class="email">E-mail</label>
+                <input class="inputMargin" type="email" [formControl]="email" />
               
                 <div *ngIf="email?.invalid && email?.touched">
-                  <span *ngIf="email.hasError('email')" class="errors margin">
+                  <span *ngIf="email.hasError('email')" class="errors">
                   invalid Email
                   </span>
-                  <span *ngIf="email.hasError('required')" class="errors margin">
+                  <span *ngIf="email.hasError('required')" class="errors">
                     Required
                   </span>
                 </div> 

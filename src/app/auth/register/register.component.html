@@ -3,52 +3,53 @@
   <form [formGroup]="form">
     <h2>Sign Up</h2>
     <div class="form-control">
-      <label class="margin">First Name</label>
-      <input  type="text" formControlName="firstName" />
+      <label >First Name</label>
+      <input class="inputMargin" type="text" formControlName="firstName" />
       <div class="formErr">
         <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
-          <span *ngIf="form.controls['firstName'].hasError('required')" class="errors margin">
+          <span *ngIf="form.controls['firstName'].hasError('required')" class="errors">
             Required
           </span>
         </div>
       </div>
     </div>
     <div class="form-control">
-      <label class="margin">Last Name</label>
-      <input  type="text" formControlName="lastName" />
+      <label>Last Name</label>
+      <input class="inputMargin" type="text" formControlName="lastName" />
       <div class="formErr">
         <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
-          <span *ngIf="form.controls['lastName'].hasError('required')" class="errors margin">
+          <span *ngIf="form.controls['lastName'].hasError('required')" class="errors">
             Required
           </span>
         </div>
+
       </div>
     </div>
     <div class="form-control">
-      <label class="margin">Email</label>
-      <input  type="email" formControlName="email" />
+      <label >Email</label>
+      <input class="inputMargin" type="email" formControlName="email" />
       <div class="formErr">
         <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
         
-          <span *ngIf="form.controls['email'].hasError('email')" class="errors margin">
+          <span *ngIf="form.controls['email'].hasError('email')" class="errors">
           Invalid Email
           </span>
-          <span *ngIf="form.controls['email'].hasError('required')" class="errors margin">
+          <span *ngIf="form.controls['email'].hasError('required')" class="errors">
             Required
           </span>
         </div>
       </div>
     </div>
     <div class="form-control">
-      <label class="margin">Password</label>
-      <input  [type]="inputType" formControlName="password"/>
+      <label >Password</label>
+      <input class="inputMargin" [type]="inputType" formControlName="password"/>
       <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
       <div class="formErr">
         <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
-          <span *ngIf="form.controls['password'].hasError('required')" class="errors margin">
+          <span *ngIf="form.controls['password'].hasError('required')" class="errors">
             Required
           </span>
-          <span *ngIf="form.controls['password'].hasError('minlength')" class="errors margin">
+          <span *ngIf="form.controls['password'].hasError('minlength')" class="errors">
             Required {{
               form.controls['password'].getError('minlength').requiredLength - 
               form.controls['password'].getError('minlength').actualLength

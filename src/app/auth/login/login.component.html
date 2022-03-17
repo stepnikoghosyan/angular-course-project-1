@@ -3,8 +3,8 @@
   <form class="form" [formGroup]="form">
     <h2>Sign In</h2>
     <div class="form-control">
-      <label class="margin">Email</label>
-      <input  type="email" formControlName="email" />
+      <label >Email</label>
+      <input class="inputMargin" type="email" formControlName="email" />
       <div class="formErr">
         <div class="val" *ngIf = 'form.controls["email"].invalid && form.controls["email"].touched'>
           <span *ngIf="form.controls['email'].hasError('email')" class="errors margin">
@@ -18,8 +18,8 @@
      </div>
     </div>
     <div class="form-control">
-      <label class="margin">Password</label>
-      <input  [type]="inutType" formControlName="password"/>
+      <label >Password</label>
+      <input class="inputMargin" [type]="inutType" formControlName="password"/>
       <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
       <div class="formErr">
         <div class="val" *ngIf="form.controls['password'].invalid && form.controls['password'].touched">

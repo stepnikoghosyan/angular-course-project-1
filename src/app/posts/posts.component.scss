@@ -8,4 +8,6 @@
     grid-template-columns:repeat(3,31%);
     grid-row-gap:7%;
     grid-column-gap: 2%;
+    white-space: nowrap;
+    // text-overflow: ellipsis;
 }
