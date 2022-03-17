@@ -7,10 +7,10 @@
       <input class="inputMargin" type="email" formControlName="email" />
       <div class="formErr">
         <div class="val" *ngIf = 'form.controls["email"].invalid && form.controls["email"].touched'>
-          <span *ngIf="form.controls['email'].hasError('email')" class="errors margin">
+          <span *ngIf="form.controls['email'].hasError('email')" class="errors">
           invalid email
           </span>
-          <span *ngIf="form.controls['email'].hasError('required')" class="errors margin">
+          <span *ngIf="form.controls['email'].hasError('required')" class="errors">
             Required
           </span>
 
@@ -23,7 +23,7 @@
       <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
       <div class="formErr">
         <div class="val" *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
-          <span *ngIf="form.controls['password'].hasError('required')" class="errors margin">
+          <span *ngIf="form.controls['password'].hasError('required')" class="errors">
             Required
           </span>
         </div>
@@ -32,9 +32,6 @@
 
     <div class="action">
       <button (click)="login()" class="display">Sign In</button>
-    </div>
-    <div class="val err">
-        <span class="errors margin">{{errorMsg}}</span>
     </div>
     <div class="forgot">
       <label> 

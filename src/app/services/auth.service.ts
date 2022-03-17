@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { LoginDto, RegisterDto, ForgotDto, ResetDto, LoginResponse } from '../models/auth.model';
 import { environment } from '../../environments/environment'
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
 
@@ -30,24 +30,27 @@ export class AuthService {
           sessionStorage.setItem('auth', res.accessToken)
         }
         this.router.navigate(['/home']);
+      },
+      catchError((error: HttpErrorResponse)=> {
+        this.notifyService.showError(error.error.message, 'Error');
+        return of ([])
       }))
+      )
   }
 
 
-  register(body: RegisterDto, isLoading: boolean) {
+  register(body: RegisterDto) {
     return this.httpClient.post(`${this.baseUrl}auth/register`, body)
       .pipe(tap(() => {
-        isLoading = false;
         this.notifyService.showSuccess('Please check your email for verification', 'Success');
         this.router.navigate(['auth/login']);
       }))
   }
 
-  verifyAccount(activationToken: string, isLoading: boolean) {
+  verifyAccount(activationToken: string, ) {
     return this.httpClient.get(`${this.baseUrl}auth/verify-account?activationToken=${activationToken}`)
     .pipe(tap(()=> {
       this.notifyService.showSuccess('Your verification Succeded', 'Succes');
-      isLoading = false;
       setTimeout(() => {
         this.router.navigate(['auth/login']);
       }, 3000);
@@ -68,13 +71,16 @@ export class AuthService {
     .pipe(tap(() => {
       this.notifyService.showSuccess('Your password was successfully reseted', 'success');
       this.router.navigate(['/home']);
-    }))
-
+    }),
+    catchError((error: HttpErrorResponse)=> {
+      this.notifyService.showError(error.error.message, 'Error');
+      return of ([]);
+    })
+    );
   }
-  resetPassword(activationToken: ResetDto, isLoading:boolean) {
+  resetPassword(activationToken: ResetDto ) {
     return this.httpClient.post(`${this.baseUrl}auth/reset-password?activationToken=${activationToken.token}`, activationToken)
     .pipe(tap(()=>{
-      isLoading = false;
       this.notifyService.showSuccess("Success", "Password is changed");
       this.router.navigateByUrl('/home');
     }))

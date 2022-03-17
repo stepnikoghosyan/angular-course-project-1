@@ -32,7 +32,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   getToken() {
     const token = this.activeRoute.snapshot.paramMap.get('token') as string;
-    this.authService.verifyAccount(token, this.isLoading)
+    this.authService.verifyAccount(token)
       .pipe((takeUntil(this.unSubscribe$)))
       .subscribe({  
         error: (err: HttpErrorResponse) => {

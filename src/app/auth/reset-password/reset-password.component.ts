@@ -37,7 +37,7 @@ export class ResetPasswordComponent {
     if (this.form.valid) {
       this.isLoading = true;
       const resetDto: ResetDto = new ResetDto(this.form.value);
-      this.authService.resetPassword(resetDto, this.isLoading)
+      this.authService.resetPassword(resetDto)
         .pipe(takeUntil(this.unSubscribe$))
         .subscribe(
           {

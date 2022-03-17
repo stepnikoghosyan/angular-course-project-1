@@ -28,15 +28,9 @@ export class ForgotPasswordComponent {
       this.isLoading = true;
       this.errMessage = '';
       const email = {email: this.email.value};
-      console.log(email);
       this.authService.forgotPassword(email).pipe(takeUntil(this.unSubscribe)).
         subscribe(
-          {
-            error: (err:HttpErrorResponse) => {
-              this.errMessage = err.error.message;
-              this.isLoading = false;
-            }
-          }
+          () => this.isLoading = false
         )
     }
   }

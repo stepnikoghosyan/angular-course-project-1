@@ -45,7 +45,7 @@ export class RegisterComponent implements OnDestroy {
     if (this.form.valid) {
       this.isLoading = true;
       const registerDto = new RegisterDto(this.form.value);
-      this.authService.register(registerDto, this.isLoading)
+      this.authService.register(registerDto)
         .pipe(takeUntil(this.unSubscribe$))
         .subscribe(
           {
