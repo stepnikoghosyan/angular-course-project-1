@@ -23,6 +23,8 @@ import { TokenInterceptor } from './token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingComponent } from './loading/loading.component';
+import { DotsPipe } from './dots.pipe';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { LoadingComponent } from './loading/loading.component';
     CardComponent,
     CardFooterComponent,
     LoadingComponent,
+    DotsPipe,
     
   ],
   imports: [
