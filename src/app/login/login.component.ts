@@ -14,15 +14,15 @@ import { errorResponse } from '../../utils/error-response.utility';
 export class LoginComponent implements OnInit, OnDestroy{
     private subscription! :Subscription
     showSpinner = false;
+    showEyeIcon = true;
     errors:string[] = [];
-    // showEyeIcon = true;
 
     @ViewChild("showPassword") showPassword!: ElementRef<HTMLInputElement>;
     
     loginForm: FormGroup = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['',[Validators.required, Validators.minLength(6)]],
-        remember:['']
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        remember: ['']
     });
 
     constructor( private formBuilder: FormBuilder,
@@ -30,16 +30,20 @@ export class LoginComponent implements OnInit, OnDestroy{
                 ) {}
 
     ngOnInit(): void {
-        this.loginForm.controls['password'].disable();
+        console.log("loginForm init", this.loginForm.value);
     }
 
     loginFormSubmit(){
-        this.showSpinner=true
+        console.log("submit lofinForm", this.loginForm.value);
+        this.showSpinner = true;
+        console.log("is form valid?", this.loginForm.valid);
         if(this.loginForm.valid){
             const dto = new LoginDto(this.loginForm.value);
             this.errors = [];
             this.subscription = this.authService.login(dto, this.loginForm.controls['remember'].value).pipe(
-                finalize(()=>{
+                finalize(() => {
+                    console.log("lofinForm", this.loginForm.value);
+                    
                     this.showSpinner = false;
                 })
             )
@@ -66,4 +70,8 @@ export class LoginComponent implements OnInit, OnDestroy{
             this.subscription.unsubscribe()
         }
     }
+
+    toggleShowPassoword(){
+        this.showEyeIcon = !this.showEyeIcon;
+    };
 }

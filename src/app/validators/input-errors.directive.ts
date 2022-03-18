@@ -8,7 +8,6 @@ export function errors(): ValidatorFn{
     //     control.value.minLength == 6? null: {wrondPasswordLength: control.value.minLength}
 }
 
-
 @Directive({
   selector: '[inputErrors]',
   providers: [{

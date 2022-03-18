@@ -13,7 +13,7 @@
                     <span class="error-message" *ngIf="loginForm.controls['email'].errors?.['email']">Email must be an email</span>
                 </div>  
             </div>
-            <!-- <div class="form-control">
+            <div class="form-control">
                 <label>Password</label>
                 <input [type]="showEyeIcon? 'password':'text'" name="password" formControlName="password">
                 <i class="far fa-eye" *ngIf="showEyeIcon" [ngClass]= "showEyeIcon? 'far fa-eye':'far fa-eye-slash'" (click)="toggleShowPassoword()"></i>
@@ -24,13 +24,13 @@
                         {{loginForm.controls['password'].getError('minlength').requiredLength}} characters
                     </span>
                 </div>  
-            </div> -->
-            <app-password formControlName= "password"></app-password>
+            </div>
+            <!-- <app-password formControlName = "password" name="password"></app-password> -->
             <div class="errors" *ngFor="let error of errors">
                 <span>{{error}}</span>
             </div>
             <div class="buttons">
-                <button class="reset-button" type="submit" [disabled]="!loginForm.valid">Sign In</button>
+                <button class="reset-button" type="submit" [disabled]="loginForm.invalid">Sign In</button>
                 <mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
                 <div class="remember-block">
                     <div class="remember-block__content">
