@@ -6,7 +6,7 @@ export class PostModel {
     id: number;
     title: string;
     body: string;
-    imageUrl: string;
+    imageUrl: string | null;
     user: UserModel
     comments: CommentModel[];
 
@@ -17,7 +17,6 @@ export class PostModel {
         this.imageUrl = data.imageUrl;
         this.user = data.user       
         this. comments = data.comments;
-
     }
 
 }

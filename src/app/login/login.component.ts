@@ -3,7 +3,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { LoginDto } from '../models/auth.model';
-import { finalize, Subscription } from 'rxjs';
+import { finalize, Subject, Subscription } from 'rxjs';
 import { errorResponse } from '../../utils/error-response.utility';
 
 @Component({
@@ -11,8 +11,8 @@ import { errorResponse } from '../../utils/error-response.utility';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy{
-    private subscription! :Subscription
+export class LoginComponent implements  OnDestroy{
+    private subscription$ = new Subject<void>()
     showSpinner = false;
     showEyeIcon = true;
     errors:string[] = [];
@@ -29,21 +29,15 @@ export class LoginComponent implements OnInit, OnDestroy{
                  private authService: AuthService,
                 ) {}
 
-    ngOnInit(): void {
-        console.log("loginForm init", this.loginForm.value);
-    }
 
     loginFormSubmit(){
-        console.log("submit lofinForm", this.loginForm.value);
         this.showSpinner = true;
-        console.log("is form valid?", this.loginForm.valid);
         if(this.loginForm.valid){
             const dto = new LoginDto(this.loginForm.value);
             this.errors = [];
-            this.subscription = this.authService.login(dto, this.loginForm.controls['remember'].value).pipe(
-                finalize(() => {
-                    console.log("lofinForm", this.loginForm.value);
-                    
+            this.authService.login(dto, this.loginForm.controls['remember'].value)
+            .pipe(
+                finalize(() => {        
                     this.showSpinner = false;
                 })
             )
@@ -66,9 +60,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     };
 
     ngOnDestroy(): void {
-        if(this.subscription){
-            this.subscription.unsubscribe()
-        }
+     this.subscription$.next()
+     this.subscription$.complete()
     }
 
     toggleShowPassoword(){

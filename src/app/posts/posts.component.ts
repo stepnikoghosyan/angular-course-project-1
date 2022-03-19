@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { finalize, Subscription } from 'rxjs';
+import { catchError, finalize, map, Observable, Subscription, tap } from 'rxjs';
 import { PostModel } from '../models/post.model';
 import { PostsService } from '../services/posts.service';
 
@@ -8,29 +8,18 @@ import { PostsService } from '../services/posts.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit, OnDestroy {
-    private subscription? :Subscription
-    posts : PostModel[]=[];
+export class PostsComponent implements OnInit {
+    posts$? :Observable< PostModel[]>
     showSpinner = false;
     constructor(private postService:PostsService) { }
 
     ngOnInit(): void {
         this.showSpinner = true;
-        this.subscription=  this.postService.getPosts().pipe(
+        this.posts$ =  this.postService.getPosts().pipe(
             finalize(()=>{
                 this.showSpinner = false;
-            })
-        ).subscribe({
-            next: (data) => {          
-                this.posts = data.results;
-                console.log("POSTS", data.results );
-            }
-        })
-    }
-
-    ngOnDestroy(): void {
-        if(this.subscription){
-            this.subscription.unsubscribe()
-        }
+            }),
+            map(data=>data.results),
+        )
     }
 }

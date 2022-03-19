@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize, Subscription } from 'rxjs';
+import { finalize, Subject, Subscription } from 'rxjs';
 import { errorResponse } from '../../utils/error-response.utility';
 import { ForgotPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
@@ -13,7 +13,7 @@ import { NotificationService } from '../services/notification.service';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit, OnDestroy {
-    private subscription! :Subscription
+    private subscription$ = new Subject<void>() 
     showSpinner = false;
     errors:string[] = [];
     forgotPasForm: FormGroup = this.formBuilder.group({
@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         this.showSpinner = true;
         if(this.forgotPasForm.valid){
             const dto = new ForgotPasswordDto(this.forgotPasForm.value);
-            this.subscription =this.authService.forgotPassword(dto).pipe(
+            this.authService.forgotPassword(dto).pipe(
                 finalize(()=> this.showSpinner = false
                 )
             )
@@ -54,8 +54,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         } 
     }
     ngOnDestroy(): void {
-        if(this.subscription){
-            this.subscription.unsubscribe()
-        }
+      this.subscription$.next()
+      this.subscription$.complete()
     }
 }
