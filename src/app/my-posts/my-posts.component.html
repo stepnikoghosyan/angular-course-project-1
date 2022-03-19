@@ -1,0 +1,7 @@
+<div class="container">
+  <h2 class="text-center">My Posts</h2>
+  <div class="row">
+    <app-post-card class="column" *ngFor="let post of myPosts$ | async" [post]="post"></app-post-card>
+  </div>
+</div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

@@ -12,14 +12,12 @@ import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {PostsComponent} from './posts/posts.component';
-import {PostCardComponent} from './posts/post-card/post-card.component';
-import {PostCardFooterComponent} from './posts/post-card-footer/post-card-footer.component';
 import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {PostsService} from "./services/posts.service";
-import {ImageUrlPipe} from './pipes/image-url.pipe';
-import {FullNamePipe} from './pipes/full-name.pipe';
+import { appInitializerInterceptor } from './interceptors/app-initializer.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -28,10 +26,6 @@ import {FullNamePipe} from './pipes/full-name.pipe';
     HomeComponent,
     NotFoundComponent,
     PostsComponent,
-    PostCardComponent,
-    PostCardFooterComponent,
-    ImageUrlPipe,
-    FullNamePipe,
     MainComponent,
   ],
   imports: [
@@ -50,7 +44,8 @@ import {FullNamePipe} from './pipes/full-name.pipe';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
-    }
+    },
+    appInitializerInterceptor
   ],
   bootstrap: [AppComponent]
 })
