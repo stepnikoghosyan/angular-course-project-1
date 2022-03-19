@@ -9,7 +9,6 @@ import { NotFoundComponent } from "./not-found/not-found.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { VerifyAccountComponent } from "./verify-account/verify-account.component";
 import { RegisterComponent } from "./register/register.component";
-import { PostsComponent } from "./posts/posts.component";
 import { AuthPublicGuard } from "./guards/auth-public.guard";
 import { AuthGuard } from "./guards/auth.guard";
 
@@ -30,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'posts',
-        component: PostsComponent,
+        loadChildren: () => import('src/app/posts/posts.module').then(p => p.PostsModule),
         canActivate: [AuthGuard]
       },
       {

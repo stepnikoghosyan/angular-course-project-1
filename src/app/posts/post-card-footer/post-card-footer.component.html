@@ -4,10 +4,11 @@
         {{post?.user | fullName}}
     </p>
     <div class="d-flex m-l-auto">
-        <button class="icon-eye"></button>
         <div class="comment-wrapper">
-            <button class="icon-bubble"></button>
+            <i class="icon-bubble"></i>
             <span>{{post?.comments?.length}}</span>
         </div>
+        <button class="icon-eye m-l-20" (click)="editPost()"></button>
+        <button class="icon-eye m-l-20" (click)="viewPost()"></button>
     </div>
 </div>

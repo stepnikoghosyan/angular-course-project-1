@@ -34,7 +34,7 @@ button:hover {
     background-color: white;
 }
 .comment-wrapper {
-    padding-left: 7px;
+    padding-right: 7px;
     position: relative;
     span {
         position: absolute;
@@ -50,6 +50,9 @@ button:hover {
         top: -8px;
         right: -5px;
     }
+}
+.m-l-20 {
+    margin-left: 7px;
 }
 
 

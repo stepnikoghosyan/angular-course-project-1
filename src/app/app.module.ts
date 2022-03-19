@@ -11,7 +11,6 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
 import {NotFoundComponent} from "./not-found/not-found.component";
-import {PostsComponent} from './posts/posts.component';
 import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
@@ -25,7 +24,6 @@ import { appInitializerInterceptor } from './interceptors/app-initializer.interc
     HeaderComponent,
     HomeComponent,
     NotFoundComponent,
-    PostsComponent,
     MainComponent,
   ],
   imports: [
