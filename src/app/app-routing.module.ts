@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditPostComponent } from './edit-post/edit-post.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthPublicGuard } from './guards/auth-public.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -37,13 +38,19 @@ const routes: Routes = [
             {
                 path: "posts", 
                 component: PostsComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard],
+                
             },
             {
                 path: 'users',
                 component: UsersComponent,
                 canActivate: [AuthGuard]
             },
+            {
+                path: 'edit-post/:id',
+                component: EditPostComponent,
+                
+            }
         ]
     },
     {

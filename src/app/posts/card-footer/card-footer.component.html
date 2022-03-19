@@ -9,9 +9,10 @@
         <button type="button">
             <i class="far fa-eye"></i>
         </button>
-        <button>
-            <i class="far fa-comment"></i>
+        <button routerLink="/main/edit-post/{{post.id}}" >
+            <i class="far fa-edit"></i>
         </button>
+        <i class="far fa-comment"></i>
         <div class="count">{{post?.comments?.length}}</div>
     </div>
 </div>

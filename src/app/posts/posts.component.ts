@@ -23,6 +23,7 @@ export class PostsComponent implements OnInit, OnDestroy {
         ).subscribe({
             next: (data) => {          
                 this.posts = data.results;
+                console.log("POSTS", data.results );
             }
         })
     }

@@ -24,7 +24,7 @@ export class VerifyAccountComponent implements OnInit {
     });
 
     constructor(
-        private actacatedRoute:ActivatedRoute,
+        private activatedRoute:ActivatedRoute,
         private authService:AuthService,
         private formBuilder:FormBuilder,
         private notifyService: NotificationService
@@ -32,7 +32,7 @@ export class VerifyAccountComponent implements OnInit {
 
     ngOnInit(): void {
       this.showSpinner = true;
-      const activationToken = this.actacatedRoute.snapshot.params['activationToken'];
+      const activationToken = this.activatedRoute.snapshot.params['activationToken'];
       if (activationToken) {
        this.subscription = this.authService.verifyAccount(activationToken)
             .subscribe({

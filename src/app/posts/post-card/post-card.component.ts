@@ -9,13 +9,13 @@ import { PostsService } from 'src/app/services/posts.service';
 })
 export class PostCardComponent implements OnInit {
     
-    @Input('post') post?: PostModel;
+    @Input('post') post!: PostModel;
     
     constructor() {}
 
     ngOnInit(): void {
-        if(this.post && !this.post?.image ){
-            this.post.image = "../../assets/images/img.png"
+        if(this.post && !this.post?.imageUrl ){
+            this.post.imageUrl = "../../assets/images/img.png"
         }
     }
 }

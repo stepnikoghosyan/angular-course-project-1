@@ -1,0 +1,18 @@
+<form [formGroup]="updateForm" (ngSubmit)="updateFormSubmit()">
+    <h1>Update Post</h1>
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="title" value="{{post?.title}}" formControlName="title">
+    </div>
+    <div class="form-group">
+        <label>Body</label>
+        <textarea rows="10" name="body" value = "{{post?.body}}" formControlName="body"></textarea>
+    </div>
+    <div class="btn_container">
+        <button class="file_btn">Select file</button>
+        <div>
+            <p>{{post?.imageUrl? post.imageUrl: "No image"}}</p>
+        </div>
+        <button  class="create_btn" type="submit">Create</button>
+    </div>
+</form>
