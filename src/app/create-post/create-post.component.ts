@@ -1,5 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
 import { PostModelDto } from '../models/post.model';
 import { PostsService } from '../services/posts.service';
 
@@ -12,12 +16,15 @@ export class CreatePostComponent implements OnInit {
   errorMessage:string ="";
   targetValue:string ="";
   isClose:boolean = false;
+  showSpinner = false;
 
 
   date = JSON.stringify(new Date());
 
   constructor(private formBuilder: FormBuilder, 
-    private postsService: PostsService) { }
+    private postsService: PostsService,
+    private router:Router,
+    private notification :ToastrService) { }
   createForm: FormGroup = this.formBuilder.group({
     title: ['', Validators.required],
     body: ['', Validators.required],
@@ -26,15 +33,28 @@ export class CreatePostComponent implements OnInit {
    
 })
   ngOnInit(): void {
+  
   }
   createFormSubmit(){
-   const dto =new PostModelDto(this.createForm.value)
-    this.postsService.createPost(dto).subscribe({
-          next(res){
-              console.log(res)
-              console.log(dto)
-          }
-    })
+  if(this.createForm.valid){
+    const dto =new PostModelDto(this.createForm.value)
+      this.postsService.createPost(dto).pipe(
+        finalize(()=>{
+            this.showSpinner = false;
+        })
+    ).subscribe({
+        next: ()=>{
+          this.notification.success("Thank you for filling out your information!", "Success massage")
+          this.router.navigateByUrl('main/posts');
+          
+      },
+        error:(err:HttpErrorResponse )=>{
+            this.notification.error(err.statusText, `${err.status}`)
+          
+        }
+        
+      })
+    }
   }
   onSelectFile(event:any){ 
     
@@ -59,5 +79,5 @@ export class CreatePostComponent implements OnInit {
     this.isClose= false;
     this.errorMessage=""
   }
-  
+
 }
