@@ -1,38 +1,37 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 
 import {AppRoutingModule} from './app-routing.module';
-import {AuthModule} from "./auth.module";
-import {MainComponent} from './main/main.component';
+import {MainComponent} from './components/main/main.component';
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-import {HeaderComponent} from './header/header.component';
-import {NotFoundComponent} from "./not-found/not-found.component";
+import {HeaderComponent} from './components/header/header.component';
+import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
-import {PostsService} from "./services/posts.service";
-import { appInitializerInterceptor } from './interceptors/app-initializer.interceptor';
+import {PostsService} from "./modules/posts/services/posts.service";
+import {AuthService} from "./modules/auth/services/auth.service";
+import {appInitializer} from "./interceptors/app-initializer.interceptor";
+import {HomeModule} from "./modules/home/home.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    HomeComponent,
     NotFoundComponent,
     MainComponent,
+    HeaderComponent
   ],
   imports: [
-    AuthModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HomeModule
   ],
   providers: [
     AuthPublicGuard,
@@ -43,7 +42,12 @@ import { appInitializerInterceptor } from './interceptors/app-initializer.interc
       useClass: TokenInterceptor,
       multi: true,
     },
-    appInitializerInterceptor
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      deps: [AuthService],
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

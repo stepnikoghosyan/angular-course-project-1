@@ -1,32 +1,38 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree,} from '@angular/router';
-import {Observable} from 'rxjs';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanLoad,
+  Route,
+  Router,
+  RouterStateSnapshot,
+  UrlSegment,
+  UrlTree,
+} from '@angular/router';
 
 import {NotificationService} from "../services/notification.service";
+import {StorageService} from '../services/storage.service';
 
 @Injectable()
-export class AuthPublicGuard implements CanActivate {
+export class AuthPublicGuard implements CanActivate, CanLoad {
   constructor(private router: Router,
+              private storageService: StorageService,
               private notifyService: NotificationService) {
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    const auth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
-    try {
-      if (auth && JSON.parse(auth).accessToken) {
-        return this.router.parseUrl('/home');
-      }
-      return true;
-    } catch (ex: any) {
-      this.notifyService.showError('Error', ex.message);
-      return true;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+    return this.checkAuthentication()
+  }
+
+  canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree {
+    return this.checkAuthentication()
+  }
+
+  private checkAuthentication(): boolean | UrlTree {
+    const auth = this.storageService.getAccessToken();
+    if (auth) {
+      return this.router.parseUrl('/home');
     }
+    return true;
   }
 }
