@@ -10,7 +10,7 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./my-posts.component.scss']
 })
 export class MyPostsComponent implements OnInit {
-  isLoading = false;
+  isLoading = true;
   myPosts$?: Observable<PostModel[]>;
   constructor(
     private postsService: PostsService,
