@@ -13,19 +13,19 @@
                     <span class="error-message" *ngIf="loginForm.controls['email'].errors?.['email']">Email must be an email</span>
                 </div>  
             </div>
-            <div class="form-control">
-                <label>Password</label>
+            <!-- <div class="form-control">
+                 <label>Password</label> 
                 <input [type]="showEyeIcon? 'password':'text'" name="password" formControlName="password">
                 <i class="far fa-eye" *ngIf="showEyeIcon" [ngClass]= "showEyeIcon? 'far fa-eye':'far fa-eye-slash'" (click)="toggleShowPassoword()"></i>
-                <i class="far fa-eye-slash" *ngIf="!showEyeIcon" (click)="toggleShowPassoword()"></i>
-                <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
-                    <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['required']">Password is required</span>
-                    <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['minlength']">Password length must be equal or greater than 
-                        {{loginForm.controls['password'].getError('minlength').requiredLength}} characters
-                    </span>
-                </div>  
-            </div>
-            <!-- <app-password formControlName = "password" name="password"></app-password> -->
+                <i class="far fa-eye-slash" *ngIf="!showEyeIcon" (click)="toggleShowPassoword()"></i> 
+            </div> -->
+            <app-password formControlName = "password" name="password"></app-password>
+            <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" >
+                <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['required']">Password is required</span>
+                <span class="error-message" class="error-message"*ngIf="loginForm.controls['password'].errors?.['minlength']">Password length must be equal or greater than 
+                    {{loginForm.controls['password'].getError('minlength').requiredLength}} characters
+                </span>
+            </div>  
             <div class="errors" *ngFor="let error of errors">
                 <span>{{error}}</span>
             </div>
