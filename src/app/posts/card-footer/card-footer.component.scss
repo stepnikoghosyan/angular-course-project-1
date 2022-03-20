@@ -16,12 +16,13 @@
     border: 1px solid #1469d9;
     color: #1469d9;
     padding: 8px;
+    margin-left: 5px;
     font-size: 12px;
     border-radius: 5px;
 }
-.comment{
-    margin-left: 4px;
-    margin-right: 8px;
+
+.actions a {
+    display:  inherit;
 }
 .user {
     display: flex;

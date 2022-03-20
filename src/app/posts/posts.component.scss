@@ -11,3 +11,15 @@
     white-space: nowrap;
     // text-overflow: ellipsis;
 }
+
+.btn{
+  display: flex;
+  justify-content: end;
+  width: 95%;
+  margin-bottom: 30px;
+}
+
+.routerBtn{
+  background-color: #1469d9;
+  color: white;
+}

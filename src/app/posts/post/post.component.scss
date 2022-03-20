@@ -1,0 +1,38 @@
+.card{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.postForm{
+    width: 100%;
+}
+
+.inputForm{
+    width: 100%;
+}
+.card h1{
+    text-align: center;
+}
+
+
+.title{
+    width: 100%;
+}
+.inputBtn{
+    display: none;
+}
+
+.btn {
+    color: #fff;
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1469d9;
+    font-size: 16px;
+    cursor: pointer;
+}

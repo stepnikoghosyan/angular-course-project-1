@@ -11,57 +11,63 @@ import { LoginComponent } from '../auth/login/login.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AuthPublicGuard } from '../guards/auth-public.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { PostComponent } from '../posts/post/post.component';
 
 const routes: Routes = [
   {
-    path: '', 
-    redirectTo: 'auth/login', 
-    pathMatch: 'full' 
+    path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full'
   },
   {
-    path:'auth/register', 
-    component:RegisterComponent,
+    path: 'auth/register',
+    component: RegisterComponent,
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'auth/forgot-password', 
+    path: 'auth/forgot-password',
     component: ForgotPasswordComponent,
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'auth/reset-password',
+    path: 'auth/reset-password',
     component: ResetPasswordComponent,
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'auth/verify-account/:token',
+    path: 'auth/verify-account/:token',
     component: VerifyAccountComponent,
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'auth/reset-password/:token', 
+    path: 'auth/reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'auth/login', 
-    component:LoginComponent,
+    path: 'auth/login',
+    component: LoginComponent,
     canActivate: [AuthPublicGuard]
   },
   {
-    path:'home', 
+    path: 'home',
     component: HomeComponent,
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
-    path:'users', 
+    path: 'users',
     component: UsersComponent,
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
-    path:'posts', 
-    component:PostsComponent,
-    canActivate:[AuthGuard]
+    path: 'posts',
+    component: PostsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'post',
+    component: PostComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

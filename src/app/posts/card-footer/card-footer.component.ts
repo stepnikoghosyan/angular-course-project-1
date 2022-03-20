@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostModel } from 'src/app/models/post.model';
-import { faEye, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faComment, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-card-footer',
@@ -9,10 +9,11 @@ import { faEye, faComment } from '@fortawesome/free-solid-svg-icons';
 })
 export class CardFooterComponent implements OnInit {
   faEye = faEye;
-  faComment= faComment;
+  faEdit = faEdit;
+  faComment = faComment;
   constructor() { }
 
- @Input() post!: PostModel;
+  @Input() post!: PostModel;
 
   ngOnInit(): void {
   }

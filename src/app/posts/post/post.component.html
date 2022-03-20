@@ -1,0 +1,26 @@
+<div class="card">
+    <h1>Create Post</h1>
+    <form class="postForm" [formGroup] = 'formGroup' >
+        <div class="inputForm">
+            <div>
+                <label>Title</label>
+            </div>
+            <input class="title" formControlName = "title"  type="text">
+        </div>
+        <div class="inputForm">
+            <div>
+                <label>Body</label>
+            </div>
+            
+            <textarea class="title" formControlName = "body" rows="7px" cols="100px"></textarea>
+        </div>
+        
+        <div>
+            <input class="inputBtn" type="file" id="img" [name]='file?.name' #file accept=".jpg, .jpeg, .png,.gif" (change)="hendler($event)">
+            <button class="upload" (click)='trigger(file)'>Upload</button>
+            <p *ngIf = 'file'>{{file?.name}} </p>
+        </div>
+
+        <button class="btn">Create</button>
+    </form>
+</div>

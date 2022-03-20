@@ -24,6 +24,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingComponent } from './loading/loading.component';
 import { DotsPipe } from './dots.pipe';
+import { PostComponent } from './posts/post/post.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { DotsPipe } from './dots.pipe';
     CardFooterComponent,
     LoadingComponent,
     DotsPipe,
+    PostComponent,
     
   ],
   imports: [
