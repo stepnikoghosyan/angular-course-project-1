@@ -1,21 +1,27 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-
-import { MainComponent } from "./main/main.component";
-import { HomeComponent } from "./home/home.component";
-import { LoginComponent } from "./login/login.component";
-import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
-import { NotFoundComponent } from "./not-found/not-found.component";
-import { ResetPasswordComponent } from "./reset-password/reset-password.component";
-import { VerifyAccountComponent } from "./verify-account/verify-account.component";
-import { RegisterComponent } from "./register/register.component";
-import { AuthPublicGuard } from "./guards/auth-public.guard";
-import { AuthGuard } from "./guards/auth.guard";
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {MainComponent} from "./components/main/main.component";
+import {AuthPublicGuard} from "./guards/auth-public.guard";
+import {AuthGuard} from "./guards/auth.guard";
+import {NotFoundComponent} from "./components/not-found/not-found.component";
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
+    canLoad: [AuthPublicGuard],
+    canActivate: [AuthPublicGuard]
+  },
+  {
+    path: '',
     component: MainComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -24,46 +30,13 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent,
-        canActivate: [AuthGuard]
+        loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
       },
       {
         path: 'posts',
-        loadChildren: () => import('src/app/posts/posts.module').then(p => p.PostsModule),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'my-posts',
-        loadChildren: () => import('src/app/my-posts/my-posts.module').then(m => m.MyPostsModule),
-        canActivate: [AuthGuard]
-      },
+        loadChildren: () => import('./modules/posts/posts.module').then(m => m.PostsModule),
+      }
     ]
-  },
- 
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'auth/verify-account/:accessToken',
-    component: VerifyAccountComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'auth/reset-password/:token',
-    component: ResetPasswordComponent,
-    canActivate: [AuthPublicGuard],
-  },
-  {
-    path: 'auth/forgot-password',
-    component: ForgotPasswordComponent,
-    canActivate: [AuthPublicGuard],
   },
   {
     path: '**',
