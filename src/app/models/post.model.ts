@@ -27,14 +27,10 @@ export class PostModelDto{
     imageUrl: string;
     updatedAt: string;
 
-       constructor(data: any){
+    constructor(data: any){
         this.title = data.title,
         this.body = data.body,
         this.imageUrl = data.imageUrl
         this.updatedAt = data.updatedAt
     }
 }
-
-      
-     
-  

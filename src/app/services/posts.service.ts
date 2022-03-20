@@ -31,8 +31,4 @@ export class PostsService {
             .put<PostModel>(`${environment.apiUrl}/posts/${id}`, postDto);
     }
 
-    createPost(postDto: PostModelDto): Observable<any>{
-            console.log(postDto)
-         return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts/`, postDto)
-    }
 }
