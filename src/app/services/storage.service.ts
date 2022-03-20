@@ -13,25 +13,27 @@ export class StorageService {
     this.storageType = storageType
   }
 
-  setToken(tokens: LoginResponse) {
-    this.storage.setItem('accessToken', tokens.accessToken);
-    this.storage.setItem('refreshToken', tokens.refreshToken);
+  setToken(tokens: LoginResponse, rememberMe: boolean) {
+    if (rememberMe) {
+      localStorage.setItem('accessToken', tokens.accessToken);
+      localStorage.setItem('refreshToken', tokens.refreshToken);
+    } else {
+      sessionStorage.setItem('accessToken', tokens.accessToken);
+      sessionStorage.setItem('refreshToken', tokens.refreshToken);
+    }
   }
 
   getAccessToken(): string {
-    return this.storage.getItem('accessToken') || '';
+    return localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') || '';
   }
 
   getRefreshToken(): string {
-    return this.storage.getItem('refreshToken') || '';
-  }
-
-  private get storage() {
-    return this.storageType === 'localStorage' ? localStorage : sessionStorage;
+    return localStorage.getItem('refreshToken') || sessionStorage.getItem('refreshToken') || '';
   }
 
   clear() {
-    this.storage.clear();
+    localStorage.clear();
+    sessionStorage.clear();
   }
 
 }
