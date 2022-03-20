@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PostsAddEditComponent } from './posts-add-edit/posts-add-edit.component';
-import { PostsViewComponent } from './posts-view/posts-view.component';
-import { PostsComponent } from './posts.component';
+import { PostsAddEditComponent } from '../modules/posts/components/posts-add-edit/posts-add-edit.component';
+import { PostsViewComponent } from '../modules/posts/components/posts-view/posts-view.component';
+import { PostsComponent } from '../modules/posts/posts.component';
 
 const routes: Routes = [
     {
