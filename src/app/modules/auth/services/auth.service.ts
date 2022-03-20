@@ -19,16 +19,11 @@ export class AuthService {
   }
 
   login(loginDto: LoginDto, rememberMe: boolean): Observable<LoginResponse> {
-    if (rememberMe) {
-      this.storageService.setStorageType('localStorage');
-    } else {
-      this.storageService.setStorageType('sessionStorage');
-    }
     return this.httpClient
       .post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginDto)
       .pipe(
         tap((data: LoginResponse) => {
-            this.storageService.setToken(data);
+            this.storageService.setToken(data, rememberMe);
             this.router.navigateByUrl('/home');
           }
         )
