@@ -5,8 +5,8 @@ import {RouterModule} from '@angular/router';
 import {LoaderComponent} from './ components/loader/loader.component';
 import {LoadingSpinnerComponent} from "./ components/loading-spinner/loading-spinner.component";
 import {FormsModule} from "@angular/forms";
-import {ImageUrlPipe} from '../../pipes/image-url.pipe';
-import {FullNamePipe} from '../../pipes/full-name.pipe';
+import {ImageUrlPipe} from './pipes/image-url.pipe';
+import {FullNamePipe} from './pipes/full-name.pipe';
 
 @NgModule({
   declarations: [

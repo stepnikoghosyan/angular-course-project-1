@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { PostModel } from "../../../../models/post.model";
+import { PostModel } from "../../models/post.model";
 
 @Component({
   selector: 'app-post-card-footer',

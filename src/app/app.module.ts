@@ -15,7 +15,6 @@ import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {PostsService} from "./modules/posts/services/posts.service";
 import {AuthService} from "./modules/auth/services/auth.service";
 import {appInitializer} from "./interceptors/app-initializer.interceptor";
-import {HomeModule} from "./modules/home/home.module";
 
 
 @NgModule({
@@ -31,7 +30,6 @@ import {HomeModule} from "./modules/home/home.module";
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HomeModule
   ],
   providers: [
     AuthPublicGuard,

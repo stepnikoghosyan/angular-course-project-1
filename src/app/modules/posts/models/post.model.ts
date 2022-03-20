@@ -1,5 +1,5 @@
-import {UserModel} from "./user.model";
-import {CommentModel} from "./comment.model";
+import {UserModel} from "../../../models/user.model";
+import {CommentModel} from "../../../models/comment.model";
 
 export interface PostModel {
   id: number;

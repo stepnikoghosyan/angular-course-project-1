@@ -1,27 +1,51 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,} from '@angular/common/http';
+import {catchError, EMPTY, Observable, throwError} from 'rxjs';
+import {StorageService} from "../services/storage.service";
+import {AuthService} from "../modules/auth/services/auth.service";
+import {NotificationService} from "../services/notification.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+
+  constructor(private storageService: StorageService,
+              private authService: AuthService,
+              private notificationService: NotificationService) {
+  }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const item = localStorage.getItem('auth') || sessionStorage.getItem('auth');
-    if (!item)
-      return next.handle(req);
-    try {
-      const auth = JSON.parse(item);
-      if (auth) {
-        const newReq = req.clone({
-          headers: req.headers.set(
-            'Authorization',
-            `Bearer ${auth.accessToken}`
-          ),
-        });
-        return next.handle(newReq);
-      }
-    } catch (ex: any) {
-      return next.handle(req);
+    return next.handle(this.addToken(req))
+      .pipe(
+        catchError(error => {
+          if (error instanceof HttpErrorResponse) {
+            switch (error.status) {
+              case 403:
+                this.authService.logout();
+                return EMPTY;
+              case 401:
+                if (this.storageService.getAccessToken()) {
+                  this.authService.logout();
+                }
+                return throwError(() => error);
+              case 500:
+                this.notificationService.showError('Error', 'Internal Server Error');
+            }
+          }
+          return throwError(() => error);
+        })
+      )
+  }
+
+  private addToken(req: HttpRequest<any>) {
+    const accessToken = this.storageService.getAccessToken();
+    if (!accessToken) {
+      return req;
     }
-    return next.handle(req);
+    return req.clone({
+      headers: req.headers.set(
+        'Authorization',
+        `Bearer ${accessToken}`
+      ),
+    });
   }
 }

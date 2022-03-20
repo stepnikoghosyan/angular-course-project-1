@@ -9,15 +9,12 @@ import {
   UrlSegment,
   UrlTree,
 } from '@angular/router';
-
-import {NotificationService} from "../services/notification.service";
 import {StorageService} from '../services/storage.service';
 
 @Injectable()
 export class AuthPublicGuard implements CanActivate, CanLoad {
   constructor(private router: Router,
-              private storageService: StorageService,
-              private notifyService: NotificationService) {
+              private storageService: StorageService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {

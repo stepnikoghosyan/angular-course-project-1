@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 
 import { environment } from "../../../../environments/environment";
-import { PostModel } from "../../../models/post.model";
+import { PostModel } from "../models/post.model";
 import { PaginatedResponseModel } from "../../../models/paginated-response.model";
 import { UserService } from "../../../services/user.service";
 

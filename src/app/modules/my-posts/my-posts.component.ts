@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {catchError, finalize, map, Observable, of} from 'rxjs';
-import {PostModel} from '../../models/post.model';
+import {PostModel} from '../posts/models/post.model';
 import {NotificationService} from '../../services/notification.service';
 import {PostsService} from '../posts/services/posts.service';
 
