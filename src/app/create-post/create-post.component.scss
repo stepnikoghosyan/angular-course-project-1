@@ -1,0 +1,43 @@
+*{
+    padding: 10px 0px;
+}
+form{
+    margin: auto;
+    width: 80%;
+    
+    h1{
+       text-align: center; 
+    }
+
+    input, 
+    textarea{
+        width: 100%;
+        resize: vertical;
+        padding-left: 10px;
+    } 
+    .btn_container{
+        position: relative;
+
+        .file_btn{
+            border: 1px solid #5f9ea0;
+            color: #5f9ea0;
+            background-color: white;
+            padding: 10px 20px;
+        } 
+        .create_btn{
+            color: white;
+            background-color: #5f9ea0;
+            padding: 10px 15px;
+            position: absolute;
+            right: 0;
+            top: 50px;
+        }  
+        .close_btn{
+            color: white;
+            background-color: red;
+            padding: 10px 15px;
+            
+           
+        }
+    }
+}
