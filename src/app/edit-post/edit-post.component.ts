@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostModel, PostModelDto } from '../models/post.model';
@@ -11,8 +11,10 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./edit-post.component.scss']
 })
 export class EditPostComponent implements OnInit {
+    @ViewChild('file') el!: ElementRef;
     date = JSON.stringify(new Date());
     post!: PostModel;
+    isClicked = true;
 
     updateForm: FormGroup = this.formBuilder.group({
         title: ['', Validators.required],
@@ -44,13 +46,18 @@ export class EditPostComponent implements OnInit {
         if(this.updateForm.valid){
             this.postService.putPost(this.post.id, dto).subscribe({
                 next: ()=>{
-                    this.router.navigateByUrl('/posts');
-                    
+                    this.router.navigateByUrl('/main/posts');
+            
                 },
                 error: (err: HttpErrorResponse)=>{
-                    console.log(err.message);
+                    console.log('ERROR MESSAGE', err.message);
                 }
             })
         }
+    }
+
+    selectFile(){
+        // this.el.nativeElement.click();
+        // this.isClicked = true;
     }
 }
