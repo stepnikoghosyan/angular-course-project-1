@@ -58,6 +58,9 @@ export class LoginComponent implements  OnDestroy{
             })
         }
     };
+    // ngOnInit() :void {
+    //     this.loginForm.controls['password'].setValue("azazaz")
+    // }
 
     ngOnDestroy(): void {
         this.subscription$.next()

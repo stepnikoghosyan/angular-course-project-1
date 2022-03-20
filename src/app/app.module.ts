@@ -28,6 +28,7 @@ import { PasswordComponent } from './password/password.component';
 import { InputErrorsDirective } from './validators/input-errors.directive';
 import { EditPostComponent } from './edit-post/edit-post.component';
 // import { MultilineDirective } from './directives/multiline.directive';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 
 
@@ -53,6 +54,7 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     InputErrorsDirective,
     EditPostComponent,
     // MultilineDirective,
+    CreatePostComponent,
 
   ],
   imports: [
