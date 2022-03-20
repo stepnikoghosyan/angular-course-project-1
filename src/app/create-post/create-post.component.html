@@ -20,7 +20,7 @@
     <div class="btn_container">
         <label for="title"class="file_btn">Select file</label>
         {{targetValue}} <button class="close_btn" *ngIf="isClose" (click)="clearFile($event)">X</button>
-        <input #inputValue id ="title" type="file" style="visibility:hidden" class="file_btn" multiple formControlName="file"  multiple (change) = "onSelectFile($event)"  name ="Select file"/> 
+        <input #inputValue id ="title" type="file" style="visibility:hidden" class="file_btn" multiple formControlName="imageUrl"  multiple (change) = "onSelectFile($event)"  name ="Select file"/> 
         
         
         <button  class="create_btn" type="submit">Create</button>

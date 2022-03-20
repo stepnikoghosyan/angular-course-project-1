@@ -12,7 +12,7 @@ export class CreatePostComponent implements OnInit {
   errorMessage:string ="";
   targetValue:string ="";
   isClose:boolean = false;
- // selectedFile:File = null;
+
 
   date = JSON.stringify(new Date());
 
@@ -37,7 +37,7 @@ export class CreatePostComponent implements OnInit {
     })
   }
   onSelectFile(event:any){ 
-    //this.selectedFile = event.target.files[0];
+    
     this.targetValue = event.target.files[0].name;
    if(event.target.files && event.target.files[0]){
      this.isClose = true;
@@ -50,14 +50,6 @@ export class CreatePostComponent implements OnInit {
           this.errorMessage="The file must not be greater 2MG"
         }
       }
-
-      var reader = new FileReader();
-      reader.onload=(event: any)=>{
-        console.log(event.target.result)
-        
-       
-      }
-      reader.readAsDataURL(event.target.files[0])
    }
 
   }
