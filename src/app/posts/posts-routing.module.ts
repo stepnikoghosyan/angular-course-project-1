@@ -9,6 +9,7 @@ const routes: Routes = [
         path: '',
         component: PostsComponent,
         children: [
+            
             {
                 path: 'view/:id',
                 component: PostsViewComponent

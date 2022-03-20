@@ -3,13 +3,16 @@
     background-color: rgb(245,247,251);
     display: flex;
     align-items: center;
-    padding: 5px 15px;
+    padding: 9px 15px;
     border-radius: 0 0 5px 5px;
 }
 .icon-bubble {
     color: rgb(64,114,251);
 }
 .icon-eye {
+    color: rgb(64,114,251);
+}
+.icon-pencil {
     color: rgb(64,114,251);
 }
 .icon-user {
@@ -38,7 +41,7 @@ button:hover {
     position: relative;
     span {
         position: absolute;
-        width: 15px;
+        min-width: 15px;
         height: 15px;
         border-radius: 50%;
         background-color: rgb(64,114,251);
@@ -47,8 +50,8 @@ button:hover {
         display: flex;
         align-items: center;
         justify-content: center;
-        top: -8px;
-        right: -5px;
+        top: -6px;
+        right: -4px;
     }
 }
 .m-l-20 {

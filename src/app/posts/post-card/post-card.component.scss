@@ -14,28 +14,29 @@
           filter: contrast(100%);
         }
       }
-    .post-top-content {
-        text-align: center;
-        img {
-            width: 100px;
-            height: 100px;
-        }
-        .post-title{
-            margin-top: 10px;
-        }
-    }
-    .description{
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 100%;
-        font-size: 15px;
-        margin: 10px 0 20px;
-        padding: 10px 15px;
-    }
-
   &:hover {
     transition: all 0.5s;
     box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  }
+  .post-card-body {
+    padding: 15px;
+    .post-top-content {
+      text-align: center;
+      img {
+          width: 100px;
+          height: 100px;
+      }
+      .post-title {
+          margin-top: 10px;
+      }
+  }
+  .description {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      font-size: 15px;
+      margin-top: 10px;
+    }
   }
 }

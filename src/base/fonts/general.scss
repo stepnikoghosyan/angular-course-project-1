@@ -131,7 +131,7 @@ label {
 
   &:hover,
   &:focus {
-    padding-right: 24px;
+    padding-right: 40px;
     padding-left:8px;
   }
 
@@ -238,5 +238,8 @@ input {
     @media(min-width: 56rem) {
       width: 33.3333%;
     }
+}
+.align-items-center {
+  align-items: center;
 }
  

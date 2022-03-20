@@ -3,12 +3,12 @@
         <em class="icon-user"></em>
         {{post?.user | fullName}}
     </p>
-    <div class="d-flex m-l-auto">
+    <div class="d-flex align-items-center m-l-auto">
         <div class="comment-wrapper">
             <i class="icon-bubble"></i>
             <span>{{post?.comments?.length}}</span>
         </div>
-        <button class="icon-eye m-l-20" (click)="editPost()"></button>
+        <button class="icon-pencil m-l-20" (click)="editPost()"></button>
         <button class="icon-eye m-l-20" (click)="viewPost()"></button>
     </div>
 </div>
