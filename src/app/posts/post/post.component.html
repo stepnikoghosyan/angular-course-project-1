@@ -16,11 +16,25 @@
         </div>
         
         <div>
-            <input class="inputBtn" type="file" id="img" [name]='file?.name' #file accept=".jpg, .jpeg, .png,.gif" (change)="hendler($event)">
+            <input class="inputBtn"  type="file" id="img" formControlName = "file"
+             #file accept=".jpg, .jpeg, .png" (change)="handler($event)">
+
             <button class="upload" (click)='trigger(file)'>Upload</button>
-            <p *ngIf = 'file'>{{file?.name}} </p>
+            <div style="color: red;" >
+                <p  *ngIf = '!isImage'>{{errorFile}}</p>
+                <p *ngIf = '!chapiMej'>{{fileSizeError}}</p>
+            </div>
+          
+            <p>
+                {{fileName }} 
+                <span *ngIf = 'fileName' style="color: brown;" 
+                (click)="deleteImg()">
+                     x
+                </span>
+            </p>
         </div>
 
-        <button class="btn">Create</button>
+        <button class="btn" (click)="create()">Create</button>
     </form>
+  
 </div>

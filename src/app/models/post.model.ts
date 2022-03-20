@@ -1,15 +1,10 @@
-import { CommentsModel } from "./coments.model";
-import { UserModel } from "./user.model";
-
-export interface PostModel {
-  title: string;
-  body: string;
-  id: number;
-  imageUrl: string;
-  comments: CommentsModel[];
-  user: UserModel;
+export class PostDto {
+    title: string;
+    body: string;
+    image: { file: { type: "string", format: "binary" } };
+    constructor(data:any, img:any){
+        this.title = data.title;
+        this.body = data.body;
+        this.image ={file: img}
+    }
 }
-
-
-
-

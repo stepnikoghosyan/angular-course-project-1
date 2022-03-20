@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostModel } from 'src/app/models/post.model';
+import { PostsModel } from 'src/app/models/posts.model';
 import { faEye, faComment, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,7 +13,7 @@ export class CardFooterComponent implements OnInit {
   faComment = faComment;
   constructor() { }
 
-  @Input() post!: PostModel;
+  @Input() post!: PostsModel;
 
   ngOnInit(): void {
   }

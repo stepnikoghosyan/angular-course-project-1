@@ -31,10 +31,7 @@ export class ForgotDto {
     }
 }
 
-export interface LoginResponse {
-    accessToken: string;
-    refreshToken: string;
-}
+
 
 export class ResetDto {
     newPassword: string;
@@ -44,4 +41,9 @@ export class ResetDto {
         this.newPassword = data.newPassword;
         this.token = data.token;
     }
+}
+
+export interface LoginResponse {
+    accessToken: string;
+    refreshToken: string;
 }

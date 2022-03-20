@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PostModel } from 'src/app/models/post.model';
+import { PostsModel } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class CardComponent implements OnInit {
    private postsService: PostsService,
   ) { }
 
-  @Input() post!: PostModel;
+  @Input() post!: PostsModel;
 
 
 

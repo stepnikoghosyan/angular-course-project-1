@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { catchError, finalize, map, Observable, of } from 'rxjs';
-import { PostModel } from '../models/post.model';
+import { PostsModel } from '../models/posts.model';
 import { NotificationService } from '../services/notification.service';
 import { PostsService } from '../services/posts.service';
 
@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit {
 
   
   isLoading = true;
-  posts$!: Observable<PostModel[]>;
+  posts$!: Observable<PostsModel[]>;
 
   constructor(
     private postsService: PostsService,
