@@ -28,7 +28,11 @@ import { PasswordComponent } from './password/password.component';
 import { InputErrorsDirective } from './validators/input-errors.directive';
 import { EditPostComponent } from './edit-post/edit-post.component';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { MultilineDirective } from './directives/multiline.directive';
+=======
+import { CreatePostComponent } from './create-post/create-post.component';
+>>>>>>> 06eca4be591908672df49127c8db5bc55b8206d6
 =======
 import { CreatePostComponent } from './create-post/create-post.component';
 >>>>>>> 06eca4be591908672df49127c8db5bc55b8206d6
@@ -57,7 +61,11 @@ import { CreatePostComponent } from './create-post/create-post.component';
     InputErrorsDirective,
     EditPostComponent,
 <<<<<<< HEAD
+<<<<<<< HEAD
     MultilineDirective,
+=======
+    CreatePostComponent,
+>>>>>>> 06eca4be591908672df49127c8db5bc55b8206d6
 =======
     CreatePostComponent,
 >>>>>>> 06eca4be591908672df49127c8db5bc55b8206d6
