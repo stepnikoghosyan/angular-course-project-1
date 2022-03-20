@@ -27,6 +27,7 @@ import { UserNamePipe } from './pipes/user-name.pipe';
 import { PasswordComponent } from './password/password.component';
 import { InputErrorsDirective } from './validators/input-errors.directive';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 
 
@@ -51,6 +52,7 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     PasswordComponent,
     InputErrorsDirective,
     EditPostComponent,
+    CreatePostComponent,
 
   ],
   imports: [
