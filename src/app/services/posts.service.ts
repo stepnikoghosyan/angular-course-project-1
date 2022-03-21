@@ -7,6 +7,7 @@ import { PostModel, PostModelDto } from '../models/post.model';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
+import { CommentModel, commentsResponse } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,14 @@ export class PostsService {
                     //catchError(()=>)
                     
                 ) 
+    }
+
+    getComments(id:number) :Observable<commentsResponse>{
+        let params  = {
+            'posts':id
+        }
+        return this.httpClient
+            .get<commentsResponse>(`${environment.apiUrl}/comments`, {params})
     }
 
     createPost(postDto: PostModelDto): Observable<any>{

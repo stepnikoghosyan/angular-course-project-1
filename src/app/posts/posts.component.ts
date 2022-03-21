@@ -23,6 +23,7 @@ export class PostsComponent implements OnInit {
                 
         )
     }
+    
 }
 function data(arg0: string, data: any): void {
     throw new Error('Function not implemented.');

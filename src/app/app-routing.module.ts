@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CommentsComponent } from './posts/comments/comments.component';
+import { PostsViewComponent } from './posts/posts-view/posts-view.component';
 import { PostsComponent } from './posts/posts.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -57,7 +59,18 @@ const routes: Routes = [
                 path: 'create',
                 component: CreatePostComponent,
                 
-            }
+            },
+            {
+                path: 'comments/:id',
+                component: CommentsComponent,
+                
+            },
+            {
+                path: 'view',
+                component: PostsViewComponent,
+                
+            },
+
         ]
     },
     {
