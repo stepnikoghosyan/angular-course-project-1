@@ -31,6 +31,7 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 
 import { SetImagePipe } from './pipes/set-image.pipe';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { CommentsComponent } from './posts/comments/comments.component';
 
 
 
@@ -58,6 +59,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
     // MultilineDirective,
     CreatePostComponent,
     SetImagePipe,
+    CommentsComponent
 
   ],
   imports: [

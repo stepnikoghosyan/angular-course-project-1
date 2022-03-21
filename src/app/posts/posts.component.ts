@@ -22,4 +22,5 @@ export class PostsComponent implements OnInit {
             map(data=>data.results),
         )
     }
+    
 }
