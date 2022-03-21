@@ -37,8 +37,10 @@ export class PostsService {
                     tap(()=>{
                         this.notifyService.success("Post is updated", "Success!!")
                         this.router.navigateByUrl('/main/posts');
-                    })
-                )
+                    }), 
+                    //catchError(()=>)
+                    
+                ) 
     }
 
     createPost(postDto: PostModelDto): Observable<any>{
