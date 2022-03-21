@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label>Body</label>
-        <textarea rows="10" name="body"  formControlName="body"></textarea>
+        <textarea rows="10" name="body" multiline  formControlName="body"></textarea>
         <div *ngIf="createForm.controls['body'].invalid && createForm.controls['body'].touched" >
             <span class="error-message" *ngIf="createForm.controls['body'].errors?.['required']">Body is required</span> 
             
@@ -19,11 +19,18 @@
     
     <div class="btn_container">
         <label for="title"class="file_btn">Select file</label>
-        {{targetValue}} <button class="close_btn" *ngIf="isClose" (click)="clearFile($event)">X</button>
-        <input #inputValue id ="title" type="file" style="visibility:hidden" class="file_btn" multiple formControlName="imageUrl"  multiple (change) = "onSelectFile($event)"  name ="Select file"/> 
-        
+        {{isTargetValue}}
+        <ng-container *ngIf="isSaveImage">
+            <img [src]="cardImageBase64" />
+        </ng-container>
+        <button class="close_btn" *ngIf="isClose" (click)="clearFile($event)">X</button>
+        <input  id ="title" type="file" style="visibility:hidden" class="file_btn" multiple formControlName="imageUrl" (change) = "onSelectFile($event)"  name ="Select file"/> 
+        {{errorMessage}}
         
         <button  class="create_btn" type="submit">Create</button>
-        {{errorMessage}}
+
     </div>     
 </form>
+
+    {{errors}}
+
