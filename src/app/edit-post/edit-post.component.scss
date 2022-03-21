@@ -1,6 +1,10 @@
 *{
     padding: 10px 0px;
 }
+label{
+    border-radius: 4px;
+    display: inline-block;
+}
 form{
     margin: auto;
     width: 80%;
@@ -17,16 +21,21 @@ form{
     } 
     .btn_container{
         position: relative;
-
+        
         .file_btn{
             border: 1px solid #5f9ea0;
             color: #5f9ea0;
             background-color: white;
             padding: 10px 20px;
-        } 
+            cursor: pointer;
+        }
+        .close_btn{
+            padding: 1px 6px;
+            background-color: rgb(231, 55, 55);
+        }
         .create_btn{
             color: white;
-            background-color: #5f9ea0;
+            background-color: #5bc5c9;
             padding: 10px 15px;
             position: absolute;
             right: 0;
@@ -41,5 +50,6 @@ form{
 .file_visible{
     visibility: visible ;
 }
+
 
 

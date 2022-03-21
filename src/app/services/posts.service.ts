@@ -4,14 +4,18 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationResponseModel } from '../models/pagination-response';
 import { PostModel, PostModelDto } from '../models/post.model';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
-    constructor(private httpClient: HttpClient) { };
+    constructor(private httpClient: HttpClient,
+                private router: Router,
+                private notifyService: NotificationService) { };
 
 
     getPosts() : Observable <PaginationResponseModel<PostModel>>  {
@@ -28,11 +32,17 @@ export class PostsService {
 
     putPost(id: number, postDto: PostModelDto): Observable<any>{
         return this.httpClient
-            .put<PostModel>(`${environment.apiUrl}/posts/${id}`, postDto);
+            .put<PostModel>(`${environment.apiUrl}/posts/${id}`, postDto)
+                .pipe(
+                    tap(()=>{
+                        this.notifyService.success("Post is updated", "Success!!")
+                        this.router.navigateByUrl('/main/posts');
+                    })
+                )
     }
 
     createPost(postDto: PostModelDto): Observable<any>{
-            console.log(postDto)
-         return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts/`, postDto)
+        console.log(postDto)
+        return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts/`, postDto)
     }
 }

@@ -6,16 +6,16 @@
     </div>
     <div class="form-group">
         <label>Body</label>
-        <textarea rows="10" name="body" appMultiline value = "{{post?.body}}" formControlName="body"></textarea>
+        <textarea rows="10" name="body" multiline value = "{{post?.body}}" formControlName="body"></textarea>
     </div>
     <div class="btn_container">
-        <button type="button" (click)="selectFile()" class="file_btn">Select File</button>
-            <!-- <input type="file" name="file" class="file_invisible" #file formArrayName="imageUrl"
-              [ngClass]=" isClicked? 'file_visible':'file_invisible'">
-         -->
-        <div>
-            <p>{{post?.imageUrl? post.imageUrl: "No image"}}</p>
+        <label for="title" class="file_btn">Select file</label>
+        <div class="file_value"> {{targetValue}} 
+            <button class="close_btn" *ngIf="isHidden" (click)="removeFile()">X</button>
         </div>
-        <button class="create_btn" type="submit">Create</button>
+        <input #inputValue id="title" type="file" class="file_invisible file_btn"
+            formControlName="imageUrl" (change)="selectFile($event)" name ="file"/> 
+        
+        <button class="create_btn" type="submit">Update</button>
     </div>
 </form>
