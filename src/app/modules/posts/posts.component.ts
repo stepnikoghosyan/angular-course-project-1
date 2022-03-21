@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {catchError, finalize, map, Observable, of} from "rxjs";
 
-import {PostModel} from "./models/post.model";
-import {PostsService} from "./services/posts.service";
+import {PostModel} from "../post-card/models/post.model";
+import {PostsService} from "../post-card/services/posts.service";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
@@ -21,9 +21,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.posts$ = this.postsService.getPosts()
       .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        }),
+        finalize(() => this.isLoading = false),
         map(data => data.results),
         catchError((err) => {
           this.showNotifications(false, err.error.message);

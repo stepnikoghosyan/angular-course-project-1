@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {PostsComponent} from "./posts.component";
 import {PostsViewComponent} from "./components/posts-view/posts-view.component";
 import {PostsAddEditComponent} from "./components/posts-add-edit/posts-add-edit.component";
-import { PostContainerComponent } from '../shared/ components/post-container/post-container.component';
+import {PostContainerComponent} from "../post-card/components/post-container/post-container.component";
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     component: PostContainerComponent,
     children: [
-    
+
       {
         path: 'view/:id',
         component: PostsViewComponent

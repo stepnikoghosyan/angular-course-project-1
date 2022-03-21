@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {MyPostsComponent} from './my-posts.component';
 import {MyPostsRoutingModule} from './my-posts-routing.module';
 import {SharedModule} from '../shared/shared.module';
+import {PostCardModule} from "../post-card/post-card.module";
 
 @NgModule({
   declarations: [
@@ -11,7 +12,7 @@ import {SharedModule} from '../shared/shared.module';
   imports: [
     CommonModule,
     MyPostsRoutingModule,
-    SharedModule
+    PostCardModule
   ]
 })
 export class MyPostsModule { }

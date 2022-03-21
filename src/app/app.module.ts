@@ -12,7 +12,7 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {AuthPublicGuard} from './guards/auth-public.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
-import {PostsService} from "./modules/posts/services/posts.service";
+import {PostsService} from "./modules/post-card/services/posts.service";
 import {AuthService} from "./modules/auth/services/auth.service";
 import {appInitializer} from "./interceptors/app-initializer.interceptor";
 

@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { PostModel } from "src/app/modules/posts/models/post.model";
+import {Component, Input} from "@angular/core";
+import {Router} from "@angular/router";
+import {PostModel} from "../../models/post.model";
 
 @Component({
   selector: 'app-post-card-footer',
@@ -11,8 +11,8 @@ export class PostCardFooterComponent {
   @Input() post: PostModel | null = null;
 
   constructor(private route: Router) {
-
   }
+
   editPost(): void {
     this.route.navigate([`/posts/${this.post?.id}`]);
   }
