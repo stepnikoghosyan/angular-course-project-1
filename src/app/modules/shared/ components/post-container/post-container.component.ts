@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PostModel } from 'src/app/modules/posts/models/post.model';
 
 @Component({
   selector: 'app-post-container',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PostContainerComponent implements OnInit {
   @Input() title: string = '';
-  @Input() isShowAddButton = false;
+  @Input() posts: PostModel[] | null = null;
   constructor() { }
 
   ngOnInit(): void {

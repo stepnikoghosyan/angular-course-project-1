@@ -1,4 +1,3 @@
-<app-post-container title="My Posts">
-  <app-post-card class="col-4" *ngFor="let post of myPosts$ | async" [post]="post"></app-post-card>
+<app-post-container [posts]="myPosts$ | async" [title]="'My Posts'">
 </app-post-container>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
