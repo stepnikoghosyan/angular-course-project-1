@@ -45,4 +45,5 @@ export class PostsService {
         console.log(postDto)
         return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts/`, postDto)
     }
+
 }

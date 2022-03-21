@@ -59,13 +59,13 @@ export class CreatePostComponent implements OnInit {
   onSelectFile(event:any){ 
     
     this.targetValue = event.target.files[0].name;
-    if(event.target.files && event.target.files[0]){
-        this.isClose = true;
-        this.errorMessage = "The file must be in JPEG, JP OR PNG format"
-        if(event.target.files[0].type === "image/jpeg" ||
-            event.target.files[0].type === "image/jpg" ||
-            event.target.files[0].type === "image/png"){
-                this.errorMessage ="" 
+   if(event.target.files && event.target.files[0]){
+     this.isClose = true;
+     this.errorMessage = "The file must be in JPEG, JP OR PNG format"
+     if(event.target.files[0].type === "image/jpeg" ||
+      event.target.files[0].type === "image/jpg" ||
+      event.target.files[0].type === "image/png"){
+        this.errorMessage ="" 
         if(event.target.files[0].size >200000){
           this.errorMessage="The file must not be greater 2MG"
         }
