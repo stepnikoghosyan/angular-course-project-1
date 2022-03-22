@@ -49,3 +49,13 @@ export class EmailDto {
        this.email = data.email;
     }
 };
+
+// export class CommentDto {
+//     postId: number;
+//     password: string;
+
+//     constructor(data: any){
+//         this.postId = data.postId;
+//         this.password = data.password;
+//     }
+// }

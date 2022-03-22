@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationResponseModel } from '../models/pagination-response';
-import { PostModel, PostModelDto } from '../models/post.model';
+import { createCommentDto, PostModel, PostModelDto } from '../models/post.model';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
@@ -50,6 +50,12 @@ export class PostsService {
         }
         return this.httpClient
             .get<commentsResponse>(`${environment.apiUrl}/comments`, {params})
+    }
+
+
+    createComment(creaeCommentDto:createCommentDto, id:number) {
+        return this.httpClient.post<createCommentDto>(`${environment.apiUrl}/comments/${id}`, creaeCommentDto)
+
     }
 
     createPost(postDto: PostModelDto): Observable<any>{
