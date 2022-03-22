@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
-import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
@@ -16,9 +15,9 @@ import { CardFooterComponent } from './posts/card-footer/card-footer.component';
 import { TokenInterceptor } from './token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { DotsPipe } from './dots.pipe';
-import { PostComponent } from './posts/post/post.component';
+
 import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -26,15 +25,13 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     HomeComponent,
     UsersComponent,
-    PostsComponent,
+    
     ProfileComponent,
-    HeaderComponent,
     NotFoundComponent,
-    CardComponent,
-    CardFooterComponent,
-    DotsPipe,
-    PostComponent,
+    
+
   ],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -43,8 +40,6 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     FontAwesomeModule,
     SharedModule,
-
-
     ToastrModule.forRoot(),
   
   ],

@@ -25,12 +25,11 @@ import { AuthRoutingModule } from './auth-routing.module';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FontAwesomeModule,
     ToastrModule.forRoot(),
-    AuthRoutingModule,
     SharedModule,
+
+    AuthRoutingModule,
+    
   ],
 })
 export class AuthModule { }

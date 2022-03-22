@@ -11,7 +11,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AuthPublicGuard } from '../guards/auth-public.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
-import { PostComponent } from '../posts/post/post.component';
+
 
 const routes: Routes = [
   {
@@ -36,16 +36,17 @@ const routes: Routes = [
     component: UsersComponent,
     canActivate: [AuthGuard]
   },
+
   {
     path: 'posts',
-    component: PostsComponent,
-    canActivate: [AuthGuard]
+    loadChildren: () => import('../posts/posts.module').then(m=>m.PostsModule), 
+    // canLoad: [AuthPublicGuard ]
+    
   },
-  {
-    path: 'post',
-    component: PostComponent,
-    canActivate: [AuthGuard]
-  },
+
+
+
+
   {
     path: '**',
     component: NotFoundComponent,
