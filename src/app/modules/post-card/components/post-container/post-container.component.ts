@@ -11,6 +11,9 @@ export class PostContainerComponent {
   title: string = '';
 
   @Input()
+  subTitle: string = '';
+
+  @Input()
   posts: PostModel[] | null = null;
 
 }
