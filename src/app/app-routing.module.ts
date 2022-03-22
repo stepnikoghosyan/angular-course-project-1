@@ -66,7 +66,7 @@ const routes: Routes = [
                 
             },
             {
-                path: 'view',
+                path: 'view/:id',
                 component: PostsViewComponent,
                 
             },

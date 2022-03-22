@@ -3,10 +3,20 @@
     <div class="form-group">
         <label>Title</label>
         <input type="text" name="title"  formControlName="title">
+        <div *ngIf="updateForm.controls['title'].invalid && updateForm.controls['title'].touched" >
+            <span class="error-message" *ngIf="updateForm.controls['title'].errors?.['required']">
+                Title is required
+            </span> 
+        </div>
     </div>
     <div class="form-group">
         <label>Body</label>
         <textarea rows="10" name="body" multiline  formControlName="body"></textarea>
+        <div *ngIf="updateForm.controls['body'].invalid && updateForm.controls['body'].touched" >
+            <span class="error-message" *ngIf="updateForm.controls['body'].errors?.['required']">
+                Body is required
+            </span> 
+        </div>
     </div>
     <div class="btn_container">
         <label for="title" class="file_btn">Select file</label>

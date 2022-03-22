@@ -20,10 +20,10 @@ posts? :PostModel
             next: (data)=>{
                 console.log("POST DATA", data);
                 this.posts = data;
-              this.posts
-              if(this.posts && !this.posts?.imageUrl ){
-                this.posts.imageUrl = "../../assets/images/img.png"
-            }
+            //   this.posts
+            //   if(this.posts && !this.posts?.imageUrl ){
+            //     this.posts.imageUrl = "../../assets/images/img.png"
+            
             }
         })
     
