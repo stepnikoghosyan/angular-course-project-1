@@ -1,40 +1,50 @@
+<app-loading *ngIf="isLoading"></app-loading>
 <div class="card">
     <h1>Create Post</h1>
-    <form class="postForm" [formGroup] = 'formGroup' >
+    <form class="postForm" [formGroup]='formGroup'>
         <div class="inputForm">
             <div>
                 <label>Title</label>
             </div>
-            <input class="title" formControlName = "title"  type="text">
+            <input class="title" formControlName="title" type="text">
+            <div class="formErr">
+                <div class="val" *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
+                    <span *ngIf="formGroup.controls['title'].hasError('required')" class="errors">
+                        Required
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="inputForm">
             <div>
                 <label>Body</label>
             </div>
-            
-            <textarea class="title" formControlName = "body" rows="7px" cols="100px"></textarea>
+
+            <textarea class="title" formControlName="body" rows="7px" cols="100px"></textarea>
+            <span *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
+                Required
+            </span>
         </div>
-        
+
         <div>
-            <input class="inputBtn"  type="file" id="img" formControlName = "file"
-             #file accept=".jpg, .jpeg, .png" (change)="handler($event)">
+            <input class="inputBtn" type="file" id="img" formControlName="file" #file accept=".jpg, .jpeg, .png"
+                (change)="handler($event)">
 
             <button class="upload" (click)='trigger(file)'>Upload</button>
-            <div style="color: red;" >
-                <p  *ngIf = '!isImage'>{{errorFile}}</p>
-                <p *ngIf = '!chapiMej'>{{fileSizeError}}</p>
+            <div style="color: red;">
+                <p *ngIf='!isImage'>{{errorFile}}</p>
+                <p *ngIf='!chapiMej'>{{fileSizeError}}</p>
             </div>
-          
+
             <p>
-                {{fileName }} 
-                <span *ngIf = 'fileName' style="color: brown;" 
-                (click)="deleteImg()">
-                     x
+                {{fileName }}
+                <span *ngIf='fileName' style="color: brown;" (click)="deleteImg()">
+                    x
                 </span>
             </p>
         </div>
 
         <button class="btn" (click)="create()">Create</button>
     </form>
-  
+
 </div>

@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
   errorFile = '';
   fileSizeError = '';
   fileType = '';
+  isLoading = false;
   constructor(
     private fb: FormBuilder,
     private postsService: PostsService
@@ -86,7 +87,6 @@ export class PostComponent implements OnInit {
           let fileArr = this.formGroup.get('file')?.value.split('\\');
           this.fileName = fileArr[fileArr.length - 1];
 
-          console.log(file);
           this.fileType = file.type;
           this.img = ev.target?.result;
         }
@@ -103,17 +103,15 @@ export class PostComponent implements OnInit {
 
   public create() {
 
-    if (this.formGroup.valid) {
-
+    if (this.formGroup.valid && this.chapiMej && this.isImage) {
+      this.isLoading = true
       const image = {
         type: this.fileType,
         format: this.img,
       }
       const postDto = new PostDto(this.formGroup.value,image)
       this.postsService.createPost(postDto)
-        .subscribe({
-          next: (res) => { console.log(res) }
-        })
+        .subscribe(() => this.isLoading = false)
     }
 
   }

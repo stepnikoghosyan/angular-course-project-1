@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from '../auth/register/register.component'
+// import { RegisterComponent } from '../auth/register/register.component'
 import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../auth/reset-password/reset-password.component';
 import { VerifyAccountComponent } from '../auth/verify-account/verify-account.component';
@@ -16,39 +16,16 @@ import { PostComponent } from '../posts/post/post.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/login',
+    redirectTo: 'auth',
     pathMatch: 'full'
   },
+
   {
-    path: 'auth/register',
-    component: RegisterComponent,
-    canActivate: [AuthPublicGuard]
+    path: 'auth',
+    loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule),
+    canLoad: [AuthPublicGuard]
   },
-  {
-    path: 'auth/forgot-password',
-    component: ForgotPasswordComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'auth/reset-password',
-    component: ResetPasswordComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'auth/verify-account/:token',
-    component: VerifyAccountComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'auth/reset-password/:token',
-    component: ResetPasswordComponent,
-    canActivate: [AuthPublicGuard]
-  },
-  {
-    path: 'auth/login',
-    component: LoginComponent,
-    canActivate: [AuthPublicGuard]
-  },
+  
   {
     path: 'home',
     component: HomeComponent,

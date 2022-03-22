@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostsModel } from 'src/app/models/posts.model';
 import { faEye, faComment, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-card-footer',
@@ -11,9 +12,15 @@ export class CardFooterComponent implements OnInit {
   faEye = faEye;
   faEdit = faEdit;
   faComment = faComment;
-  constructor() { }
+  constructor(private postsService: PostsService) { }
 
   @Input() post!: PostsModel;
+
+  editPost(id: number) {
+    console.log(id);
+    
+    return this.postsService.getPostById(id).subscribe()
+  }
 
   ngOnInit(): void {
   }
