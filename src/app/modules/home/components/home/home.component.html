@@ -1,4 +1,5 @@
-<div class="container">
-  <p>Welcome!</p>
-</div>
-
+<app-post-container [posts]="posts$ | async"
+                    [title]="'Home'"
+                    [subTitle]="'Review some of the latest posts in our platform'">
+</app-post-container>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
