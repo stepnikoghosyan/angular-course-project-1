@@ -23,18 +23,14 @@ export class VerifyAccountComponent implements OnInit {
       const activationToken = this.activatedRoute.snapshot.params['activationToken'];
    
     this.authService.verifyAccount(activationToken).subscribe({
-          next:( resp)=>{
-            if(activationToken){
+          next:( result)=>{
+            if(result && result.message=="Success"){
               this.isActivationToken=true;
               this.token = activationToken;
-              this.router.navigateByUrl('login');   
+              this.router.navigateByUrl('login');  
+             
             }
-           
-            resp.subscribe({
-              next:(v: any)=>{
-                console.log(v)
-              }
-            })
+
           
               
           }, 
