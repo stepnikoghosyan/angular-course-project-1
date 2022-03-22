@@ -19,13 +19,7 @@ export class PostsComponent implements OnInit {
             finalize(()=>{
                 this.showSpinner = false;
             }),
-            map(data => data.results)
-                
+            map(data=>data.results),
         )
     }
-    
 }
-function data(arg0: string, data: any): void {
-    throw new Error('Function not implemented.');
-}
-

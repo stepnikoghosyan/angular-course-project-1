@@ -48,9 +48,6 @@ export class EditPostComponent implements OnInit {
                 console.log("POST DATA", data);
                 this.post = data;
                 this.targetValue = this.post?.imageUrl
-                this.updateForm.controls['title'].setValue(this.post?.title);
-                this.updateForm.controls['body'].setValue(this.post?.body);
-                // this.updateForm.controls['imageUrl'].setValue(this.post?.imageUrl);
             }
         })
     }

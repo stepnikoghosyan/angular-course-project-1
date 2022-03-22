@@ -1,7 +1,7 @@
-// import { AbstractControl, ValidationErrors } from "@angular/forms";
+import { AbstractControl, ValidationErrors } from "@angular/forms";
 
-// export function ValidatorForImage(control:AbstractControl):ValidationErrors|null{
-// if(Event.AT_TARGET.)
-// return null;
+export function ValidatorForImage(control:AbstractControl):ValidationErrors|null{
 
-// }
+return null;
+
+}

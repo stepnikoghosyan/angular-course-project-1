@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { errorResponse } from '../configs/error-response.config';
-import { PostModelDto } from '../models/post.model';
+import { CreatePostModelDto } from '../models/post.model';
 import { PostsService } from '../services/posts.service';
 
 @Component({
@@ -20,10 +20,7 @@ export class CreatePostComponent implements OnInit {
   isClose:boolean = false;
   showSpinner = false;
   cardImageBase64:string="";
-  isSaveImage:boolean =false;
-
-  date = JSON.stringify(new Date());
-
+  
   constructor(private formBuilder: FormBuilder, 
     private postsService: PostsService,
     private router:Router,
@@ -33,8 +30,8 @@ export class CreatePostComponent implements OnInit {
   createForm: FormGroup = this.formBuilder.group({
     title: ['', Validators.required],
     body: ['', Validators.required],
-    imageUrl: [''],  
-    updatedAt: [this.date]
+    image: [''],  
+  
    
 })
   ngOnInit(): void {
@@ -42,7 +39,8 @@ export class CreatePostComponent implements OnInit {
   }
 
   createFormSubmit(){
-    const dto =new PostModelDto(this.createForm.value)
+    const dto =new CreatePostModelDto(this.createForm.value)
+      console.log(dto);
       this.postsService.createPost(dto).pipe(
         finalize(()=>{
             this.showSpinner = false;
@@ -50,7 +48,7 @@ export class CreatePostComponent implements OnInit {
     ).subscribe({
         next: ()=>{
           this.notification.success("Thank you for filling out your information!", "Success massage")
-          //this.router.navigateByUrl('main/posts');
+          this.router.navigateByUrl('main/posts');
           
       },
         error:(err:HttpErrorResponse )=>{
@@ -89,10 +87,13 @@ export class CreatePostComponent implements OnInit {
               
             reader.onload = (e: any) => {
               const image = new Image();
-              image.src = e.target.result;
+               image.src= e.target.result;
+              
               this.createForm.patchValue({
-                imageUrl:image.src});
-              }          
+                image :image.src});
+                      
+              } 
+             
          reader.readAsDataURL(event.target.files[0]);
       
         }
