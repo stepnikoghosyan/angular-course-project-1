@@ -19,11 +19,12 @@
             <div>
                 <label>Body</label>
             </div>
-
             <textarea class="title" formControlName="body" rows="7px" cols="100px"></textarea>
-            <span *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
-                Required
-            </span>
+            <div *ngIf='formGroup.controls["body"].invalid && formGroup.controls["body"].touched'>
+                <span *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
+                    Required
+                </span>
+            </div>
         </div>
 
         <div>
@@ -44,7 +45,10 @@
             </p>
         </div>
 
-        <button class="btn" (click)="create()">Create</button>
+        <button *ngIf="!id else update" class="btn" (click)="create()">Create</button>
+        <ng-template #update>
+            <button class="btn" (click)="save()">Save</button>
+        </ng-template>
     </form>
 
 </div>

@@ -19,12 +19,12 @@ export class AuthPublicGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-
-    const auth = localStorage.getItem('auth');
-    if (auth) {
-      return this.router.parseUrl('/home');
-    }
-    return true;
+    return this.checkAouth()
+    //   const auth = localStorage.getItem('auth');
+    //   if (auth) {
+    //     return this.router.parseUrl('/home');
+    //   }
+    //   return true;
   }
 
   canLoad(
@@ -35,12 +35,26 @@ export class AuthPublicGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      
+
+    return this.checkAouth()
+
+    // const auth = localStorage.getItem('auth');
+    // if (auth) {
+    //   return this.router.parseUrl('/home');
+    // }
+    // return true;
+  }
+
+
+  private checkAouth() {
     const auth = localStorage.getItem('auth');
     if (auth) {
       return this.router.parseUrl('/home');
     }
     return true;
   }
+
 }
+
+
 

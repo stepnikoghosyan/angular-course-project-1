@@ -22,11 +22,13 @@ import { DotsPipe } from '../dots.pipe';
     PostsComponent,
     CardComponent,
     CardFooterComponent,
-    DotsPipe,],
+    DotsPipe
+  ],
   imports: [
     CommonModule,
     PostsRoutingModule,
     SharedModule
-  ]
+  ],
+  
 })
 export class PostsModule { }

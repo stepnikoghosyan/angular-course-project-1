@@ -2,21 +2,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PostsComponent } from './posts.component';
 import { PostComponent } from './post/post.component';
+import { AuthPublicGuard } from '../guards/auth-public.guard';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'posts',
-    pathMatch: 'full'
+    pathMatch: 'full',
+ 
   },
   {
     path: '',
     component: PostsComponent,
   },
   {
-    path: 'post',
+    path: 'post/create',
     component:PostComponent
-  }
+  },
+  {
+    path: 'post/:id',
+    component:PostComponent
+  },
 ]
 
 @NgModule({

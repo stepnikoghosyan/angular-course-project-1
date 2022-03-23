@@ -21,5 +21,21 @@ export class AuthGuard implements CanActivate {
 
       
   }
+  canLoad(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+      
+    const auth = localStorage.getItem('auth');
+    const auth1 = sessionStorage.getItem('auth');
+    if (auth || auth1) {
+      return this.router.parseUrl('/posts');
+    }
+    return true;
+  }
   
 }

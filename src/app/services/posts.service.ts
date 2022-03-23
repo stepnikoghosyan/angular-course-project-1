@@ -39,8 +39,11 @@ export class PostsService {
 
   getPostById(id: number) {
     return this.httpClient.get(`${this.baseUrl}posts/${id}`).pipe(tap(() => {
-      this.router.navigate([`post/${id}`])
+      this.router.navigate([`posts/post/${id}`])
     }))
+  }
+  updatePost(id: number, obj: PostDto) {
+    return this.httpClient.put(`${this.baseUrl}posts/${id}`, obj)
   }
 }
 

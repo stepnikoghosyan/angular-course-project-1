@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { PostDto } from 'src/app/models/post.model';
+import { PostsModel } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts.service';
 
 
@@ -22,14 +25,38 @@ export class PostComponent implements OnInit {
   fileSizeError = '';
   fileType = '';
   isLoading = false;
+  id: number = NaN;
+  private unsubscribe$ = new Subject<void>();
   constructor(
     private fb: FormBuilder,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private avtiveRouter: ActivatedRoute,
+
   ) { }
 
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
+    this.showPostData();
+  }
+
+  showPostData() {
+    this.id = this.avtiveRouter.snapshot.params['id'];
+    if (this.id) {
+      this.postsService.getPostById(this.id).pipe(takeUntil(this.unsubscribe$)).subscribe({
+        next: (res: any) => {
+          this.formGroup.patchValue({
+            title: res.title,
+            body: res.body,
+            image: res.imageUrl
+          })
+          this.fileName = 'image'
+        },
+        error: (err: any) => {
+          this.errorFile = err.error.message
+        }
+      })
+    }
   }
 
   initForm() {
@@ -109,7 +136,7 @@ export class PostComponent implements OnInit {
         type: this.fileType,
         format: this.img,
       }
-      const postDto = new PostDto(this.formGroup.value,image)
+      const postDto = new PostDto(this.formGroup.value, image)
       this.postsService.createPost(postDto)
         .subscribe(() => this.isLoading = false)
     }
@@ -118,5 +145,9 @@ export class PostComponent implements OnInit {
   public deleteImg() {
     this.formGroup.get('file')?.reset();
     this.fileName = ''
+  }
+  public save() {
+    let obj = new PostDto(this.formGroup, this.img)
+    this.postsService.updatePost(this.id, obj).subscribe()
   }
 }

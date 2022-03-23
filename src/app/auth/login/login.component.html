@@ -6,7 +6,7 @@
       <label >Email</label>
       <input class="inputMargin" type="email" formControlName="email" />
       <div class="formErr">
-        <div class="val" *ngIf = 'form.controls["email"].invalid && form.controls["email"].touched'>
+        <div class="val" *ngIf='form.controls["email"].invalid && form.controls["email"].touched'>
           <span *ngIf="form.controls['email'].hasError('email')" class="errors">
           invalid email
           </span>
@@ -35,7 +35,7 @@
     </div>
     <div class="forgot">
       <label> 
-        <input type="checkbox" formControlName = 'RememberMe' /> 
+        <input type="checkbox" formControlName='RememberMe' /> 
         <span>Remember me</span> 
       </label>
       <a routerLink="/auth/forgot-password" >

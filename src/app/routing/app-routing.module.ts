@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule),
     canLoad: [AuthPublicGuard]
   },
-  
+
   {
     path: 'home',
     component: HomeComponent,
@@ -39,13 +39,10 @@ const routes: Routes = [
 
   {
     path: 'posts',
-    loadChildren: () => import('../posts/posts.module').then(m=>m.PostsModule), 
-    // canLoad: [AuthPublicGuard ]
-    
+    loadChildren: () => import('../posts/posts.module').then(m => m.PostsModule),
+    canLoad: [AuthPublicGuard]
+
   },
-
-
-
 
   {
     path: '**',

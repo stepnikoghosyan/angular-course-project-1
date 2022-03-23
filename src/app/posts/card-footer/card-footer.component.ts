@@ -16,10 +16,11 @@ export class CardFooterComponent implements OnInit {
 
   @Input() post!: PostsModel;
 
-  editPost(id: number) {
-    console.log(id);
-    
-    return this.postsService.getPostById(id).subscribe()
+  editPost(id: number) {    
+    return this.postsService.getPostById(id).subscribe((res) => {
+      console.log(res);
+      
+    })
   }
 
   ngOnInit(): void {
