@@ -20,7 +20,7 @@
       <div class="flex-container">
         <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
         <div class="file-upload">
-          <button class="upload-btn" (click)="fileUpload.click()"> Select file </button>
+          <button type="button" class="upload-btn" (click)="fileUpload.click()"> Select file </button>
           <label>{{fileName}}</label>
         </div>
       </div>
