@@ -229,9 +229,26 @@ textarea {
 .file-input {
   display: none;
 }
-
+.file-name{
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  .delete-btn{
+    cursor: pointer;
+    background: #c5444a;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-left: 10px;
+    border: none;
+    padding: 5px 8px;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+}
 
 .upload-btn {
+  cursor: pointer;
   padding: 12px 35px;
   font-size: 16px;
   background-color: transparent;
@@ -245,6 +262,7 @@ textarea {
 }
 
 .create-btn {
+  cursor: pointer;
   padding: 12px 35px;
   font-size: 16px;
   background-color: dodgerblue;

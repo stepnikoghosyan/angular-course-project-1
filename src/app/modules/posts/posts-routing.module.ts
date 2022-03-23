@@ -20,7 +20,7 @@ const routes: Routes = [
         component: PostsViewComponent
       },
       {
-        path: 'posts/add',
+        path: 'add',
         component: PostsAddEditComponent
       },
       {

@@ -72,25 +72,25 @@ export class PostsViewComponent implements OnInit {
     if (this.submitted) {
       return;
     } else {
-      if (this.form.valid) {
-        const dto = new CreatePostDto(this.form.value,this.formData);
-        this.isLoading = true;
-        this.submitted = true;
-        this.postService.createPost(dto)
-          .pipe(takeUntil(this.unsubscribe$),
-            finalize(() => {
-              this.isLoading = false;
-              this.submitted = false;
-            }))
-          .subscribe({
-            next: () => {
-              this.showNotifications(true, "Successfully created.")
-            },
-            error: (err: HttpErrorResponse) => {
-              this.showNotifications(true, err.error.message);
-            }
-          });
-      }
+      // if (this.form.valid) {
+      //   const dto = new CreatePostDto(this.form.value,this.formData);
+      //   this.isLoading = true;
+      //   this.submitted = true;
+      //   this.postService.createPost(dto)
+      //     .pipe(takeUntil(this.unsubscribe$),
+      //       finalize(() => {
+      //         this.isLoading = false;
+      //         this.submitted = false;
+      //       }))
+      //     .subscribe({
+      //       next: () => {
+      //         this.showNotifications(true, "Successfully created.")
+      //       },
+      //       error: (err: HttpErrorResponse) => {
+      //         this.showNotifications(true, err.error.message);
+      //       }
+      //     });
+      // }
     }
   }
 
