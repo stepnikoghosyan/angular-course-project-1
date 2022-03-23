@@ -1,0 +1,26 @@
+.flex-col {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 20px auto;
+  // span {
+  //   padding: 0 10% 0 3%;
+  // }
+}
+.flex-container {
+  width: 50%;
+  margin-left: auto;
+  margin-top: 20px;
+}
+.flex-container:first-child {
+  display: flex;
+  align-items: baseline;
+  & > label {
+    margin-left: 10px;
+  }
+}
+.flex-container:last-child {
+  display: flex;
+  justify-content: flex-end;
+}

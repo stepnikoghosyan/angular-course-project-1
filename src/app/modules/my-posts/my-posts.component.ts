@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {catchError, finalize, map, Observable, of} from 'rxjs';
-import {PostModel} from '../post-card/models/post.model';
-import {NotificationService} from '../../services/notification.service';
-import {PostsService} from '../post-card/services/posts.service';
+import { Component, OnInit } from '@angular/core';
+import { catchError, finalize, map, Observable, of } from 'rxjs';
+import { PostModel } from '../post-card/models/post.model';
+import { NotificationService } from '../../services/notification.service';
+import { PostsService } from '../post-card/services/posts.service';
+import { UserService } from 'src/app/services/user.service';
+import { PostsQueryParamsModel } from '../post-card/models/posts-query-params.model';
 
 @Component({
   selector: 'app-my-posts',
@@ -15,6 +17,7 @@ export class MyPostsComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
+    private userService: UserService,
     private notifyService: NotificationService) {
   }
 
@@ -23,7 +26,12 @@ export class MyPostsComponent implements OnInit {
   }
 
   private getMyPosts(): void {
-    this.myPosts$ = this.postsService.getMyPosts()
+    const params:PostsQueryParamsModel = {
+      page: 1,
+      pageSize: 10,
+      userID: this.userService.user?.id
+    }
+    this.myPosts$ = this.postsService.getPostsByPagination(params)
       .pipe(
         finalize(() => this.isLoading = false),
         map(data => data.results),

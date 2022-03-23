@@ -5,6 +5,7 @@ import {PostsRoutingModule} from './posts-routing.module';
 import {PostsAddEditComponent} from './components/posts-add-edit/posts-add-edit.component';
 import {PostsViewComponent} from './components/posts-view/posts-view.component';
 import {PostCardModule} from "../post-card/post-card.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import {PostCardModule} from "../post-card/post-card.module";
   imports: [
     CommonModule,
     PostsRoutingModule,
-    PostCardModule
+    PostCardModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PostsModule { }

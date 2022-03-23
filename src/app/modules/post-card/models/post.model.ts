@@ -8,4 +8,5 @@ export interface PostModel {
   imageUrl: string | null;
   user: UserModel;
   comments: CommentModel[];
+  createdAt: Date;
 }
