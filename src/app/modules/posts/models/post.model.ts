@@ -1,3 +1,6 @@
+import {UserModel} from "../../../models/user.model";
+import {CommentModel} from "../../../models/comment.model";
+
 export class CreatePostDto {
   title: string;
   body: string;
@@ -9,4 +12,7 @@ export class CreatePostDto {
     this.image = file.has('file') ? file : null;
   }
 }
+
+
+
 

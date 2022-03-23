@@ -225,6 +225,38 @@ textarea {
   flex-wrap: wrap;
   margin: 0 -10px;
 }
+
+.file-input {
+  display: none;
+}
+
+
+.upload-btn {
+  padding: 12px 35px;
+  font-size: 16px;
+  background-color: transparent;
+  border-radius: 8px;
+  border: 2px solid #73bf73;
+  &:hover {
+    background-color: #73bf73;
+    color: #fff;
+    transition: 0.3s;
+  }
+}
+
+.create-btn {
+  padding: 12px 35px;
+  font-size: 16px;
+  background-color: dodgerblue;
+  border-radius: 8px;
+  border: 2px solid dodgerblue;
+  color: #fff;
+  &:hover {
+    background-color: transparent;
+    color: #000;
+    transition: 0.3s;
+  }
+}
 @media only screen and (min-width: 556px) {
   .col-4 {
     width: 100%;

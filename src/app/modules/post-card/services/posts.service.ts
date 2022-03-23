@@ -41,6 +41,10 @@ export class PostsService {
     });
   }
 
+  getPostById(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}/posts/${id}`);
+  }
+
   private paramsToHttpParams(params: PostsQueryParamsModel): HttpParams {
     let httpParams = new HttpParams();
     Object.entries(params).forEach(([key, value]) => {
