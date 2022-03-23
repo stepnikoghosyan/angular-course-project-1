@@ -14,17 +14,19 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
+ 
   errors:string[] = [];
   errorMessage:string ="";
   isTargetValue:string = "";
   isClose:boolean = false;
   showSpinner = false;
-  cardImageBase64:string="";
-  
+  cardImageBase64:string =""
+ // selectrdFile: File =null
   constructor(private formBuilder: FormBuilder, 
     private postsService: PostsService,
     private router:Router,
-    private notification :ToastrService) { }
+    private notification: ToastrService,
+) { }
     
     
   createForm: FormGroup = this.formBuilder.group({
@@ -34,21 +36,33 @@ export class CreatePostComponent implements OnInit {
   
    
 })
+get f(){
+  return this.createForm.controls
+}
   ngOnInit(): void {
-    
+
   }
 
   createFormSubmit(){
-    const dto =new CreatePostModelDto(this.createForm.value)
-      console.log(dto);
-      this.postsService.createPost(dto).pipe(
+  
+    const formData = new FormData();
+     const dto = new CreatePostModelDto(this.createForm.value);
+   
+    formData.append("title",this.createForm.get('title')?.value);
+    formData.append("body",  this.createForm.get('body')?.value);
+    formData.append("image ", this.cardImageBase64)
+      console.log(formData.get('body')),
+      console.log(formData.get('image'))
+    this.postsService.createPost(dto).pipe(
         finalize(()=>{
+         
             this.showSpinner = false;
         })
     ).subscribe({
-        next: ()=>{
+        next: (res)=>{
+           console.log(res)
           this.notification.success("Thank you for filling out your information!", "Success massage")
-          this.router.navigateByUrl('main/posts');
+         // this.router.navigateByUrl('main/posts');
           
       },
         error:(err:HttpErrorResponse )=>{
@@ -83,20 +97,20 @@ export class CreatePostComponent implements OnInit {
                 this.errorMessage="The file must not be greater 2MG";
                 
               }
-             const reader = new FileReader();
+  
+            const reader = new FileReader();
               
             reader.onload = (e: any) => {
-              const image = new Image();
-               image.src= e.target.result;
               
+               this.cardImageBase64= e.target.result;
+             
               this.createForm.patchValue({
-                image :image.src});
-                      
-              } 
+                image :this.cardImageBase64});              } 
              
          reader.readAsDataURL(event.target.files[0]);
-      
-        }
+        console.log(event.target.files[0])
+     
+      }
           
      } 
   }

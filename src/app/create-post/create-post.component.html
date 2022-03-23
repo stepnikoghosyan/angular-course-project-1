@@ -21,15 +21,16 @@
         <label for="title"class="file_btn">Select file</label>
         {{isTargetValue}}
         <ng-container >
-            <img src=""  formControlName="image" />
+            <img src=""   />
         </ng-container>
-        <button class="close_btn" *ngIf="isClose" (click)="clearFile($event)">X</button>
-        <input  id ="title" type="file" style="visibility:hidden" class="file_btn" (change) = "onSelectFile($event)"  name ="Select file"/> 
+        <button class="close_btn" formControlName="image"  *ngIf="isClose" (click)="clearFile($event)">X</button>
+        <input  id ="title"  type="file" class="file_btn" (change) = "onSelectFile($event)"  name ="image"/> 
         {{errorMessage}}
         
         <button  class="create_btn" type="submit">Create</button>
 
-    </div>     
+    </div>   
+      
 </form>
 
     {{errors}}
