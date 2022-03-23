@@ -1,15 +1,15 @@
 <div class="container-medium">
-  <h2 class="text-center">Create Post</h2>
+  <h2 class="text-center">{{postId ? 'Update Post' : 'Create Post'}}</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
-      <label>Title</label>
+      <label class="required">Title</label>
       <input type="text" formControlName="title">
       <div *ngIf="form.controls['title'].invalid && form.controls['title'].touched">
         <p class="error-message" *ngIf="form.controls['title'].errors?.['required']">Post title is required</p>
       </div>
     </div>
     <div>
-      <label>Body</label>
+      <label class="required">Body</label>
       <textarea formControlName="body"></textarea>
       <div *ngIf="form.controls['body'].invalid && form.controls['body'].touched">
         <p class="error-message" *ngIf="form.controls['body'].errors?.['required']">Post body is required</p>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="flex-col">
-      <input type="file" class="file-input" [accept]="extention" (change)="onFileSelected($event)" #fileUpload>
+      <input type="file" class="file-input" [accept]="extension" (change)="onFileSelected($event)" #fileUpload>
       <div class="file-upload">
         <button type="button" class="upload-btn" (click)="fileUpload.click()"> Select file </button>
         <div class="file-name" *ngIf="fileName">
@@ -29,7 +29,8 @@
       </div>
     </div>
     <div class="flex-container">
-      <button [disabled]="form.invalid || submitted" class="create-btn">{{postId?'Update':'Create'}} </button>
+      <button class="cancel-btn" routerLink="/">Back</button>
+      <button [disabled]="form.invalid || submitted" class="create-btn">{{postId ? 'Update' : 'Create'}} </button>
     </div>
   </form>
 </div>

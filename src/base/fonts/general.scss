@@ -269,12 +269,35 @@ textarea {
   border-radius: 8px;
   border: 2px solid dodgerblue;
   color: #fff;
-  &:hover {
+
+  &:hover:enabled {
+    background-color: transparent;
+    color: #000;
+    transition: 0.3s;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.cancel-btn {
+  cursor: pointer;
+  padding: 12px 35px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 2px solid lightgray;
+  background-color: lightgray;
+  color: black;
+  margin-right: 10px;
+  &:hover:enabled {
     background-color: transparent;
     color: #000;
     transition: 0.3s;
   }
 }
+
 @media only screen and (min-width: 556px) {
   .col-4 {
     width: 100%;
@@ -282,6 +305,7 @@ textarea {
     padding-right: 10px;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .col-4 {
     width: 50%;
@@ -303,10 +327,16 @@ textarea {
     @media(min-width: 40rem) {
       width: 50%;
     }
-    @media(min-width: 56rem) {
-      width: 33.3333%;
-    }
+  @media(min-width: 56rem) {
+    width: 33.3333%;
+  }
 }
+
 .align-items-center {
   align-items: center;
+}
+
+.required:after {
+  content: " *";
+  color: red;
 }
