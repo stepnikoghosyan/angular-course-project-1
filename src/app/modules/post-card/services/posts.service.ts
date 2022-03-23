@@ -7,6 +7,7 @@ import {PostModel} from "../models/post.model";
 import {PaginatedResponseModel} from "../../../models/paginated-response.model";
 import {PostsQueryParamsModel} from "../models/posts-query-params.model";
 import {UserService} from "../../../services/user.service";
+import {CreatePostDto} from "../../posts/models/post.model";
 
 @Injectable()
 export class PostsService {
@@ -46,5 +47,13 @@ export class PostsService {
       httpParams = httpParams.append(key, value);
     })
     return httpParams;
+  }
+
+  createPost(params: CreatePostDto) {
+    return this.httpClient.post<void>(`${environment.apiUrl}/posts`, params);
+  }
+
+  updatePost(id: number, params: CreatePostDto) {
+    return this.httpClient.put<void>(`${environment.apiUrl}/posts/${id}`, params);
   }
 }
