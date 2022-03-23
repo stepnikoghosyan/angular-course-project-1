@@ -1,14 +1,10 @@
 import { UserModel } from "./user.model";
 
 export interface CommentModel{
-    Id: number;
+    commentId: number;
     message: string;
     createdAt: string;
     updatedAt: string;
+    userName: UserModel;
     user: UserModel
-}
-
-export interface commentsResponse {
-    count:number
-    results:CommentModel[]
 }

@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationResponseModel } from '../models/pagination-response';
-import { createCommentDto, PostModel, PostModelDto } from '../models/post.model';
-import { catchError, tap } from 'rxjs/operators';
+import { CreatePostModelDto, PostModel, PostModelDto } from '../models/post.model';
+import {  tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
-import { CommentModel, commentsResponse } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,29 +37,13 @@ export class PostsService {
                     tap(()=>{
                         this.notifyService.success("Post is updated", "Success!!")
                         this.router.navigateByUrl('/main/posts');
-                    }), 
-                    //catchError(()=>)
-                    
-                ) 
+                    })
+                )
     }
 
-    getComments(id:number) :Observable<commentsResponse>{
-        let params  = {
-            'posts':id
-        }
-        return this.httpClient
-            .get<commentsResponse>(`${environment.apiUrl}/comments`, {params})
-    }
-
-
-    createComment(creaeCommentDto:createCommentDto, id:number) {
-        return this.httpClient.post<createCommentDto>(`${environment.apiUrl}/comments/${id}`, creaeCommentDto)
-
-    }
-
-    createPost(postDto: PostModelDto): Observable<any>{
+    createPost(postDto: CreatePostModelDto): Observable<any>{
         console.log(postDto)
-        return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts/`, postDto)
+        return this.httpClient.post<CreatePostModelDto>(`${environment.apiUrl}/posts/`, postDto)
     }
 
 }

@@ -1,4 +1,4 @@
-import { Title } from "@angular/platform-browser";
+
 import { CommentModel } from "./comment.model";
 import { UserModel } from "./user.model";
 
@@ -6,7 +6,6 @@ export class PostModel {
     id: number;
     title: string;
     body: string;
-    createdAt:Date;
     imageUrl: string | null;
     user: UserModel
     comments: CommentModel[];
@@ -15,7 +14,6 @@ export class PostModel {
         this.id = data.id;
         this.title = data.title;
         this.body = data.body;
-        this.createdAt = data.createdAt
         this.imageUrl = data.imageUrl;
         this.user = data.user       
         this. comments = data.comments;
@@ -37,10 +35,12 @@ export class PostModelDto{
     }
 }
 
-export class createCommentDto {
-    message :string
-
-    constructor(data:any) {
-        this.message = data.message
+    export class CreatePostModelDto extends PostModelDto{
+    image: File;
+        constructor(data:any){
+            super(data)
+            this.image = data.image
+        }
     }
-}
+     
+  
