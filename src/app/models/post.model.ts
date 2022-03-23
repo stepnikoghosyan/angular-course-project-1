@@ -1,4 +1,5 @@
 
+import { TOUCH_BUFFER_MS } from "@angular/cdk/a11y/input-modality/input-modality-detector";
 import { CommentModel } from "./comment.model";
 import { UserModel } from "./user.model";
 
@@ -35,11 +36,14 @@ export class PostModelDto{
     }
 }
 
-    export class CreatePostModelDto extends PostModelDto{
-    image: File;
-        constructor(data:any){
-            super(data)
-            this.image = data.image
+    export class CreatePostModelDto{
+    title:string;
+    body:string;
+    image: FormData | null;
+        constructor(data:any, image:FormData){
+            this.body = data.body;
+            this.title = data.title;
+            this.image = image.has("image") ? image : null
         }
     }
      
