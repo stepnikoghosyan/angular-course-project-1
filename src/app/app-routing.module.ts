@@ -28,39 +28,39 @@ const routes: Routes = [
     },
     {
         path: "main", 
-        component: MainComponent,
-        canActivate: [AuthGuard],
-        children: [
-            {
-                path: "home", 
-                component: HomeComponent,
-                canActivate: [AuthGuard]
-            },
-            {
-                path: "posts", 
-                component: PostsComponent,
-                canActivate: [AuthGuard],
-               children:[
-                {
-                    path: 'create',
-                    component: CreatePostComponent,
-                    
-                }
-               ]
+        loadChildren: ()=> import("./modules/main/main.module").then(m => m.MainModule)
+        // component: MainComponent,
+        // canActivate: [AuthGuard],
+        // children: [
+        //     {
+        //         path: "home", 
+        //         component: HomeComponent,
+        //         canActivate: [AuthGuard]
+        //     },
+        //     {
+        //         path: "posts", 
+        //         component: PostsComponent,
+        //         canActivate: [AuthGuard],
                 
-            },
-            {
-                path: 'users',
-                component: UsersComponent,
-                canActivate: [AuthGuard]
-            },
-            {
-                path: 'edit-post/:id',
-                component: EditPostComponent,
                 
-            },
+        //     },
+        //     {
+        //         path: 'create',
+        //         component: CreatePostComponent,
+            
+        //     },
+        //     {
+        //         path: 'users',
+        //         component: UsersComponent,
+        //         canActivate: [AuthGuard]
+        //     },
+        //     {
+        //         path: 'edit-post/:id',
+        //         component: EditPostComponent,
+                
+        //     },
          
-        ]
+        // ]
     },
     {
         path:"login",
