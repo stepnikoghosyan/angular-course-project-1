@@ -27,7 +27,10 @@
         <input  id ="title" hidden   formControlName="image"  type="file" class="file_btn" (change) = "onSelectFile($event)"  name ="image"/> 
         {{errorMessage}}
         
-        <button  class="create_btn" type="submit">Create</button>
+        <div class="btns">
+            <a routerLink="../posts"><i class="fas fa-arrow-left"></i></a>
+            <button class="create_btn" type="submit">Create</button>
+        </div>
 
     </div>   
       

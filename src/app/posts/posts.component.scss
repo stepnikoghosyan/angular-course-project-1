@@ -7,6 +7,17 @@
         font-size: 35px;
         margin-top: 25px;
     }
+    .create_post{
+        display: flex;
+        justify-content: end;
+        margin-right: 50px;
+
+        button{
+            color: white;
+            background-color: #ffc107;
+            padding: 10px 15px;
+        }  
+    }
     .posts{
         display: flex;
         flex-wrap: wrap;

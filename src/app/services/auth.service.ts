@@ -10,11 +10,11 @@ import { NotificationService } from '../services/notification.service';
   providedIn: 'root'
 })
 export class AuthService {
-
+    isLoggedIn = false;
+    
     constructor(private httpClient: HttpClient,
                 private router: Router,
                 private notifyService: NotificationService) {}
-
 
     forgotPassword(forgotPasswordDto: ForgotPasswordDto): Observable<void>{
         return this.httpClient
@@ -47,7 +47,8 @@ export class AuthService {
                 } else {
                     sessionStorage.setItem('auth', item);
                 }
-                this.router.navigateByUrl("/main/home")
+                this.router.navigateByUrl("/main/home");
+                this.isLoggedIn = true
             })
         );
       };

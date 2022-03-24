@@ -1,5 +1,8 @@
 <div class="posts-content">
     <h1 class="title">Posts</h1>
+    <div class="create_post">
+        <button type="button" routerLink="../create">Create Post</button>
+    </div>
     <div class="posts">
         <app-post-card *ngFor="let post of posts$| async " [post]="post"></app-post-card>
     </div>

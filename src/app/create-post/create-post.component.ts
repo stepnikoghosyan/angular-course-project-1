@@ -88,9 +88,9 @@ export class CreatePostComponent implements OnInit {
     formData.append("title",this.createForm.get('title')?.value);
     formData.append("body",  this.createForm.get('body')?.value);
     formData.append("image", this.createForm.get('image')?.value)
-    const dto = new CreatePostModelDto(this.createForm.value,formData);
-   console.log("dto is",dto.image?.append("image", this.createForm.get('image')?.value))
-   console.log("image",this.createForm.get('image')?.value)
+    const dto = new CreatePostModelDto(this.createForm.value, formData);
+    console.log("dto is",dto.image?.append("image", this.createForm.get('image')?.value))
+    console.log("image",this.createForm.get('image')?.value)
    
     // formData.append("title",this.createForm.get('title')?.value);
     // formData.append("body",  this.createForm.get('body')?.value);

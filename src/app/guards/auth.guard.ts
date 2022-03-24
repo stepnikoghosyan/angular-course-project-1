@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
       if ((local && JSON.parse(local).accessToken) || (session && JSON.parse(session).accessToken)) {
         return true;
       }
-    return this.router.parseUrl('/login');
+        return this.router.parseUrl('/login');
     }
   
 }

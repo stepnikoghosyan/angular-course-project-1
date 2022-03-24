@@ -36,7 +36,7 @@ export class PostModelDto{
     }
 }
 
-    export class CreatePostModelDto{
+export class CreatePostModelDto{
     title:string;
     body:string;
     image: FormData | null;
@@ -45,6 +45,6 @@ export class PostModelDto{
             this.title = data.title;
             this.image = image.has("image") ? image : null
         }
-    }
+}
      
   

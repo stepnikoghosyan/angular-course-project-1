@@ -15,7 +15,10 @@
         </div>
         <input #inputValue id="title" type="file" class="file_invisible file_btn"
             formControlName="imageUrl" (change)="selectFile($event)" name ="file"/> 
+        <div class="update_btns">
+            <a routerLink="../../posts"><i class="fas fa-arrow-left"></i></a>
+            <button class="create_btn" type="submit">Update</button>
+        </div>
         
-        <button class="create_btn" type="submit">Update</button>
     </div>
 </form>

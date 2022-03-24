@@ -5,7 +5,6 @@ import { finalize, Subject, Subscription } from 'rxjs';
 import { errorResponse } from '../../utils/error-response.utility';
 import { ForgotPasswordDto } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
-import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-forgot-password',
