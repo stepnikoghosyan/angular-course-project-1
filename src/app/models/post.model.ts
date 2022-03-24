@@ -7,6 +7,7 @@ export class PostModel {
     id: number;
     title: string;
     body: string;
+    createdAt:string
     imageUrl: string | null;
     user: UserModel
     comments: CommentModel[];
@@ -15,6 +16,7 @@ export class PostModel {
         this.id = data.id;
         this.title = data.title;
         this.body = data.body;
+        this.createdAt=data.createdAt
         this.imageUrl = data.imageUrl;
         this.user = data.user       
         this. comments = data.comments;

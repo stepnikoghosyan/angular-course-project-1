@@ -14,4 +14,8 @@ export class PostCardComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {}
+
+    onImageError():void {
+     this.post.imageUrl = "../../assets/images/img.png"
+  }
 }

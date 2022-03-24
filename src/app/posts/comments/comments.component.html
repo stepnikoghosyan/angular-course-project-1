@@ -1,0 +1,8 @@
+<h3>Comments</h3>
+<form [formGroup]="commentsForm" (ngSubmit)="createComment()">
+<input type="text" formControlName="message">
+<button>submit</button>
+</form>
+<div *ngFor="let comment of comments">
+    {{comment?.message}}
+</div>
