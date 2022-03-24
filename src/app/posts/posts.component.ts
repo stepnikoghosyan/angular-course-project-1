@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, finalize, map, Observable, Subscription, tap } from 'rxjs';
+import { catchError, finalize, map, Observable, of, Subscription, tap } from 'rxjs';
 import { PostModel } from '../models/post.model';
 import { PostsService } from '../services/posts.service';
 
