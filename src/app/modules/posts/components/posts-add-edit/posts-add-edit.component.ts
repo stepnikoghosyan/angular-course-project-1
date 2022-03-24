@@ -6,6 +6,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {PostsService} from "../../../post-card/services/posts.service";
 import {NotificationService} from "../../../../services/notification.service";
 import {PostModel} from 'src/app/modules/post-card/models/post.model';
+import {fileTypeValidator} from "../../validators/file-type.validator";
+import {fileSizeValidator} from "../../validators/file-size.validator";
+import {FILE_EXTENSIONS, FILE_SIZE_MEGABYTE} from "../../constants";
 
 @Component({
   selector: 'app-posts-add-edit',
@@ -20,13 +23,17 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   fileName = '';
   isLoading = false;
   submitted = false;
-  extension = '.jpg, .jpeg, .png';
+  extension: string;
+  fileSize: string;
 
   constructor(private formBuilder: FormBuilder,
-    private postService: PostsService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private notifyService: NotificationService) {
+              private postService: PostsService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private notifyService: NotificationService) {
+
+    this.extension = FILE_EXTENSIONS.map(item => '.' + item).join(', ');
+    this.fileSize = FILE_SIZE_MEGABYTE + 'MB';
     this.formInit();
   }
 
@@ -38,7 +45,7 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      image: [null]
+      image: [null, [fileTypeValidator(), fileSizeValidator()]]
     });
   }
 
@@ -72,17 +79,11 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
-      const fileSize = this.convertByteToMegaByte(file.size);
-      const fileExtension = file.type.split('/').pop()?.toLowerCase();
-      if (fileSize > 2) {
-        this.notifyService.showNotification(false, 'The size of the picture should be smaller than 2MB');
-        return;
-      }
-      if (!fileExtension || this.extension.indexOf(`.${fileExtension}`) === -1) {
-        this.notifyService.showNotification(false, `The picture must be ${this.extension}`);
-        return;
-      }
       this.form.controls['image'].setValue(file);
+    }
+    if (this.form.controls['image'].invalid) {
+      this.fileName = '';
+    } else {
       this.fileName = file.name;
     }
   }
@@ -149,11 +150,6 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
           this.notifyService.showNotification(false, err.error.message);
         }
       });
-  }
-
-  private convertByteToMegaByte(sizeInBytes: number): number {
-    const bytesInOneMegaByte = 1024 * 1024;
-    return sizeInBytes / bytesInOneMegaByte;
   }
 
   ngOnDestroy(): void {

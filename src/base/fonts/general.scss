@@ -228,10 +228,10 @@ textarea {
 .file-input {
   display: none;
 }
+
 .file-name{
   display: flex;
   align-items: center;
-  margin-top: 15px;
   .delete-btn{
     cursor: pointer;
     background: #c5444a;
@@ -253,6 +253,7 @@ textarea {
   background-color: transparent;
   border-radius: 8px;
   border: 2px solid #73bf73;
+  margin-bottom: 15px;
   &:hover {
     background-color: #73bf73;
     color: #fff;

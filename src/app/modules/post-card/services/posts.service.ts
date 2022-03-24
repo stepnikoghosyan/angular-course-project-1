@@ -21,7 +21,7 @@ export class PostsService {
   getPostsByPagination(params?: PostsQueryParamsModel) {
     if (!params) {
       params = {
-        page: 4,
+        page: 1,
         pageSize: 10
       }
     }
