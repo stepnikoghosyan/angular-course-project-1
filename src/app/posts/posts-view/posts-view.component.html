@@ -11,12 +11,12 @@
         {{posts?.title}}
     </span>
     <div>
-        <img class="img" [src]="posts?.imageUrl" alt="image of the post">
+        <img class="img" [src]="posts?.imageUrl" (error)="onImageError()" alt="image of the post">
     </div>
     <br>
     <span>
         {{posts?.body}}
     </span>
 </div>
-<app-comments></app-comments>
+<!-- <app-comments></app-comments> -->
 

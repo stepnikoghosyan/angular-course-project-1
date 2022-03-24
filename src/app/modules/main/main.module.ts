@@ -16,6 +16,7 @@ import { EditPostComponent } from 'src/app/edit-post/edit-post.component';
 import { PostsComponent } from 'src/app/posts/posts.component';
 import { HomeComponent } from 'src/app/home/home.component';
 import { MainComponent } from 'src/app/main/main.component';
+import { PostsViewComponent } from 'src/app/posts/posts-view/posts-view.component';
 
 
 import { SetImagePipe } from 'src/app/pipes/set-image.pipe';
@@ -34,8 +35,8 @@ import { CreatePostComponent } from 'src/app/create-post/create-post.component';
     CreatePostComponent,
     PostsComponent,
     HomeComponent,
-    MainComponent
-
+    MainComponent,
+    PostsViewComponent
 ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { EditPostComponent } from 'src/app/edit-post/edit-post.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { HomeComponent } from 'src/app/home/home.component';
 import { MainComponent } from 'src/app/main/main.component';
+import { PostsViewComponent } from 'src/app/posts/posts-view/posts-view.component';
 import { PostsComponent } from 'src/app/posts/posts.component';
 import { UsersComponent } from 'src/app/users/users.component';
 
@@ -38,6 +39,10 @@ const routes: Routes = [
     {
         path: 'edit-post/:id',
         component: EditPostComponent,
+    },
+    {
+        path: 'view-post/:id',
+        component: PostsViewComponent,
     },
 ];
 

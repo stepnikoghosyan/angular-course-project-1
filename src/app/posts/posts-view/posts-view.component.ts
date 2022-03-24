@@ -10,7 +10,7 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./posts-view.component.scss']
 })
 export class PostsViewComponent implements OnInit {
-posts? :PostModel
+posts! :PostModel
   constructor( private postService: PostsService,
                private activatedRoute: ActivatedRoute) { }
 
@@ -28,4 +28,9 @@ posts? :PostModel
     
   }
 
+  onImageError():void {
+    this.posts.imageUrl = "../../assets/images/img.png"
+ }
+
+ 
 }
