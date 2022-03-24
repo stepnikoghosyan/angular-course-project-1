@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { PostDto } from 'src/app/models/post.model';
-import { PostsModel } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts.service';
-
-
 
 @Component({
   selector: 'app-post',
@@ -31,7 +28,6 @@ export class PostComponent implements OnInit {
     private fb: FormBuilder,
     private postsService: PostsService,
     private avtiveRouter: ActivatedRoute,
-
   ) { }
 
 
@@ -85,8 +81,6 @@ export class PostComponent implements OnInit {
   }
 
 
-
-
   public fileTypeCheck(type: string): boolean {
 
     if (type === "image/jpeg" || type === "image/png") {
@@ -99,6 +93,7 @@ export class PostComponent implements OnInit {
     }
     return this.isImage
   }
+
   public handler(event: any): void {
 
     if (!event.target.files?.length) return
@@ -109,8 +104,6 @@ export class PostComponent implements OnInit {
         this.errorFile = ''
         const reader = new FileReader();
         reader.onload = ev => {
-          console.log('result', ev.target?.result)
-
           let fileArr = this.formGroup.get('file')?.value.split('\\');
           this.fileName = fileArr[fileArr.length - 1];
 
@@ -146,8 +139,9 @@ export class PostComponent implements OnInit {
     this.formGroup.get('file')?.reset();
     this.fileName = ''
   }
+
   public save() {
-    let obj = new PostDto(this.formGroup, this.img)
-    this.postsService.updatePost(this.id, obj).subscribe()
+    this.postsService.updatePost(this.id, this.formGroup.value)
+    .subscribe()
   }
 }

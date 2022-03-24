@@ -4,16 +4,10 @@ import { PostsRoutingModule } from './posts-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostsComponent } from './posts.component';
 import { PostComponent } from './post/post.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ToastrModule } from 'ngx-toastr';
-import { HeaderComponent } from '../header/header.component';
 import { CardComponent } from './card/card.component';
 import { CardFooterComponent } from './card-footer/card-footer.component';
 import { DotsPipe } from '../dots.pipe';
-
-
+import { PostViewComponent } from './post-view/post-view.component';
 
 
 @NgModule({
@@ -22,7 +16,8 @@ import { DotsPipe } from '../dots.pipe';
     PostsComponent,
     CardComponent,
     CardFooterComponent,
-    DotsPipe
+    DotsPipe,
+    PostViewComponent
   ],
   imports: [
     CommonModule,

@@ -21,7 +21,11 @@ export class PostsService {
   ) { }
 
   getPosts(): Observable<PaginationModel<PostsModel>> {
-    return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`)
+    return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`,{
+      params:{
+        showAll:true
+      }
+    })
 
   }
 
@@ -42,8 +46,12 @@ export class PostsService {
       this.router.navigate([`posts/post/${id}`])
     }))
   }
+  
   updatePost(id: number, obj: PostDto) {
     return this.httpClient.put(`${this.baseUrl}posts/${id}`, obj)
+    .pipe(tap(()=>{
+      this.router.navigate(['/posts'])
+    }))
   }
 }
 

@@ -5,19 +5,18 @@ import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './routing/app-routing.module';
-import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { CardComponent } from './posts/card/card.component';
-import { CardFooterComponent } from './posts/card-footer/card-footer.component';
 import { TokenInterceptor } from './token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SharedModule } from './shared/shared.module';
-import { RouterModule } from '@angular/router';
+import { MyPostsComponent } from './my-posts/my-posts.component';
+
+
 
 
 @NgModule({
@@ -25,11 +24,9 @@ import { RouterModule } from '@angular/router';
     AppComponent,
     HomeComponent,
     UsersComponent,
-    
+    MyPostsComponent,
     ProfileComponent,
     NotFoundComponent,
-    
-
   ],
 
   imports: [

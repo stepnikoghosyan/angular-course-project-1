@@ -1,5 +1,5 @@
 import { CommentsModel } from "./coments.model";
-import { UserModel } from "./user.model";
+import { UserModelDto } from "./user.model";
 
 export interface PostsModel {
   title: string;
@@ -7,7 +7,7 @@ export interface PostsModel {
   id: number;
   imageUrl: string|null;
   comments: CommentsModel[];
-  user: UserModel;
+  user: UserModelDto;
 }
 
 
