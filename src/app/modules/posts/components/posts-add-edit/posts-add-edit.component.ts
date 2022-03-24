@@ -1,13 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { RegisterDto } from "../../../auth/models/auth.model";
-import { finalize, Subject, takeUntil } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
-import { CreatePostDto } from "../../models/post.model";
-import { PostsService } from "../../../post-card/services/posts.service";
-import { NotificationService } from "../../../../services/notification.service";
-import { PostModel } from 'src/app/modules/post-card/models/post.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {finalize, Subject, takeUntil} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
+import {PostsService} from "../../../post-card/services/posts.service";
+import {NotificationService} from "../../../../services/notification.service";
+import {PostModel} from 'src/app/modules/post-card/models/post.model';
 
 @Component({
   selector: 'app-posts-add-edit',
@@ -22,7 +20,7 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   fileName = '';
   isLoading = false;
   submitted = false;
-  extention = '.jpg, .jpeg, .png';
+  extension = '.jpg, .jpeg, .png';
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostsService,
@@ -50,7 +48,10 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.postService.getPostById(this.postId).pipe(
         takeUntil(this.unsubscribe$),
-        finalize(() => { this.isLoading = false; })).subscribe({
+        finalize(() => {
+          this.isLoading = false;
+        }))
+        .subscribe({
           next: (data: PostModel) => {
             this.form.patchValue({
               title: data.title,
@@ -67,23 +68,25 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
         })
     }
   }
+
   private convertByteToMegaByte(size: number): number {
     const megaBytes = 1024 * 1024;
     const decimal = 3;
     const fileSize = +(size / megaBytes).toFixed(decimal);
     return fileSize;
   }
+
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
       const fileSize = this.convertByteToMegaByte(file.size);
-      const fileExtention = file.name.split('.').pop();
+      const fileExtension = file.name.split('.').pop();
       if (fileSize > 2) {
         this.showNotifications(false, 'The size of the picture should be smaller than 2MB');
         return;
       }
-      if (!fileExtention || this.extention.indexOf(`.${fileExtention.toLocaleLowerCase()}`) === -1) {
-        this.showNotifications(false, `The picture must be ${this.extention}`);
+      if (!fileExtension || this.extension.indexOf(`.${fileExtension.toLocaleLowerCase()}`) === -1) {
+        this.showNotifications(false, `The picture must be ${this.extension}`);
         return;
       }
       this.form.controls['image'].setValue(file);
