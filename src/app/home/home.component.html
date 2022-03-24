@@ -1,1 +1,7 @@
+<div class="posts-content">
 <button type = "button" class="logOut" (click)="onLogOut()"> Log Out</button>
+<div class="posts">
+    <app-post-card *ngFor="let post of posts$| async " [post]="post"></app-post-card>
+</div>
+<mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+</div>
