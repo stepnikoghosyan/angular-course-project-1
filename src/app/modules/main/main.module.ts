@@ -4,7 +4,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
 
 // import { MultilineDirective } from 'src/app/directives/multiline.directive';
 import { HeaderComponent } from 'src/app/header/header.component';
@@ -43,7 +42,6 @@ import { CreatePostComponent } from 'src/app/create-post/create-post.component';
     ReactiveFormsModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    HttpClientModule
   ]
 })
 export class MainModule { }

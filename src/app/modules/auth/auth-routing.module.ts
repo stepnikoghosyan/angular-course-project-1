@@ -7,38 +7,42 @@ import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 import { RegisterComponent } from 'src/app/register/register.component';
 import { ResetPasswordComponent } from 'src/app/reset-password/reset-password.component';
 import { VerifyAccountComponent } from 'src/app/verify-account/verify-account.component';
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
     
     {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'login'
+        component: AuthComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: "login",
+                pathMatch: "full"
+            },
+            {
+                path: 'login',
+                component: LoginComponent
+            },
+            { 
+                path: "register",
+                component: RegisterComponent,
+            },
+            {
+                path: "forgot-password",
+                component: ForgotPasswordComponent,
+            },
+            {
+                path: "auth/reset-password/:activationToken",
+                component: ResetPasswordComponent,
+            },
+            {
+                path: "auth/verify-account/:activationToken",
+                component: VerifyAccountComponent,
+            }
+        ]
     },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    { 
-        path: "register",
-        component: RegisterComponent,
-    },
-    {
-        path: "forgot-password",
-        component: ForgotPasswordComponent,
-    },
-    {
-        path: "auth/reset-password/:activationToken",
-        component: ResetPasswordComponent,
-    },
-    {
-        path: "auth/verify-account/:activationToken",
-        component: VerifyAccountComponent,
-    }, 
-    {
-        path:"**",
-        component: NotFoundComponent
-    }
+   
 ];
 
 @NgModule({
