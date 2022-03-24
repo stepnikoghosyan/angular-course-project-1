@@ -1,5 +1,5 @@
-import {UserModel} from "../../../models/user.model";
-import {CommentModel} from "../../../models/comment.model";
+import { UserModel } from "../../../models/user.model";
+import { CommentModel } from "../../../models/comment.model";
 
 export interface PostModel {
   id: number;
@@ -9,4 +9,10 @@ export interface PostModel {
   user: UserModel;
   comments: CommentModel[];
   createdAt: Date;
+}
+
+export interface PostFormModel {
+  title: string;
+  body: string;
+  image: File | null;
 }

@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {finalize, Subject, takeUntil} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
-import {PostsService} from "../../../post-card/services/posts.service";
-import {NotificationService} from "../../../../services/notification.service";
-import {PostModel} from 'src/app/modules/post-card/models/post.model';
-import {fileTypeValidator} from "../../validators/file-type.validator";
-import {fileSizeValidator} from "../../validators/file-size.validator";
-import {FILE_EXTENSIONS, FILE_SIZE_MEGABYTE} from "../../constants";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { finalize, Subject, takeUntil } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
+import { PostsService } from "../../../post-card/services/posts.service";
+import { NotificationService } from "../../../../services/notification.service";
+import { PostFormModel, PostModel } from 'src/app/modules/post-card/models/post.model';
+import { fileTypeValidator } from "../../validators/file-type.validator";
+import { fileSizeValidator } from "../../validators/file-size.validator";
+import { FILE_EXTENSIONS, FILE_SIZE_MEGABYTE } from "../../constants";
 
 @Component({
   selector: 'app-posts-add-edit',
@@ -27,13 +27,14 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   fileSize: string;
 
   constructor(private formBuilder: FormBuilder,
-              private postService: PostsService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private notifyService: NotificationService) {
+    private postService: PostsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private notifyService: NotificationService) {
 
     this.extension = FILE_EXTENSIONS.map(item => '.' + item).join(', ');
     this.fileSize = FILE_SIZE_MEGABYTE + 'MB';
+    this.postId = this.activatedRoute.snapshot.params['id'];
     this.formInit();
   }
 
@@ -50,7 +51,6 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   }
 
   private getPostById(): void {
-    this.postId = this.activatedRoute.snapshot.params['id'];
     if (this.postId) {
       this.isLoading = true;
       this.postService.getPostById(this.postId).pipe(
@@ -62,8 +62,7 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
           next: (data: PostModel) => {
             this.form.patchValue({
               title: data.title,
-              body: data.body,
-              image: data.imageUrl
+              body: data.body
             });
             if (data.imageUrl) {
               this.fileName = 'image';
@@ -99,25 +98,19 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
     } else {
       if (this.form.valid) {
         const formValue = this.form.value;
-        const formData = new FormData();
-        formData.append('title', formValue.title);
-        formData.append('body', formValue.body);
-        if (formValue.image && typeof (formValue.image) !== 'string') {
-          formData.append('image', formValue.image);
-        }
         this.isLoading = true;
         this.submitted = true;
         if (this.postId) {
-          this.updatePost(formData);
+          this.updatePost(formValue);
         } else {
-          this.createPost(formData);
+          this.createPost(formValue);
         }
       }
     }
   }
 
-  private updatePost(formData: FormData): void {
-    this.postService.updatePost(this.postId!, formData)
+  private updatePost(formValue: PostFormModel): void {
+    this.postService.updatePost(this.postId!, formValue)
       .pipe(
         takeUntil(this.unsubscribe$),
         finalize(() => {
@@ -126,7 +119,7 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
         }))
       .subscribe({
         next: () => {
-          this.notifyService.showNotification(true, "Successfully created.", null, ['posts'])
+          this.notifyService.showNotification(true, "Successfully updated.", null, ['posts'])
         },
         error: (err: HttpErrorResponse) => {
           this.notifyService.showNotification(false, err.error.message);
@@ -134,8 +127,8 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  private createPost(formData: FormData): void {
-    this.postService.createPost(formData)
+  private createPost(formValue: PostFormModel): void {
+    this.postService.createPost(formValue)
       .pipe(
         takeUntil(this.unsubscribe$),
         finalize(() => {

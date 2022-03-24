@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
 
-import {environment} from "../../../../environments/environment";
-import {PostModel} from "../models/post.model";
-import {PaginatedResponseModel} from "../../../models/paginated-response.model";
-import {PostsQueryParamsModel} from "../models/posts-query-params.model";
+import { environment } from "../../../../environments/environment";
+import { PostFormModel, PostModel } from "../models/post.model";
+import { PaginatedResponseModel } from "../../../models/paginated-response.model";
+import { PostsQueryParamsModel } from "../models/posts-query-params.model";
 
 @Injectable()
 export class PostsService {
@@ -31,7 +31,7 @@ export class PostsService {
     });
   }
 
-  getPostById(id: number):Observable<PostModel> {
+  getPostById(id: number): Observable<PostModel> {
     return this.httpClient.get<PostModel>(`${environment.apiUrl}/posts/${id}`);
   }
 
@@ -43,11 +43,23 @@ export class PostsService {
     return httpParams;
   }
 
-  createPost(formData: FormData): Observable<void> {
+  createPost(formValue: PostFormModel): Observable<void> {
+    const formData = this.createFormData(formValue);
     return this.httpClient.post<void>(`${environment.apiUrl}/posts`, formData);
   }
 
-  updatePost(id: number, formData: FormData): Observable<void> {
+  updatePost(id: number, formValue: PostFormModel): Observable<void> {
+    const formData = this.createFormData(formValue);
     return this.httpClient.put<void>(`${environment.apiUrl}/posts/${id}`, formData);
+  }
+  
+  private createFormData(formValue: PostFormModel): FormData {
+    const formData = new FormData();
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (key !== 'image' || (key === 'image' && value)) {        
+        formData.append(key, value);
+      }
+    })
+    return formData;
   }
 }
