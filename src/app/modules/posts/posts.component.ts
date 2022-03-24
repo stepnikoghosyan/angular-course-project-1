@@ -4,6 +4,7 @@ import {catchError, finalize, map, Observable, of} from "rxjs";
 import {PostModel} from "../post-card/models/post.model";
 import {PostsService} from "../post-card/services/posts.service";
 import {NotificationService} from "../../services/notification.service";
+import {PostsQueryParamsModel} from "../post-card/models/posts-query-params.model";
 
 @Component({
   selector: 'app-posts',
@@ -19,7 +20,10 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.posts$ = this.postsService.getPosts()
+    const params: PostsQueryParamsModel = {
+      showAll: true,
+    }
+    this.posts$ = this.postsService.getPosts(params)
       .pipe(
         finalize(() => this.isLoading = false),
         map(data => data.results),

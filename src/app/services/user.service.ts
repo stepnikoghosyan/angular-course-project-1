@@ -11,6 +11,7 @@ export class UserService {
   public user: UserModel | null = null;
 
   constructor(private httpClient: HttpClient) {
+    this.getUserProfile();
   }
 
   getUserProfile(): Observable<UserModel> {

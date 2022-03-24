@@ -15,8 +15,16 @@ export class PostsService {
     private usersService: UserService) {
   }
 
-  getPosts(): Observable<PaginatedResponseModel<PostModel>> {
-    return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`);
+  getPosts(params?: PostsQueryParamsModel): Observable<PaginatedResponseModel<PostModel>> {
+    if (!params) {
+      params = {
+        page: 1,
+        pageSize: 10
+      }
+    }
+    return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`,{
+      params: this.paramsToHttpParams(params)
+    });
   }
 
   getPostsByPagination(params?: PostsQueryParamsModel) {
