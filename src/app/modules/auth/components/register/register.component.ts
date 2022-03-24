@@ -57,23 +57,13 @@ export class RegisterComponent implements OnDestroy {
             }))
           .subscribe({
             next: () => {
-              this.showNotifications(true, "Successfully registered.")
+              this.notifyService.showNotification(true, "Successfully registered.", null, ['auth', 'login'])
             },
             error: (err: HttpErrorResponse) => {
-              this.showNotifications(true, err.error.message);
+              this.notifyService.showNotification(false, err.error.message);
             }
           });
       }
     }
   }
-
-  private showNotifications(success: boolean, message: string): void {
-    if (success) {
-      this.notifyService.showSuccess("Success", message);
-      this.router.navigate(['auth', 'login']);
-    } else {
-      this.notifyService.showError("Error", message);
-    }
-  }
-
 }

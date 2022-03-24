@@ -55,23 +55,14 @@ export class LoginComponent implements OnDestroy {
               this.submitted = false;
             }))
           .subscribe({
+            next: () => {
+              this.notifyService.showNotification(true, "Successfully logged in.", null, ['/home']);
+            },
             error: (err: HttpErrorResponse) => {
-              this.showNotifications(false, err.error.message)
-            }, next: () => {
-              this.showNotifications(true, "Successfully logged in.");
-            }
+              this.notifyService.showNotification(false, err.error.message)
+            },
           })
       }
     }
   }
-
-  private showNotifications(success: boolean, message: string): void {
-    if (success) {
-      this.notifyService.showSuccess("Success", message);
-      this.router.navigateByUrl('/home');
-    } else {
-      this.notifyService.showError("Error", message);
-    }
-  }
-
 }

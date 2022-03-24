@@ -13,7 +13,7 @@
   <form *ngIf="expandEmailGroup"
         [formGroup]="emailFormGroup"
         (ngSubmit)="onSendEmail()">
-    <label>Email</label>
+    <label class="required">Email</label>
     <input placeholder="Email" type="email" formControlName="email"/>
     <div *ngIf="emailFormGroup.controls['email'].invalid && emailFormGroup.controls['email'].touched">
       <p class="error-message" *ngIf="emailFormGroup.controls['email'].errors?.['required']">

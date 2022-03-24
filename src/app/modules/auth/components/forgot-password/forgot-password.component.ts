@@ -53,23 +53,14 @@ export class ForgotPasswordComponent implements OnDestroy {
               this.submitted = false;
             }))
           .subscribe({
-            error: (err: HttpErrorResponse) => {
-              this.showNotifications(false, err.error.message);
-            },
             next: () => {
-              this.showNotifications(true, ' ');
+              this.notifyService.showNotification(true, '')
+            },
+            error: (err: HttpErrorResponse) => {
+              this.notifyService.showNotification(false, err.error.message, null, ['auth', 'login'])
             }
           });
       }
-    }
-  }
-
-  private showNotifications(success: boolean, message: string): void {
-    if (success) {
-      this.notifyService.showSuccess("Success", message);
-      this.router.navigate(['auth', 'login']);
-    } else {
-      this.notifyService.showError("Error", message);
     }
   }
 }

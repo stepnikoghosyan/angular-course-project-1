@@ -2,21 +2,21 @@
   <h2>Sign Up</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
-      <label>First Name</label>
+      <label class="required">First Name</label>
       <input type="text" formControlName="firstName" placeholder="First Name">
       <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
         <p class="error-message" *ngIf="form.controls['firstName'].errors?.['required']">First Name is required.</p>
       </div>
     </div>
     <div>
-      <label>Last Name</label>
+      <label class="required">Last Name</label>
       <input type="text" formControlName="lastName" placeholder="Last Name">
       <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
         <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required.</p>
       </div>
     </div>
     <div>
-      <label>Email</label>
+      <label class="required">Email</label>
       <input type="email" formControlName="email" placeholder="Email">
       <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
         <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required.</p>

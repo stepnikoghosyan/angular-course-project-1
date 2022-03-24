@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 }
                 return throwError(() => error);
               case 500:
-                this.notificationService.showError('Error', 'Internal Server Error');
+                this.notificationService.showError('Internal Server Error');
             }
           }
           return throwError(() => error);

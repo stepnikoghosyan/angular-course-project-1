@@ -46,21 +46,12 @@ export class ResetPasswordComponent implements OnDestroy {
         )
         .subscribe({
           next: () => {
-            this.showNotifications(true, "Password is changed.");
+            this.notifyService.showNotification(true, "Password is changed.", null, ['auth', 'login']);
           },
           error: (err: HttpErrorResponse) => {
-            this.showNotifications(false, err.error.message);
+            this.notifyService.showNotification(false, err.error.message);
           }
         })
-    }
-  }
-
-  private showNotifications(success: boolean, message: string): void {
-    if (success) {
-      this.notifyService.showSuccess("Success", message);
-      this.router.navigate(['auth', 'login']);
-    } else {
-      this.notifyService.showError("Error", message);
     }
   }
 

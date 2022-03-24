@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
   private showNotifications(success: boolean, message: string): void {
     if (!success) {
-      this.notifyService.showError("Error", message);
+      this.notifyService.showError(message);
     }
   }
 }

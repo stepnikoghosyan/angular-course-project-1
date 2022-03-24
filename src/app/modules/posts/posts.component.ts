@@ -28,14 +28,8 @@ export class PostsComponent implements OnInit {
         finalize(() => this.isLoading = false),
         map(data => data.results),
         catchError((err) => {
-          this.showNotifications(false, err.error.message);
+          this.notifyService.showError(err.error.message);
           return of([]);
         }));
-  }
-
-  private showNotifications(success: boolean, message: string): void {
-    if (!success) {
-      this.notifyService.showError("Error", message);
-    }
   }
 }

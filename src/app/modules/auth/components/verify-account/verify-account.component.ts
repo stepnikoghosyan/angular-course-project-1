@@ -57,10 +57,10 @@ export class VerifyAccountComponent implements OnInit {
           }))
         .subscribe({
           next: () => {
-            this.showNotifications(true, "Account verified");
+            this.notifyService.showNotification(true, "Account verified")
           },
           error: (err) => {
-            this.showNotifications(false, err.error.message);
+            this.notifyService.showNotification(false, err.error.message)
           }
         });
     }
@@ -75,20 +75,12 @@ export class VerifyAccountComponent implements OnInit {
         }))
       .subscribe({
         next: () => {
-          this.showNotifications(true, "Account verified");
+          this.notifyService.showNotification(true, "Account verified", null, ['auth', 'login'])
         },
         error: (err) => {
-          this.showNotifications(false, err.error.message);
+          this.notifyService.showNotification(false, err.error.message)
         }
       });
   }
 
-  private showNotifications(success: boolean, message: string): void {
-    if (success) {
-      this.notifyService.showSuccess("Success", message);
-      this.router.navigate(['auth', 'login']);
-    } else {
-      this.notifyService.showError("Error", message);
-    }
-  }
 }

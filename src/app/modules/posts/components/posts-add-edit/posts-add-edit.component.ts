@@ -63,30 +63,23 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
             }
           },
           error: (err: HttpErrorResponse) => {
-            this.showNotifications(true, err.error.message);
+            this.notifyService.showNotification(false, err.error.message);
           }
         })
     }
-  }
-
-  private convertByteToMegaByte(size: number): number {
-    const megaBytes = 1024 * 1024;
-    const decimal = 3;
-    const fileSize = +(size / megaBytes).toFixed(decimal);
-    return fileSize;
   }
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
       const fileSize = this.convertByteToMegaByte(file.size);
-      const fileExtension = file.name.split('.').pop();
+      const fileExtension = file.type.split('/').pop()?.toLowerCase();
       if (fileSize > 2) {
-        this.showNotifications(false, 'The size of the picture should be smaller than 2MB');
+        this.notifyService.showNotification(false, 'The size of the picture should be smaller than 2MB');
         return;
       }
-      if (!fileExtension || this.extension.indexOf(`.${fileExtension.toLocaleLowerCase()}`) === -1) {
-        this.showNotifications(false, `The picture must be ${this.extension}`);
+      if (!fileExtension || this.extension.indexOf(`.${fileExtension}`) === -1) {
+        this.notifyService.showNotification(false, `The picture must be ${this.extension}`);
         return;
       }
       this.form.controls['image'].setValue(file);
@@ -104,7 +97,6 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
       return;
     } else {
       if (this.form.valid) {
-        // const dto = new CreatePostDto(this.form.value, this.formData);
         const formValue = this.form.value;
         const formData = new FormData();
         formData.append('title', formValue.title);
@@ -125,44 +117,45 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
 
   private updatePost(formData: FormData): void {
     this.postService.updatePost(this.postId!, formData)
-      .pipe(takeUntil(this.unsubscribe$),
+      .pipe(
+        takeUntil(this.unsubscribe$),
         finalize(() => {
           this.isLoading = false;
           this.submitted = false;
         }))
       .subscribe({
         next: () => {
-          this.showNotifications(true, "Successfully created.")
+          this.notifyService.showNotification(true, "Successfully created.", null, ['posts'])
         },
         error: (err: HttpErrorResponse) => {
-          this.showNotifications(false, err.error.message);
+          this.notifyService.showNotification(false, err.error.message);
         }
       });
   }
+
   private createPost(formData: FormData): void {
     this.postService.createPost(formData)
-      .pipe(takeUntil(this.unsubscribe$),
+      .pipe(
+        takeUntil(this.unsubscribe$),
         finalize(() => {
           this.isLoading = false;
           this.submitted = false;
         }))
       .subscribe({
         next: () => {
-          this.showNotifications(true, "Successfully created.")
+          this.notifyService.showNotification(true, "Successfully created.", null, ['posts'])
         },
         error: (err: HttpErrorResponse) => {
-          this.showNotifications(false, err.error.message);
+          this.notifyService.showNotification(false, err.error.message);
         }
       });
   }
-  private showNotifications(success: boolean, message: string): void {
-    if (success) {
-      this.notifyService.showSuccess("Success", message);
-      this.router.navigate(['posts']);
-    } else {
-      this.notifyService.showError("Error", message);
-    }
+
+  private convertByteToMegaByte(sizeInBytes: number): number {
+    const bytesInOneMegaByte = 1024 * 1024;
+    return sizeInBytes / bytesInOneMegaByte;
   }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

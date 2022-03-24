@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {PostModel} from "../../models/post.model";
 import {UserService} from "../../../../services/user.service";
@@ -11,7 +11,8 @@ import {UserService} from "../../../../services/user.service";
 export class PostCardFooterComponent {
   @Input() post: PostModel | null = null;
 
-  constructor(private route: Router,public userService: UserService) {
+  constructor(private route: Router,
+              public userService: UserService) {
   }
 
   editPost(): void {
