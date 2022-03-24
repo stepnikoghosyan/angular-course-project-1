@@ -21,14 +21,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     const params: PostsQueryParamsModel = {
-      page: 1,
-      pageSize: 20
+      showAll: true
     }
 
-    this.posts$ = this.postsService.getPostsByPagination(params)
+    this.posts$ = this.postsService.getPosts(params)
       .pipe(
         finalize(() => this.isLoading = false),
-        map(data => data.results),
+        map(data => data.results.splice(-20).reverse()),
         catchError((err) => {
           this.showNotifications(false, err.error.message);
           return of([]);
