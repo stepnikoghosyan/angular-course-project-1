@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {  Component,  OnInit} from '@angular/core';
+import {  Component,  OnDestroy,  OnInit} from '@angular/core';
 import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of, Subject, takeUntil } from 'rxjs';
 import { imageSizeValidation, imageTypeValidation } from 'src/app/customValidators/imageValidators';
+import { NotificationService } from 'src/app/services/notification.service';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 import { CreatePostModelDto } from '../../../../models/post.model';
 import { PostsService } from '../../services/posts.service';
@@ -15,7 +16,8 @@ import { PostsService } from '../../services/posts.service';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent implements OnInit, OnDestroy {
+  private subscription$ = new Subject<void>()
   errors:string[] = [];
   errorMessage:string ="";
   isTargetValue:string = "";
@@ -27,7 +29,8 @@ export class CreatePostComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     private postsService: PostsService,
     private router:Router,
-    private notification: ToastrService,
+    private notification: ToastrService, 
+    private showNotifications :NotificationService
 ) { }
     
     
@@ -51,67 +54,31 @@ get image() {
               var file = <File> event.target.files[0]
                 this.createForm.patchValue({
                   image: file
-                })
-                        
-
- 
-        //    const reader = new FileReader();
-             
-        //    reader.onload = (e: any) => {
-             
-        //       this.cardImageBase64= e.target.result;
-            
-        //      this.createForm.patchValue({
-        //        image :event.target.files[0]});              } 
-            
-        // reader.readAsDataURL(event.target.files[0]);
-      
-    
-            
-         
+                })                 
     } 
  }
   createFormSubmit(){
     const formData = new FormData();
-    formData.append("title",this.createForm.get('title')?.value);
-    formData.append("body",  this.createForm.get('body')?.value);
-    formData.append("image", this.createForm.get('image')?.value)
+    for (let key in this.createForm.value) {
+      formData.append(key,this.createForm.value[key])
+    } 
     
-    // console.log("dto is",dto.image?.append("image", this.createForm.get('image')?.value))
-    // console.log("image",this.createForm.get('image')?.value)
-   
-    // formData.append("title",this.createForm.get('title')?.value);
-    // formData.append("body",  this.createForm.get('body')?.value);
-    // formData.append("image", this.file)
     
     this.postsService.createPost(formData).pipe(
+       takeUntil(this.subscription$),
         finalize(()=>{
-         
             this.showSpinner = false;
-        })
-    ).subscribe({
+        }),
+        catchError((err) => {
+          this.showNotifications.error(errorResponse(err),"Error" );
+          return of([]);
+      }))
+    .subscribe({
         next: (res)=>{
-           console.log(res)
-          this.notification.success("Thank you for filling out your information!", "Success massage")
+         this.notification.success("Thank you for filling out your information!", "Success massage")
          this.router.navigateByUrl('main/posts');
           
-      },
-        error:(err:HttpErrorResponse )=>{
-          console.log(err)
-          switch(err.status){
-            case 400:
-            case 401:
-            case 403:
-            case 404:
-                this.errors = errorResponse(err);
-                break;
-            default:
-                this.errors.push("Something went wrong");
-        }
-            // this.notification.error(err.statusText, `${err.status}`)
-          
-        }
-        
+      },   
       })
     
   }
@@ -122,4 +89,8 @@ get image() {
     this.errorMessage="";
   }
 
+  ngOnDestroy(): void {
+    this.subscription$.next()
+    this.subscription$.complete()
+ }
 }
