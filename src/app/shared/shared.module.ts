@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CardComponent } from './card/card.component';
 import { CardFooterComponent } from './card-footer/card-footer.component';
 import { DotsPipe } from './dots.pipe';
+import { PostViewComponent } from './post-view/post-view.component';
 
 
 
@@ -20,7 +21,8 @@ import { DotsPipe } from './dots.pipe';
     CardComponent,
     CardFooterComponent,
     DotsPipe,
-    HeaderComponent
+    HeaderComponent,
+    PostViewComponent
   ],
 
   imports: [
@@ -41,6 +43,7 @@ import { DotsPipe } from './dots.pipe';
     CardComponent,
     CardFooterComponent,
     DotsPipe,
+    PostViewComponent
   ]
 })
 export class SharedModule { }

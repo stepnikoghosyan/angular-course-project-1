@@ -32,9 +32,14 @@ export class CardFooterComponent implements OnInit {
       this.router.navigate(['posts', post.id]);
     })
   }
+  // vuePost(id: number) {
+  //   this.postsService.getPostById(id).subscribe((post) => {
+  //     this.router.navigate(['post-view', post.id]);
+  //   })
+  // }
 
   ngOnInit(): void {
-    console.log(this.post.id, '---', this.userService.currentProfile?.id)
+
   }
 
 }

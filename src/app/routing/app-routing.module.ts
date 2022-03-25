@@ -6,6 +6,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { AuthPublicGuard } from '../guards/auth-public.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { MyPostsComponent } from '../my-posts/my-posts.component';
+import { PostViewComponent } from '../shared/post-view/post-view.component';
 
 
 
@@ -39,7 +40,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
 
   },
-
+  {
+    path: 'post-view/:id',
+    component: PostViewComponent,
+    canActivate:[AuthGuard]
+  },
   {
     path: 'my-posts',
     component:MyPostsComponent,

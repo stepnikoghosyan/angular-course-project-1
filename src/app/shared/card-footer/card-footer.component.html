@@ -9,12 +9,12 @@
     </div>
   </div>
   <div class="actions">
-    
-    <fa-icon class="icon" [icon]="faEye"></fa-icon>
+    <a >
+      <fa-icon class="icon" [icon]="faEye"></fa-icon>
+    </a>
     <span *ngIf="post.user.id == userService.currentProfile?.id" (click)="editPost(post.id)">
       <fa-icon class="icon" [icon] ='faEdit'></fa-icon>
     </span>
-    
     <fa-icon class="icon" [icon]="faComment">
     </fa-icon>
     <span class="comment-length">
@@ -23,3 +23,4 @@
  
   </div>
 </div>
+<!-- [routerLink]="['/post-view',post.id]" -->

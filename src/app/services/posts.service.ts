@@ -19,6 +19,7 @@ export class PostsService {
     private notifyService: NotificationService,
     private router: Router
   ) { }
+  infoPost!: object
 
   getPosts(userID?: number): Observable<PaginationModel<PostsModel>> {
     let params: any = {
@@ -48,7 +49,12 @@ export class PostsService {
   }
 
   getPostById(id: number) {
-    return this.httpClient.get<PostsModelDto>(`${this.baseUrl}posts/${id}`)
+    return this.httpClient.get<PostsModelDto>(`${this.baseUrl}posts/${id}`).pipe(tap((res) => {
+      this.infoPost = res;
+      console.log(res); 
+      console.log('post-view');
+      
+    }))
   }
   
   updatePost(id: number, obj: PostDto) {
