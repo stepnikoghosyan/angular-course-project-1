@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { mapTo, Observable, tap } from 'rxjs';
+import { UsersService } from '../users/users.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UsersService) {}
   canActivate(
 
     route: ActivatedRouteSnapshot,
@@ -14,13 +15,15 @@ export class AuthGuard implements CanActivate {
   
       const auth = localStorage.getItem('auth');
       const auth1 = sessionStorage.getItem('auth');
+
       if (auth || auth1) {
-        return true;
+        return this.setCurrentProfile().pipe(mapTo(true));
       }
       return this.router.parseUrl('auth/login');
 
       
   }
+
   canLoad(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -29,13 +32,22 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      
+
     const auth = localStorage.getItem('auth');
     const auth1 = sessionStorage.getItem('auth');
+
     if (auth || auth1) {
-      return this.router.parseUrl('/posts');
+      return this.setCurrentProfile().pipe(mapTo(true));
     }
-    return true;
+    return this.router.parseUrl('auth/login');
+  }
+
+  setCurrentProfile() {
+    return this.userService.userGetProfile().pipe(tap(
+      profile => {
+        this.userService.currentProfile = profile;
+      }
+    ))
   }
   
 }

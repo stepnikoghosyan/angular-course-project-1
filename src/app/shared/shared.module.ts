@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
+import { CardComponent } from './card/card.component';
+import { CardFooterComponent } from './card-footer/card-footer.component';
+import { DotsPipe } from './dots.pipe';
 
 
 
@@ -14,6 +17,9 @@ import { RouterModule } from '@angular/router';
   
   declarations: [
     LoadingComponent,
+    CardComponent,
+    CardFooterComponent,
+    DotsPipe,
     HeaderComponent
   ],
 
@@ -32,6 +38,9 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     FontAwesomeModule,
     HeaderComponent,
+    CardComponent,
+    CardFooterComponent,
+    DotsPipe,
   ]
 })
 export class SharedModule { }

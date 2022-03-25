@@ -1,2 +1,19 @@
 <app-header></app-header>
-<p>my-posts works!</p>
+<app-loading *ngIf="isLoading"></app-loading>
+<div>
+  <div class="title">
+    <h1>Posts</h1>
+  </div> 
+  <div class="btn" *ngIf=" !isLoading">
+    <a class="routerBtn" routerLink="/posts/create" >
+      create posts
+    </a>
+  </div>
+  <div>
+    <div>
+    <div class="cards">
+      <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
+    </div>
+  </div> 
+</div>
+

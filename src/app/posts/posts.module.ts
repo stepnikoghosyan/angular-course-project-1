@@ -4,9 +4,6 @@ import { PostsRoutingModule } from './posts-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostsComponent } from './posts.component';
 import { PostComponent } from './post/post.component';
-import { CardComponent } from './card/card.component';
-import { CardFooterComponent } from './card-footer/card-footer.component';
-import { DotsPipe } from '../dots.pipe';
 import { PostViewComponent } from './post-view/post-view.component';
 
 
@@ -14,9 +11,6 @@ import { PostViewComponent } from './post-view/post-view.component';
   declarations: [
     PostComponent,
     PostsComponent,
-    CardComponent,
-    CardFooterComponent,
-    DotsPipe,
     PostViewComponent
   ],
   imports: [

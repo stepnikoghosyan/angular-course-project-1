@@ -6,8 +6,7 @@
 .cards{
     display: grid;
     grid-template-columns:repeat(3,31%);
-    grid-row-gap:7%;
-    grid-column-gap: 2%;
+    grid-gap: 25px;
     white-space: nowrap;
     // text-overflow: ellipsis;
 }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationModel } from '../models/pagination.model';
-import { PostDto } from '../models/post.model';
+import { PostDto, PostsModelDto } from '../models/post.model';
 import { PostsModel } from '../models/posts.model';
 import { NotificationService } from './notification.service';
 
@@ -20,11 +20,17 @@ export class PostsService {
     private router: Router
   ) { }
 
-  getPosts(): Observable<PaginationModel<PostsModel>> {
+  getPosts(userID?: number): Observable<PaginationModel<PostsModel>> {
+    let params: any = {
+      showAll: true
+    }
+
+    if (userID) {
+      params.userID = userID.toString();
+    }
+
     return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`,{
-      params:{
-        showAll:true
-      }
+      params
     })
 
   }
@@ -42,9 +48,7 @@ export class PostsService {
   }
 
   getPostById(id: number) {
-    return this.httpClient.get(`${this.baseUrl}posts/${id}`).pipe(tap(() => {
-      this.router.navigate([`posts/post/${id}`])
-    }))
+    return this.httpClient.get<PostsModelDto>(`${this.baseUrl}posts/${id}`)
   }
   
   updatePost(id: number, obj: PostDto) {

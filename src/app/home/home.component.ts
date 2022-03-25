@@ -12,21 +12,24 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  // isLoading = false;
-  // posts$!: Observable<PostsModel[]>;
+  isLoading = false;
+  posts$!: Observable<PostsModel[]>;
   constructor(
     private postsService: PostsService,
     private notifyService: NotificationService,
   ) { }
 
-  ngOnInit(): void {}
-    // this.posts$ = this.postsService.getPosts().pipe(
-    //   finalize(() => {
-    //     this.isLoading = false;
-    //   }),
-    //   map(data => data.results),
-    //   catchError((error: HttpErrorResponse) => {
-    //     this.notifyService.showError(error.error.message, 'Error');
-    //     return of([]);
-    //   }
+  ngOnInit(): void {
+    this.posts$ = this.postsService.getPosts().pipe(
+      finalize(() => {
+        this.isLoading = false;
+      }),
+      map(data => data.results.slice(-20)),
+      catchError((error: HttpErrorResponse) => {
+        this.notifyService.showError(error.error.message, 'Error');
+        return of([]);
+      }));
+
+  }
+
 }

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LoginDto } from 'src/app/models/auth.model';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
+    private userService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -56,9 +58,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       const loginDto = new LoginDto(this.form.value);
       this.authService.login(loginDto).pipe(takeUntil(this.unSubscribe$))
-        .subscribe(
-          () => this.isLoading = false
-        );
+        .subscribe(() => {
+          this.isLoading = false
+        });
     }
   }
 

@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
   fileType = '';
   isLoading = false;
   id: number = NaN;
+  title = 'Create'
   private unsubscribe$ = new Subject<void>();
   constructor(
     private fb: FormBuilder,
@@ -39,6 +40,7 @@ export class PostComponent implements OnInit {
   showPostData() {
     this.id = this.avtiveRouter.snapshot.params['id'];
     if (this.id) {
+      this.title = 'Edit',
       this.postsService.getPostById(this.id).pipe(takeUntil(this.unsubscribe$)).subscribe({
         next: (res: any) => {
           this.formGroup.patchValue({
