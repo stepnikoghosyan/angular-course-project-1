@@ -47,7 +47,6 @@ export class PostsViewComponent implements OnInit {
         .subscribe({
           next: (data: PostModel) => {
             this.post = data;
-            console.log('dataModel', this.post)
           },
           error: (err: HttpErrorResponse) => {
             this.notifyService.showNotification(false, err.error.message);
