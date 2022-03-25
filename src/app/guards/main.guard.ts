@@ -18,8 +18,8 @@ export class MainGuard implements CanLoad {
         
         const local = localStorage.getItem('auth');
         const session = sessionStorage.getItem('auth');
-        if (this.authService.isLoggedIn && ((local && JSON.parse(local).accessToken) ||
-            (session && JSON.parse(session).accessToken))) {
+        if ((local && JSON.parse(local).accessToken) ||
+            (session && JSON.parse(session).accessToken)){
             return true;
         }
         return this.router.parseUrl('/login');
