@@ -18,17 +18,22 @@
     </div>
     
     <div class="btn_container">
-        <label for="title"class="file_btn">Select file</label>
+        <label for="title" class="file_btn">Select file</label>
         {{isTargetValue}}
-        <ng-container >
+        <!-- <ng-container >
             <img src=""   />
-        </ng-container>
-        <button class="close_btn" formControlName="image"  *ngIf="isClose" (click)="clearFile($event)">X</button>
-        <input  id ="title"  type="file" class="file_btn" (change) = "onSelectFile($event)"  name ="image"/> 
-        {{errorMessage}}
-        
-        <button  class="create_btn" type="submit">Create</button>
-
+        </ng-container> -->
+        <button class="close_btn"  *ngIf="isClose" (click)="clearFile($event)">X</button>
+        <input  id ="title"  formControlName="image"  type="file" class="file_btn" (change) = "onSelectFile($event)"  name ="image"/> 
+        <!-- <span ngIf = "" >{{errorMessage}}</span> -->
+       
+        <span  class="error-message" *ngIf="image.errors?.['type']"> The type of image must be jpeg, jpg, png type</span>
+        <span class="error-message"  *ngIf="image.errors?.['size']">> The size of image is greater then 2 Mg</span>
+       
+        <div class="btns">
+            <a routerLink="../posts"><i class="fas fa-arrow-left"></i></a>
+            <button class="create_btn" type="submit">Create</button>
+        </div>  
     </div>   
       
 </form>
