@@ -44,9 +44,10 @@ export class PostsService {
                 )
     }
 
-    createPost(postDto: CreatePostModelDto): Observable<any>{
-        console.log(postDto)
-        return this.httpClient.post<CreatePostModelDto>(`${environment.apiUrl}/posts/`, postDto)
+    createPost(postDto: FormData): Observable<any>{
+        
+        
+        return this.httpClient.post<FormData>(`${environment.apiUrl}/posts/`, postDto)
     }
 
 }

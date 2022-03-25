@@ -47,17 +47,11 @@ get image() {
   
   onSelectFile(event:any){ 
   
-    if(event.target.files && event.target.files[0]){
-      console.log(this.image)
-  console.log(event.target.files[0].size)
-    //          let fileCount: number = event.target.files.length;
-            
-              
-              // var file = <File> event.target.files[0]
-        
-              //   this.createForm.patchValue({
-              //     image: file
-              //   })
+    if(event.target.files && event.target.files[0]){     
+              var file = <File> event.target.files[0]
+                this.createForm.patchValue({
+                  image: file
+                })
                         
 
  
@@ -78,11 +72,11 @@ get image() {
     } 
  }
   createFormSubmit(){
-    const formData = new FormData(this.createForm.value);
+    const formData = new FormData();
     formData.append("title",this.createForm.get('title')?.value);
     formData.append("body",  this.createForm.get('body')?.value);
     formData.append("image", this.createForm.get('image')?.value)
-     const dto = new CreatePostModelDto(this.createForm.value, formData);
+    
     // console.log("dto is",dto.image?.append("image", this.createForm.get('image')?.value))
     // console.log("image",this.createForm.get('image')?.value)
    
@@ -90,7 +84,7 @@ get image() {
     // formData.append("body",  this.createForm.get('body')?.value);
     // formData.append("image", this.file)
     
-    this.postsService.createPost(dto).pipe(
+    this.postsService.createPost(formData).pipe(
         finalize(()=>{
          
             this.showSpinner = false;
