@@ -31,6 +31,7 @@ export function imageTypeValidation(arr:string[]):ValidatorFn{
 export function imageSizeValidation(size:number):ValidatorFn{
     return function (control:AbstractControl):ValidationErrors | null {
         const fileSize = control.value.size;
+        console.log(fileSize)
         if(fileSize>size){
             console.log(fileSize)
             return {size:true};
