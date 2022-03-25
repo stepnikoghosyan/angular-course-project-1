@@ -3,12 +3,12 @@
     <h1>{{title}} Post</h1>
     <form class="postForm" [formGroup]='formGroup'>
         <div class="inputForm">
-            <div>
+            <div class="label">
                 <label>Title</label>
             </div>
             <input class="title" formControlName="title" type="text">
             <div class="formErr">
-                <div class="val" *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
+                <div  *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
                     <span *ngIf="formGroup.controls['title'].hasError('required')" class="errors">
                         Required
                     </span>
@@ -16,14 +16,16 @@
             </div>
         </div>
         <div class="inputForm">
-            <div>
+            <div class="label">
                 <label>Body</label>
             </div>
             <textarea class="title" formControlName="body" rows="7px" cols="100px"></textarea>
-            <div *ngIf='formGroup.controls["body"].invalid && formGroup.controls["body"].touched'>
-                <span *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
-                    Required
-                </span>
+            <div class="formErr">
+                <div *ngIf='formGroup.controls["body"].invalid && formGroup.controls["body"].touched'>
+                    <span  *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
+                        Required
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -31,24 +33,28 @@
             <input class="inputBtn" type="file" id="img" formControlName="file" #file accept=".jpg, .jpeg, .png"
                 (change)="handler($event)">
 
-            <button class="upload" (click)='trigger(file)'>Upload</button>
-            <div style="color: red;">
-                <p *ngIf='!isImage'>{{errorFile}}</p>
-                <p *ngIf='!chapiMej'>{{fileSizeError}}</p>
+            <button class="upload" (click)='trigger(file)'>select file</button>
+            <div class="formErr">
+                <p class="errors" *ngIf='!isImage'>{{errorFile}}</p>
+                <p class="errors" *ngIf='!sizeCheck'>{{fileSizeError}}</p>
             </div>
 
-            <p>
-                {{fileName }}
-                <span *ngIf='fileName' style="color: brown;" (click)="deleteImg()">
-                    x
-                </span>
-            </p>
+            <div class="file-delete">
+                <p>
+                    {{fileName }}
+                    <span *ngIf='fileName' class="delete" (click)="deleteImg()">
+                        x
+                    </span>
+                </p>
+            </div>
         </div>
-
-        <button *ngIf="!id else update" class="btn" (click)="create()">Create</button>
-        <ng-template #update>
-            <button class="btn" (click)="save()">Save</button>
-        </ng-template>
+        <div class="create">
+            <button *ngIf="!id else update" class="btn" (click)="create()">Create</button>
+            <ng-template #update>
+                <button class="btn" (click)="save()">Save</button>
+            </ng-template>
+        </div>
+      
     </form>
 
 </div>

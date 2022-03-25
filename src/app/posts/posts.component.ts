@@ -2,9 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { catchError, finalize, map, Observable, of } from 'rxjs';
 import { PostsModel } from '../models/posts.model';
-import { NotificationService } from '../services/notification.service';
-import { PostsService } from '../services/posts.service';
+import { NotificationService } from '../shared/notification.service';
 import { UsersService } from '../users/users.service';
+import { PostsService } from './posts.service';
 
 
 

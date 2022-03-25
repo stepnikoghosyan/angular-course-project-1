@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 1200px;
+    margin: 0 auto;
+}
+.user{
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.userImg{
+    width: 50px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.fullName{
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.date{
+    margin-top: 10px;
+    font-size: 16px;
+    color: gray;
+}
+
+.title{
+    margin-top: 10px;
+}
+
+h1{
+    font-weight: 900;
+    letter-spacing: 0.2px;
+}
+
+.bodyImg{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.bodyImg img{
+    height: 250px;
+}
+
+.text{
+    text-align: start;
+}

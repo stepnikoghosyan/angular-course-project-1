@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostsModel } from 'src/app/models/posts.model';
-import { faEye, faComment, faEdit, faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { PostsService } from 'src/app/services/posts.service';
+import { faEye, faComment, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { UsersService } from 'src/app/users/users.service';
 import { PostsModelDto } from 'src/app/models/post.model';
 import { Router } from '@angular/router';
-import { UserModelDto } from 'src/app/models/user.model';
-import { forkJoin } from 'rxjs';
+import { PostsService } from 'src/app/posts/posts.service';
+
 
 @Component({
   selector: 'app-card-footer',
@@ -32,11 +31,6 @@ export class CardFooterComponent implements OnInit {
       this.router.navigate(['posts', post.id]);
     })
   }
-  // vuePost(id: number) {
-  //   this.postsService.getPostById(id).subscribe((post) => {
-  //     this.router.navigate(['post-view', post.id]);
-  //   })
-  // }
 
   ngOnInit(): void {
 

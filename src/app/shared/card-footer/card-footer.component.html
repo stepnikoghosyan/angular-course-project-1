@@ -9,10 +9,10 @@
     </div>
   </div>
   <div class="actions">
-    <a >
+    <a [routerLink] = "['/post-view',post.id]">
       <fa-icon class="icon" [icon]="faEye"></fa-icon>
     </a>
-    <span *ngIf="post.user.id == userService.currentProfile?.id" (click)="editPost(post.id)">
+    <span class="edit" *ngIf="post.user.id == userService.currentProfile?.id" (click)="editPost(post.id)">
       <fa-icon class="icon" [icon] ='faEdit'></fa-icon>
     </span>
     <fa-icon class="icon" [icon]="faComment">

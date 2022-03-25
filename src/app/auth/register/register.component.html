@@ -43,7 +43,9 @@
     <div class="form-control">
       <label >Password</label>
       <input class="inputMargin" [type]="inputType" formControlName="password"/>
-      <span (click)="showHidePass()" [ngClass]="showPassword?'openedEye':'closedEye'" ></span>
+        <img class="eye"  [src] = 'showPassword?"assets/hide.png":"assets/view.png"' 
+        (click)="showHidePass()">
+
       <div class="formErr">
         <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
           <span *ngIf="form.controls['password'].hasError('required')" class="errors">

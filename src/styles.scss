@@ -54,21 +54,10 @@ button {
     margin-top: 5px;
 }
 
-.openedEye {
-    background: url('assets/outline_visibility_off_black_24dp.png'), no-repeat;
-}
-
-.closedEye {
-    background: url('assets/outline_visibility_black_24dp.png'), no-repeat;
-}
-
-.closedEye, .openedEye {
-    display: inline-block;
-    height: 22px;
-    width: 25px;
+.eye {
     position: absolute;
     left: 82%;
-    bottom: 42%;
+    bottom: 37%;
 }
 
 .routerBtn {

@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { NotificationService } from 'src/app/services/notification.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ForgotDto } from 'src/app/models/auth.model';
+import { AuthService } from '../auth.service';
+import { NotificationService } from 'src/app/shared/notification.service';
+
+
 
 @Component({
   selector: 'app-verify-account',
@@ -21,7 +22,6 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
-    private router: Router,
     private notifyService: NotificationService
   ) { }
 

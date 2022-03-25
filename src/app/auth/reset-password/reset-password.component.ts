@@ -4,8 +4,9 @@ import { FormBuilder, Validators, FormGroup, FormControl, MinLengthValidator } f
 import { ActivatedRoute} from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ResetDto } from 'src/app/models/auth.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { NotificationService } from 'src/app/shared/notification.service';
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',

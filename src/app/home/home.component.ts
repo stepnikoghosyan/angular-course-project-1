@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, finalize, map, Observable, of } from 'rxjs';
 import { PostsModel } from '../models/posts.model';
-import { PostsService } from '../services/posts.service';
-import { NotificationService } from '../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PostsService } from '../posts/posts.service';
+import { NotificationService } from '../shared/notification.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  isLoading = false;
+  isLoading = true;
   posts$!: Observable<PostsModel[]>;
   constructor(
     private postsService: PostsService,

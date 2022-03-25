@@ -1,9 +1,7 @@
 import { Component} from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Subject, takeUntil } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ForgotDto } from 'src/app/models/auth.model';
 
 @Component({
   selector: 'app-forgot-passvord',

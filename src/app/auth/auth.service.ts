@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { LoginDto, RegisterDto, ForgotDto, ResetDto, LoginResponse } from '../models/auth.model';
 import { environment } from '../../environments/environment'
-import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { NotificationService } from './notification.service';
+import { NotificationService } from '../shared/notification.service';
 
 
 @Injectable({

@@ -8,7 +8,7 @@
     grid-template-columns:repeat(3,31%);
     grid-gap: 25px;
     white-space: nowrap;
-    // text-overflow: ellipsis;
+
 }
 
 .btn{
@@ -21,4 +21,5 @@
 .routerBtn{
   background-color: #1469d9;
   color: white;
+  border-radius: 5px;
 }

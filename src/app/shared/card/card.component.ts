@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PostsModel } from 'src/app/models/posts.model';
-import { PostsService } from 'src/app/services/posts.service';
+import { PostsService } from 'src/app/posts/posts.service';
+
 
 @Component({
   selector: 'app-card',

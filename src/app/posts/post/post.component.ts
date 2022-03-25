@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { PostDto } from 'src/app/models/post.model';
-import { PostsService } from 'src/app/services/posts.service';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post',
@@ -14,7 +14,7 @@ import { PostsService } from 'src/app/services/posts.service';
 export class PostComponent implements OnInit {
 
   formGroup!: FormGroup;
-  chapiMej = true;
+  sizeCheck = true;
   isImage = true;
   img !: any;
   fileName = '';
@@ -72,14 +72,14 @@ export class PostComponent implements OnInit {
   public kbytesToSize(kbytes: number): boolean {
 
     if (kbytes <= 2048) {
-      this.chapiMej = true;
+      this.sizeCheck = true;
       this.fileSizeError = '';
     } else {
-      this.chapiMej = false;
+      this.sizeCheck = false;
       this.errorFile = '';
       this.fileSizeError = 'file size should not be more than 2mb';
     }
-    return this.chapiMej;
+    return this.sizeCheck;
   }
 
 
@@ -125,7 +125,7 @@ export class PostComponent implements OnInit {
 
   public create() {
 
-    if (this.formGroup.valid && this.chapiMej && this.isImage) {
+    if (this.formGroup.valid && this.sizeCheck && this.isImage) {
       this.isLoading = true
       const image = {
         type: this.fileType,

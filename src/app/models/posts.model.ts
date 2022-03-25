@@ -8,6 +8,7 @@ export interface PostsModel {
   imageUrl: string|null;
   comments: CommentsModel[];
   user: UserModelDto;
+  createdAt?:string;
 }
 
 
