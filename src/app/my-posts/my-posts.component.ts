@@ -29,6 +29,7 @@ export class MyPostsComponent implements OnInit {
   private getMyPosts() {
       this.posts$ = this.postsService.getPosts(this.usersService.currentProfile?.id).pipe(
         finalize(() => {
+          
           this.isLoading = false;
         }),
         map(data => data.results),
