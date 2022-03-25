@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { mapTo, Observable, tap } from 'rxjs';
+import { EMPTY, mapTo, Observable, of, tap } from 'rxjs';
 import { UsersService } from '../users/users.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       const auth1 = sessionStorage.getItem('auth');
 
       if (auth || auth1) {
-        return this.setCurrentProfile().pipe(mapTo(true));
+        return this.setCurrentProfile();
       }
       return this.router.parseUrl('auth/login');
 
@@ -37,17 +37,21 @@ export class AuthGuard implements CanActivate {
     const auth1 = sessionStorage.getItem('auth');
 
     if (auth || auth1) {
-      return this.setCurrentProfile().pipe(mapTo(true));
+      return this.setCurrentProfile();
     }
     return this.router.parseUrl('auth/login');
   }
 
   setCurrentProfile() {
-    return this.userService.userGetProfile().pipe(tap(
-      profile => {
-        this.userService.currentProfile = profile;
-      }
-    ))
+    if (this.userService.currentProfile) {
+      return of(true)
+    } else {
+      return this.userService.userGetProfile().pipe(tap(
+        profile => {
+          this.userService.currentProfile = profile;
+        }
+      ), mapTo(true))
+    }
   }
   
 }

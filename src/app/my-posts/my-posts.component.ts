@@ -27,8 +27,7 @@ export class MyPostsComponent implements OnInit {
   }
 
   private getMyPosts() {
-    this.usersService.userGetProfile().subscribe(profile => {
-      this.posts$ = this.postsService.getPosts(profile.id).pipe(
+      this.posts$ = this.postsService.getPosts(this.usersService.currentProfile?.id).pipe(
         finalize(() => {
           this.isLoading = false;
         }),
@@ -37,7 +36,6 @@ export class MyPostsComponent implements OnInit {
           this.notifyService.showError(error.error.message, 'Error');
           return of([]);
         }))
-    })
     
 
 
