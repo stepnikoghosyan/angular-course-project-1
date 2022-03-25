@@ -185,8 +185,9 @@ input {
   border-radius: 5px;
 }
 .container {
-  margin: 100px auto 0 auto;
-  padding: 32px 20px;
+  padding: 0px 20px;
+  max-width: 1800px;
+  margin: auto;
 }
 
 .container-medium {
@@ -194,6 +195,10 @@ input {
   min-width: 350px;
   margin: 0 auto;
   padding: 32px 20px;
+}
+
+main {
+ margin-top: 75px;
 }
 
 textarea {

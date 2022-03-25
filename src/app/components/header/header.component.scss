@@ -11,7 +11,7 @@ header {
   display: flex;
   align-items: baseline;
   background-color: #fff;
-  padding: 20px 30px;
+  padding: 10px 30px;
   overflow: hidden;
   border-bottom: 1px solid #d0d0d0;
   z-index: 2;
@@ -23,11 +23,10 @@ header {
 
   .flex-container > a {
     display: block;
-    width: 100px;
-    margin: 10px;
+    margin: 0 10px;
     text-align: center;
-    font-size: 20px;
-    padding: 10px 5px;
+    font-size: 16px;
+    padding: 5px 5px;
   }
   .flex-container > a:hover{
     border-bottom: 2px solid black;
@@ -40,7 +39,7 @@ header {
   }
 
   .title {
-    font-size: 28px;
+    font-size: 25px;
   }
   .push {
     margin-left: auto;
