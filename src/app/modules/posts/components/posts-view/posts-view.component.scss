@@ -26,6 +26,9 @@
 .post-title {
     margin-top: 20px;
 }
+.post-body {
+  margin: 20px 0;
+}
 .post-comment {
     display: flex;
     justify-content: center;
@@ -35,3 +38,9 @@
     width: 100%;
     padding-top: 15px;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: flex-end;
+}
+

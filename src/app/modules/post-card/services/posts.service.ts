@@ -43,20 +43,20 @@ export class PostsService {
     return httpParams;
   }
 
-  createPost(formValue: PostFormModel): Observable<void> {
+  createPost(formValue: PostFormModel): Observable<PostModel> {
     const formData = this.createFormData(formValue);
-    return this.httpClient.post<void>(`${environment.apiUrl}/posts`, formData);
+    return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts`, formData);
   }
 
-  updatePost(id: number, formValue: PostFormModel): Observable<void> {
+  updatePost(id: number, formValue: PostFormModel): Observable<PostModel> {
     const formData = this.createFormData(formValue);
-    return this.httpClient.put<void>(`${environment.apiUrl}/posts/${id}`, formData);
+    return this.httpClient.put<PostModel>(`${environment.apiUrl}/posts/${id}`, formData);
   }
-  
+
   private createFormData(formValue: PostFormModel): FormData {
     const formData = new FormData();
     Object.entries(formValue).forEach(([key, value]) => {
-      if (key !== 'image' || (key === 'image' && value)) {        
+      if (key !== 'image' || (key === 'image' && value)) {
         formData.append(key, value);
       }
     })

@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { finalize, Subject, takeUntil } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
-import { PostsService } from "../../../post-card/services/posts.service";
-import { NotificationService } from "../../../../services/notification.service";
-import { PostFormModel, PostModel } from 'src/app/modules/post-card/models/post.model';
-import { fileTypeValidator } from "../../validators/file-type.validator";
-import { fileSizeValidator } from "../../validators/file-size.validator";
-import { FILE_EXTENSIONS, FILE_SIZE_MEGABYTE } from "../../constants";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {finalize, Subject, takeUntil} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
+import {PostsService} from "../../../post-card/services/posts.service";
+import {NotificationService} from "../../../../services/notification.service";
+import {PostFormModel, PostModel} from 'src/app/modules/post-card/models/post.model';
+import {fileTypeValidator} from "../../validators/file-type.validator";
+import {fileSizeValidator} from "../../validators/file-size.validator";
+import {FILE_EXTENSIONS, FILE_SIZE_MEGABYTE} from "../../constants";
 
 @Component({
   selector: 'app-posts-add-edit',
@@ -119,7 +119,8 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
         }))
       .subscribe({
         next: () => {
-          this.notifyService.showNotification(true, "Successfully updated.", null, ['posts'])
+          this.notifyService.showNotification(true, "Successfully updated.", null,
+            ['posts', 'view', this.postId!.toString()])
         },
         error: (err: HttpErrorResponse) => {
           this.notifyService.showNotification(false, err.error.message);
