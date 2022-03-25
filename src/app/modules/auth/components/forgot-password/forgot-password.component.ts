@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize, Subject, Subscription } from 'rxjs';
+import { finalize, Subject, Subscription, takeUntil } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 import { ForgotPasswordDto } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
@@ -29,7 +29,9 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         this.showSpinner = true;
         if(this.forgotPasForm.valid){
             const dto = new ForgotPasswordDto(this.forgotPasForm.value);
-            this.authService.forgotPassword(dto).pipe(
+            this.authService.forgotPassword(dto).pipe(takeUntil(
+                this.subscription$
+            ),
                 finalize(()=> this.showSpinner = false
                 )
             )

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 import { ResetPasswordDto } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
@@ -43,7 +43,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     formResetSubmit(){
         if(this.resetPasForm.valid){
             const dto = new ResetPasswordDto(this.resetPasForm.value);
-            this.authService.resetPassword(dto).subscribe({
+            this.authService.resetPassword(dto).pipe(takeUntil(
+                this.subscription$)).subscribe({
                 
                 error: (err: HttpErrorResponse) => {
                     this.errors = [];

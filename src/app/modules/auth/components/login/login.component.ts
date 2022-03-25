@@ -3,7 +3,7 @@ import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { LoginDto } from '../../models/auth.model';
-import { finalize, Subject } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 
 @Component({
@@ -36,7 +36,8 @@ export class LoginComponent implements  OnDestroy{
             const dto = new LoginDto(this.loginForm.value);
             this.errors = [];
             this.authService.login(dto, this.loginForm.controls['remember'].value)
-            .pipe(
+            .pipe(takeUntil(
+                this.subscription$),
                 finalize(() => {        
                     this.showSpinner = false;
                 })

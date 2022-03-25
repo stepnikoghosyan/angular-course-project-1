@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmailDto } from '../../models/auth.model';
-import { finalize, Subject, Subscription } from 'rxjs';
+import { finalize, pipe, Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-verify-account',
@@ -34,8 +34,9 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       this.showSpinner = true;
       const activationToken = this.activatedRoute.snapshot.params['activationToken'];
       if (activationToken) {
-      this.authService.verifyAccount(activationToken)
-            .subscribe({
+      this.authService.verifyAccount(activationToken).pipe(takeUntil(
+        this.subscription$)).
+            subscribe({
                 error :(err: HttpErrorResponse) => {
                     this.notifyService.error("Invalid activation token", "Error");
                     this.showTitle = false;

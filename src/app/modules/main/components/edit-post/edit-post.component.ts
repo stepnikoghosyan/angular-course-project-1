@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { PaginationResponseModel } from 'src/app/models/pagination-response';
 import { PostModel, PostModelDto } from '../../../../models/post.model';
 import { NotificationService } from '../../../../services/notification.service';
@@ -13,8 +13,9 @@ import { PostsService } from '../../services/posts.service';
   templateUrl: './edit-post.component.html',
   styleUrls: ['./edit-post.component.scss']
 })
-export class EditPostComponent implements OnInit {
+export class EditPostComponent implements OnInit, OnDestroy {
     @ViewChild('file') el!: ElementRef;
+    private subscription$ = new Subject<void>()
     date = JSON.stringify(new Date());
     post!: PostModel;
     targetValue!: string | null;
@@ -39,7 +40,8 @@ export class EditPostComponent implements OnInit {
         this.showSpinner = true;
         let id = this.activatedRoute.snapshot.params['id'];
         this.postService.getPost(id)
-        .pipe(
+        .pipe(takeUntil(
+            this.subscription$),
             finalize(()=>
                 this.showSpinner = false
             )
@@ -88,4 +90,9 @@ export class EditPostComponent implements OnInit {
         this.targetValue = "";
         this.isHidden = false;
     }
+
+    ngOnDestroy(): void {
+        this.subscription$.next()
+        this.subscription$.complete()
+     }
 }

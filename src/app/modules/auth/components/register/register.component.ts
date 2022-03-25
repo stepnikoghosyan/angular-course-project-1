@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
-import { finalize, Subject, Subscription } from 'rxjs';
+import { finalize, Subject, Subscription, takeUntil } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 
 
@@ -34,7 +34,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.showSpinner = true;
         const dto = new RegisterDto(this.registerForm.value);
         if(this.registerForm.valid){
-           this.authService.register(dto).pipe(
+           this.authService.register(dto).pipe(takeUntil(
+            this.subscription$),
                 finalize(()=>{
                     this.showSpinner = false;
                 })
