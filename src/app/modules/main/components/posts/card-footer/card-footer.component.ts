@@ -18,7 +18,11 @@ export class CardFooterComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        console.log("MY ID", this.myProfile);
-        this.post.user.id === this.myProfile.id ? this.isMyPost = true : this.isMyPost
+        console.log("MY ID, USER ID", this.myProfile.id, this.post.user.id);
+        if(this.post.user.id === this.myProfile.id){
+            this.isMyPost = true
+        }else{
+            this.isMyPost
+        }
     }
 }

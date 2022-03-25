@@ -1,4 +1,6 @@
 export interface PaginationResponseModel<T>{
+    imageUrl: string | null;
+    id: number;
     userID: number;
     pageSize: number;
     results: T[];

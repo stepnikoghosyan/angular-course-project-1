@@ -21,8 +21,11 @@ export class PostsService {
     getPosts() : Observable <PaginationResponseModel<PostModel>>  {
     
       return this.httpClient
-        .get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`)
-           
+        .get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`, {
+            params:{
+                showAll: true,
+            }
+        })
     }
 
     getPost(id: number): Observable <PostModel>{
