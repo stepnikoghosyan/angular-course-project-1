@@ -23,7 +23,8 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   isTargetValue:string = "";
   isClose:boolean = false;
   showSpinner = false;
-  cardImageBase64:string =""
+  file:any;
+ 
  
   
   constructor(private formBuilder: FormBuilder, 
@@ -49,12 +50,13 @@ get image() {
   }
   
   onSelectFile(event:any){ 
-  
-    if(event.target.files && event.target.files[0]){     
-              var file = <File> event.target.files[0]
-                this.createForm.patchValue({
-                  image: file
-                })                 
+    this.isTargetValue=event.target.files[0].name;
+    this.isClose=true;
+    if(event.target.files[0]){   
+
+                  this.file = <File> event.target.files[0]
+                  
+                console.log(this.file)             
     } 
  }
   createFormSubmit(){
@@ -87,6 +89,7 @@ get image() {
     this.isTargetValue=""
     this.isClose= false;
     this.errorMessage="";
+      
   }
 
   ngOnDestroy(): void {
