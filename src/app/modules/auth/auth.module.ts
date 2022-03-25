@@ -11,7 +11,6 @@ import { RegisterComponent } from 'src/app/modules/auth/components/register/regi
 import { ResetPasswordComponent } from 'src/app/modules/auth/components/reset-password/reset-password.component';
 import { PasswordComponent } from 'src/app/modules/auth/components/password/password.component';
 import { VerifyAccountComponent } from 'src/app/modules/auth/components/verify-account/verify-account.component';
-
 import { AuthComponent } from './auth.component';
 
 

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ForgotPasswordComponent } from 'src/app/modules/auth/components/forgot-password/forgot-password.component';
 import { LoginComponent } from 'src/app/modules/auth/components/login/login.component';
-import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 import { RegisterComponent } from 'src/app/modules/auth/components/register/register.component';
 import { ResetPasswordComponent } from 'src/app/modules/auth/components/reset-password/reset-password.component';
 import { VerifyAccountComponent } from 'src/app/modules/auth/components/verify-account/verify-account.component';
@@ -42,7 +41,6 @@ const routes: Routes = [
             }
         ]
     },
-   
 ];
 
 @NgModule({

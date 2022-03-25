@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
-import { CreatePostModelDto } from '../../models/post.model';
+import { CreatePostModelDto } from '../../../../models/post.model';
 import { PostsService } from '../../services/posts.service';
 
 

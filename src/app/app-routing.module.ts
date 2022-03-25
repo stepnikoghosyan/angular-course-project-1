@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainGuard } from './modules/main/guards/main.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { MainGuard } from './guards/main.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
     {
         path: "",
         loadChildren: ()=> import("./modules/auth/auth.module").then(m => m.AuthModule),
+        canLoad:[AuthGuard]
     },
     {
         path: "main", 
         loadChildren: ()=> import("./modules/main/main.module").then(m => m.MainModule),
-        canLoad: [ MainGuard ]
+        canLoad: [MainGuard]
     },
     {
         path:"**",
@@ -22,6 +24,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

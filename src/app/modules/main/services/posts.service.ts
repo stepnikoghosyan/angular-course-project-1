@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PaginationResponseModel } from '../models/pagination-response';
-import { CreatePostModelDto, PostModel, PostModelDto } from '../models/post.model';
+import { PaginationResponseModel } from '../../../models/pagination-response';
+import { CreatePostModelDto, PostModel, PostModelDto } from '../../../models/post.model';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from './../../../services/notification.service';
@@ -21,7 +21,7 @@ export class PostsService {
     getPosts() : Observable <PaginationResponseModel<PostModel>>  {
     
       return this.httpClient
-        .get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`);
+        .get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`)
            
     }
 

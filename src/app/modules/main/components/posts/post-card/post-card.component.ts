@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PostModel } from 'src/app/modules/main/models/post.model';
+import { PostModel } from 'src/app/models/post.model';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-post-card',
@@ -7,7 +8,7 @@ import { PostModel } from 'src/app/modules/main/models/post.model';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
-    
+    @Input('myProfile') myProfile!: UserModel;
     @Input('post') post!: PostModel;
     
     constructor() {}

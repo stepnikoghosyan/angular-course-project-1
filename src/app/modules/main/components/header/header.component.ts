@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { INavItem } from '../../models/nav-item.model';
+import { INavItem } from '../../../../models/nav-item.model';
 import { getNavigationItems } from '../../configs/navigation-Items.config';
 
 @Component({

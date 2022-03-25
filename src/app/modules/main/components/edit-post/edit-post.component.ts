@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { PostModel, PostModelDto } from '../../models/post.model';
+import { PostModel, PostModelDto } from '../../../../models/post.model';
 import { NotificationService } from '../../../../services/notification.service';
 import { PostsService } from '../../services/posts.service';
 

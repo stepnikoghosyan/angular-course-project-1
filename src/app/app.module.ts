@@ -8,14 +8,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './interceptors/token.interceptor';
-import { MainGuard } from './modules/main/guards/main.guard';
-
 
 @NgModule({
     declarations: [
         AppComponent,
-        NotFoundComponent
-
+        NotFoundComponent,
     ],
     imports: [
         BrowserModule,
@@ -24,13 +21,13 @@ import { MainGuard } from './modules/main/guards/main.guard';
         BrowserAnimationsModule,
         HttpClientModule
     ],
-    providers: [MainGuard,
+    providers: [
         {
-            provide : HTTP_INTERCEPTORS,
-            useClass : AuthInterceptor,
-            multi:true
-        }],
-
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
