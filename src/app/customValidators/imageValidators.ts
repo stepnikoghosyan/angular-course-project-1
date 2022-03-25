@@ -10,7 +10,7 @@ export function imageTypeValidation(arr:string[]):ValidatorFn{
             const path:string[] = file.split("\\");
             const imageType:string[]= path[path.length-1].split(".");
             let item = imageType[1].toLowerCase()
-            for(let i = 0; i <arr.length-1; i++){
+            for(let i = 0; i <arr.length; i++){
                 if(arr[i]===item){
                     isImageType = true;      
                    
@@ -28,12 +28,12 @@ export function imageTypeValidation(arr:string[]):ValidatorFn{
       return null;     
     }
 }
-export function imageSizeValidation(size:number):ValidatorFn{
+export function imageSizeValidation(file:File):ValidatorFn{
     return function (control:AbstractControl):ValidationErrors | null {
-        const fileSize = control.value.size;
-        console.log(fileSize)
-        if(fileSize>size){
-            console.log(fileSize)
+        const fileSize = file.size;
+       
+        if(fileSize>2097152){
+           
             return {size:true};
         }
        

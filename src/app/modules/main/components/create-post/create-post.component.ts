@@ -7,7 +7,6 @@ import { catchError, finalize, of, Subject, takeUntil } from 'rxjs';
 import { imageSizeValidation, imageTypeValidation } from 'src/app/customValidators/imageValidators';
 import { NotificationService } from 'src/app/services/notification.service';
 import { errorResponse } from '../../../../../utils/error-response.utility';
-import { CreatePostModelDto } from '../../../../models/post.model';
 import { PostsService } from '../../services/posts.service';
 
 
@@ -24,6 +23,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   isClose:boolean = false;
   showSpinner = false;
   file:any;
+  notifyService: any;
  
  
   
@@ -52,20 +52,21 @@ get image() {
   onSelectFile(event:any){ 
     this.isTargetValue=event.target.files[0].name;
     this.isClose=true;
+   
     if(event.target.files[0]){   
-
+ 
                   this.file = <File> event.target.files[0]
-                  
-                console.log(this.file)             
+                  this.image.addValidators(imageSizeValidation(this.file));
+                           
     } 
+  
  }
   createFormSubmit(){
     const formData = new FormData();
     for (let key in this.createForm.value) {
       formData.append(key,this.createForm.value[key])
     } 
-    
-    
+    if(this.createForm.valid){
     this.postsService.createPost(formData).pipe(
        takeUntil(this.subscription$),
         finalize(()=>{
@@ -82,6 +83,11 @@ get image() {
           
       },   
       })
+    }else{
+           console.log('Form invalid');
+            this.notifyService.error( "", "No changes")
+
+    }
     
   }
   
@@ -89,11 +95,13 @@ get image() {
     this.isTargetValue=""
     this.isClose= false;
     this.errorMessage="";
-      
-  }
+   
+ }
 
   ngOnDestroy(): void {
     this.subscription$.next()
     this.subscription$.complete()
+    
  }
+ 
 }
