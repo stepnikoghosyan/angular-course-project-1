@@ -19,28 +19,33 @@ const routes: Routes = [
             },
             {
                 path: "posts",
-                component: PostsComponent
+                component: PostsComponent,                  
             },
-
+            {
+                path: 'posts/create',
+                component: CreatePostComponent,
+        
+            },
+            {
+                path: "posts/:id",
+                component: PostsViewComponent,   
+            },
+           
+            {
+                path: 'posts/:id/edit',
+                component: EditPostComponent,
+            },
+            
+           
             {
                 path: 'users',
                 component: UsersComponent,
             },
+             
+           
         ]
     },
-    {
-        path: 'create',
-        component: CreatePostComponent,
-
-    },
-    {
-        path: 'edit-post/:id',
-        component: EditPostComponent,
-    },
-    {
-        path: 'view-post/:id',
-        component: PostsViewComponent,
-    },
+   
 ];
 
 @NgModule({

@@ -4,7 +4,7 @@ import { EmailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, Rese
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../shared/notification.service';
 
 @Injectable({
   providedIn: 'root'

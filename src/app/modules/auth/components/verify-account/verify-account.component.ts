@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotificationService } from '../../../../services/notification.service';
+import { NotificationService } from '../../../../shared/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmailDto } from '../../models/auth.model';
 import { finalize, pipe, Subject, Subscription, takeUntil } from 'rxjs';

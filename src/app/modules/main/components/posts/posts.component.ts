@@ -23,7 +23,6 @@ export class PostsComponent implements OnInit {
 
     ngOnInit(): void {
         this.showSpinner = true;
-        this.activatedRoute.snapshot.params['showAll'];
         this.posts$ = this.postService.getPosts().pipe(
             finalize(() => {
                 this.showSpinner = false;

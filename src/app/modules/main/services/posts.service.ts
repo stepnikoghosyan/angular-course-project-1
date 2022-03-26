@@ -6,7 +6,8 @@ import { PaginationResponseModel } from '../../../models/pagination-response';
 import { CreatePostModelDto, PostModel, PostModelDto } from '../../../models/post.model';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { NotificationService } from './../../../services/notification.service';
+import { NotificationService } from '../../../shared/notification.service';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +34,9 @@ export class PostsService {
             .get<PostModel>(`${environment.apiUrl}/posts/${id}`)
     }
 
-    putPost(id: number, postDto: PostModelDto): Observable<any>{
+    putPost(id: number, postDto: FormData): Observable<any>{
         return this.httpClient
-            .put<PostModel>(`${environment.apiUrl}/posts/${id}`, postDto)
+            .put<FormData>(`${environment.apiUrl}/posts/${id}`, postDto)
                 .pipe(
                     tap(()=>{
                         this.notifyService.success("Post is updated", "Success!!")
@@ -45,8 +46,6 @@ export class PostsService {
     }
 
     createPost(postDto: FormData): Observable<any>{
-        
-        
         return this.httpClient.post<FormData>(`${environment.apiUrl}/posts/`, postDto)
     }
 

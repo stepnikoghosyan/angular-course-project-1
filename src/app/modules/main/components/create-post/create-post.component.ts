@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, finalize, of, Subject, takeUntil } from 'rxjs';
 import { imageSizeValidation, imageTypeValidation } from 'src/app/customValidators/imageValidators';
-import { NotificationService } from 'src/app/services/notification.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 import { PostsService } from '../../services/posts.service';
 
