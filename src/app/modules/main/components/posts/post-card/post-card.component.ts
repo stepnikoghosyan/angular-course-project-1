@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PostModel } from 'src/app/models/post.model';
-import { UserModel } from 'src/app/models/user.model';
+import { PostModel } from 'src/app/modules/main/models/post.model';
+import { UserModel } from 'src/app/modules/main/models/user.model';
 
 @Component({
   selector: 'app-post-card',

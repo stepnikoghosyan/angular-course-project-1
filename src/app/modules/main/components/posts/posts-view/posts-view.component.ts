@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PostModel } from 'src/app/models/post.model';
+import { PostModel } from 'src/app/modules/main/models/post.model';
 import { PostsService } from '../../../services/posts.service';
 
 
@@ -10,7 +10,7 @@ import { PostsService } from '../../../services/posts.service';
   styleUrls: ['./posts-view.component.scss']
 })
 export class PostsViewComponent implements OnInit {
-posts! :PostModel
+post? :PostModel
   constructor( private postService: PostsService,
                private activatedRoute: ActivatedRoute) { }
 
@@ -19,9 +19,9 @@ posts! :PostModel
         this.postService.getPost(id).subscribe({
             next: (data)=>{
                 console.log("POST DATA", data);
-                this.posts = data;
-              if(this.posts && !this.posts?.imageUrl ){
-                this.posts.imageUrl = "../../assets/images/img.png"
+                this.post = data;
+              if(this.post && !this.post?.imageUrl ){
+                this.post.imageUrl = "../../assets/images/img.png"
               }
             }
         })
@@ -29,8 +29,8 @@ posts! :PostModel
   }
 
   onImageError():void {
-    this.posts.imageUrl = "../../assets/images/img.png"
- }
+    this.post!.imageUrl = "../../assets/images/img.png"
+}
 
  
 }

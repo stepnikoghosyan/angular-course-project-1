@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { PaginationResponseModel } from 'src/app/models/pagination-response';
-import { PostModel, PostModelDto } from '../../../../models/post.model';
+import { imageTypeValidation } from 'src/app/modules/main/customValidators/imageValidators';
+import { imageSizeValidation, imgTypeValidation } from 'src/app/modules/main/customValidators/imgValidator';
+import { PostModel } from '../../models/post.model';
 import { NotificationService } from '../../../../services/notification.service';
 import { PostsService } from '../../services/posts.service';
 
@@ -21,15 +22,17 @@ export class EditPostComponent implements OnInit, OnDestroy {
     targetValue!: string | null;
     isClicked = true;
     isHidden = false;
-    showSpinner = false;
+    showSpinner = false;  
+    fileName ='';
 
 
     updateForm: FormGroup = this.formBuilder.group({
         title: ['', Validators.required],
         body: ['', Validators.required],
-        imageUrl: [''],
+        imageUrl: ['', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
         updatedAt: [this.date]
     })
+    
 
     constructor(private formBuilder: FormBuilder,
                 private postService: PostsService,
@@ -49,20 +52,30 @@ export class EditPostComponent implements OnInit, OnDestroy {
         .subscribe({
             next: (data)=>{
                 console.log("POST DATA", data);
-                // this.post = data;
-                this.targetValue = this.post?.imageUrl
+                this.post = data;
+                this.targetValue = this.post?.imageUrl;
+                console.log("IMAGEURL", this.post?.imageUrl );
+                this.updateForm.controls['imageUrl'].setValue(this.post?.imageUrl);
+                this.updateForm.controls['title'].setValue(this.post?.title);
+                this.updateForm.controls['body'].setValue(this.post?.body);
+
             }
         })
     }
     
-    updateFormSubmit(){
-        const dto = new PostModelDto(this.updateForm.value);
-        console.log("postDto", dto);
+    onUpdateForm(){
+    
         console.log("PostID", this.post.id);
         console.log("post valid", this.updateForm.valid );
+        const formData = new FormData();
+        for (let key in this.updateForm.value) {
+            formData.append(key, this.updateForm.value[key]);
+            console.log("KEY VALUE", key, this.updateForm.value[key]);
+            
+        }
         if(this.updateForm.valid){
             this.showSpinner = true;
-            this.postService.putPost(this.post.id, dto)
+            this.postService.putPost(this.post.id, formData)
             .pipe(
                 finalize(()=>  
                      this.showSpinner = false )
@@ -78,11 +91,19 @@ export class EditPostComponent implements OnInit, OnDestroy {
             this.notifyService.error( "", "No changes")
         }
     }
+   
+    // file!: File;
 
     selectFile(event: any){
-        this.targetValue = event.target.files[0].name;
+        
+        this.targetValue = event.target.files[0].name
         if(this.targetValue){
             this.isHidden = true;
+        }
+        if (event.target.files[0]) {
+
+            const file = <File>event.target.files[0]
+            this.updateForm.controls['imageUrl'].addValidators(imageSizeValidation(file));
         }
     }
 

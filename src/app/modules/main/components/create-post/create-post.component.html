@@ -5,7 +5,6 @@
         <input type="text" name="title"  formControlName="title">
         <div *ngIf="createForm.controls['title'].invalid && createForm.controls['title'].touched" >
             <span class="error-message" *ngIf="createForm.controls['title'].errors?.['required']">Title is required</span> 
-            
         </div>
     </div>
     <div class="form-group">
@@ -13,7 +12,6 @@
         <textarea rows="10" name="body" multiline  formControlName="body"></textarea>
         <div *ngIf="createForm.controls['body'].invalid && createForm.controls['body'].touched" >
             <span class="error-message" *ngIf="createForm.controls['body'].errors?.['required']">Body is required</span> 
-            
         </div>
     </div>
     
@@ -22,7 +20,7 @@
         {{isTargetValue}}
       
         <button class="close_btn"  *ngIf="isClose" (click)="clearFile($event)">X</button>
-        <input  id ="title" hidden formControlName="image"  type="file" class="file_btn" (change) = "onSelectFile($event)"  name ="image"/> 
+        <input id ="title" hidden formControlName="image" type="file" class="file_btn" (change) = "onSelectFile($event)" name ="image"/> 
         <div>  
             <span  class="error-message" *ngIf="image.errors?.['type']"> The type of image must be jpeg, jpg, png type</span>
             <span class="error-message"  *ngIf="image.errors?.['size']">> The size of image is greater then 2 Mg</span>

@@ -1,4 +1,4 @@
-import { INavItem } from "../../../models/nav-item.model";
+import { INavItem } from "../models/nav-item.model";
 
 export function getNavigationItems(): INavItem[] {
     return [

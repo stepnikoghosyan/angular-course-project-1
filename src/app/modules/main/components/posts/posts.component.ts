@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { finalize, map, Observable } from 'rxjs';
-import { PostModel } from '../../../../models/post.model';
-import { UserModel } from '../../../../models/user.model';
+import { PostModel } from '../../models/post.model';
+import { UserModel } from '../../models/user.model';
 import { PostsService } from '../../services/posts.service';
 import { UsersService } from '../../services/users.service';
 

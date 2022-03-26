@@ -1,22 +1,35 @@
-<div class="posts-view">
-    <span>
-        {{posts?.user | userName}}
-    </span>
-    <br>
-    <span>
-        {{posts?.createdAt}}
-    </span>
-    <br>
-    <span>
-        {{posts?.title}}
-    </span>
-    <div>
-        <img class="img" [src]="posts?.imageUrl" (error)="onImageError()" alt="image of the post">
+<div class="view_post">
+    <div class="wrapper">
+        <div class="info">
+            <div class="user_info">
+                <img [src]="post?.user?.profilePicture" alt="user image" class="user_img">
+                <div class="user_name">
+                    <span class="name">{{post?.user | userName}}</span>
+                    <span class="created_date">{{post?.createdAt | date}}</span>
+                </div>
+            </div>
+        </div>
+        <h2 class="post_title"> {{post?.title}}</h2>
+        <div class="post_img">
+            <img [src]="post?.imageUrl" (error)="onImageError()" alt="post image">
+        </div>
+        <div class="post_body">
+            <p>{{post?.body}}</p>
+        </div>
     </div>
-    <br>
-    <span>
-        {{posts?.body}}
-    </span>
+    <div class="wrapper">
+        <div class="comment_content">
+            <h2>Comments</h2>
+            <div class="comments" *ngFor="let comment of this.post?.comments">
+                <div> 
+                    <img [src]="this.post?.user?.profilePicture">
+                </div>
+                <div class="comment" >
+                    {{comment}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- <app-comments></app-comments> -->
+<!-- !-- <app-comments></app-comments> --> 
 
