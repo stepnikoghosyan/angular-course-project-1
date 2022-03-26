@@ -38,7 +38,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
                 private postService: PostsService,
                 private activatedRoute: ActivatedRoute,
                 private notifyService: NotificationService) { }
-
     ngOnInit(): void {
         this.showSpinner = true;
         let id = this.activatedRoute.snapshot.params['id'];
@@ -77,11 +76,10 @@ export class EditPostComponent implements OnInit, OnDestroy {
             this.showSpinner = true;
             this.postService.putPost(this.post.id, formData)
             .pipe(
-                finalize(()=>  
+                finalize(()=>
                      this.showSpinner = false )
             )
             .subscribe({
-                
                 error: (err: HttpErrorResponse)=>{
                     console.log('ERROR MESSAGE', err.error.message);
                 }
@@ -101,17 +99,14 @@ export class EditPostComponent implements OnInit, OnDestroy {
             this.isHidden = true;
         }
         if (event.target.files[0]) {
-
             const file = <File>event.target.files[0]
             this.updateForm.controls['imageUrl'].addValidators(imageSizeValidation(file));
         }
     }
-
     removeFile(){
         this.targetValue = "";
         this.isHidden = false;
     }
-
     ngOnDestroy(): void {
         this.subscription$.next()
         this.subscription$.complete()

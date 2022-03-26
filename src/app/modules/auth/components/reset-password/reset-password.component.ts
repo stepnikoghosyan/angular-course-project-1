@@ -6,7 +6,7 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 import { ResetPasswordDto } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
-import { NotificationService } from '../../../../services/notification.service';
+import { NotificationService } from '../../../../shared/notification.service';
 
 @Component({
   selector: 'app-reset-password',

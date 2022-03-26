@@ -30,7 +30,7 @@ post? :PostModel
 
   onImageError():void {
     this.post!.imageUrl = "../../assets/images/img.png"
-}
+ }
 
  
 }
