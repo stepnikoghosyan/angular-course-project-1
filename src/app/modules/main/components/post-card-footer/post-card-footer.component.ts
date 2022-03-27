@@ -1,7 +1,6 @@
-import {Component, Input} from "@angular/core";
-import {Router} from "@angular/router";
-import {PostModel} from "../../models/post.model";
-import {UserService} from "../../../../services/user.service";
+import { Component, Input } from "@angular/core";
+import { Router } from "@angular/router";
+import { PostModel } from "../../models/post.model";
 
 @Component({
   selector: 'app-post-card-footer',
@@ -10,10 +9,8 @@ import {UserService} from "../../../../services/user.service";
 })
 export class PostCardFooterComponent {
   @Input() post: PostModel | null = null;
-
-  constructor(private route: Router,
-              public userService: UserService) {
-  }
+  @Input() canEdit: boolean = false;
+  constructor(private route: Router) { }
 
   editPost(): void {
     this.route.navigate([`/posts/${this.post?.id}`]);

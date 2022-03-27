@@ -1,5 +1,6 @@
-import {Component, Input} from "@angular/core";
-import {PostModel} from "../../models/post.model";
+import { Component, Input } from "@angular/core";
+import { UserService } from "src/app/services/user.service";
+import { PostModel } from "../../models/post.model";
 
 @Component({
   selector: 'app-post-card',
@@ -9,4 +10,8 @@ import {PostModel} from "../../models/post.model";
 export class PostCardComponent {
   @Input()
   post: PostModel | null = null;
+  userId: number | undefined;
+  constructor(private userService: UserService) {
+    this.userId = this.userService.getUser()?.id;
+  }
 }

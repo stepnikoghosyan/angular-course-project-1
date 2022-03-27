@@ -6,5 +6,5 @@
     </div>
     <p class="description">{{post?.body}}</p>
   </div>
-  <app-post-card-footer [post]="post"></app-post-card-footer>
+  <app-post-card-footer [canEdit]="userId === post?.user?.id" [post]="post"></app-post-card-footer>
 </div>

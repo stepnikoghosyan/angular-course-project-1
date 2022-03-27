@@ -8,7 +8,7 @@
             <i class="icon-bubble"></i>
             <span>{{post?.comments?.length}}</span>
         </div>
-        <button *ngIf="userService.user?.id == post?.user?.id" class="icon-pencil m-l-20" (click)="editPost()"></button>
+        <button *ngIf="canEdit" class="icon-pencil m-l-20" (click)="editPost()"></button>
         <button class="icon-eye m-l-20" (click)="viewPost()"></button>
     </div>
 </div>
