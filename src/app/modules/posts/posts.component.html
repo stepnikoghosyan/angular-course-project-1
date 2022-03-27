@@ -1,8 +1,0 @@
-<app-post-container [posts]="posts$ | async" [title]="'Posts'">
-  <div class="d-flex flex-end">
-    <button class="btn-primary" routerLink="/posts/add">
-      Create Post
-    </button>
-  </div>
-</app-post-container>
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

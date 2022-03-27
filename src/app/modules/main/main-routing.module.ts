@@ -1,0 +1,49 @@
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {MainComponent} from "./main.component";
+import {AuthGuard} from "../../guards/auth.guard";
+import {HomeComponent} from "./components/home/home.component";
+import {PostsComponent} from "./components/posts/posts.component";
+import {PostsViewComponent} from "./components/posts-view/posts-view.component";
+import {PostsAddEditComponent} from "./components/posts-add-edit/posts-add-edit.component";
+
+const routes: Routes = [
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'posts',
+        component: PostsComponent,
+      },
+      {
+        path: 'posts/view/:id',
+        component: PostsViewComponent
+      },
+      {
+        path: 'posts/add',
+        component: PostsAddEditComponent
+      },
+      {
+        path: 'posts/:id',
+        component: PostsAddEditComponent
+      }
+    ]
+  }
+]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class MainRoutingModule {
+}

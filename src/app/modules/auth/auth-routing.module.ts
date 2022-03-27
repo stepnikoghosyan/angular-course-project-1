@@ -21,27 +21,22 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
-        canActivate: [AuthPublicGuard]
       },
       {
         path: 'register',
         component: RegisterComponent,
-        canActivate: [AuthPublicGuard]
       },
       {
         path: 'verify-account/:accessToken',
         component: VerifyAccountComponent,
-        canActivate: [AuthPublicGuard]
       },
       {
         path: 'reset-password/:token',
         component: ResetPasswordComponent,
-        canActivate: [AuthPublicGuard],
       },
       {
         path: 'forgot-password',
         component: ForgotPasswordComponent,
-        canActivate: [AuthPublicGuard],
       },
     ]
   }

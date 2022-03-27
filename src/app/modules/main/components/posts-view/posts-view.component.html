@@ -1,0 +1,22 @@
+<div class="container-medium">
+    <div class="post-user d-flex align-items-center">
+      <img class="img-wrapper" [src]="post?.user?.profilePictureUrl | imageUrl" alt="">
+      <div class="user-info">
+        <p class="user-name">{{post?.user | fullName}}</p>
+        <p class="post-date">{{post?.createdAt | date: 'mediumDate'}}</p>
+      </div>
+    </div>
+  <h1 class="post-title">{{post?.title}}</h1>
+  <div class="post-image-wrapper">
+    <img [src]="post?.imageUrl | imageUrl" alt="">
+  </div>
+  <div class="post-body">{{post?.body}}</div>
+  <div class="flex-container">
+
+  <button class="cancel-btn" routerLink="/posts">Back</button>
+  </div>
+  <div class="post-comment">
+    <h3>Comments</h3>
+  </div>
+</div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
