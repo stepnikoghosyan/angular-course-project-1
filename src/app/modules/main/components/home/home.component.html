@@ -1,5 +1,5 @@
-<app-post-container [posts]="posts$ | async"
-                    [title]="'Home'"
-                    [subTitle]="'Review some of the latest posts in our platform'">
+<h2 class="text-center">Home</h2>
+<div class="text-center subtitle">Review some of the latest posts in our platform</div>
+<app-post-container [posts$]="posts$">
 </app-post-container>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

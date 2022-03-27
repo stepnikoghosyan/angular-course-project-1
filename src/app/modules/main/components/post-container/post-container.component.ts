@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {PostModel} from "../../models/post.model";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-post-container',
@@ -8,12 +9,6 @@ import {PostModel} from "../../models/post.model";
 })
 export class PostContainerComponent {
   @Input()
-  title: string = '';
-
-  @Input()
-  subTitle: string = '';
-
-  @Input()
-  posts: PostModel[] | null = null;
+  posts$: Observable<PostModel[]> = of([]);
 
 }

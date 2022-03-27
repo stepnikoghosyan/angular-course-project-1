@@ -13,7 +13,7 @@ import {PostsQueryParamsModel} from "../../models/posts-query-params.model";
 })
 export class PostsComponent implements OnInit {
   isLoading = true;
-  posts$?: Observable<PostModel[]>;
+  posts$: Observable<PostModel[]> = of([]);
 
   constructor(private postsService: PostsService,
               private notifyService: NotificationService) {
