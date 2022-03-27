@@ -1,18 +1,11 @@
 import {Injectable} from "@angular/core";
 import {LoginResponse} from "../modules/auth/models/auth.model";
 
-type StorageType = 'localStorage' | 'sessionStorage';
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class StorageService {
-  private storageType: StorageType = 'sessionStorage';
-
-  setStorageType(storageType: StorageType) {
-    this.storageType = storageType
-  }
-
   setToken(tokens: LoginResponse, rememberMe: boolean) {
     if (rememberMe) {
       localStorage.setItem('accessToken', tokens.accessToken);
