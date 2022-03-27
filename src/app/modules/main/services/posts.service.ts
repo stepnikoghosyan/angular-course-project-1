@@ -6,6 +6,7 @@ import { environment } from "../../../../environments/environment";
 import { PostFormModel, PostModel } from "../models/post.model";
 import { PaginatedResponseModel } from "../../../models/paginated-response.model";
 import { PostsQueryParamsModel } from "../models/posts-query-params.model";
+import {paramsToHttpParams} from "../helpers/convert-to-http-params.helper";
 
 @Injectable()
 export class PostsService {
@@ -14,7 +15,7 @@ export class PostsService {
 
   getPosts(params?: PostsQueryParamsModel): Observable<PaginatedResponseModel<PostModel>> {
     return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`, {
-      params: params ? this.paramsToHttpParams(params) : {}
+      params: params ? paramsToHttpParams(params) : {}
     });
   }
 
@@ -27,22 +28,13 @@ export class PostsService {
     }
 
     return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`, {
-      params: this.paramsToHttpParams(params)
+      params: paramsToHttpParams(params)
     });
   }
 
   getPostById(id: number): Observable<PostModel> {
     return this.httpClient.get<PostModel>(`${environment.apiUrl}/posts/${id}`);
   }
-
-  private paramsToHttpParams(params: PostsQueryParamsModel): HttpParams {
-    let httpParams = new HttpParams();
-    Object.entries(params).forEach(([key, value]) => {
-      httpParams = httpParams.append(key, value);
-    })
-    return httpParams;
-  }
-
   createPost(formValue: PostFormModel): Observable<PostModel> {
     const formData = this.createFormData(formValue);
     return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts`, formData);

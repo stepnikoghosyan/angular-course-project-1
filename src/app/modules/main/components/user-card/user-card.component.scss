@@ -1,0 +1,49 @@
+.user-card-content {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  margin: 10px 0;
+
+  &:hover {
+    .card__image {
+      filter: contrast(100%);
+    }
+  }
+
+  &:hover {
+    .card__image {
+      filter: contrast(100%);
+    }
+  }
+
+  &:hover {
+    transition: all 0.5s;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, .7);
+  }
+
+  .user-card-body {
+    padding-top: 25px;
+    padding-bottom: 40px;
+
+    .user-top-content {
+      text-align: center;
+
+      img {
+        vertical-align: middle;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+      }
+
+      .user-full-name {
+        margin-top: 10px;
+      }
+
+      .user-email {
+        margin-top: 10px;
+      }
+    }
+  }
+}

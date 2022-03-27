@@ -1,0 +1,8 @@
+<h2 class="text-center">Users</h2>
+
+<div class="container">
+  <div class="row">
+    <app-user-card class="col-4" *ngFor="let user of users$ | async" [user]="user"></app-user-card>
+  </div>
+</div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

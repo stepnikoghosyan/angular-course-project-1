@@ -1,0 +1,9 @@
+<div class="user-card-content">
+  <div class="user-card-body">
+    <div class="user-top-content">
+      <img [src]="user?.profilePictureUrl | imageUrl" alt="">
+      <h3 class="user-full-name">{{user | fullName}}</h3>
+      <div class="user-email">{{user?.email}}</div>
+    </div>
+  </div>
+</div>

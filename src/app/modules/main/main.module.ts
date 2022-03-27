@@ -15,6 +15,9 @@ import {PipesModule} from "../pipes/pipes.module";
 import {PostsService} from "./services/posts.service";
 import {MainComponent} from "./main.component";
 import {HeaderComponent} from "./components/header/header.component";
+import {UsersComponent} from "./components/users/users.component";
+import {UsersService} from "./services/users.service";
+import {UserCardComponent} from "./components/user-card/user-card.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import {HeaderComponent} from "./components/header/header.component";
     PostCardComponent,
     PostCardFooterComponent,
     PostContainerComponent,
-    MyPostsComponent
+    MyPostsComponent,
+    UsersComponent,
+    UserCardComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +43,7 @@ import {HeaderComponent} from "./components/header/header.component";
   ],
   providers: [
     PostsService,
+    UsersService
   ]
 })
 export class MainModule {

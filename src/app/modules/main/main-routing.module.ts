@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {MainComponent} from "./main.component";
-import {AuthGuard} from "../../guards/auth.guard";
 import {HomeComponent} from "./components/home/home.component";
 import {PostsComponent} from "./components/posts/posts.component";
 import {PostsViewComponent} from "./components/posts-view/posts-view.component";
 import {PostsAddEditComponent} from "./components/posts-add-edit/posts-add-edit.component";
+import {UsersComponent} from "./components/users/users.component";
 
 const routes: Routes = [
   {
@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
       },
       {
         path: 'posts',
