@@ -8,7 +8,7 @@
     </div>
   <h1 class="post-title">{{post?.title}}</h1>
   <div class="post-image-wrapper">
-    <img [src]="post?.imageUrl | imageUrl" alt="">
+    <img  #image [src]="post?.imageUrl | imageUrl" (error)="image.src='assets/images/default.jpg'" alt="">
   </div>
   <div class="post-body">{{post?.body}}</div>
   <div class="flex-container">
