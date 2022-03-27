@@ -28,7 +28,9 @@
         </div>
         <div *ngIf="form.controls['image'].invalid">
           <p class="error-message" *ngIf="form.controls['image'].errors?.['fileType']">The picture must be {{extension}}.</p>
-          <p class="error-message" *ngIf="form.controls['image'].errors?.['fileSize']">The size of the picture should be smaller than {{fileSize}}.</p>
+          <p class="error-message" *ngIf="form.controls['image'].errors?.['fileSize']">
+            The size of the picture should be smaller than {{form.controls['image'].errors?.['fileSize'].allowedSize}} MB.
+          </p>
         </div>
       </div>
     </div>

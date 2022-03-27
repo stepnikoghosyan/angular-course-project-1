@@ -8,7 +8,6 @@ import {NotificationService} from "../../../../services/notification.service";
 import {PostFormModel, PostModel} from 'src/app/modules/post-card/models/post.model';
 import {fileTypeValidator} from "../../validators/file-type.validator";
 import {fileSizeValidator} from "../../validators/file-size.validator";
-import {FILE_EXTENSIONS, FILE_SIZE_MEGABYTE} from "../../constants";
 
 @Component({
   selector: 'app-posts-add-edit',
@@ -24,16 +23,17 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   isLoading = false;
   submitted = false;
   extension: string;
-  fileSize: string;
+
+  private readonly FILE_EXTENSIONS = ['image/jpg', 'image/jpeg', 'image/png'];
+  private readonly FILE_SIZE_MEGABYTE = 2;
 
   constructor(private formBuilder: FormBuilder,
-    private postService: PostsService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private notifyService: NotificationService) {
+              private postService: PostsService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private notifyService: NotificationService) {
 
-    this.extension = FILE_EXTENSIONS.map(item => '.' + item).join(', ');
-    this.fileSize = FILE_SIZE_MEGABYTE + 'MB';
+    this.extension = this.FILE_EXTENSIONS.map(item => ('.' + item.split('/').pop()).toLowerCase()).join(', ');
     this.postId = this.activatedRoute.snapshot.params['id'];
     this.formInit();
   }
@@ -46,7 +46,7 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      image: [null, [fileTypeValidator(), fileSizeValidator()]]
+      image: [null, [fileTypeValidator(this.FILE_EXTENSIONS), fileSizeValidator(this.FILE_SIZE_MEGABYTE)]]
     });
   }
 
