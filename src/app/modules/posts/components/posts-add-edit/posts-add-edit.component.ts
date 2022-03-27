@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {finalize, Subject, takeUntil} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
-import {PostsService} from "../../../post-card/services/posts.service";
-import {NotificationService} from "../../../../services/notification.service";
-import {PostFormModel, PostModel} from 'src/app/modules/post-card/models/post.model';
-import {fileTypeValidator} from "../../validators/file-type.validator";
-import {fileSizeValidator} from "../../validators/file-size.validator";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { finalize, Subject, takeUntil } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
+import { PostsService } from "../../../post-card/services/posts.service";
+import { NotificationService } from "../../../../services/notification.service";
+import { PostFormModel, PostModel } from 'src/app/modules/post-card/models/post.model';
+import { fileTypeValidator } from "../../validators/file-type.validator";
+import { fileSizeValidator } from "../../validators/file-size.validator";
 
 @Component({
   selector: 'app-posts-add-edit',
@@ -23,15 +23,16 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
   isLoading = false;
   submitted = false;
   extension: string;
+  previewImage = '';
 
   private readonly FILE_EXTENSIONS = ['image/jpg', 'image/jpeg', 'image/png'];
   private readonly FILE_SIZE_MEGABYTE = 2;
 
   constructor(private formBuilder: FormBuilder,
-              private postService: PostsService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private notifyService: NotificationService) {
+    private postService: PostsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private notifyService: NotificationService) {
 
     this.extension = this.FILE_EXTENSIONS.map(item => ('.' + item.split('/').pop()).toLowerCase()).join(', ');
     this.postId = this.activatedRoute.snapshot.params['id'];
@@ -62,9 +63,11 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
           next: (data: PostModel) => {
             this.form.patchValue({
               title: data.title,
-              body: data.body
+              body: data.body,
+              image: data.imageUrl
             });
             if (data.imageUrl) {
+              this.previewImage = data.imageUrl;
               this.fileName = 'image';
             }
           },
@@ -81,17 +84,27 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
       this.form.controls['image'].setValue(file);
     }
     if (this.form.controls['image'].invalid) {
-      this.fileName = '';
+      this.deleteImageProperty();
     } else {
       this.fileName = file.name;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewImage = reader.result as string;
+      }
+      reader.readAsDataURL(file)
     }
   }
 
   deleteImage(): void {
     this.form.controls['image'].reset();
-    this.fileName = '';
+    this.deleteImageProperty();
   }
 
+  private deleteImageProperty(): void {
+    this.fileName = '';
+    this.previewImage = '';
+  }
+  
   onSubmit(): void {
     if (this.submitted) {
       return;

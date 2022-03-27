@@ -6,8 +6,7 @@
   margin: 20px auto;
 }
 .flex-container {
-  width: 50%;
-  margin-left: auto;
+  width: 100%;
   margin-top: 20px;
 }
 .flex-container:first-child {
@@ -21,7 +20,13 @@
   display: flex;
   justify-content: flex-end;
 }
-
+.preview-image {
+  margin: 10px 0;
+  img {
+    max-height: 180px;
+    max-width: 180px;
+  }
+}
 textarea {
   font-family: inherit;
 }

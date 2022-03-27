@@ -20,6 +20,9 @@
       <input type="file" class="file-input" [accept]="extension" (change)="onFileSelected($event)" #fileUpload>
       <div class="file-upload">
         <button type="button" class="upload-btn" (click)="fileUpload.click()"> Select file </button>
+        <div class="preview-image">
+          <img *ngIf="previewImage" [src]="previewImage">
+        </div>
         <div class="file-name" *ngIf="fileName">
           <span> {{fileName}} </span>
           <button (click)="deleteImage()" type="button" class="delete-btn">
