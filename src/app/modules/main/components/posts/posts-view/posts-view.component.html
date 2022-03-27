@@ -2,7 +2,6 @@
     <div class="wrapper">
         <div class="info">
             <div class="user_info">
-<<<<<<< HEAD
                 <img [src]="post?.user?.profilePicture" alt="user image" class="user_img">
                 <div class="user_name">
                     <span class="name">{{post?.user | userName}}</span>
@@ -12,39 +11,18 @@
         </div>
         <h2 class="post_title"> {{post?.title}}</h2>
         <div class="post_img">
-            <img [src]="post?.imageUrl" (error)="onImageError()" alt="post image">
+            <img [src]="post?.imageUrl | setImage" (error)="onImageError()" alt="post image">
         </div>
         <div class="post_body">
             <p>{{post?.body}}</p>
-=======
-                <img [src]="posts?.user?.profilePicture" alt="user image" class="user_img">
-                <div class="user_name">
-                    <span class="name">{{posts?.user | userName}}</span>
-                    <span class="created_date">{{posts?.createdAt | date}}</span>
-                </div>
-            </div>
-        </div>
-        <h2 class="post_title"> {{posts?.title}}</h2>
-        <div class="post_img">
-            <img [src]="posts?.imageUrl" (error)="onImageError()" alt="post image">
-        </div>
-        <div class="post_body">
-            <p>{{posts?.body}}</p>
->>>>>>> 33c9d0d273069c35f64617e1ad03c92a1cef1f10
         </div>
     </div>
     <div class="wrapper">
         <div class="comment_content">
             <h2>Comments</h2>
-<<<<<<< HEAD
             <div class="comments" *ngFor="let comment of this.post?.comments">
                 <div> 
                     <img [src]="this.post?.user?.profilePicture">
-=======
-            <div class="comments" *ngFor="let comment of this.posts?.comments">
-                <div>
-                    <img [src]="this.posts?.user?.profilePicture">
->>>>>>> 33c9d0d273069c35f64617e1ad03c92a1cef1f10
                 </div>
                 <div class="comment" >
                     {{comment}}
@@ -53,9 +31,5 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 <!-- !-- <app-comments></app-comments> --> 
 
-=======
-<!-- !-- <app-comments></app-comments> -->
->>>>>>> 33c9d0d273069c35f64617e1ad03c92a1cef1f10

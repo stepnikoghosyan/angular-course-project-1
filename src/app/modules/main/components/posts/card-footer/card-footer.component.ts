@@ -11,7 +11,7 @@ import { UsersService } from '../../../services/users.service';
     styleUrls: ['./card-footer.component.scss']
 })
 export class CardFooterComponent implements OnInit {
-    @Input('post') post!: PostModel;
+    @Input('post') post?: PostModel;
     @Input('myProfile') myProfile!: UserModel;
     isMyPost = false;
 
@@ -19,10 +19,10 @@ export class CardFooterComponent implements OnInit {
 
     ngOnInit(): void {
         // console.log("MY ID, USER ID", this.myProfile.id, this.post.user.id);
-        if(this.post.user.id === this.myProfile.id){
+        if(this.post?.user.id === this.myProfile.id){
             this.isMyPost = true
         }else{
-            this.isMyPost
+            this.isMyPost;
         }
     }
 }

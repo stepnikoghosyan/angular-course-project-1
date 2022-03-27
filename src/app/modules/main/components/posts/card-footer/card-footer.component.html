@@ -6,10 +6,10 @@
         </span>
     </div>
     <div class = "comments">
-        <button type="button" routerLink="../view-post/{{post.id}}">
+        <button type="button" routerLink="../posts/{{post?.id}}">
             <i class="far fa-eye"></i>
         </button>
-        <button routerLink="../edit-post/{{post.id}}" *ngIf="isMyPost">
+        <button routerLink="../posts/{{post?.id}}/edit" *ngIf="isMyPost">
             <i class="far fa-edit"></i>
         </button>
         <i class="far fa-comment"></i>

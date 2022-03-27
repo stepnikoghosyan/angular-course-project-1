@@ -15,7 +15,7 @@ import { PostsService } from '../../services/posts.service';
     styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit, OnDestroy {
-    private subscription$ = new Subject<void>()
+    private subscription$ = new Subject<void>();
     errors: string[] = [];
     errorMessage: string = "";
     isTargetValue: string = "";
@@ -34,7 +34,8 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     createForm: FormGroup = this.formBuilder.group({
         title: ['', Validators.required],
         body: ['', Validators.required],
-        image: ['null', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
+        // image: ['null', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
+        image: ['', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
 
     })
 
@@ -50,17 +51,13 @@ export class CreatePostComponent implements OnInit, OnDestroy {
         if (event.target.files[0]) {
 
             this.file = <File>event.target.files[0]
-            this.image.addValidators(imageSizeValidation(this.file));
+            // this.image.addValidators(imageSizeValidation(this.file));
 
         }
     }
     createFormSubmit() {
-        const formData = new FormData();
-        for (let key in this.createForm.value) {
-            formData.append(key, this.createForm.value[key])
-        }
         if (this.createForm.valid) {
-            this.postsService.createPost(formData).pipe(
+            this.postsService.createPost(this.createForm).pipe(
                 takeUntil(this.subscription$),
                 finalize(() => {
                     this.showSpinner = false;
@@ -70,8 +67,8 @@ export class CreatePostComponent implements OnInit, OnDestroy {
                     return of([]);
                 }))
                 .subscribe({
-                    next: (res) => {
-                        this.notifyService.success("Thank you for filling out your information!", "Success massage")
+                    next: () => {
+                        this.notifyService.success("Post is created.", "Success!!")
                         this.router.navigateByUrl('main/posts');
                     },
                 })

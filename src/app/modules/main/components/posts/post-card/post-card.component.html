@@ -1,9 +1,9 @@
 <div class="wrapper">
     <div class="post_content">
         <div class="post_img">
-            <img class="img" [src]="post?.imageUrl" (error)="onImageError()" alt="image of the post">
-            <h3>{{post?.title}}</h3>
+            <img class="img" [src]="post?.imageUrl | setImage" (error)="onImageError()" alt="image of the post">
         </div>
+        <h3>{{post?.title}}</h3>
         <div class="post_body">
             <p>{{post?.body}}</p>
         </div>

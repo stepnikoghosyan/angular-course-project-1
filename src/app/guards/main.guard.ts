@@ -15,13 +15,21 @@ export class MainGuard implements CanLoad {
         segments: UrlSegment[]): Observable<boolean |
             UrlTree> | Promise<boolean |
                 UrlTree> | boolean | UrlTree {
-        
+
         const local = localStorage.getItem('auth');
         const session = sessionStorage.getItem('auth');
-        if ((local && JSON.parse(local).accessToken) ||
-            (session && JSON.parse(session).accessToken)){
-            return true;
+
+        try {
+            if ((local && JSON.parse(local).accessToken) ||
+                (session && JSON.parse(session).accessToken)) {
+                return true;
+            }
+            return this.router.parseUrl('/login');
+        }catch(err){
+            
+            console.log("Guard's error");
+            return this.router.parseUrl('/login');
         }
-        return this.router.parseUrl('/login');
+        
     }
 }

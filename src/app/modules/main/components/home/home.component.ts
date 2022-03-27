@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, finalize, map, Observable, of, tap } from 'rxjs';
-<<<<<<< HEAD
-import { UserModel } from 'src/app/modules/main/models/user.model';
-import { NotificationService } from 'src/app/services/notification.service';
-=======
-import { UserModel } from 'src/app/models/user.model';
+import { UserModel } from '../../models/user.model';
 import { NotificationService } from 'src/app/shared/notification.service';
->>>>>>> 33c9d0d273069c35f64617e1ad03c92a1cef1f10
 import { errorResponse } from 'src/utils/error-response.utility';
 import { PostModel } from '../../models/post.model';
 import { AuthService } from '../../../auth/services/auth.service';

@@ -12,11 +12,20 @@ export class AuthGuard implements CanLoad {
         segments: UrlSegment[]): Observable<boolean | UrlTree> |
         Promise<boolean | UrlTree> |
         boolean | UrlTree {
+
         const auth = localStorage.getItem('auth');
-        if (auth && JSON.parse(auth).accessToken) {
-            return this.router.parseUrl('/home');
+        try {
+            if (auth && JSON.parse(auth).accessToken) {
+                
+                return this.router.parseUrl('/home');
+                
+            }
+            return true;
+
+        } catch (err) {
+            console.log("Auth Guard's Error");
+            return true;
         }
-        return true;
     }
 }
 

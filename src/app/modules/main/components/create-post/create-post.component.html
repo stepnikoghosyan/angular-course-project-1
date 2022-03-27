@@ -17,20 +17,21 @@
     
     <div class="btn_container">
         <label for="title" class="file_btn">Select file</label>
-        {{isTargetValue}}
-      
-        <button class="close_btn"  *ngIf="isClose" (click)="clearFile($event)">X</button>
+        <div class="file_value">
+            {{isTargetValue}}
+            <button class="close_btn"  *ngIf="isClose" (click)="clearFile($event)">X</button>
+        </div>
         <input id ="title" hidden formControlName="image" type="file" class="file_btn" (change) = "onSelectFile($event)" name ="image"/> 
         <div>  
             <span  class="error-message" *ngIf="image.errors?.['type']"> The type of image must be jpeg, jpg, png type</span>
             <span class="error-message"  *ngIf="image.errors?.['size']">> The size of image is greater then 2 Mg</span>
         </div>
         <div class="btns">
-            <a routerLink="../posts"><i class="fas fa-arrow-left"></i></a>
+            <a routerLink="../../posts"><i class="fas fa-arrow-left"></i></a>
             <button class="create_btn" type="submit">Create</button>
-        </div>  
+        </div>
+        <mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
     </div>   
-      
 </form>
 
     {{errors}}

@@ -4,11 +4,7 @@
         <label>Title</label>
         <input type="text" name="title" value="{{post?.title}}" formControlName="title">
         <div *ngIf="updateForm.controls['title'].invalid && updateForm.controls['title'].touched" >
-<<<<<<< HEAD
             <span class="error-message" *ngIf="updateForm.controls['title'].errors?.['required']">Title is required</span> 
-=======
-            <span class="error-message" *ngIf="updateForm.controls['title'].errors?.['required']">Title is required</span>
->>>>>>> 33c9d0d273069c35f64617e1ad03c92a1cef1f10
         </div>
     </div>
     <div class="form-group">
@@ -26,9 +22,9 @@
         <input #inputValue id="title" formControlName="imageUrl" type="file" class="file_invisible file_btn"
              (change)="selectFile($event)" name ="file"/>
         <div class="update_btns">
-            <a routerLink="../../posts"><i class="fas fa-arrow-left"></i></a>
+            <a routerLink="../../../posts"><i class="fas fa-arrow-left"></i></a>
             <button class="create_btn" type="submit">Update</button>
         </div>
-        <mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+        <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
     </div>
 </form>
