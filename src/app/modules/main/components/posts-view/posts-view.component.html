@@ -1,4 +1,4 @@
-<div class="container-medium">
+<div *ngIf="post$ | async; let post" class="container-medium">
     <div class="post-user d-flex align-items-center">
       <img class="img-wrapper" [src]="post?.user?.profilePictureUrl | imageUrl" alt="">
       <div class="user-info">

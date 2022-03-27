@@ -56,7 +56,7 @@ export class PostsService {
   private createFormData(formValue: PostFormModel): FormData {
     const formData = new FormData();
     Object.entries(formValue).forEach(([key, value]) => {
-      if (key !== 'image' || (key === 'image' && value)) {
+      if (value) {
         formData.append(key, value);
       }
     })
