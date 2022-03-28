@@ -7,6 +7,7 @@ import { MainComponent } from 'src/app/modules/main/main.component';
 import { PostsViewComponent } from 'src/app/modules/main/components/posts/posts-view/posts-view.component';
 import { UsersComponent } from 'src/app/modules/main/components/users/users.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 
 const routes: Routes = [
     {
@@ -35,14 +36,14 @@ const routes: Routes = [
                 path: 'posts/:id/edit',
                 component: EditPostComponent,
             },
-            
-           
             {
                 path: 'users',
                 component: UsersComponent,
             },
-             
-           
+            {
+                path: 'profile-settings',
+                component: ProfileSettingsComponent,
+            },
         ]
     },
    

@@ -50,7 +50,8 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
         if (event.target.files[0]) {
 
-            this.file = <File>event.target.files[0]
+            this.file = <File>event.target.files[0];
+            
             // this.image.addValidators(imageSizeValidation(this.file));
 
         }
