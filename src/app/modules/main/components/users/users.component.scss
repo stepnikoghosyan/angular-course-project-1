@@ -1,0 +1,29 @@
+.search-container {
+  background-color: #ffffff;
+  width: 300px;
+  height: 44px;
+  border-radius: 5px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto auto 15px;
+  border: 1px solid #ccc;
+
+  input {
+    all: unset;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+    .disabled {
+
+    }
+  }
+
+  button {
+    background-color: #ffffff;
+    border: none;
+    padding-right: 15px;
+    cursor: pointer;
+  }
+}
