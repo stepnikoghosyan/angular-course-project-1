@@ -1,7 +1,6 @@
-export interface UserQueryParamsModel {
+import { QueryParamsModel } from './query-params.model';
+
+export interface UserQueryParamsModel extends QueryParamsModel{
   search?: string;
   excludeSelf?: true;
-  showAll?: true;
-  page?: number;
-  pageSize?: number
 }

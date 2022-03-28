@@ -8,7 +8,7 @@ import { UserModel } from '../modules/main/models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  public user: UserModel | null = null;
+  private user: UserModel | null = null;
 
   constructor(private httpClient: HttpClient) {
     this.getUserProfile();
@@ -20,7 +20,7 @@ export class UserService {
         this.user = user;
       }));
   }
-  
+
   getUser(): UserModel | null {
     return this.user;
   }

@@ -16,3 +16,8 @@ export interface PostFormModel {
   body: string;
   image: File | null;
 }
+
+export interface PostEntityModel {
+  post: PostModel;
+  comments: CommentModel[];
+}

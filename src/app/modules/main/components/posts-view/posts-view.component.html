@@ -1,22 +1,25 @@
-<div *ngIf="post$ | async; let post" class="container-medium">
-    <div class="post-user d-flex align-items-center">
-      <img class="img-wrapper" [src]="post?.user?.profilePictureUrl | imageUrl" alt="">
-      <div class="user-info">
-        <p class="user-name">{{post?.user | fullName}}</p>
-        <p class="post-date">{{post?.createdAt | date: 'mediumDate'}}</p>
-      </div>
+<div *ngIf="postEntity$ | async; let postEntity" class="container-medium">
+  <div class="post-user d-flex align-items-center">
+    <img class="img-wrapper" [src]="postEntity?.post?.user?.profilePictureUrl | imageUrl" alt="">
+    <div class="user-info">
+      <p class="user-name">{{postEntity?.post?.user | fullName}}</p>
+      <p class="post-date">{{postEntity?.post?.createdAt | date: 'mediumDate'}}</p>
     </div>
-  <h1 class="post-title">{{post?.title}}</h1>
-  <div class="post-image-wrapper">
-    <img  #image [src]="post?.imageUrl | imageUrl" (error)="image.src='assets/images/default.jpg'" alt="">
   </div>
-  <div class="post-body">{{post?.body}}</div>
+  <h1 class="post-title">{{postEntity?.post?.title}}</h1>
+  <div class="post-image-wrapper">
+    <img #image [src]="postEntity?.post?.imageUrl | imageUrl" (error)="image.src='assets/images/default.jpg'" alt="">
+  </div>
+  <div class="post-body">{{postEntity?.post?.body}}</div>
   <div class="flex-container">
 
-  <button class="cancel-btn" routerLink="/posts">Back</button>
+    <button class="cancel-btn" routerLink="/posts">Back</button>
   </div>
   <div class="post-comment">
     <h3>Comments</h3>
+    <div>
+      <app-comment-item *ngFor="let comment of postEntity?.comments" [comment]="comment"></app-comment-item>
+    </div>
   </div>
 </div>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

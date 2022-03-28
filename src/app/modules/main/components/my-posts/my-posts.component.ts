@@ -29,7 +29,7 @@ export class MyPostsComponent implements OnInit {
     const params:PostsQueryParamsModel = {
       page: 1,
       pageSize: 10,
-      userID: this.userService.user?.id
+      userID: this.userService.getUser()?.id
     }
     this.myPosts$ = this.postsService.getPostsByPagination(params)
       .pipe(

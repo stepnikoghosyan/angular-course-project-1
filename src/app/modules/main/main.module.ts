@@ -18,6 +18,9 @@ import {HeaderComponent} from "./components/header/header.component";
 import {UsersComponent} from "./components/users/users.component";
 import {UsersService} from "./services/users.service";
 import {UserCardComponent} from "./components/user-card/user-card.component";
+import { CommentItemComponent } from './components/comment-item/comment-item.component';
+import { SendMessageComponent } from './components/send-message/send-message.component';
+import { CommentsService } from "./services/comments.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import {UserCardComponent} from "./components/user-card/user-card.component";
     PostContainerComponent,
     MyPostsComponent,
     UsersComponent,
-    UserCardComponent
+    UserCardComponent,
+    CommentItemComponent,
+    SendMessageComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,8 @@ import {UserCardComponent} from "./components/user-card/user-card.component";
   ],
   providers: [
     PostsService,
-    UsersService
+    UsersService,
+    CommentsService
   ]
 })
 export class MainModule {

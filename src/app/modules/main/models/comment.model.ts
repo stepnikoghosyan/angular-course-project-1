@@ -1,4 +1,4 @@
-import {UserModel} from "./user.model";
+import { UserModel } from "./user.model";
 
 export interface CommentModel {
   id: number;
@@ -6,4 +6,11 @@ export interface CommentModel {
   createdAt: Date;
   updatedAt: Date;
   user: UserModel;
+}
+
+export class CommentDto {
+  message: string;
+  constructor(data: string) {
+    this.message = data
+  }
 }
