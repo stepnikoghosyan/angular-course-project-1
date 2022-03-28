@@ -1,5 +1,4 @@
-<div class="view_post">
-    <div class="wrapper">
+<div class="view_post" *ngFor="let post of post$ |async">
         <div class="info">
             <div class="user_info">
                 <img [src]="post?.user?.profilePicture" alt="user image" class="user_img">
@@ -17,12 +16,12 @@
             <p>{{post?.body}}</p>
         </div>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" *ngFor="let post of post$ |async">
         <div class="comment_content">
             <h2>Comments</h2>
-            <div class="comments" *ngFor="let comment of this.post?.comments">
+            <div class="comments" *ngFor="let comment of post?.comments">
                 <div> 
-                    <img [src]="this.post?.user?.profilePicture">
+                    <img [src]="post?.user?.profilePicture" >
                 </div>
                 <div class="comment" >
                     {{comment}}
@@ -30,6 +29,6 @@
             </div>
         </div>
     </div>
-</div>
+
 <!-- !-- <app-comments></app-comments> --> 
 

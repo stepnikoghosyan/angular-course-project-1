@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { finalize, Observable } from 'rxjs';
 import { PostModel } from 'src/app/modules/main/models/post.model';
 import { PostsService } from '../../../services/posts.service';
 
@@ -10,21 +11,22 @@ import { PostsService } from '../../../services/posts.service';
     styleUrls: ['./posts-view.component.scss']
 })
 export class PostsViewComponent implements OnInit {
-    post?: PostModel;
+    showSpinner = false
+    post$?:Observable<PostModel[]>;
     constructor(private postService: PostsService,
         private activatedRoute: ActivatedRoute) { }
 
     ngOnInit(): void {
-        let id = this.activatedRoute.snapshot.params['id'];
-        this.postService.getPost(id).subscribe({
-            next: (data) => {
-                console.log("POST DATA", data);
-                this.post = data;
-            }
-        })
+        this.showSpinner=true
+        const id = this.activatedRoute.snapshot.params['id'];
+        this.postService.getPost(id).pipe(
+            finalize(()=>{
+                this.showSpinner=false
+            }),
+        )
     }
 
     onImageError(): void {
-        this.post!.imageUrl = "../../assets/images/img.png"
+        // this.post$!.imageUrl = "../../assets/images/img.png"
     }
 }

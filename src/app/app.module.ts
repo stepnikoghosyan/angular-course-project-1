@@ -29,7 +29,8 @@ import { AppInitService } from './modules/main/services/app-init.service';
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
-        }
+        },
+        
     ],
     bootstrap: [AppComponent]
 })

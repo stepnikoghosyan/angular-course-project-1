@@ -29,11 +29,11 @@ export class PostsComponent implements OnInit {
             }),
             map(data => data.results),
         ),
-        this.usersService.getMyProfile().subscribe({
-            next: (data) => {
-                this.myProfile = data;
-                console.log("MY PROFILE DATA", data);
-            }
-        })
-    }
+         this.usersService.getMyProfile().subscribe()
+        //       next: (data) => {
+        //          this.myProfile = data;
+        //           console.log("MY PROFILE DATA", data);
+        //     }
+        //   })
+     }
 }

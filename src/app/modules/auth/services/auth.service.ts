@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EmailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto } from '../models/auth.model';
-import { Observable, tap } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/notification.service';
+import { UsersService } from '../../main/services/users.service';
+import { StorageService } from '../../main/services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,9 @@ export class AuthService {
     
     constructor(private httpClient: HttpClient,
                 private router: Router,
-                private notifyService: NotificationService) {}
+                private notifyService: NotificationService,
+                private userService :UsersService,
+                private storageService :StorageService) {}
 
     forgotPassword(forgotPasswordDto: ForgotPasswordDto): Observable<void>{
         return this.httpClient
@@ -88,6 +92,29 @@ export class AuthService {
           return this.httpClient
             .post<void>(`${environment.apiUrl}/auth/resend-activation-token`, email)
       };
-}
+      checkCurrentLoggedInUser(): Promise<void> {
+        return new Promise((resolve, reject) => {
+          const accessToken = this.storageService.getAccessToken();
+          if (!accessToken) {
+            resolve();
+            return;
+          }
+          this.userService.getMyProfile()
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                resolve();
+              },
+              error: (err: HttpErrorResponse) => {
+                if (err.status === 401) {
+                  resolve();
+                } else {
+                  reject(err);
+                }
+              }
+            });
+        });
+      }
+    }
 
     
