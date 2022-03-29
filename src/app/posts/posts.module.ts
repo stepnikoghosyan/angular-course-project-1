@@ -5,9 +5,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PostsComponent } from './posts.component';
 import { PostComponent } from './post/post.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FileTypeValidator } from './post/file-type-validator.service';
-import { FileSizeValidator } from './post/file-size-validator.service';
-
 
 
 @NgModule({
