@@ -1,6 +1,7 @@
 .card{
-    border: 2px solid rgb(245, 242, 242);
+    border: 2px solid rgb(204, 202, 202);
     border-radius: 5px;
+    box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
 }
 
 
@@ -10,7 +11,7 @@
     align-items: center;
 }
 .img{
-    margin: 0 auto;
+    margin: 5px auto;
 }
 
 .img img {

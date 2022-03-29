@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { catchError, finalize, map, Observable, of } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { catchError, finalize, map, Observable, of, Subject, takeUntil } from 'rxjs';
 import { PostsModel } from '../models/posts.model';
 import { NotificationService } from '../shared/notification.service';
-import { UsersService } from '../users/users.service';
 import { PostsService } from './posts.service';
 
 
@@ -13,20 +12,20 @@ import { PostsService } from './posts.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
 
-
+  unSubscribe$ = new Subject<void>();
   isLoading = true;
   posts$!: Observable<PostsModel[]>;
-  
+
   constructor(
     private postsService: PostsService,
     private notifyService: NotificationService,
-    private usersService: UsersService
   ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postsService.getPosts().pipe(
+      takeUntil(this.unSubscribe$),
       finalize(() => {
         this.isLoading = false;
       }),
@@ -36,6 +35,11 @@ export class PostsComponent implements OnInit {
         return of([]);
       }))
 
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
   }
 
 }

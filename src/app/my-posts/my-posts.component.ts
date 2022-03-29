@@ -21,15 +21,12 @@ export class MyPostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-   
     this.getMyPosts()
   }
 
   private getMyPosts() {
       this.posts$ = this.postsService.getPosts(this.usersService.currentProfile?.id).pipe(
         finalize(() => {
-          
           this.isLoading = false;
         }),
         map(data => data.results),
@@ -38,8 +35,6 @@ export class MyPostsComponent implements OnInit {
           return of([]);
         }))
     
-
-
   }
 
 

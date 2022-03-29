@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute} from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { PostDto } from 'src/app/models/post.model';
 import { PostsService } from '../posts.service';
+import { FileSizeValidator } from './file-size-validator.service';
+import { FileTypeValidator } from './file-type-validator.service';
 
 @Component({
   selector: 'app-post',
@@ -11,15 +13,13 @@ import { PostsService } from '../posts.service';
   styleUrls: ['./post.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
   formGroup!: FormGroup;
   sizeCheck = true;
-  isImage = true;
-  img !: any;
+  img: any;
   fileName = '';
   errorFile = '';
-  fileSizeError = '';
   fileType = '';
   isLoading = false;
   id: number = NaN;
@@ -29,95 +29,76 @@ export class PostComponent implements OnInit {
     private fb: FormBuilder,
     private postsService: PostsService,
     private avtiveRouter: ActivatedRoute,
+    // public typeValidator: FileTypeValidator,
+    //  public sizeValidator: FileSizeValidator
   ) { }
-
 
   ngOnInit(): void {
     this.initForm();
     this.showPostData();
-  }
-
+  };
   showPostData() {
     this.id = this.avtiveRouter.snapshot.params['id'];
     if (this.id) {
       this.title = 'Edit',
-      this.postsService.getPostById(this.id).pipe(takeUntil(this.unsubscribe$)).subscribe({
-        next: (res: any) => {
-          this.formGroup.patchValue({
-            title: res.title,
-            body: res.body,
-            image: res.imageUrl
-          })
-          this.fileName = 'image'
-        },
-        error: (err: any) => {
-          this.errorFile = err.error.message
-        }
-      })
+        this.postsService.getPostById(this.id).pipe(takeUntil(this.unsubscribe$)).subscribe({
+          next: (res: any) => {
+            this.formGroup.patchValue({
+              title: res.title,
+              body: res.body,
+              image: res.imageUrl
+            })
+            this.fileName = 'image'
+          },
+          error: (err: any) => {
+            this.errorFile = err.error.message
+          }
+        })
     }
   }
-
   initForm() {
     this.formGroup = this.fb.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      file: [null, []],
+      file: [null,  [FileTypeValidator.fileTypeValidator,]
+      ]
+
+      // this.sizeValidator.bind(this)
     })
   }
+
+
+  sizeValidator(control: AbstractControl): ValidationErrors | null {
+ 
+
+    if (this.formGroup.value.file > 2048) {
+      return {
+        sizeValidator: true//'file size should not be more than 2mb'
+      }
+    }
+    return null
+
+  }
+
 
   public trigger(file: any): void {
     file.click()
   }
 
-  public kbytesToSize(kbytes: number): boolean {
 
-    if (kbytes <= 2048) {
-      this.sizeCheck = true;
-      this.fileSizeError = '';
-    } else {
-      this.sizeCheck = false;
-      this.errorFile = '';
-      this.fileSizeError = 'file size should not be more than 2mb';
-    }
-    return this.sizeCheck;
-  }
-
-
-  public fileTypeCheck(type: string): boolean {
-
-    if (type === "image/jpeg" || type === "image/png") {
-      this.isImage = true;
-      this.errorFile = '';
-    } else {
-      this.isImage = false;
-      this.fileSizeError = '';
-      this.errorFile = 'Please upload JPEG, JPG or PNG files'
-    }
-    return this.isImage
-  }
-
+  file!: File 
   public handler(event: any): void {
 
     if (!event.target.files?.length) return
     if (event?.target.files && event.target.files[0]) {
-      let file = event.target?.files[0];
+      this.file = event.target?.files[0];
 
-      if (this.fileTypeCheck(file.type) && this.kbytesToSize(file.size)) {
-        this.errorFile = ''
-        const reader = new FileReader();
-        reader.onload = ev => {
-          let fileArr = this.formGroup.get('file')?.value.split('\\');
-          this.fileName = fileArr[fileArr.length - 1];
-
-          this.fileType = file.type;
-          this.img = ev.target?.result;
-        }
-        reader.readAsDataURL(file);
-      }
-      else {
-        this.formGroup.get('file')?.reset();
-
-      }
+      this.formGroup.patchValue({
+        'file': event.target?.files[0]
+      })
+      
+      console.log('hendler',this.formGroup.get('file'))
+      this.formGroup.get('file')?.reset();
 
     }
 
@@ -125,18 +106,19 @@ export class PostComponent implements OnInit {
 
   public create() {
 
-    if (this.formGroup.valid && this.sizeCheck && this.isImage) {
+    console.log('create', this.formGroup.controls['file'].errors!['fileTypeValidator'] );
+
+    if (this.formGroup.valid) {
       this.isLoading = true
-      const image = {
-        type: this.fileType,
-        format: this.img,
-      }
+
+      const image = this.img
       const postDto = new PostDto(this.formGroup.value, image)
       this.postsService.createPost(postDto)
         .subscribe(() => this.isLoading = false)
     }
 
   }
+
   public deleteImg() {
     this.formGroup.get('file')?.reset();
     this.fileName = ''
@@ -144,6 +126,11 @@ export class PostComponent implements OnInit {
 
   public save() {
     this.postsService.updatePost(this.id, this.formGroup.value)
-    .subscribe()
+      .subscribe()
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

@@ -1,17 +1,21 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="card">
-    <h1>{{title}} Post</h1>
+    <div >
+        <h1>{{title}} Post</h1>
+    </div>
     <form class="postForm" [formGroup]='formGroup'>
         <div class="inputForm">
-            <div class="label">
-                <label>Title</label>
-            </div>
-            <input class="title" formControlName="title" type="text">
-            <div class="formErr">
-                <div  *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
-                    <span *ngIf="formGroup.controls['title'].hasError('required')" class="errors">
-                        Required
-                    </span>
+            <div>
+                <div class="label">
+                    <label>Title</label>
+                </div>
+                <input class="title" formControlName="title" type="text">
+                <div class="formErr">
+                    <div  *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
+                        <span *ngIf="formGroup.controls['title'].hasError('required')" class="errors">
+                            Required
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,19 +34,27 @@
         </div>
 
         <div>
-            <input class="inputBtn" type="file" id="img" formControlName="file" #file accept=".jpg, .jpeg, .png"
-                (change)="handler($event)">
+            <!-- accept=".jpg, .jpeg, .png" -->
+            <input class="inputBtn" type="file" id="img" formControlName="file"
+             #file (change)="handler($event)">
+                
 
             <button class="upload" (click)='trigger(file)'>select file</button>
             <div class="formErr">
-                <p class="errors" *ngIf='!isImage'>{{errorFile}}</p>
-                <p class="errors" *ngIf='!sizeCheck'>{{fileSizeError}}</p>
+                <p class="errors" *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
+                
+                    Please upload JPEG, JPG or PNG files
+                </p>
+                <p class="errors"  *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
+                    'ile size should not be more than 2mb
+                </p>
+           
             </div>
 
             <div class="file-delete">
-                <p>
+                <p *ngIf='!formGroup.controls["file"].errors'>
                     {{fileName }}
-                    <span *ngIf='fileName' class="delete" (click)="deleteImg()">
+                    <span  class="delete" (click)="deleteImg()">
                         x
                     </span>
                 </p>
