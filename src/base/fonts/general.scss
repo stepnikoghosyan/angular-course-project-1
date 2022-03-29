@@ -302,7 +302,40 @@ textarea {
     transition: 0.3s;
   }
 }
+.comment-item {
+  margin: 20px 0;
+  display: flex;
 
+  img{
+      height: 35px;
+      width: 35px;
+      border-radius: 50%;
+  }
+  .message-content, .send-message-content{
+    margin-left: 10px;
+    border-radius: 10px;
+    width: calc(100% - 35px);
+  }
+  .message-content {
+      padding: 15px;    
+      text-align: start;
+      .name {
+          font-weight: bold;
+          font-size: 16px;
+      }
+      .message {
+          margin-top: 20px;
+          font-size: 15px;
+          white-space: pre-line;
+      }
+  }
+  .my-comment {
+      background-color: #c6d1f2;
+  }
+  .other-comment {
+      background-color: #ebeffe;
+  }
+}
 @media only screen and (min-width: 556px) {
   .col-4 {
     width: 100%;

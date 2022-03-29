@@ -1,0 +1,31 @@
+.send-message-content {
+    position: relative;
+    textarea {
+        background-color: #c6d1f2;
+        min-height: 65px;
+        resize: none;
+        font-family: inherit;
+        overflow: hidden;
+        font-size: 15px;
+        line-height: 18px;
+    }
+    .send-btn {
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+        background: none;
+        border-radius: 5px;
+        border: 1px solid #3e6ef5;
+        padding: 10px;
+        cursor: pointer;
+        &:hover {
+            background-color: #3e6ef5;
+            i {
+                color: #ffffff;
+            }
+        }
+        i {
+            color: #5a7af4;
+        }
+    }
+}

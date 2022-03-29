@@ -1,13 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, finalize, forkJoin, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, finalize, forkJoin, map, Observable, of, Subject, takeUntil } from 'rxjs';
 import { PaginatedResponseModel } from 'src/app/models/paginated-response.model';
 import { PostEntityModel, PostModel } from 'src/app/modules/main/models/post.model';
 import { PostsService } from 'src/app/modules/main/services/posts.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { CommentModel } from '../../models/comment.model';
+import { UserService } from 'src/app/services/user.service';
+import { CommentDto, CommentModel } from '../../models/comment.model';
 import { CommentsQueryParamsModel } from '../../models/comments-query-params.model';
+import { UserModel } from '../../models/user.model';
 import { CommentsService } from '../../services/comments.service';
 
 @Component({
@@ -15,34 +17,45 @@ import { CommentsService } from '../../services/comments.service';
   templateUrl: './posts-view.component.html',
   styleUrls: ['./posts-view.component.scss']
 })
-export class PostsViewComponent implements OnInit {
+export class PostsViewComponent implements OnInit, OnDestroy {
   private postId: number | null = null;
+  private usubscribe$ = new Subject<void>();
+  private newCommentSubject = new BehaviorSubject<CommentModel | null>(null);
 
   isLoading = false;
-  post$?: Observable<PostModel>;
+  user: UserModel | null;
   postEntity$?: Observable<PostEntityModel>;
   constructor(private postService: PostsService,
     private activatedRoute: ActivatedRoute,
     private commentsService: CommentsService,
-    private notifyService: NotificationService) { }
+    private userService: UserService,
+    private notifyService: NotificationService) {
+    this.user = this.userService.getUser();
+    this.postId = this.activatedRoute.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
-    this.postId = this.activatedRoute.snapshot.params['id'];
     this.combineObservable();
   }
 
   private combineObservable(): void {
     if (this.postId) {
       this.isLoading = true;
-      this.postEntity$ = forkJoin([
+      this.postEntity$ = combineLatest([
         this.getPostById(),
-        this.getComments()
+        this.getComments(),
+        this.newCommentSubject.asObservable()
       ]).pipe(
-        finalize(() => { this.isLoading = false; }),
-        map(([post, comments]) => {
+        map(([post, comments, newComment]) => {
+          if (newComment && newComment.id) {
+            newComment = Object.assign(newComment, { user: this.user });
+            comments.unshift(newComment);
+          }
+          this.isLoading = false;
           return { post, comments };
         }),
         catchError((err: HttpErrorResponse) => {
+          this.isLoading = false;
           this.showNotifications(false, err.error.message);
           return of();
         })
@@ -57,7 +70,6 @@ export class PostsViewComponent implements OnInit {
           this.showNotifications(false, err.error.message);
           return of();
         }));
-
   }
   private getComments(): Observable<CommentModel[]> {
     const params: CommentsQueryParamsModel = {
@@ -74,9 +86,28 @@ export class PostsViewComponent implements OnInit {
       );
   }
 
+  sendComment(message: string): void {
+    this.isLoading = true;
+    const commentDto = new CommentDto(message);
+    this.commentsService.addComment(this.postId!, commentDto).pipe(
+      takeUntil(this.usubscribe$),
+      finalize(() => { this.isLoading = false; })).subscribe({
+        next: (comment: CommentModel) => {
+          this.newCommentSubject.next(comment);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.showNotifications(false, err.error.message);
+        }
+      });
+  }
+
   private showNotifications(success: boolean, message: string): void {
     if (!success) {
       this.notifyService.showError(message);
     }
+  }
+  ngOnDestroy(): void {
+    this.usubscribe$.complete();
+    this.usubscribe$.next();
   }
 }

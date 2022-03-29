@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { Component, Input } from '@angular/core';
 import { CommentModel } from '../../models/comment.model';
 
 @Component({
@@ -7,14 +6,9 @@ import { CommentModel } from '../../models/comment.model';
   templateUrl: './comment-item.component.html',
   styleUrls: ['./comment-item.component.scss']
 })
-export class CommentItemComponent implements OnInit {
+export class CommentItemComponent {
   @Input() comment?: CommentModel;
-  userId: number | undefined;
-  constructor(private userService: UserService) {
-    this.userId = this.userService.getUser()?.id;
-  }
-
-  ngOnInit(): void {
-  }
+  @Input() userId: number | undefined;
+  constructor() { }
 
 }

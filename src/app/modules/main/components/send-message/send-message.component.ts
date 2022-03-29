@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-send-message',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./send-message.component.scss']
 })
 export class SendMessageComponent implements OnInit {
+  messageControl = new FormControl(null, [Validators.required]);
+  @Input() user: UserModel | null = null;
+  @Output() send = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  sendMessage(): void {
+    if (this.messageControl.invalid) {
+      return;
+    }
+    const message = this.messageControl.value;
+    if (message.trim()) {
+      this.messageControl.reset();
+      this.send.emit(message.trim());
+    }
   }
 
 }

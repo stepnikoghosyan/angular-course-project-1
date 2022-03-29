@@ -9,7 +9,7 @@
 }
 .user-name {
     font-size: 15px;
-    color:#464242;
+    color: #464242;
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -23,15 +23,15 @@
     max-width: 400px;
     margin: auto;
     height: 200px;
-    img{
-      max-height: 200px;
+    img {
+        max-height: 200px;
     }
 }
 .post-title {
     margin-top: 20px;
 }
 .post-body {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 .post-comment {
     border-top: 1px solid gray;
@@ -43,7 +43,6 @@
 }
 
 .flex-container {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
-

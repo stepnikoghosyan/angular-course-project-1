@@ -22,6 +22,7 @@ import { CommentItemComponent } from './components/comment-item/comment-item.com
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { CommentsService } from "./services/comments.service";
 import {ProfileComponent} from "./components/profile/profile.component";
+import { TextareaAutoresizeDirective } from './directives/textarea-autoresize.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {ProfileComponent} from "./components/profile/profile.component";
     UserCardComponent,
     CommentItemComponent,
     SendMessageComponent,
-    ProfileComponent
+    ProfileComponent,
+    TextareaAutoresizeDirective
   ],
   imports: [
     CommonModule,
