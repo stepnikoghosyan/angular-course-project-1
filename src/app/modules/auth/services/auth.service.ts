@@ -97,6 +97,8 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             const accessToken = this.storageService.getAccessToken();
             if (!accessToken) {
+                console.log("test");
+                
                 resolve();
                 return;
             }
@@ -104,10 +106,7 @@ export class AuthService {
                 .pipe(take(1))
                 .subscribe({
                     next: (data) => {
-                        resolve();
-                        console.log("resolved");
-                        console.log("my profile data", data);
-                        
+                        resolve();        
                     },
                     error: (err: HttpErrorResponse) => {
                         if (err.status === 401) {
