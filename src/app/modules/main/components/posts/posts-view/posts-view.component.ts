@@ -12,14 +12,14 @@ import { PostsService } from '../../../services/posts.service';
 })
 export class PostsViewComponent implements OnInit {
     showSpinner = false
-    post$?:Observable<PostModel[]>;
+    post$?:Observable<PostModel>;
     constructor(private postService: PostsService,
         private activatedRoute: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.showSpinner=true
         const id = this.activatedRoute.snapshot.params['id'];
-        this.postService.getPost(id).pipe(
+        this.post$ = this.postService.getPost(id).pipe(
             finalize(()=>{
                 this.showSpinner=false
             }),

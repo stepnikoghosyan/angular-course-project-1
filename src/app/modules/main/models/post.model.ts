@@ -42,3 +42,15 @@ export class CreatePostModelDto {
     }
 }
 
+export interface commentsResponse {
+    count:number
+    results:CommentModel[]
+}
+
+export class createCommentDto {
+    message :string
+
+    constructor(data:any) {
+        this.message = data.message
+    }
+}

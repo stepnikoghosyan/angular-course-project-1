@@ -1,8 +1,20 @@
-<h3>Comments</h3>
-<form [formGroup]="commentsForm" (ngSubmit)="createComment()">
+
+ <form [formGroup]="commentsForm" (ngSubmit)="createComment()">
 <input type="text" formControlName="message">
 <button>submit</button>
-</form>
-<div *ngFor="let comment of comments">
-    {{comment?.message}}
+</form> 
+<div *ngFor="let comment of comments$ |async">
+    <p> Username
+     <span>{{comment?.user | userName}}</span>
+     <p>
+         comment
+         <span>{{comment.message}}</span> 
+     </p>
+   <p>
+       profilePicture
+       <span>{{comment.user.profilePicture}}</span>
+   </p>
+   <p [ngClass]="this.post?.user?.id === this.myProfile.id? 'my comment' : 'other comment'">M</p>
 </div>
+
+<h2>asda</h2>
