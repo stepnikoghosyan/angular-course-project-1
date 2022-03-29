@@ -1,4 +1,5 @@
 <app-loading *ngIf="isLoading"></app-loading>
+<div class="main">
 <div class="card">
     <div >
         <h1>{{title}} Post</h1>
@@ -23,7 +24,7 @@
             <div class="label">
                 <label>Body</label>
             </div>
-            <textarea class="title" formControlName="body" rows="7px" cols="100px"></textarea>
+            <textarea class="title" formControlName="body" rows="10px" cols="100px"></textarea>
             <div class="formErr">
                 <div *ngIf='formGroup.controls["body"].invalid && formGroup.controls["body"].touched'>
                     <span  *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
@@ -55,7 +56,7 @@
                 <p *ngIf='!formGroup.controls["file"].errors'>
                     {{fileName }}
                     <span  class="delete" (click)="deleteImg()">
-                        x
+                        <fa-icon class="xmark" [icon]="faCircleXmark"></fa-icon>
                     </span>
                 </p>
             </div>
@@ -69,4 +70,5 @@
       
     </form>
 
+</div>
 </div>

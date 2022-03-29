@@ -6,6 +6,7 @@ import { PostDto } from 'src/app/models/post.model';
 import { PostsService } from '../posts.service';
 import { FileSizeValidator } from './file-size-validator.service';
 import { FileTypeValidator } from './file-type-validator.service';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-post',
@@ -14,7 +15,7 @@ import { FileTypeValidator } from './file-type-validator.service';
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PostComponent implements OnInit, OnDestroy {
-
+  faCircleXmark = faCircleXmark;
   formGroup!: FormGroup;
   sizeCheck = true;
   img: any;
