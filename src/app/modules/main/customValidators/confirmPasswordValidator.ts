@@ -12,7 +12,7 @@ export class ConfirmPasswordValidator {
             if (control.value !== matchingControl.value) {
                 console.log("Matching error");
 
-                matchingControl.setErrors({ confirmedValidator: true });
+                matchingControl.setErrors({ "doesNotMatch": true });
             } else {
                 matchingControl.setErrors(null);
                 console.log("Match");
