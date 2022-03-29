@@ -1,7 +1,7 @@
 <div class="comment-item">
     <img [src]="user?.profilePictureUrl | imageUrl" alt="">
     <div class="send-message-content">
-        <textarea appTextareaAutoresize autocomplete="off" [formControl]="messageControl"></textarea>
+        <textarea autosize [formControl]="messageControl"></textarea>
         <button type="button" class="send-btn" (click)="sendMessage()"> <i class="fa fa-send"></i> </button>
     </div>
 </div>

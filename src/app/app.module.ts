@@ -11,7 +11,6 @@ import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthService} from "./modules/auth/services/auth.service";
 import {appInitializer} from "./interceptors/app-initializer.interceptor";
 
-
 @NgModule({
   declarations: [
     AppComponent,

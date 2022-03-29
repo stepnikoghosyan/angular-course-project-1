@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "../../../auth/services/auth.service";
 import {UserModel} from "../../models/user.model";
 import {UserService} from "../../../../services/user.service";
@@ -11,7 +11,8 @@ import {UserService} from "../../../../services/user.service";
 export class HeaderComponent {
   user: UserModel | null;
 
-  constructor(private authService: AuthService, private userService: UserService) {
+  constructor(private authService: AuthService,
+              private userService: UserService) {
     this.user = this.userService.getUser();
   }
 

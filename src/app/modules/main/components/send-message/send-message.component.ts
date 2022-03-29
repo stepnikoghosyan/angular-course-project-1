@@ -20,10 +20,10 @@ export class SendMessageComponent implements OnInit {
     if (this.messageControl.invalid) {
       return;
     }
-    const message = this.messageControl.value;
-    if (message.trim()) {
+    const message = this.messageControl.value.trim();
+    if (message) {
       this.messageControl.reset();
-      this.send.emit(message.trim());
+      this.send.emit(message);
     }
   }
 

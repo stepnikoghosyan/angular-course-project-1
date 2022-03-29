@@ -1,6 +1,5 @@
 <div *ngIf="postEntity$ | async as postEntity" class="container-medium">
   <div *ngIf="postEntity.post as post">
-
     <div class="post-user d-flex align-items-center">
       <img class="img-wrapper" [src]="postEntity?.post?.user?.profilePictureUrl | imageUrl" alt="">
       <div class="user-info">

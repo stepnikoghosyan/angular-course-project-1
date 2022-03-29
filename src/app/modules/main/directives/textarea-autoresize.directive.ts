@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import {Directive, ElementRef, HostListener} from '@angular/core';
 
 @Directive({
   selector: '[appTextareaAutoresize]'
@@ -14,7 +14,7 @@ export class TextareaAutoresizeDirective {
 
   ngOnInit() {
     if (this.elementRef.nativeElement.scrollHeight) {
-      setTimeout(() => this.resize());
+      this.resize()
     }
   }
 
