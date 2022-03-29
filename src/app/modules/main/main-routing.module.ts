@@ -6,6 +6,7 @@ import {PostsComponent} from "./components/posts/posts.component";
 import {PostsViewComponent} from "./components/posts-view/posts-view.component";
 import {PostsAddEditComponent} from "./components/posts-add-edit/posts-add-edit.component";
 import {UsersComponent} from "./components/users/users.component";
+import {ProfileComponent} from "./components/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -40,7 +41,11 @@ const routes: Routes = [
       {
         path: 'posts/:id',
         component: PostsAddEditComponent
-      }
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
     ]
   }
 ]

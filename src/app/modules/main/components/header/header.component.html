@@ -1,11 +1,21 @@
 <header>
   <div>
-    <a routerLink="/" class="title"> Angular Course</a>
+    <a routerLink="" class="title"> Angular Course</a>
   </div>
   <div class="flex-container push">
     <a routerLink="/home" routerLinkActive="active"> Home </a>
     <a routerLink="/users" routerLinkActive="active"> Users </a>
     <a routerLink="/posts" routerLinkActive="active"> Posts </a>
-    <a routerLink="" (click)="onLogout($event)"> Logout </a>
+    <div class="dropdown">
+      <a class="dropbtn">
+        <img [src]="user?.profilePictureUrl | profilePic" alt="">
+        <i class="fa fa-caret-down"></i>
+      </a>
+      <div class="dropdown-content">
+        <a routerLink="/profile" > Profile </a>
+        <a routerLink="" (click)="onLogout($event)"> Logout </a>
+      </div>
+    </div>
+
   </div>
 </header>

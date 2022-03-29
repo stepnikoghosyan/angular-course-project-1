@@ -12,7 +12,7 @@ header {
   align-items: baseline;
   background-color: #fff;
   padding: 10px 30px;
-  overflow: hidden;
+  //overflow: hidden;
   border-bottom: 1px solid #d0d0d0;
   z-index: 2;
 
@@ -21,14 +21,27 @@ header {
     justify-content: flex-end;
   }
 
-  .flex-container > a {
+  .flex-container > a,.dropdown {
+    position: relative;
     display: block;
     margin: 0 10px;
     text-align: center;
     font-size: 16px;
     padding: 5px 5px;
+
+    img {
+      width: 55px;
+      height: 55px;
+    }
+    i {
+      position: absolute;
+      top: 26px;
+    }
   }
-  .flex-container > a:hover{
+  .dropdown{
+    margin-top: -20px;
+  }
+  .flex-container > a:hover,.dropdown:hover{
     border-bottom: 2px solid black;
   }
 
@@ -44,6 +57,34 @@ header {
   .push {
     margin-left: auto;
   }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: -5px;
+    min-width: 160px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
   @media(max-width: 640px) {
     .title {
       font-size: 20px;

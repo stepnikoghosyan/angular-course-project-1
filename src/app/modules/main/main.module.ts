@@ -21,6 +21,7 @@ import {UserCardComponent} from "./components/user-card/user-card.component";
 import { CommentItemComponent } from './components/comment-item/comment-item.component';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { CommentsService } from "./services/comments.service";
+import {ProfileComponent} from "./components/profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CommentsService } from "./services/comments.service";
     UsersComponent,
     UserCardComponent,
     CommentItemComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

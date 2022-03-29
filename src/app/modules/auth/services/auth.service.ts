@@ -77,6 +77,8 @@ export class AuthService {
         .subscribe({
           next: () => {
             resolve();
+
+
           },
           error: (err: HttpErrorResponse) => {
             if (err.status === 401) {

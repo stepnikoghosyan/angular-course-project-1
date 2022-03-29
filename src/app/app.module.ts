@@ -10,6 +10,7 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthService} from "./modules/auth/services/auth.service";
 import {appInitializer} from "./interceptors/app-initializer.interceptor";
+import { ProfilePicPipe } from './modules/pipes/profile-pic.pipe';
 
 
 @NgModule({
