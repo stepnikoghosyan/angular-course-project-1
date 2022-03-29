@@ -23,11 +23,11 @@ import { PostsComponent } from 'src/app/modules/main/components/posts/posts.comp
 import { AppInitService } from './services/app-init.service';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 
-export function initializeApp(appInitService: AppInitService) {
-    return (): Promise<any> => {
-        return appInitService.appInit();
-    }
-}
+// export function initializeApp(appInitService: AppInitService) {
+//     return (): Promise<any> => {
+//         return appInitService.appInit();
+//     }
+// }
 
 @NgModule({
     declarations: [
@@ -55,12 +55,12 @@ export function initializeApp(appInitService: AppInitService) {
     ],
     providers: [
         AppInitService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeApp,
-            deps: [AppInitService],
-            multi: true
-        }
+        // {
+        //     provide: APP_INITIALIZER,
+        //     useFactory: initializeApp,
+        //     deps: [AppInitService],
+        //     multi: true
+        // }
     ]
 })
 export class MainModule { }

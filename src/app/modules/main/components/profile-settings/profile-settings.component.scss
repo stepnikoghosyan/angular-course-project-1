@@ -2,14 +2,14 @@
     margin: 0 auto;
 }
 .wrapper{
-    width: 40%;
-    background-color: darksalmon;
+    width: 30%;
+    //  background-color: darksalmon;
 
     .img_content{
         margin-top: 50px;
         text-align: center;
         width: 230px;
-        background-color: antiquewhite;
+        // background-color: antiquewhite;
         display: flex;
         flex-direction: column;
 
@@ -17,10 +17,15 @@
             font-size: 28px;
         }
         .img_container{
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background-color: burlywood;
+            width: 150px;
+            height: 150px;
+            margin-top: 15px;
+            // background-color: burlywood;
+
+            img{
+                width: 100%;
+                border-radius: 50%;
+            }
         }
     }
     .settings_buttons{
@@ -42,7 +47,7 @@
         }
     }
     form{
-        margin-top: 30px;
+        margin-top: 20px;
         text-align: center;
         
         .form-control{
@@ -68,15 +73,27 @@
                 text-align: left;
                 margin-top: 10px;
             }
+            // i{
+            //     margin-left: -30px; 
+            //     cursor: pointer
+            // }
+        }
+        .password_container{
+            position: relative;
+            
             i{
-                margin-left: -30px; 
-                cursor: pointer
+                position: absolute;
+                right: 0px;
+                top: 39px;
             }
         }
-        .save_btn{
-            padding: 10px 15px;
-            margin-top: 30px;
-            background-color: rgb(39, 130, 204);
+        .form-control{
+            text-align: end;
+            .save_btn{
+                padding: 10px 15px;
+                margin-top: 10px;
+                background-color: rgb(39, 130, 204);
+            }
         }
     }
 
