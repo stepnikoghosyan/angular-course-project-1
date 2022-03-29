@@ -1,51 +1,24 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {CanLoad, Route, Router, UrlSegment, UrlTree,} from '@angular/router';
+import {StorageService} from '../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthPublicGuard implements CanActivate {
-
-  constructor(private router: Router) {
-
+export class AuthPublicGuard implements CanLoad {
+  constructor(private router: Router,
+              private storageService: StorageService) {
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return this.checkAuth()
-
+  canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree {
+    return this.checkAuthentication()
   }
 
-  canLoad(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-
-    return this.checkAuth()
-
-  }
-
-
-  private checkAuth() {
-    const auth = localStorage.getItem('auth');
+  private checkAuthentication(): boolean | UrlTree {
+    const auth = this.storageService.getAccessToken();
     if (auth) {
       return this.router.parseUrl('/home');
     }
     return true;
   }
-
 }
-
-
-

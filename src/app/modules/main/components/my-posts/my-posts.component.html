@@ -1,0 +1,4 @@
+<h2 class="text-center">My Posts</h2>
+<app-post-container [posts$]="myPosts$">
+</app-post-container>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

@@ -1,0 +1,53 @@
+.login-container {
+  max-width: 500px;
+  min-width: 350px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sign-in-button {
+  width: 100%;
+  margin: 10px auto;
+}
+
+.checkbox {
+  width: auto;
+}
+
+.remember-forgot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 20px auto;
+  span {
+    padding: 0 10% 0 3%;
+  }
+}
+.flex-container {
+  width: 50%;
+}
+.flex-container:first-child {
+  display: flex;
+  align-items: baseline;
+  & > label {
+    margin-left: 10px;
+  }
+}
+.flex-container:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+.not-member {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-size: 14px;
+
+  span {
+    margin-right: 5px;
+  }
+}

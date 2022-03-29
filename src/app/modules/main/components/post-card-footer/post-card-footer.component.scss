@@ -1,0 +1,62 @@
+.card-footer {
+    border-top: 1px solid #ccc;
+    background-color: rgb(245,247,251);
+    display: flex;
+    align-items: center;
+    padding: 9px 15px;
+    border-radius: 0 0 5px 5px;
+}
+.icon-bubble {
+    color: rgb(64,114,251);
+}
+.icon-eye {
+    color: rgb(64,114,251);
+}
+.icon-pencil {
+    color: rgb(64,114,251);
+}
+.icon-user {
+    color: gray;
+}
+.user-name {
+    font-size: 13px;
+    color: #5a5050;
+    em {
+      padding-right: 5px;
+      font-size: 13px;
+    }
+}
+
+button {
+    border: 1px solid rgb(64,114,251);
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: white;
+}
+.comment-wrapper {
+    padding-right: 7px;
+    position: relative;
+    span {
+        position: absolute;
+        min-width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: rgb(64,114,251);
+        color: #fff;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -6px;
+        right: -4px;
+    }
+}
+.m-l-20 {
+    margin-left: 10px;
+}
+
+
+

@@ -1,0 +1,37 @@
+<div class="form-container register-container">
+  <h2>Sign Up</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label class="required">First Name</label>
+      <input type="text" formControlName="firstName" placeholder="First Name">
+      <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
+        <p class="error-message" *ngIf="form.controls['firstName'].errors?.['required']">First Name is required.</p>
+      </div>
+    </div>
+    <div>
+      <label class="required">Last Name</label>
+      <input type="text" formControlName="lastName" placeholder="Last Name">
+      <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
+        <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required.</p>
+      </div>
+    </div>
+    <div>
+      <label class="required">Email</label>
+      <input type="email" formControlName="email" placeholder="Email">
+      <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required.</p>
+        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Please enter a valid email
+          address.</p>
+      </div>
+    </div>
+    <app-password formControlName="password"
+                  [label]="'Password'">
+    </app-password>
+    <app-loader *ngIf="isLoading"></app-loader>
+    <button [disabled]="form.invalid || submitted" class="btn-primary btn sign-in-button sign-up-button">Sign Up
+    </button>
+  </form>
+  <div class="already-member">
+    <span>Already a member?  </span><a routerLink="../login">Sign in</a>
+  </div>
+</div>
