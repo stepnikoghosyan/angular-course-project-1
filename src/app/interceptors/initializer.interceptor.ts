@@ -23,9 +23,9 @@ export function appInitializer(authService: AuthService) {
   return () => authService.checkCurrentLoggedInUser();
 }
 
-export const appInitializercreater = {
-    provide: APP_INITIALIZER,
-    useFactory: appInitializer,
-    deps: [AuthService],
-    multi: true
-}
+// export const appInitializercreater = {
+//     provide: APP_INITIALIZER,
+//     useFactory: appInitializer,
+//     deps: [AuthService],
+//     multi: true
+// }

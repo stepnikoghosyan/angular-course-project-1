@@ -15,16 +15,17 @@ export class CardFooterComponent implements OnInit {
     @Input('post') post?: PostModel;
     isMyPost = false;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService,
+                private myProfile : UsersService) { }
 
     ngOnInit(): void {
-        // console.log("MY ID, USER ID", this.myProfile.id, this.post.user.id);
+        console.log("MY ID, USER ID", this.myProfile.myProfile?.id, );
         if(this.post?.user.id === this.authService.myProfileId){
             console.log("profile id", this.authService.myProfileId);
             
             this.isMyPost = true;
         }else{
-            console.log("profile id", this.authService.myProfileId);
+            // console.log("profile id", this.authService.myProfileId);
             
             this.isMyPost;
         }

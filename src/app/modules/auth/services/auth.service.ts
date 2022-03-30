@@ -17,16 +17,17 @@ export class AuthService {
 
     constructor(private httpClient: HttpClient,
         private router: Router,
-        private notifyService: NotificationService,
+        // private notifyService: NotificationService,
         private userService: UsersService,
-        private storageService: StorageService) { }
+        private storageService: StorageService,
+        ) { }
 
     forgotPassword(forgotPasswordDto: ForgotPasswordDto): Observable<void> {
         return this.httpClient
             .post<void>(`${environment.apiUrl}/auth/forgot-password`, forgotPasswordDto)
             .pipe(
                 tap(() => {
-                    this.notifyService.success("Check your email", "Success!");
+                    // this.notifyService.success("Check your email", "Success!");
                 })
             )
     };
@@ -35,7 +36,7 @@ export class AuthService {
         return this.httpClient.post<void>(`${environment.apiUrl}/auth/reset-password`, resetPasswordDto)
             .pipe(
                 tap(() => {
-                    this.notifyService.success("", "Success!!");
+                    // this.notifyService.success("", "Success!!");
                     this.router.navigateByUrl("/home");
                 })
             );
@@ -62,7 +63,7 @@ export class AuthService {
         return this.httpClient
             .post<void>(`${environment.apiUrl}/auth/register`, registerDto).pipe(
                 tap(() => {
-                    this.notifyService.success("Please check your email", "Succes!!");
+                    // this.notifyService.success("Please check your email", "Succes!!");
                     this.router.navigateByUrl('/login');
                 })
                 // catchError
@@ -84,7 +85,7 @@ export class AuthService {
                     }
                 })
             .pipe(tap(() => {
-                this.notifyService.success("Account verified", "Success")
+                // this.notifyService.success("Account verified", "Success")
                 this.router.navigateByUrl('login');
             }))
     };
@@ -98,8 +99,6 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             const accessToken = this.storageService.getAccessToken();
             if (!accessToken) {
-                console.log("test");
-                
                 resolve();
                 return;
             }
@@ -108,8 +107,8 @@ export class AuthService {
                 .subscribe({
                     next: (user) => {
                         resolve(); 
-                        this.myProfileId = user.id;
-                        console.log("init data", this.myProfileId, user.id);
+                         this.myProfileId = user.id;
+                        // console.log("init data", this.myProfileId, user.id);
                                
                     },
                     error: (err: HttpErrorResponse) => {
@@ -118,8 +117,7 @@ export class AuthService {
                             console.log("init rejected");
                             
                         } else {
-                            console.log("rejected");
-                            
+                            console.log("rejected");        
                             reject(err);
                         }
                     }

@@ -14,14 +14,14 @@ export class UsersService {
     public myProfile?: UserModel
 
     constructor(private httpClient: HttpClient,
-        private notifyService: NotificationService) { }
+        // private notifyService: NotificationService
+        ) { }
 
     getMyProfile(): Observable<UserModel> {
         return this.httpClient.get<UserModel>(`${environment.apiUrl}/users/my-profile`).pipe(
             tap((user) => {
                 this.myProfile = user;
-                console.log("get image", this.myProfile.profilePicture);
-                
+                console.log("get image", this.myProfile);
             })
         )
     }
@@ -36,7 +36,7 @@ export class UsersService {
         return this.httpClient
             .put<FormData>(`${environment.apiUrl}/users`, formData)
             .pipe(tap(() => {
-                this.notifyService.success("Your information has been updated", "Success")
+                // this.notifyService.success("Your information has been updated", "Success")
             }))
     }
 }
