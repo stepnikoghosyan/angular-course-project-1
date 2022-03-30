@@ -24,8 +24,7 @@ import { CommentsService } from "./services/comments.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import { TextareaAutoresizeDirective } from './directives/textarea-autoresize.directive';
 import {AuthModule} from "../auth/auth.module";
-import {EmailComponent} from "../auth/components/email/email.component";
-// import {AutosizeModule} from "ngx-autosize";
+import {AutosizeModule} from "ngx-autosize";
 
 @NgModule({
   declarations: [
@@ -53,7 +52,7 @@ import {EmailComponent} from "../auth/components/email/email.component";
         LoaderModule,
         PipesModule,
         AuthModule,
-        // AutosizeModule
+        AutosizeModule
     ],
   providers: [
     PostsService,
