@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,14 +20,8 @@ import { SetImagePipe } from 'src/app/modules/main/pipes/set-image.pipe';
 import { CreatePostComponent } from 'src/app/modules/main/components/create-post/create-post.component';
 import { CommentsComponent } from './components/posts/comments/comments.component';
 import { PostsComponent } from 'src/app/modules/main/components/posts/posts.component';
-import { AppInitService } from './services/app-init.service';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
-
-// export function initializeApp(appInitService: AppInitService) {
-//     return (): Promise<any> => {
-//         return appInitService.appInit();
-//     }
-// }
+import { SetUserImagePipe } from './pipes/set-user-image.pipe';
 
 @NgModule({
     declarations: [
@@ -45,6 +39,7 @@ import { ProfileSettingsComponent } from './components/profile-settings/profile-
         CommentsComponent,
         PostsComponent,
         ProfileSettingsComponent,
+        SetUserImagePipe,
     ],
     imports: [
         CommonModule,
@@ -52,15 +47,6 @@ import { ProfileSettingsComponent } from './components/profile-settings/profile-
         ReactiveFormsModule,
         MatIconModule,
         MatProgressSpinnerModule,
-    ],
-    providers: [
-        AppInitService,
-        // {
-        //     provide: APP_INITIALIZER,
-        //     useFactory: initializeApp,
-        //     deps: [AppInitService],
-        //     multi: true
-        // }
     ]
 })
 export class MainModule { }

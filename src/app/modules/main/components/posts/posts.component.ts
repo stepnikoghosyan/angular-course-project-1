@@ -12,7 +12,7 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-    myProfile!: UserModel;
+    myProfile?: UserModel;
     posts$?: Observable<PostModel[]>;
     showSpinner = false;
 
@@ -29,11 +29,6 @@ export class PostsComponent implements OnInit {
             }),
             map(data => data.results),
         ),
-         this.usersService.getMyProfile().subscribe()
-        //       next: (data) => {
-        //          this.myProfile = data;
-        //           console.log("MY PROFILE DATA", data);
-        //     }
-        //   })
+         this.usersService.myProfile;
      }
 }

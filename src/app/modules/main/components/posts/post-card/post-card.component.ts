@@ -8,7 +8,6 @@ import { UserModel } from 'src/app/modules/main/models/user.model';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
-    @Input('myProfile') myProfile!: UserModel;
     @Input('post') post!: PostModel;
     
     constructor() {}

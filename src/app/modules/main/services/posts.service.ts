@@ -56,16 +56,17 @@ export class PostsService {
         };
         return this.httpClient.post<FormData>(`${environment.apiUrl}/posts/`, formData)
     }
-    getComments(id:number) :Observable<commentsResponse>{
-        let params  = {
-            'posts':id
+
+    getComments(id: number): Observable<commentsResponse> {
+        let params = {
+            'posts': id
         }
         return this.httpClient
-            .get<commentsResponse>(`${environment.apiUrl}/comments`, {params})
+            .get<commentsResponse>(`${environment.apiUrl}/comments`, { params })
     }
 
 
-    createComment(creaeCommentDto:createCommentDto, id:number) {
+    createComment(creaeCommentDto: createCommentDto, id: number) {
         return this.httpClient.post<createCommentDto>(`${environment.apiUrl}/comments/${id}`, creaeCommentDto)
 
     }

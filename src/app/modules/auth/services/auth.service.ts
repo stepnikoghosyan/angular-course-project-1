@@ -13,6 +13,7 @@ import { StorageService } from '../../main/services/storage.service';
 })
 export class AuthService {
     isLoggedIn = false;
+    myProfileId?: number;
 
     constructor(private httpClient: HttpClient,
         private router: Router,
@@ -105,13 +106,20 @@ export class AuthService {
             this.userService.getMyProfile()
                 .pipe(take(1))
                 .subscribe({
-                    next: (data) => {
-                        resolve();        
+                    next: (user) => {
+                        resolve(); 
+                        this.myProfileId = user.id;
+                        console.log("init data", this.myProfileId, user.id);
+                               
                     },
                     error: (err: HttpErrorResponse) => {
                         if (err.status === 401) {
                             resolve();
+                            console.log("init rejected");
+                            
                         } else {
+                            console.log("rejected");
+                            
                             reject(err);
                         }
                     }
