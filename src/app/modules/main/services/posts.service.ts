@@ -6,7 +6,8 @@ import { environment } from "../../../../environments/environment";
 import { PostFormModel, PostModel } from "../models/post.model";
 import { PaginatedResponseModel } from "../../../models/paginated-response.model";
 import { PostsQueryParamsModel } from "../models/posts-query-params.model";
-import {paramsToHttpParams} from "../helpers/convert-to-http-params.helper";
+import { paramsToHttpParams } from "../helpers/convert-to-http-params.helper";
+import { convertToFormData } from "../helpers/json-to-form-data.helper";
 
 @Injectable()
 export class PostsService {
@@ -36,22 +37,12 @@ export class PostsService {
     return this.httpClient.get<PostModel>(`${environment.apiUrl}/posts/${id}`);
   }
   createPost(formValue: PostFormModel): Observable<PostModel> {
-    const formData = this.createFormData(formValue);
+    const formData = convertToFormData<PostFormModel>(formValue);
     return this.httpClient.post<PostModel>(`${environment.apiUrl}/posts`, formData);
   }
 
   updatePost(id: number, formValue: PostFormModel): Observable<PostModel> {
-    const formData = this.createFormData(formValue);
+    const formData = convertToFormData<PostFormModel>(formValue);
     return this.httpClient.put<PostModel>(`${environment.apiUrl}/posts/${id}`, formData);
-  }
-
-  private createFormData(formValue: PostFormModel): FormData {
-    const formData = new FormData();
-    Object.entries(formValue).forEach(([key, value]) => {
-      if (value) {
-        formData.append(key, value);
-      }
-    })
-    return formData;
   }
 }
