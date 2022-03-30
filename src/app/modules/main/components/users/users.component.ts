@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
-import {FormControl} from "@angular/forms";
-import {catchError, debounceTime, map, Observable, of, startWith, switchMap, tap} from "rxjs";
+import {catchError, debounceTime, distinctUntilChanged, map, Observable, of, startWith, Subject, switchMap} from "rxjs";
 
 import {UserModel} from "../../models/user.model";
 import {UsersService} from "../../services/users.service";
 import {UserQueryParamsModel} from "../../models/user-query-params.model";
 import {NotificationService} from "../../../../services/notification.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -15,31 +15,50 @@ import {NotificationService} from "../../../../services/notification.service";
 export class UsersComponent implements OnInit {
   isLoading = true;
   users$: Observable<UserModel[]> = of([]);
-  searchControl = new FormControl();
+  searchText: string = '';
+  searchTextChanged$: Subject<string> = new Subject<string>();
+  isButtonClicked: boolean = false;
 
-  constructor(private userService: UsersService,
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private userService: UsersService,
               private notifyService: NotificationService) {
   }
 
   ngOnInit() {
-    this.onInputChange();
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      this.searchText = queryParams['search'] ? queryParams['search'] : '';
+    })
+    this.onSearchChanged();
   }
 
-  public onSearchButtonClick() {
-    this.searchControl.setValue(this.searchControl.value)
+  onSearchButtonClick() {
+    this.isButtonClicked = true;
+    this.searchTextChanged$.next(this.searchText);
   }
 
-  private onInputChange() {
-    this.users$ = this.searchControl.valueChanges
-      .pipe(
-        startWith(''),
-        debounceTime(500),
-        tap(() => {
-          this.isLoading = true;
-        }),
-        switchMap(value => {
-          return this.getUsers(value)
-        }));
+  onInputChange(event: string) {
+    this.searchTextChanged$.next(event);
+  }
+
+  private onSearchChanged() {
+    this.users$ = this.searchTextChanged$.pipe(
+      startWith(this.searchText),
+      debounceTime(300),
+      distinctUntilChanged((prev, curr) => {
+        return !(prev !== curr || this.isButtonClicked)
+      }),
+      switchMap(value => {
+        this.isLoading = true;
+        this.isButtonClicked = false;
+        this.router.navigate(['/users'], {
+          relativeTo: this.activatedRoute,
+          queryParams: {
+            search: value
+          },
+        });
+        return this.getUsers(value)
+      }));
   }
 
   private getUsers(searchValue: string): Observable<UserModel[]> {

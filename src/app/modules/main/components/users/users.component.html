@@ -1,6 +1,7 @@
 <h2 class="text-center">Users</h2>
 <div class="search-container">
-  <input type="text" placeholder="Search" [formControl]="searchControl" [readOnly]="isLoading">
+  <input type="text" placeholder="Search" [(ngModel)]="searchText" (ngModelChange)="onInputChange($event)"
+         [readOnly]="isLoading">
   <button type="button" (click)="onSearchButtonClick()"><i class="fa fa-search"></i></button>
 </div>
 <div class="container">

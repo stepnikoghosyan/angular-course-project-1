@@ -9,7 +9,7 @@ import {PostCardFooterComponent} from "./components/post-card-footer/post-card-f
 import {PostContainerComponent} from "./components/post-container/post-container.component";
 import {MyPostsComponent} from "./components/my-posts/my-posts.component";
 import {MainRoutingModule} from "./main-routing.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoaderModule} from "../loader/loader.module";
 import {PipesModule} from "../pipes/pipes.module";
 import {PostsService} from "./services/posts.service";
@@ -18,11 +18,11 @@ import {HeaderComponent} from "./components/header/header.component";
 import {UsersComponent} from "./components/users/users.component";
 import {UsersService} from "./services/users.service";
 import {UserCardComponent} from "./components/user-card/user-card.component";
-import { CommentItemComponent } from './components/comment-item/comment-item.component';
-import { SendMessageComponent } from './components/send-message/send-message.component';
-import { CommentsService } from "./services/comments.service";
+import {CommentItemComponent} from './components/comment-item/comment-item.component';
+import {SendMessageComponent} from './components/send-message/send-message.component';
+import {CommentsService} from "./services/comments.service";
 import {ProfileComponent} from "./components/profile/profile.component";
-import { TextareaAutoresizeDirective } from './directives/textarea-autoresize.directive';
+import {TextareaAutoresizeDirective} from './directives/textarea-autoresize.directive';
 import {AuthModule} from "../auth/auth.module";
 import {AutosizeModule} from "ngx-autosize";
 
@@ -46,13 +46,14 @@ import {AutosizeModule} from "ngx-autosize";
     TextareaAutoresizeDirective
   ],
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MainRoutingModule,
-        LoaderModule,
-        PipesModule,
-        AuthModule,
-        AutosizeModule
+      CommonModule,
+      ReactiveFormsModule,
+      MainRoutingModule,
+      LoaderModule,
+      PipesModule,
+      AuthModule,
+      AutosizeModule,
+      FormsModule
     ],
   providers: [
     PostsService,
