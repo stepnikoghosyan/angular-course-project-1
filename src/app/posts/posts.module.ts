@@ -4,7 +4,7 @@ import { PostsRoutingModule } from './posts-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostsComponent } from './posts.component';
 import { PostComponent } from './post/post.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -17,9 +17,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PostsRoutingModule,
     SharedModule,
     
-  ],
-  exports: [
-    FontAwesomeModule,
   ]
   
 })

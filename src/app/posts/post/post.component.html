@@ -53,9 +53,10 @@
             </div>
 
             <div class="file-delete">
-                <p *ngIf='!formGroup.controls["file"].errors'>
-                    {{fileName }}
+                <p *ngIf='!formGroup.controls["file"].errors'><span> {{fileName }}</span>
+                   
                     <span  class="delete" (click)="deleteImg()">
+                        
                         <fa-icon class="xmark" [icon]="faCircleXmark"></fa-icon>
                     </span>
                 </p>
@@ -71,4 +72,7 @@
     </form>
 
 </div>
+                
+                
+    
 </div>

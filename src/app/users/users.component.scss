@@ -1,0 +1,57 @@
+h1 {
+    text-align: center;
+}
+
+.search{
+    display: flex;
+    justify-content: center;    
+    position: relative;
+}
+
+input{
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    
+}
+.searchIcon {
+    color: gray;
+    font-size: 16px;
+    position: absolute;
+    left: 55%;
+    bottom: 15%;
+    cursor: pointer;
+}
+
+
+.user{
+    display: grid;
+    grid-template-columns:repeat(3,31%);
+    grid-gap: 25px;
+    white-space: nowrap;
+    margin-top: 30px;
+}
+.userCard{
+    border: 2px solid rgb(204, 202, 202);
+    border-radius: 5px;
+    box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
+}
+
+.imgContent{
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    height: 150px;
+    width: 150px;  
+    border: 1px solid aqua;
+    border-radius: 50%;
+    margin-top: 20px;
+    
+}
+
+
