@@ -1,12 +1,12 @@
-import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { LoginDto } from "../../models/auth.model";
-import { HttpErrorResponse } from "@angular/common/http";
-import { NotificationService } from "../../../../services/notification.service";
-import { AuthService } from "../../services/auth.service";
-import { finalize, Subject, switchMap, takeUntil } from "rxjs";
-import { emailValidator } from "../../validators/email-validator";
-import { UserService } from 'src/app/services/user.service';
+import {Component, OnDestroy} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LoginDto} from "../../models/auth.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {NotificationService} from "../../../../services/notification.service";
+import {AuthService} from "../../services/auth.service";
+import {finalize, Subject, switchMap, takeUntil} from "rxjs";
+import {emailValidator} from "../../validators/email-validator";
+import {UserService} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,16 +21,16 @@ export class LoginComponent implements OnDestroy {
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private notifyService: NotificationService,
-    private userService: UserService) {
+              private authService: AuthService,
+              private notifyService: NotificationService,
+              private userService: UserService) {
     this.formInit();
   }
 
   private formInit(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, emailValidator()]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
       remember: ['']
     });
   }

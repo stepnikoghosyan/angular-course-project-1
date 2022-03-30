@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 export class NotificationService {
   constructor(private toastr: ToastrService,
               private router: Router) {
+    toastr.toastrConfig.maxOpened = 1;
+    toastr.toastrConfig.autoDismiss = true;
   }
 
   showNotification(success: boolean, message: string, title?: string | null, navigationUrl?: string[]) {
