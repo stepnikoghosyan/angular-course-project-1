@@ -15,17 +15,8 @@
         <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required.</p>
       </div>
     </div>
-    <div>
-      <label class="required">Email</label>
-      <input type="email" formControlName="email" placeholder="Email">
-      <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
-        <p class="error-message" *ngIf="form.controls['email'].errors?.['required']">Email is required.</p>
-        <p class="error-message" *ngIf="form.controls['email'].errors?.['email']">Please enter a valid email
-          address.</p>
-      </div>
-    </div>
-    <app-password formControlName="password"
-                  [label]="'Password'">
+    <app-email formControlName="email" [label]="'Email'"></app-email>
+    <app-password formControlName="password" [label]="'Password'">
     </app-password>
     <app-loader *ngIf="isLoading"></app-loader>
     <button [disabled]="form.invalid || submitted" class="btn-primary btn sign-in-button sign-up-button">Sign Up

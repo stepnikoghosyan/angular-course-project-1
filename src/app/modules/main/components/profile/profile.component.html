@@ -1,1 +1,28 @@
-<p>profile works!</p>
+<h2 class="text-center">Profile settings</h2>
+<div class="form-container profile-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<!--    <img [src]="user?.profilePictureUrl" alt="">-->
+    <div>
+      <label class="required">First Name</label>
+      <input type="text" formControlName="firstName" placeholder="First Name">
+      <div *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
+        <p class="error-message" *ngIf="form.controls['firstName'].errors?.['required']">First Name is required.</p>
+      </div>
+    </div>
+    <div>
+      <label class="required">Last Name</label>
+      <input type="text" formControlName="lastName" placeholder="Last Name">
+      <div *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
+        <p class="error-message" *ngIf="form.controls['lastName'].errors?.['required']">Last Name is required.</p>
+      </div>
+    </div>
+    <app-email formControlName="email" [label]="'Email'"></app-email>
+    <app-password formControlName="password" [label]="'Password'"></app-password>
+    <app-password formControlName="confirm_password" [label]="'Confirm Password'"></app-password>
+    <app-loader *ngIf="isLoading"></app-loader>
+
+    <div class="flex-container">
+      <button [disabled]="form.invalid || submitted" class="create-btn">Update</button>
+    </div>
+  </form>
+</div>

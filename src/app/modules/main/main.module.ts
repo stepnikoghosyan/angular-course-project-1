@@ -23,7 +23,9 @@ import { SendMessageComponent } from './components/send-message/send-message.com
 import { CommentsService } from "./services/comments.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import { TextareaAutoresizeDirective } from './directives/textarea-autoresize.directive';
-import {AutosizeModule} from "ngx-autosize";
+import {AuthModule} from "../auth/auth.module";
+import {EmailComponent} from "../auth/components/email/email.component";
+// import {AutosizeModule} from "ngx-autosize";
 
 @NgModule({
   declarations: [
@@ -44,14 +46,15 @@ import {AutosizeModule} from "ngx-autosize";
     ProfileComponent,
     TextareaAutoresizeDirective
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MainRoutingModule,
-    LoaderModule,
-    PipesModule,
-    AutosizeModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MainRoutingModule,
+        LoaderModule,
+        PipesModule,
+        AuthModule,
+        // AutosizeModule
+    ],
   providers: [
     PostsService,
     UsersService,

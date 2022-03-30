@@ -1,0 +1,14 @@
+<div>
+  <label class="required">{{label}}</label>
+  <div class="password-content">
+    <input type="email"
+           [placeholder]="label"
+           [(ngModel)]="email"
+           (ngModelChange)="onChange($event)"
+           (blur)="onTouch()">
+  </div>
+  <div *ngIf="control.invalid && control.touched">
+    <p class="error-message" *ngIf="control.errors?.['required']">Email is required.</p>
+    <p class="error-message" *ngIf="control.errors?.['email']">Please enter a valid email address.</p>
+  </div>
+</div>

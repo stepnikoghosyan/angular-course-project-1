@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserModel } from '../modules/main/models/user.model';
+import {UserFormData, UserModel} from '../modules/main/models/user.model';
+import {convertToFormData} from "../modules/main/helpers/json-to-form-data.helper";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class UserService {
 
   getUser(): UserModel | null {
     return this.user;
+  }
+
+  updateProfile(formValue: UserFormData): Observable<UserModel> {
+    const formData = convertToFormData<UserFormData>(formValue);
+    return this.httpClient.put<UserModel>(`${environment.apiUrl}/users`, formData);
   }
 }

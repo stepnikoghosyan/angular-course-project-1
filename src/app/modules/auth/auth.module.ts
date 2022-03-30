@@ -11,24 +11,30 @@ import {PasswordComponent} from "./components/password/password.component";
 import {AuthRoutingModule} from "./auth-routing.module";
 import {AuthComponent} from "./auth.component";
 import {LoaderModule} from "../loader/loader.module";
+import {EmailComponent} from "./components/email/email.component";
 
 @NgModule({
-  declarations: [
-    AuthComponent,
-    LoginComponent,
-    RegisterComponent,
-    ResetPasswordComponent,
-    VerifyAccountComponent,
-    ForgotPasswordComponent,
-    PasswordComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    AuthRoutingModule,
-    LoaderModule
-  ]
+    declarations: [
+        AuthComponent,
+        LoginComponent,
+        RegisterComponent,
+        ResetPasswordComponent,
+        VerifyAccountComponent,
+        ForgotPasswordComponent,
+        PasswordComponent,
+        EmailComponent
+    ],
+    exports: [
+        PasswordComponent,
+        EmailComponent
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AuthRoutingModule,
+        LoaderModule
+    ]
 })
 export class AuthModule {
 }
