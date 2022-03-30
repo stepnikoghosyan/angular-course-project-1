@@ -23,7 +23,6 @@ export class AuthService {
       .post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginDto)
       .pipe(
         tap((data: LoginResponse) => {
-          console.log(data);
             this.storageService.setToken(data, rememberMe);
             this.router.navigateByUrl('/home');
           }
