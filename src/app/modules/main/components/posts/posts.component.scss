@@ -1,3 +1,13 @@
-.create-post-btn{
-    margin: 20px 20px;
+.top-content {
+    margin: 20px;
+    justify-content: space-between;
+}
+@media screen and(max-width:630px) {
+    .top-content {
+        flex-direction: column;
+        p-dropdown,
+        .btn-primary {
+            margin-top: 10px;
+        }
+    }
 }

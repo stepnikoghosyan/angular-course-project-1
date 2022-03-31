@@ -1,7 +1,7 @@
 <div *ngIf="postEntity$ | async as postEntity" class="container-medium">
   <div *ngIf="postEntity.post as post">
     <div class="post-user d-flex align-items-center">
-      <img class="img-wrapper" [src]="postEntity?.post?.user?.profilePictureUrl | imageUrl" alt="">
+      <img class="img-wrapper" [src]="postEntity?.post?.user?.profilePictureUrl | profilePic" alt="">
       <div class="user-info">
         <p class="user-name">{{postEntity?.post?.user | fullName}}</p>
         <p class="post-date">{{postEntity?.post?.createdAt | date: 'mediumDate'}}</p>
