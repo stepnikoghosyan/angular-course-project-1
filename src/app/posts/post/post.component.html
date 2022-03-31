@@ -35,7 +35,7 @@
         </div>
 
         <div>
-            <input class="inputBtn" type="file" id="img" formControlName="file"
+            <input class="inputBtn" type="file" id="img" 
              #file (change)="fileUpload($event)">
                 
 
@@ -52,18 +52,20 @@
             </div>
 
         </div>
+<!-- file-delete -->
+            <div  *ngIf='!formGroup.controls["file"].errors'>
+                <span> {{formGroup.controls["file"].value!.name}}
 
-            <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
-                <span> {{fileName }}</span>
-                   
-                    <!-- <span  class="delete" > -->
-                        
-                        <fa-icon class="xmark" [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
-                    <!-- </span> -->
-               
+                
+                <fa-icon class="xmark " 
+                [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
+            </span>
             </div>
         <div class="create">
-            <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
+            <div class="settingErr">
+                <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
+                <p *ngIf = 'isInValid' class="errors">*fill in all the fields</p>
+            </div>  
             <ng-template #update>
                 <button class="btn" (click)="savePost()">Save</button>
             </ng-template>

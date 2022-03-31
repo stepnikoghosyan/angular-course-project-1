@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { PostDto } from 'src/app/models/post.model';
 import { PostsService } from '../posts.service';
-import { FileSizeValidator } from './file-size-validator.service';
 import { FileTypeValidator } from './file-type-validator.service';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,7 +15,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class PostComponent implements OnInit, OnDestroy {
   faCircleXmark = faCircleXmark;
-  formGroup!: FormGroup;
+  formGroup: FormGroup;
   sizeCheck = true;
   fileName = '';
   errorFile = '';
@@ -28,12 +27,15 @@ export class PostComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private postsService: PostsService,
     private avtiveRouter: ActivatedRoute,
-  ) { }
+  ) {
+    this.formGroup = this.initForm();
+  }
 
   ngOnInit(): void {
-    this.initForm();
+
     this.showPostData();
   };
+
   showPostData() {
     this.id = this.avtiveRouter.snapshot.params['id'];
     if (this.id) {
@@ -53,8 +55,9 @@ export class PostComponent implements OnInit, OnDestroy {
         })
     }
   }
+
   initForm() {
-    this.formGroup = this.fb.group({
+    return this.fb.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
       file: [null, [FileTypeValidator.fileTypeValidator,]
@@ -65,15 +68,12 @@ export class PostComponent implements OnInit, OnDestroy {
 
 
   sizeValidator(control: AbstractControl): ValidationErrors | null {
-
-
     if (this.formGroup.value.file > 2048) {
       return {
-        sizeValidator: true//'file size should not be more than 2mb'
+        sizeValidator: true
       }
     }
     return null
-
   }
 
 
@@ -85,19 +85,23 @@ export class PostComponent implements OnInit, OnDestroy {
 
   public fileUpload(event: any): void {
     const file = event?.target?.files[0];
-
+    console.log(file);
     if (file) {
       this.formGroup?.get('file')?.setValue(file);
+
     }
 
   }
 
+  isInValid = false;
   public createPost() {
     if (this.formGroup.valid) {
       this.isLoading = true;
       const postDto = new PostDto(this.formGroup.controls)
       this.postsService.createPost(postDto)
         .subscribe(() => this.isLoading = false)
+    } else {
+      this.isInValid = true;
     }
 
   }
@@ -111,6 +115,7 @@ export class PostComponent implements OnInit, OnDestroy {
     this.postsService.updatePost(this.id, this.formGroup.value)
       .subscribe()
   }
+
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();

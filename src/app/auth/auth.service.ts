@@ -20,9 +20,6 @@ export class AuthService {
   ) { }
   private readonly baseUrl: string = environment.Api_Url;
 
-
- 
-
   login(loginDto: LoginDto) {
     return this.httpClient.post<LoginResponse>(`${this.baseUrl}auth/login`, loginDto)
       .pipe(tap((res) => {

@@ -37,6 +37,8 @@ export class PostsService {
   }
 
   createPost(obj: PostDto) {
+    const t = new FormData();
+    
     return this.httpClient.post<PostDto>(`${this.baseUrl}posts`, obj).pipe(tap(() => {
       this.notifyService.showSuccess('Your post was successfully published', 'success');
       this.router.navigate(['/posts']);
