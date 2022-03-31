@@ -10,6 +10,7 @@ export class NotificationService {
               private router: Router) {
     toastr.toastrConfig.maxOpened = 1;
     toastr.toastrConfig.autoDismiss = true;
+    toastr.toastrConfig.closeButton = true;
   }
 
   showNotification(success: boolean, message: string, title?: string | null, navigationUrl?: string[]) {
