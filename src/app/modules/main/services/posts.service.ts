@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationResponseModel } from '../models/pagination-response';
 import { commentsResponse, createCommentDto, PostModel } from '../models/post.model';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/notification.service';
 import { Form, FormGroup } from '@angular/forms';
@@ -66,8 +66,8 @@ export class PostsService {
     }
 
 
-    createComment(creaeCommentDto: createCommentDto, id: number) {
-        return this.httpClient.post<createCommentDto>(`${environment.apiUrl}/comments/${id}`, creaeCommentDto)
+    createComment(createCommentDto: createCommentDto, id: number) {
+        return this.httpClient.post<createCommentDto>(`${environment.apiUrl}/comments/${id}`, createCommentDto)
 
     }
 }

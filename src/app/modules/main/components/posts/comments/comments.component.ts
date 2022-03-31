@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { fakeAsync } from '@angular/core/testing';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { finalize, map, Observable, tap } from 'rxjs';
 import { CommentModel } from 'src/app/models/comment.model';
 import { PostModel } from 'src/app/models/post.model';
 import { commentsResponse } from '../../../models/post.model';
@@ -19,11 +20,17 @@ export class CommentsComponent implements OnInit {
   @Input('myProfile') myProfile!: UserModel;
   @Input('post') post?: PostModel;
 
+  showSpinner = false
+
   commentsForm:FormGroup = this.formBuilder.group({
-    message : ['']
+    message : ['',[Validators.required]]
   })
+<<<<<<< HEAD
 //   comments$? :Observable<CommentModel>[];
   comments?: CommentModel[];
+=======
+  comments : any[] = []
+>>>>>>> fc28fb1cc6202af20b74cda925b709b43ff01a78
   constructor(private commentService:PostsService,
               private activatedRoute:ActivatedRoute,
               private formBuilder:FormBuilder,
@@ -31,8 +38,8 @@ export class CommentsComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
-
     let id  = this.activatedRoute.snapshot.params['id']      
+<<<<<<< HEAD
     // this.comments$ = this.commentService.getComments(id).pipe(
      this.commentService.getComments(id).pipe(
           map(data => data.results),
@@ -44,6 +51,11 @@ export class CommentsComponent implements OnInit {
             
         }
     })
+=======
+    this.commentService.getComments(id).pipe(
+          map(data =>this.comments = data.results),
+    ).subscribe()
+>>>>>>> fc28fb1cc6202af20b74cda925b709b43ff01a78
  
   }
 
@@ -52,9 +64,16 @@ export class CommentsComponent implements OnInit {
     const dto = new createCommentDto(this.commentsForm.value)
     console.log(dto);
       this.commentService.createComment(dto , id).subscribe({
-        // next :(data) => {
-        //   console.log(this.commentsForm.value); 
-        // }
-      })
+        next : (data) => {
+          this.showSpinner = true
+          this.commentService.getComments(id).pipe(
+            map(data =>this.comments = data.results),
+            finalize(()=> {
+              this.showSpinner = false
+            })
+      ).subscribe()  
+      }
+      
   }
+ )}
 }
