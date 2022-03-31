@@ -1,15 +1,20 @@
-<div *ngFor="let comment of comments">
+
  <form [formGroup]="commentsForm" (ngSubmit)="createComment()">
+    <div [ngClass]="currentUserId ===commentCreaterId? 'my-comment' : 'other-comment'">
+        <!-- <p class="name">{{comments?.user. | userName}}</p>
+        <p class="message"> {{comment?.message}}</p> -->
+      </div>
      <div>
-<img [src]="comment.user?.profilePicture | setImage" alt="">  
-<span>{{comment?.user | userName}}</span>     
+<!-- <img [src]="comment.user?.profilePicture | setImage" alt="">  
+<span>{{comment?.user | userName}}</span>      -->
 <input type="text" formControlName="message">
 <button>submit</button>
 </div>
+<div *ngFor="let comment of comments">
 <mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
-</form> 
+
     <p> Username
-     <!-- <span>{{comment?.user | userName}}</span> -->
+     <span>{{comment?.user | userName}}</span>
      <p>
          comment
          <span>{{comment.message}}</span> 
@@ -18,6 +23,5 @@
        profilePicture
        <img [src]="comment?.user?.profilePicture | setImage" alt="">
    </p>
-   <p >M</p>
 </div>
-<h2>asda</h2>
+</form> 

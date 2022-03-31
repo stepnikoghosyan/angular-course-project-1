@@ -20,12 +20,19 @@ export class CommentsComponent implements OnInit {
   @Input('myProfile') myProfile!: UserModel;
   @Input('post') post?: PostModel;
 
+  currentUserId?:number
+  commentCreaterId?:number
   showSpinner = false
 
   commentsForm:FormGroup = this.formBuilder.group({
     message : ['',[Validators.required]]
   })
+
+//   comments$? :Observable<CommentModel>[];
+  // comments?: CommentModel[];
+
   comments : any[] = []
+
   constructor(private commentService:PostsService,
               private activatedRoute:ActivatedRoute,
               private formBuilder:FormBuilder,
@@ -33,11 +40,14 @@ export class CommentsComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
+    this.currentUserId=this.userService.myProfile?.id
+    this.commentCreaterId = this.post?.id
     let id  = this.activatedRoute.snapshot.params['id']      
+    // this.comments$ = this.commentService.getComments(id).pipe(
     this.commentService.getComments(id).pipe(
           map(data =>this.comments = data.results),
     ).subscribe()
- 
+
   }
 
   createComment(){
