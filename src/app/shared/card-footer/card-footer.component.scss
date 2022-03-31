@@ -12,14 +12,22 @@
     width: 50%;
     justify-content: flex-end;
 }
-.icon {
+
+.action {
     border: 1px solid #1469d9;
-    color: #1469d9;
-    padding: 8px;
-    margin-left: 5px;
     font-size: 12px;
-    border-radius: 5px;
+    padding: 6px;
     cursor: pointer;
+}
+.icon {
+    color: #1469d9;   
+    margin-left: 7px;    
+    border-radius: 5px;    
+}
+
+.commentIcon{
+    font-size: 20px;
+    padding-top: 5px;
 }
 
 .actions a {
@@ -38,44 +46,44 @@ p {
     margin-left: 10px;
 }
 
-.user-icon {
-    background: url('../../../assets/user.png'), 0, 0, no-repeat;
-    height: 20px;
-    width: 20px;
-}
+// .user-icon {
+//     background: url('../../../assets/user.png'), 0, 0, no-repeat;
+//     height: 20px;
+//     width: 20px;
+// }
 
-.comment-icon {
-    color: #1469d9;
-    background: url('../../../assets/comments.png'), 0, 0, no-repeat;
-    height: 25px;
-    width: 30px;
-    margin-left: 20px;
-}
+// .comment-icon {
+//     color: #1469d9;
+//     background: url('../../../assets/comments.png'), 0, 0, no-repeat;
+//     height: 25px;
+//     width: 30px;
+//     margin-left: 20px;
+// }
 
-.view-icon {
-    color: #1469d9;
-    background: url('../../../assets/view.png'), 0, 0, no-repeat;
-    height: 25px;
-    width: 30px;
-    margin-left: 20px;
-}
+// .view-icon {
+//     color: #1469d9;
+//     background: url('../../../assets/view.png'), 0, 0, no-repeat;
+//     height: 25px;
+//     width: 30px;
+//     margin-left: 20px;
+// }
 
 .comment-length {
-    font-size: 12px;
+    font-size: 10px;
     display: block;
     background-color: #1469d9;
     color: #fff;
     font-weight: bold;
     border-radius: 50%;
-    height: 18px;
-    width: 25px;
+    height: 13px;
+    width: 16px;
     text-align: center;
-    padding-top: 3px;
+    padding-top: 2px;
     position: relative;
-    bottom: 10px;
-    right: 20px;
+    bottom: 6px;
+    right: 6px;
 }
 
-.edit{
-    margin-top: 5.5px;
-}
+// .edit{
+//     margin-top: 5.5px;
+// }

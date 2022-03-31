@@ -56,10 +56,14 @@
             <div  *ngIf='!formGroup.controls["file"].errors'>
                 <span> {{formGroup.controls["file"].value!.name}}
 
-                
-                <fa-icon class="xmark " 
-                [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
-            </span>
+            <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
+                <span> {{fileName }}</span>
+                   
+                    <div  class="delete" >
+                        
+                        <fa-icon class="xmark" [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
+                    </div>
+               
             </div>
         <div class="create">
             <div class="settingErr">
