@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { confrimPasswordValidator } from '../../customValidators/confirmPasswordValidator';
-import { UserModel } from '../../models/user.model';
+import { GetUserModel, UserModel } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
 
@@ -16,7 +16,7 @@ export class ProfileSettingsComponent implements OnInit {
     showSpinner = false;
     showEyeIcon = false;
     showConfirmEyeIcon = false;
-    myProfileInfo!: UserModel;
+    myProfileInfo!: GetUserModel;
     targetValue!: any;
     file?: File;
 
@@ -48,8 +48,10 @@ export class ProfileSettingsComponent implements OnInit {
                 this.settingsForm.controls['firstName'].setValue(this.myProfileInfo.firstName);
                 this.settingsForm.controls['lastName'].setValue(this.myProfileInfo?.lastName);
                 this.settingsForm.controls['email'].setValue(this.myProfileInfo?.email);
-                // this.settingsForm.controls['profilePictureUrl'].setValue(this.myProfileInfo?.profilePictureUrl);
-                this.targetValue = this.myProfileInfo.profilePicture;
+                this.settingsForm.controls['profilePicture'].setValue(this.myProfileInfo?.profilePictureUrl);
+                this.targetValue = this.myProfileInfo.profilePictureUrl;
+                console.log("my profile image", this.myProfileInfo.profilePictureUrl);
+
             }
         })
     }

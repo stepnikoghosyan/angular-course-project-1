@@ -4,21 +4,21 @@ import { FormGroup } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { environment } from 'src/environments/environment';
-import { UserModel } from '../models/user.model';
+import { GetUserModel, UserModel } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsersService {
 
-    public myProfile?: UserModel
+    public myProfile?: GetUserModel
 
     constructor(private httpClient: HttpClient,
         // private notifyService: NotificationService
     ) { }
 
-    getMyProfile(): Observable<UserModel> {
-        return this.httpClient.get<UserModel>(`${environment.apiUrl}/users/my-profile`).pipe(
+    getMyProfile(): Observable<GetUserModel> {
+        return this.httpClient.get<GetUserModel>(`${environment.apiUrl}/users/my-profile`).pipe(
             tap((user) => {
                 this.myProfile = user;
                 console.log("get image", this.myProfile);
