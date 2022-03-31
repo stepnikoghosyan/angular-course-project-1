@@ -39,7 +39,7 @@
              #file (change)="fileUpload($event)">
                 
 
-            <button class="upload" (click)='clickOnFile(file)'>select file</button>
+            <button class="upload" (click)='clickOnFile(file)'>Select file</button>
             <div class="formErr">
                 <p class="errors" *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
                 
@@ -51,16 +51,17 @@
            
             </div>
 
-            <div class="file-delete">
-                <p *ngIf='!formGroup.controls["file"].errors'><span> {{fileName }}</span>
-                   
-                    <span  class="delete" (click)="deleteImg()">
-                        
-                        <fa-icon class="xmark" [icon]="faCircleXmark"></fa-icon>
-                    </span>
-                </p>
-            </div>
         </div>
+
+            <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
+                <span> {{fileName }}</span>
+                   
+                    <!-- <span  class="delete" > -->
+                        
+                        <fa-icon class="xmark" [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
+                    <!-- </span> -->
+               
+            </div>
         <div class="create">
             <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
             <ng-template #update>

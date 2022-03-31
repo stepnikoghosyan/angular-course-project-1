@@ -15,6 +15,7 @@ form {
     width: 60%;
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
+    font-family: Arial, sans-serif;
 }
 
 
@@ -60,26 +61,28 @@ form {
 .file-delete{
     height: 5%;
     width: 5%;
+    // border: 1px solid blue;
 }
 
-.errors,.delete{
+.errors{
     margin-top: 5px;
     color: red;   
 }
 
-.delete{
-    cursor: pointer;
-}
  
 .xmark{  
-    // color: #1469d9;     
-    font-size: 20px !important;    
-    cursor: pointer;
+    color: gray;
+    font-size: 16px !important;    
+    cursor: pointer;    
+}
+
+.xmark:hover{
+    color: red;
 }
 
 .upload{
     padding: 7px;
-    // width: 100px;
+    width: 100px;
     border: 1px solid green;
     outline: none;
     background-color: #fff;
@@ -88,3 +91,8 @@ form {
     border-radius: 5px;
 }
 
+textarea{
+    font-family: inherit;
+    font-weight: 100;
+    // font-size: 14px;
+}
