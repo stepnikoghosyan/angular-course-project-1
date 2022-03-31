@@ -7,11 +7,12 @@ import {VerifyAccountComponent} from "./components/verify-account/verify-account
 import {ForgotPasswordComponent} from "./components/forgot-password/forgot-password.component";
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
-import {PasswordComponent} from "./components/password/password.component";
+import {PasswordComponent} from "../form-components/ components/password/password.component";
 import {AuthRoutingModule} from "./auth-routing.module";
 import {AuthComponent} from "./auth.component";
 import {LoaderModule} from "../loader/loader.module";
-import {EmailComponent} from "./components/email/email.component";
+import {EmailComponent} from "../form-components/ components/email/email.component";
+import {FormComponentsModule} from "../form-components/form-components.module";
 
 @NgModule({
     declarations: [
@@ -21,19 +22,14 @@ import {EmailComponent} from "./components/email/email.component";
         ResetPasswordComponent,
         VerifyAccountComponent,
         ForgotPasswordComponent,
-        PasswordComponent,
-        EmailComponent
-    ],
-    exports: [
-        PasswordComponent,
-        EmailComponent
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
         AuthRoutingModule,
-        LoaderModule
+        LoaderModule,
+        FormComponentsModule
     ]
 })
 export class AuthModule {

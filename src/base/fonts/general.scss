@@ -302,6 +302,11 @@ textarea {
     transition: 0.3s;
   }
 }
+
+.cancel-btn,.create-btn {
+  margin-left: 20px;
+}
+
 .comment-item {
   margin: 20px 0;
   display: flex;
@@ -317,7 +322,7 @@ textarea {
     width: calc(100% - 45px);
   }
   .message-content {
-      padding: 15px;    
+      padding: 15px;
       text-align: start;
       .name {
           font-weight: bold;
