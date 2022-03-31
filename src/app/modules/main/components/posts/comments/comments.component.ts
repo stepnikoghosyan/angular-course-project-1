@@ -20,17 +20,19 @@ export class CommentsComponent implements OnInit {
   @Input('myProfile') myProfile!: UserModel;
   @Input('post') post?: PostModel;
 
+  currentUserId?:number
+  commentCreaterId?:number
   showSpinner = false
 
   commentsForm:FormGroup = this.formBuilder.group({
     message : ['',[Validators.required]]
   })
-<<<<<<< HEAD
+
 //   comments$? :Observable<CommentModel>[];
-  comments?: CommentModel[];
-=======
+  // comments?: CommentModel[];
+
   comments : any[] = []
->>>>>>> fc28fb1cc6202af20b74cda925b709b43ff01a78
+
   constructor(private commentService:PostsService,
               private activatedRoute:ActivatedRoute,
               private formBuilder:FormBuilder,
@@ -38,25 +40,14 @@ export class CommentsComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
+    this.currentUserId=this.userService.myProfile?.id
+    this.commentCreaterId = this.post?.id
     let id  = this.activatedRoute.snapshot.params['id']      
-<<<<<<< HEAD
     // this.comments$ = this.commentService.getComments(id).pipe(
-     this.commentService.getComments(id).pipe(
-          map(data => data.results),
-          tap((data)=> {
-            console.log(data);   
-          })
-    ).subscribe({
-        next:(data)=>{
-            
-        }
-    })
-=======
     this.commentService.getComments(id).pipe(
           map(data =>this.comments = data.results),
     ).subscribe()
->>>>>>> fc28fb1cc6202af20b74cda925b709b43ff01a78
- 
+
   }
 
   createComment(){
