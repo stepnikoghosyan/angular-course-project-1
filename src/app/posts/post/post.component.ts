@@ -18,10 +18,8 @@ export class PostComponent implements OnInit, OnDestroy {
   faCircleXmark = faCircleXmark;
   formGroup!: FormGroup;
   sizeCheck = true;
-  img: any;
   fileName = '';
   errorFile = '';
-  fileType = '';
   isLoading = false;
   id: number = NaN;
   title = 'Create'
@@ -30,8 +28,6 @@ export class PostComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private postsService: PostsService,
     private avtiveRouter: ActivatedRoute,
-    // public typeValidator: FileTypeValidator,
-    //  public sizeValidator: FileSizeValidator
   ) { }
 
   ngOnInit(): void {
@@ -61,16 +57,15 @@ export class PostComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      file: [null,  [FileTypeValidator.fileTypeValidator,]
+      file: [null, [FileTypeValidator.fileTypeValidator,]
       ]
 
-      // this.sizeValidator.bind(this)
     })
   }
 
 
   sizeValidator(control: AbstractControl): ValidationErrors | null {
- 
+
 
     if (this.formGroup.value.file > 2048) {
       return {
@@ -82,38 +77,25 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
 
-  public trigger(file: any): void {
+  public clickOnFile(file: any): void {
     file.click()
   }
 
 
-  file!: File 
-  public handler(event: any): void {
 
-    if (!event.target.files?.length) return
-    if (event?.target.files && event.target.files[0]) {
-      this.file = event.target?.files[0];
+  public fileUpload(event: any): void {
+    const file = event?.target?.files[0];
 
-      this.formGroup.patchValue({
-        'file': event.target?.files[0]
-      })
-      
-      console.log('hendler',this.formGroup.get('file'))
-      this.formGroup.get('file')?.reset();
-
+    if (file) {
+      this.formGroup?.get('file')?.setValue(file);
     }
 
   }
 
-  public create() {
-
-    console.log('create', this.formGroup.controls['file'].errors!['fileTypeValidator'] );
-
+  public createPost() {
     if (this.formGroup.valid) {
-      this.isLoading = true
-
-      const image = this.img
-      const postDto = new PostDto(this.formGroup.value, image)
+      this.isLoading = true;
+      const postDto = new PostDto(this.formGroup.controls)
       this.postsService.createPost(postDto)
         .subscribe(() => this.isLoading = false)
     }
@@ -125,7 +107,7 @@ export class PostComponent implements OnInit, OnDestroy {
     this.fileName = ''
   }
 
-  public save() {
+  public savePost() {
     this.postsService.updatePost(this.id, this.formGroup.value)
       .subscribe()
   }

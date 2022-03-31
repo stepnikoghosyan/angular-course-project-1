@@ -3,11 +3,12 @@ import { UserModelDto } from 'src/app/models/user.model'
 export class PostDto {
     title: string;
     body: string;
-    image: File | null
-    constructor(data: any, img: File | null) {
-        this.title = data.title;
-        this.body = data.body;
-        this.image = img
+    image: File
+    constructor(data: any) {
+        this.title = data.title.value;
+        this.body = data.body.value;
+        this.image = data.file.value
+
     }
 }
 

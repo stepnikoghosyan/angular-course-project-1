@@ -35,20 +35,19 @@
         </div>
 
         <div>
-            <!-- accept=".jpg, .jpeg, .png" -->
             <input class="inputBtn" type="file" id="img" formControlName="file"
-             #file (change)="handler($event)">
+             #file (change)="fileUpload($event)">
                 
 
-            <button class="upload" (click)='trigger(file)'>select file</button>
+            <button class="upload" (click)='clickOnFile(file)'>select file</button>
             <div class="formErr">
                 <p class="errors" *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
                 
                     Please upload JPEG, JPG or PNG files
                 </p>
-                <p class="errors"  *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
+                <!-- <p class="errors"  *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
                     'ile size should not be more than 2mb
-                </p>
+                </p> -->
            
             </div>
 
@@ -63,9 +62,9 @@
             </div>
         </div>
         <div class="create">
-            <button *ngIf="!id else update" class="btn" (click)="create()">Create</button>
+            <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
             <ng-template #update>
-                <button class="btn" (click)="save()">Save</button>
+                <button class="btn" (click)="savePost()">Save</button>
             </ng-template>
         </div>
       

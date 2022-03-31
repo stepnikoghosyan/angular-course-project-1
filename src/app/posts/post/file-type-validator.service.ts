@@ -8,10 +8,10 @@ export class FileTypeValidator {
 
   static fileTypeValidator(control: AbstractControl): ValidationErrors | null {
     const imgType = ['jpg', 'jpeg', 'png'];
-    let type = control?.value?.split('.')[1];
+    let type = control?.value?.split('.')[control?.value?.split('.').length-1];
     if (!imgType.includes(type)) {
       return {
-        fileTypeValidator: true //'Please upload JPEG, JPG or PNG files'
+        fileTypeValidator: true
       }
     }
 
