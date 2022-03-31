@@ -45,9 +45,6 @@ import {FormComponentsModule} from "../form-components/form-components.module";
     ProfileComponent,
     TextareaAutoresizeDirective,
   ],
-  exports: [
-    AutosizeModule
-  ],
   imports: [
       CommonModule,
       ReactiveFormsModule,
@@ -55,7 +52,8 @@ import {FormComponentsModule} from "../form-components/form-components.module";
       LoaderModule,
       PipesModule,
       FormComponentsModule,
-      FormsModule
+      FormsModule,
+      AutosizeModule
   ],
   providers: [
     PostsService,
