@@ -37,9 +37,12 @@ export class PostsService {
   }
 
   createPost(obj: PostDto) {
-    const t = new FormData();
-    
-    return this.httpClient.post<PostDto>(`${this.baseUrl}posts`, obj).pipe(tap(() => {
+    const formPost = new FormData();
+    formPost.append('title',obj.title);
+    formPost.append('body',obj.body);
+    formPost.append('image',obj.image);
+   
+    return this.httpClient.post<PostDto>(`${this.baseUrl}posts`, formPost).pipe(tap(() => {
       this.notifyService.showSuccess('Your post was successfully published', 'success');
       this.router.navigate(['/posts']);
     }),

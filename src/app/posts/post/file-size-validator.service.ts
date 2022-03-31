@@ -6,15 +6,14 @@ export class FileSizeValidator {
 
   constructor() { }
 
-  static sizeValidator(control: AbstractControl, size: number): ValidationErrors | null {
+  static sizeValidator(control: AbstractControl): ValidationErrors | null {
 
-    console.log(size)
+    const size = control?.value?.size;
     if (size > 2048) {
       return {
-        sizeValidator: true//'file size should not be more than 2mb'
+        validSize: true
       }
     }
     return null
-
   }
 }

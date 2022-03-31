@@ -6,6 +6,8 @@ import { PostDto } from 'src/app/models/post.model';
 import { PostsService } from '../posts.service';
 import { FileTypeValidator } from './file-type-validator.service';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { FileSizeValidator } from './file-size-validator.service';
+
 
 @Component({
   selector: 'app-post',
@@ -17,9 +19,13 @@ export class PostComponent implements OnInit, OnDestroy {
   faCircleXmark = faCircleXmark;
   formGroup: FormGroup;
   sizeCheck = true;
-  fileName = '';
-  errorFile = '';
+  isInValid = false;
   isLoading = false;
+ 
+
+
+  errorFile = '';
+
   id: number = NaN;
   title = 'Create'
   private unsubscribe$ = new Subject<void>();
@@ -34,6 +40,7 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.showPostData();
+    console.log('init',this.formGroup.controls['file'])
   };
 
   showPostData() {
@@ -47,7 +54,6 @@ export class PostComponent implements OnInit, OnDestroy {
               body: res.body,
               image: res.imageUrl
             })
-            this.fileName = 'image'
           },
           error: (err: any) => {
             this.errorFile = err.error.message
@@ -60,21 +66,21 @@ export class PostComponent implements OnInit, OnDestroy {
     return this.fb.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      file: [null, [FileTypeValidator.fileTypeValidator,]
+      file: [null, [FileTypeValidator.fileTypeValidator,FileSizeValidator.sizeValidator]
       ]
 
     })
   }
 
 
-  sizeValidator(control: AbstractControl): ValidationErrors | null {
-    if (this.formGroup.value.file > 2048) {
-      return {
-        sizeValidator: true
-      }
-    }
-    return null
-  }
+  // sizeValidator(control: AbstractControl): ValidationErrors | null {
+  //   if (this.formGroup.value.file > 2048) {
+  //     return {
+  //       sizeValidator: true
+  //     }
+  //   }
+  //   return null
+  // }
 
 
   public clickOnFile(file: any): void {
@@ -85,16 +91,18 @@ export class PostComponent implements OnInit, OnDestroy {
 
   public fileUpload(event: any): void {
     const file = event?.target?.files[0];
-    console.log(file);
+
     if (file) {
       this.formGroup?.get('file')?.setValue(file);
+      console.log('upload',this.formGroup.controls['file'])
 
     }
 
   }
 
-  isInValid = false;
+
   public createPost() {
+  
     if (this.formGroup.valid) {
       this.isLoading = true;
       const postDto = new PostDto(this.formGroup.controls)
@@ -108,7 +116,6 @@ export class PostComponent implements OnInit, OnDestroy {
 
   public deleteImg() {
     this.formGroup.get('file')?.reset();
-    this.fileName = ''
   }
 
   public savePost() {

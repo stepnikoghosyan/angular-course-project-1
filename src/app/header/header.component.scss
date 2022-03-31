@@ -34,3 +34,24 @@ a:visited{
 .logout{
     cursor: pointer;
 }
+
+.userMenu{
+    margin-top: 20px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.open{
+    cursor: pointer;
+}
+
+.menu{
+    list-style: none;
+}
+.userImg{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+

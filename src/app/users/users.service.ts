@@ -16,4 +16,8 @@ export class UsersService {
   userGetProfile() {
     return this.httpClient.get<UserModelDto>(`${this.baseUrl}users/my-profile`)
   }
+
+  getUsers(){
+    return this.httpClient.get(`${this.baseUrl}users?showAll=false`,)
+  }
 }

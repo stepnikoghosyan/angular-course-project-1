@@ -7,15 +7,16 @@ export class FileTypeValidator {
   constructor() { }
 
   static fileTypeValidator(control: AbstractControl): ValidationErrors | null {
-    const imgType = ['jpg', 'jpeg', 'png'];
-    
-    let type = control?.value?.split('.')[control?.value?.split('.').length-1];
-    if (!imgType.includes(type)) {
+    const imgType =  control?.value?.type?.split('/');
+    console.log(imgType);
+    const type = ['png','jpg','jpeg'];
+   
+
+    if (type.includes(imgType[1])) {
       return {
-        fileTypeValidator: true
+        fileType: true
       }
     }
-
     return null
   }
 }

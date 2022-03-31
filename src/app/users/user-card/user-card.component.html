@@ -1,0 +1,14 @@
+<div class="user">
+    <div class="userCard">
+        <div class="imgContent">
+            <div >
+                <img class="img" [src]="user?.profilePictureUrl || 'assets/default.png'" />
+                    
+            </div>      
+        </div>
+        <div class="userCardBody">
+            <p>  {{user?.firstName }} {{ user?.lastName}}</p>
+            <p>{{user?.email}}</p>
+        </div>    
+    </div>
+</div>

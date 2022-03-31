@@ -6,7 +6,22 @@
         [routerLinkActiveOptions]="{exact:true}">Home</a>
         <a routerLinkActive="active" routerLink="/users">Users</a>
         <a routerLinkActive="active" routerLink="/posts">Posts</a>
-        <a routerLinkActive="active" routerLink="/my-posts">My Posts</a>
-        <a (click)="logout()" class="logout"> Logout </a>
+
+        <div class="userMenu">
+            <img class="userImg" src="assets/default.png" >
+            <p class="open">^</p>
+            <ul class="menu">
+                <li>
+                    <a  routerLink="/my-profile">My Profile</a>
+                </li>
+                <li>  
+                    <a routerLink="/my-posts">My Posts</a>
+                </li>
+                <li>
+                    <a (click)="logout()" class="logout"> Logout </a>
+                </li>
+            </ul>
+        </div>
     </div>
+
 </div>

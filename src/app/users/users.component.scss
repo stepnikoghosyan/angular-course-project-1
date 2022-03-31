@@ -26,6 +26,18 @@ input{
     cursor: pointer;
 }
 
+.user{
+    display: grid;
+    grid-template-columns:repeat(3,31%);
+    grid-gap: 25px;
+    white-space: nowrap;
+    // margin-top: 30px;
+}
+
+input:focus-visible{
+    outline: none;
+}
+
 button {
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -36,38 +48,3 @@ button {
     width: 30px;
     padding-top: 5px;
 }
-.user{
-    display: grid;
-    grid-template-columns:repeat(3,31%);
-    grid-gap: 25px;
-    white-space: nowrap;
-    margin-top: 30px;
-}
-.userCard{
-    border: 2px solid rgb(204, 202, 202);
-    border-radius: 5px;
-    box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-p{
-    text-align: center;
-}
-
-.imgContent{
-    display: flex;
-    justify-content: center;
-}
-
-.img {
-    height: 150px;
-    width: 150px;  
-    border: 1px solid aqua;
-    border-radius: 50%;
-    margin-top: 20px;
-    
-}
-
-

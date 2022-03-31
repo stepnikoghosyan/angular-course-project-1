@@ -1,84 +1,86 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="main">
-<div class="card">
-    <div >
-        <h1>{{title}} Post</h1>
-    </div>
-    <form class="postForm" [formGroup]='formGroup'>
-        <div class="inputForm">
-            <div>
-                <div class="label">
-                    <label>Title</label>
+    <div class="card">
+        <div >
+            <h1>{{title}} Post</h1>
+        </div>
+        <form class="postForm" [formGroup]='formGroup'>
+            <div class="inputForm">
+                <div>
+                    <div class="label">
+                        <label>Title</label>
+                    </div>
+                    <input class="title" formControlName="title" type="text">
+                    <div class="formErr">
+                        <div  *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
+                            <span *ngIf="formGroup.controls['title'].hasError('required')" class="errors">
+                                Required
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <input class="title" formControlName="title" type="text">
+            </div>
+            <div class="inputForm">
+                <div class="label">
+                    <label>Body</label>
+                </div>
+                <textarea class="title" formControlName="body" rows="10px" cols="100px"></textarea>
                 <div class="formErr">
-                    <div  *ngIf='formGroup.controls["title"].invalid && formGroup.controls["title"].touched'>
-                        <span *ngIf="formGroup.controls['title'].hasError('required')" class="errors">
+                    <div *ngIf='formGroup.controls["body"].invalid && formGroup.controls["body"].touched'>
+                        <span  *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
                             Required
                         </span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="inputForm">
-            <div class="label">
-                <label>Body</label>
-            </div>
-            <textarea class="title" formControlName="body" rows="10px" cols="100px"></textarea>
-            <div class="formErr">
-                <div *ngIf='formGroup.controls["body"].invalid && formGroup.controls["body"].touched'>
-                    <span  *ngIf="formGroup.controls['body'].hasError('required')" class="errors">
-                        Required
-                    </span>
+
+            <div>
+                <input class="inputBtn" type="file" id="img" 
+                #file (change)="fileUpload($event)">
+                    
+
+                <button class="upload" (click)='clickOnFile(file)'>Select file</button>
+                <div class="formErr" *ngIf = "formGroup.controls['file'].value">
+
+                     <p class="errors" *ngIf = "formGroup.controls['file'].errors && 
+                      formGroup.controls['file'].errors!['fileType']">
+                        Please upload JPEG, JPG or PNG files
+                    </p> 
+
+                    <p class="errors"  *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].errors!['validSize']">
+                        file size should not be more than 2mb
+                    </p> 
+            
                 </div>
-            </div>
-        </div>
 
-        <div>
-            <input class="inputBtn" type="file" id="img" 
-             #file (change)="fileUpload($event)">
-                
-
-            <button class="upload" (click)='clickOnFile(file)'>Select file</button>
-            <div class="formErr">
-                <p class="errors" *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
-                
-                    Please upload JPEG, JPG or PNG files
-                </p>
-                <!-- <p class="errors"  *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].pristine">
-                    'ile size should not be more than 2mb
-                </p> -->
-           
             </div>
 
-        </div>
-<!-- file-delete -->
-            <div  *ngIf='!formGroup.controls["file"].errors'>
-                <span> {{formGroup.controls["file"].value!.name}}
+               
 
-            <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
-                <span> {{fileName }}</span>
-                   
-                    <div  class="delete" >
-                        
+                <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
+                    <span> {{formGroup.controls["file"]?.value?.name}}</span>
+                    <div  class="delete" *ngIf = 'formGroup.controls["file"]?.valid'>
                         <fa-icon class="xmark" [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
                     </div>
-               
-            </div>
-        <div class="create">
-            <div class="settingErr">
-                <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
-                <p *ngIf = 'isInValid' class="errors">*fill in all the fields</p>
-            </div>  
-            <ng-template #update>
-                <button class="btn" (click)="savePost()">Save</button>
-            </ng-template>
-        </div>
-      
-    </form>
+                
+                </div>
+                
+                
 
+            <div class="create">
+                <div class="settingErr">
+                    <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
+                    <p *ngIf = 'isInValid' class="errors">*fill in all the fields</p>
+                </div>  
+                <ng-template #update>
+                    <button class="btn" (click)="savePost()">Save</button>
+                </ng-template>
+            </div>
+        
+        </form>
+
+    </div>
 </div>
                 
                 
     
-</div>

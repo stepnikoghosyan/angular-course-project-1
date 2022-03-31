@@ -1,6 +1,6 @@
 export interface PostsParamsModel {
     userId: number,
-    showAll: true,
+    showAll: boolean,
     pageSize: number,
     page: number,
     title: string

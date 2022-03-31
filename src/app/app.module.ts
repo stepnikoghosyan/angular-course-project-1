@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SharedModule } from './shared/shared.module';
 import { MyPostsComponent } from './my-posts/my-posts.component';
+import { UserCardComponent } from './users/user-card/user-card.component';
 
 
 
@@ -27,6 +28,7 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
     MyPostsComponent,
     ProfileComponent,
     NotFoundComponent,
+    UserCardComponent,
   ],
 
   imports: [
