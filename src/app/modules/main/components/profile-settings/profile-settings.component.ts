@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
-import { ConfirmPasswordValidator } from '../../customValidators/confirmPasswordValidator';
+import { confrimPasswordValidator } from '../../customValidators/confirmPasswordValidator';
 import { UserModel } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
@@ -18,6 +18,7 @@ export class ProfileSettingsComponent implements OnInit {
     showConfirmEyeIcon = false;
     myProfileInfo!: UserModel;
     targetValue!: any;
+    file?: File;
 
     settingsForm: FormGroup = this.formBuilder.group({
         profilePicture: [''],
@@ -27,8 +28,10 @@ export class ProfileSettingsComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
 
     })
+    // confirmPassword = new FormControl('', confrimPasswordValidator(this.controls['password']))
 
-    constructor(private formBuilder: FormBuilder,
+    constructor(
+        private formBuilder: FormBuilder,
         private usersService: UsersService) { }
 
     get controls() {
@@ -39,12 +42,13 @@ export class ProfileSettingsComponent implements OnInit {
         // console.log("my profile info", this.myProfileInfo, this.usersService.myProfile?.firstName);
         this.usersService.getMyProfile().subscribe({
             next: (data) => {
-                this.myProfileInfo = data;
+                this.myProfileInfo = data
                 console.log("my profile", this.myProfileInfo);
 
                 this.settingsForm.controls['firstName'].setValue(this.myProfileInfo.firstName);
                 this.settingsForm.controls['lastName'].setValue(this.myProfileInfo?.lastName);
                 this.settingsForm.controls['email'].setValue(this.myProfileInfo?.email);
+                // this.settingsForm.controls['profilePictureUrl'].setValue(this.myProfileInfo?.profilePictureUrl);
                 this.targetValue = this.myProfileInfo.profilePicture;
             }
         })
@@ -52,13 +56,12 @@ export class ProfileSettingsComponent implements OnInit {
 
     settingsFormSubmit() {
         if (this.settingsForm.valid) {
-            this.usersService.putMyProfile(this.settingsForm).pipe(
+            this.usersService.putMyProfileInfo(this.settingsForm).pipe(
                 finalize(() => {
                     this.showSpinner = false;
                 }))
                 .subscribe({
                     next: () => {
-
                         console.log("updated");
                         this.settingsForm.controls['password'].reset();
                     },
@@ -67,22 +70,27 @@ export class ProfileSettingsComponent implements OnInit {
     }
 
     onSelectFile(files: any) {
-        if (files.length === 0)
+        if (files.length === 0) 
             return;
+        
 
         let mimeType = files[0].type;
         if (mimeType.match(/image\/*/) == null) {
             return;
         }
+        this.file = <File>files[0];
+        this.settingsForm.controls['profilePicture'].patchValue(this.file);
 
         let reader = new FileReader();
         reader.readAsDataURL(files[0]);
         reader.onload = (_event) => {
-            this.targetValue = reader.result;
-            this.settingsForm.controls['profilePicture'].patchValue(this.targetValue);
-            console.log("reader", this.settingsForm.controls['profilePicture'].value);
-
+            this.targetValue = reader.result; //// ???????????????????????????/
         }
+        console.log("reader", this.settingsForm.controls['profilePicture'].value);
+    }
+    
+    onImageError(): void {
+        this.targetValue = "../../assets/images/user_image.jpg"
     }
 
     clearImg() {

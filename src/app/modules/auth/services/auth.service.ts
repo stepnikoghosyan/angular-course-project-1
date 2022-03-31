@@ -108,7 +108,7 @@ export class AuthService {
                     next: (user) => {
                         resolve(); 
                          this.myProfileId = user.id;
-                        // console.log("init data", this.myProfileId, user.id);
+                        //console.log("init data", this.myProfileId, user.id);
                                
                     },
                     error: (err: HttpErrorResponse) => {

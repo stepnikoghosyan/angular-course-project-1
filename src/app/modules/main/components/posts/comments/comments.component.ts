@@ -22,7 +22,8 @@ export class CommentsComponent implements OnInit {
   commentsForm:FormGroup = this.formBuilder.group({
     message : ['']
   })
-  comments$? :Observable<CommentModel[]>
+//   comments$? :Observable<CommentModel>[];
+  comments?: CommentModel[];
   constructor(private commentService:PostsService,
               private activatedRoute:ActivatedRoute,
               private formBuilder:FormBuilder,
@@ -32,12 +33,17 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
 
     let id  = this.activatedRoute.snapshot.params['id']      
-    this.comments$ = this.commentService.getComments(id).pipe(
+    // this.comments$ = this.commentService.getComments(id).pipe(
+     this.commentService.getComments(id).pipe(
           map(data => data.results),
           tap((data)=> {
             console.log(data);   
           })
-    )
+    ).subscribe({
+        next:(data)=>{
+            
+        }
+    })
  
   }
 

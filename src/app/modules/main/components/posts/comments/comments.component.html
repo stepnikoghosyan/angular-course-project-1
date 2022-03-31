@@ -3,9 +3,9 @@
 <input type="text" formControlName="message">
 <button>submit</button>
 </form> 
-<div *ngFor="let comment of comments$ |async">
+<div *ngFor="let comment of comments">
     <p> Username
-     <span>{{comment?.user | userName}}</span>
+     <!-- <span>{{comment?.user | userName}}</span> -->
      <p>
          comment
          <span>{{comment.message}}</span> 

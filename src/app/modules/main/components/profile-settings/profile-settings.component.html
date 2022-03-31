@@ -2,7 +2,7 @@
     <div class="img_content">
         <h2>Profile Settings</h2>
         <div class="img_container">
-            <img [src]=" targetValue | setUserImage " alt="image of the user" >
+            <img [src]=" targetValue | setUserImage" (error)="onImageError()" alt="image of the user" >
         </div>
         <div class="settings_buttons">
             <input  #file id ="profilePicture" hidden formControlName="profilePicture" type="file"
@@ -75,20 +75,20 @@
                     [ngClass]="showConfirmEyeIcon? 'far fa-eye':'far fa-eye-slash'"
                     (click)="toggleShowConfirmPassoword()"></i>
                 <i class="far fa-eye-slash" *ngIf="!showConfirmEyeIcon" (click)="toggleShowConfirmPassoword()"></i>
-                <div *ngIf="settingsForm.controls['confirmPassword'].invalid && settingsForm.controls['confirmPassword'].touched">
-                    <span class="error-message" *ngIf="settingsForm.controls['confirmPassword'].errors?.['required']">
+                <div *ngIf="confirmPassword.invalid && confirmPassword.touched">
+                    <span class="error-message" *ngIf="confirmPassword.errors?.['required']">
                         Required
                     </span>
-                    <span class="error-message" *ngIf="settingsForm.controls['confirmPassword'].errors?.['minlength']">
+                    <span class="error-message" *ngIf="confirmPassword.errors?.['minlength']">
                         Please emter at least 
-                        {{settingsForm.controls['confirmPassword'].getError('minlength').requiredLength}} characters.
+                        {{confirmPassword.getError('minlength').requiredLength}} characters.
                     </span>
-                    <span class="error-message" *ngIf="settingsForm.controls['confirmPassword'].errors?.['confirmedPassword']">
+                    <span class="error-message" *ngIf="confirmPassword.errors?.['confirmedPassword']">
                        Password and Confirm Password must be match.
                     </span>
                 </div>
-            </div>
-             -->
+            </div> -->
+            
             <div class="form-control">
                 <button class="save_btn" [disabled]="!settingsForm.valid">Save</button>
             </div>

@@ -15,7 +15,7 @@ export class UsersService {
 
     constructor(private httpClient: HttpClient,
         // private notifyService: NotificationService
-        ) { }
+    ) { }
 
     getMyProfile(): Observable<UserModel> {
         return this.httpClient.get<UserModel>(`${environment.apiUrl}/users/my-profile`).pipe(
@@ -26,13 +26,13 @@ export class UsersService {
         )
     }
 
-    putMyProfile(userForm: FormGroup): Observable<any> {
+    putMyProfileInfo(userForm: FormGroup): Observable<any> {
         const formData = new FormData;
         for (let key in userForm.value) {
             formData.append(key, userForm.value[key]);
         }
         console.log("user formData", formData);
-        
+
         return this.httpClient
             .put<FormData>(`${environment.apiUrl}/users`, formData)
             .pipe(tap(() => {
