@@ -83,7 +83,9 @@ export class ProfileComponent implements OnInit{
           .subscribe({
             next: () => {
               this.notifyService.showNotification(true, "Successfully updated.", null, ['profile'])
-              this.userService.getUserProfile().subscribe(data=> {
+              this.userService.getUserProfile()
+              .pipe(takeUntil(this.unsubscribe$))
+               .subscribe(data=> {
                 this.user = data
                 this.userService.pictureChanged.next(data);
               });
@@ -115,7 +117,6 @@ export class ProfileComponent implements OnInit{
   onDeleteImage(): void {
     this.form.controls['profilePicture'].reset();
     this.form.controls['profilePicture'].setValue(this.defaultImageUrl);
-
     this.previewImage = this.defaultImageUrl
   }
 
