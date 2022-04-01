@@ -14,6 +14,7 @@ import { PostViewComponent } from './post-view/post-view.component';
 
 
 
+
 @NgModule({
   
   declarations: [
@@ -31,7 +32,7 @@ import { PostViewComponent } from './post-view/post-view.component';
     HttpClientModule,
     FontAwesomeModule,
     RouterModule,
-    
+    FontAwesomeModule,
   ],
 
   exports: [

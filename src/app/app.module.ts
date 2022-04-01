@@ -12,7 +12,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { TokenInterceptor } from './token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { SharedModule } from './shared/shared.module';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { UserCardComponent } from './users/user-card/user-card.component';
@@ -42,6 +41,7 @@ import { UserCardComponent } from './users/user-card/user-card.component';
     ToastrModule.forRoot(),
   
   ],
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

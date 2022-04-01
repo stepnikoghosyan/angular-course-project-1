@@ -12,9 +12,9 @@
     <a [routerLink] = "['/post-view',post.id]">
       <fa-icon class="icon action" [icon]="faEye"></fa-icon>
     </a>
-    <!-- <span class="edit" > -->
+    
       <fa-icon class="icon action" [icon] ='faEdit' *ngIf="post.user.id == userService.currentProfile?.id" (click)="editPost(post.id)"></fa-icon>
-    <!-- </span> -->
+    
     <fa-icon class="icon commentIcon" [icon]="faComment">
     </fa-icon>
     <span class="comment-length">

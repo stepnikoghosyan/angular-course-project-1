@@ -1,7 +1,16 @@
 .header {
+    padding: 5px 25px;
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid rgb(206, 198, 198);
+}
+.title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+h1{
+    margin: 0;
 }
 
 a {
@@ -29,18 +38,26 @@ a:visited{
 .routes{
     align-items: center;
     display: flex;
+    justify-content: flex-end
 }
 
 .logout{
     cursor: pointer;
 }
 
+.caretDown{
+    color: gray;
+    font-size: 20px;
+    position: relative;
+    margin-left: 4px;
+}
+
 .userMenu{
-    margin-top: 20px;
     margin-left: 10px;
     display: flex;
-    justify-content: space-between;
-}
+    align-items: center;
+    // padding-bottom: 17px;
+  }
 
 .open{
     cursor: pointer;
@@ -48,7 +65,20 @@ a:visited{
 
 .menu{
     list-style: none;
+    position: absolute;
+    right: 2.5%;
+    top: 6%;
 }
+
+li {
+    display: flex;
+  justify-content: flex-end;
+  margin-top: 3px;
+}
+li>a{
+    font-size: 16px;
+}
+
 .userImg{
     height: 30px;
     width: 30px;

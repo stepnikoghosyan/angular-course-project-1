@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~ngx-toastr/toastr';
+
 .main{
   display: flex;
   height: 100vh;
@@ -13,7 +14,7 @@ h2, p {
     text-align: center;
 }
 
-form {
+.main form {
     padding: 50px 20px;
     width: 500px;
     border-radius: 10px;
@@ -21,11 +22,11 @@ form {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.formErr{
+.main .formErr{
     height: 20px;
 }
 
-.form-control input {
+.main .form-control input {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -35,7 +36,7 @@ form {
     font-size: 16px;
 }
 
-button {
+.main button {
     color: #fff;
     height: 50px;
     border: none;
@@ -45,10 +46,10 @@ button {
     cursor: pointer;
 }
 
-.inputMargin {
+.main .inputMargin {
     margin-top: 5px;
 }
-.errors{
+.main .errors{
     color: rgb(204, 9, 9);
     font-size: 14px;
     margin-top: 5px;
