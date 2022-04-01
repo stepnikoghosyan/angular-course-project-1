@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { finalize, map, Observable, tap } from 'rxjs';
+import { finalize, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { CommentModel } from 'src/app/models/comment.model';
 import { PostModel } from 'src/app/models/post.model';
 import { commentsResponse } from '../../../models/post.model';
@@ -16,10 +16,13 @@ import { UsersService } from '../../../services/users.service';
     templateUrl: './comments.component.html',
     styleUrls: ['./comments.component.scss']
 })
-export class CommentsComponent implements OnInit {
-    @Input('myProfile') myProfile!: GetUserModel;
-    @Input('post') post!: any; //?????????????????????????/
-
+export class CommentsComponent implements OnInit, OnDestroy {
+    @Input('myProfile') myProfile?: GetUserModel;
+    @Input('post') post?: PostModel; //?????????????????????????/
+    
+    firstSubscription = new Subject<void>()
+    secondSubscription = new Subject<void>()
+    thirdSubscription = new Subject<void>();
     myProfileInfo?: GetUserModel;
     currentUserId?: number;
     commentCreaterId?: number;
@@ -47,6 +50,7 @@ export class CommentsComponent implements OnInit {
 
         let id = this.activatedRoute.snapshot.params['id']
         this.commentService.getComments(id).pipe(
+            takeUntil(this.firstSubscription),
             map(data => {
                 this.comments = data.results,
                     console.log(" get comments ", data)
@@ -72,7 +76,9 @@ export class CommentsComponent implements OnInit {
         let id = this.activatedRoute.snapshot.params['id']
         const dto = new createCommentDto(this.commentsForm.value)
         console.log(dto);
-        this.commentService.createComment(dto, id).subscribe({
+        this.commentService.createComment(dto, id).pipe(
+            takeUntil(this.secondSubscription)
+        ).subscribe({
             next: (data) => {
                 this.showSpinner = true
                 this.commentService.getComments(id).pipe(
@@ -80,9 +86,19 @@ export class CommentsComponent implements OnInit {
                     finalize(() => {
                         this.showSpinner = false
                     })
+                ).pipe(
+                    takeUntil(this.thirdSubscription)
                 ).subscribe()
             }
         }
         )
+    }
+    ngOnDestroy(): void {
+        this.firstSubscription.next()
+        this.firstSubscription.complete()
+        this.secondSubscription.next()
+        this.secondSubscription.complete()
+        this.thirdSubscription.next()
+        this.thirdSubscription.complete()
     }
 }
