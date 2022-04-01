@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { PostDto } from 'src/app/models/post.model';
@@ -18,14 +18,9 @@ import { FileSizeValidator } from './file-size-validator.service';
 export class PostComponent implements OnInit, OnDestroy {
   faCircleXmark = faCircleXmark;
   formGroup: FormGroup;
-  sizeCheck = true;
   isInValid = false;
   isLoading = false;
- 
-
-
   errorFile = '';
-
   id: number = NaN;
   title = 'Create'
   private unsubscribe$ = new Subject<void>();
@@ -38,27 +33,27 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.showPostData();
-    console.log('init',this.formGroup.controls['file'])
   };
 
   showPostData() {
     this.id = this.avtiveRouter.snapshot.params['id'];
     if (this.id) {
       this.title = 'Edit',
-        this.postsService.getPostById(this.id).pipe(takeUntil(this.unsubscribe$)).subscribe({
-          next: (res: any) => {
-            this.formGroup.patchValue({
-              title: res.title,
-              body: res.body,
-              image: res.imageUrl
-            })
-          },
-          error: (err: any) => {
-            this.errorFile = err.error.message
-          }
-        })
+        this.postsService.getPostById(this.id)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe({
+            next: (res: any) => {
+              this.formGroup.patchValue({
+                title: res.title,
+                body: res.body,
+                image: res.imageUrl
+              })
+            },
+            error: (err: any) => {
+              this.errorFile = err.error.message
+            }
+          })
     }
   }
 
@@ -66,43 +61,26 @@ export class PostComponent implements OnInit, OnDestroy {
     return this.fb.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      file: [null, [FileTypeValidator.fileTypeValidator,FileSizeValidator.sizeValidator]
+      file: [null, [FileTypeValidator.fileTypeValidator, FileSizeValidator.sizeValidator]
       ]
 
     })
   }
 
-
-  // sizeValidator(control: AbstractControl): ValidationErrors | null {
-  //   if (this.formGroup.value.file > 2048) {
-  //     return {
-  //       sizeValidator: true
-  //     }
-  //   }
-  //   return null
-  // }
-
-
   public clickOnFile(file: any): void {
     file.click()
   }
 
-
-
   public fileUpload(event: any): void {
     const file = event?.target?.files[0];
-
     if (file) {
       this.formGroup?.get('file')?.setValue(file);
-      console.log('upload',this.formGroup.controls['file'])
-
     }
-
   }
 
 
   public createPost() {
-  
+
     if (this.formGroup.valid) {
       this.isLoading = true;
       const postDto = new PostDto(this.formGroup.controls)

@@ -17,7 +17,7 @@ export class UsersService {
     return this.httpClient.get<UserModelDto>(`${this.baseUrl}users/my-profile`)
   }
 
-  getUsers(){
-    return this.httpClient.get(`${this.baseUrl}users?showAll=false`,)
+  getUsers(pageSize:number,page:number){
+    return this.httpClient.get(`${this.baseUrl}users?showAll=false&pageSize=${pageSize}&page=${page}`,)
   }
 }

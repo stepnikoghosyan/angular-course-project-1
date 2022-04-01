@@ -41,32 +41,24 @@
 
                 <button class="upload" (click)='clickOnFile(file)'>Select file</button>
                 <div class="formErr" *ngIf = "formGroup.controls['file'].value">
-
                      <p class="errors" *ngIf = "formGroup.controls['file'].errors && 
                       formGroup.controls['file'].errors!['fileType']">
                         Please upload JPEG, JPG or PNG files
                     </p> 
-
-                    <p class="errors"  *ngIf = "formGroup.controls['file'].errors && !formGroup.controls['file'].errors!['validSize']">
+                    <p class="errors"  *ngIf = "formGroup.controls['file'].errors
+                     && formGroup.controls['file'].errors!['validSize']">
                         file size should not be more than 2mb
                     </p> 
-            
                 </div>
 
             </div>
-
-               
-
-                <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
-                    <span> {{formGroup.controls["file"]?.value?.name}}</span>
-                    <div  class="delete" *ngIf = 'formGroup.controls["file"]?.valid'>
-                        <fa-icon class="xmark" [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
-                    </div>
-                
+            <div class="file-delete" *ngIf='!formGroup.controls["file"].errors'>
+                <span> {{formGroup.controls["file"]?.value?.name}}</span>
+                <div  class="delete" *ngIf = 'formGroup.controls["file"]?.valid'>
+                    <fa-icon class="xmark" [icon]="faCircleXmark" (click)="deleteImg()"></fa-icon>
                 </div>
                 
-                
-
+            </div>
             <div class="create">
                 <div class="settingErr">
                     <button *ngIf="!id else update" class="btn" (click)="createPost()">Create</button>
