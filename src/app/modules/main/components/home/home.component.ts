@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
     posts$?: Observable<PostModel[]>
 
     constructor(
-        private authService: AuthService,
         private postService: PostsService,
         private showNotifications: NotificationService) { }
 
@@ -32,9 +31,5 @@ export class HomeComponent implements OnInit {
                 this.showNotifications.error(errorResponse(err), "Error");
                 return of([]);
             }));
-    }
-
-    onLogOut() {
-        this.authService.logout();
     }
 }

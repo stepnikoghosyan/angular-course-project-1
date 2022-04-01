@@ -14,7 +14,7 @@ import { GetUserModel } from '../../main/models/user.model';
 })
 export class AuthService {
     isLoggedIn = false;
-    myProfile?: GetUserModel
+    myProfile?: GetUserModel;
 
     constructor(private httpClient: HttpClient,
         private router: Router,

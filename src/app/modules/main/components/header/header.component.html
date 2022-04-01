@@ -9,6 +9,18 @@
                   {{item.label}}
               </a>
           </li>
+          <div class="dropdown">
+            <div class="user_img_content">
+                <img [src]="myProfileInfo?.profilePictureUrl | setUserImage " >
+            </div>
+            <button class="dropbtn">
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a routerLink="../main/profile-settings">Profile Settings</a>
+              <a  href="#" (click)="onLogOut()">LogOut</a>
+            </div>
+          </div> 
       </ul>
     </div>
 </div>
