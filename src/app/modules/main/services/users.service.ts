@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { environment } from 'src/environments/environment';
-import { GetUserModel, UserModel } from '../models/user.model';
+import { GetUserModel } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +13,8 @@ export class UsersService {
 
     public myProfile?: GetUserModel
 
-    constructor(private httpClient: HttpClient,
-        // private notifyService: NotificationService
+    constructor(
+        private httpClient: HttpClient
     ) { }
 
     getMyProfile(): Observable<GetUserModel> {
@@ -24,7 +24,7 @@ export class UsersService {
                 console.log("get image", this.myProfile);
             })
         )
-    }
+    };
 
     putMyProfileInfo(userForm: FormGroup): Observable<any> {
         const formData = new FormData;

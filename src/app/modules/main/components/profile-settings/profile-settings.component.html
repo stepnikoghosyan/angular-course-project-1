@@ -67,7 +67,7 @@
                 <span>{{error}}</span>
             </div>
             
-            <!-- <div class="form-control password_container">
+            <div class="form-control password_container">
                 <label for="confirmPassword">Confirm Password</label>
                 <input [type]="showConfirmEyeIcon? 'text':'password'" id="confirmPassword" name="confirmPassword"
                     formControlName="confirmPassword">
@@ -75,19 +75,19 @@
                     [ngClass]="showConfirmEyeIcon? 'far fa-eye':'far fa-eye-slash'"
                     (click)="toggleShowConfirmPassoword()"></i>
                 <i class="far fa-eye-slash" *ngIf="!showConfirmEyeIcon" (click)="toggleShowConfirmPassoword()"></i>
-                <div *ngIf="confirmPassword.invalid && confirmPassword.touched">
-                    <span class="error-message" *ngIf="confirmPassword.errors?.['required']">
+                <div *ngIf="this.settingsForm.controls['confirmPassword'].invalid && this.settingsForm.controls['confirmPassword'].touched">
+                    <span class="error-message" *ngIf="this.settingsForm.controls['confirmPassword'].errors?.['required']">
                         Required
                     </span>
-                    <span class="error-message" *ngIf="confirmPassword.errors?.['minlength']">
+                    <span class="error-message" *ngIf="this.settingsForm.controls['confirmPassword'].errors?.['minlength']">
                         Please emter at least 
-                        {{confirmPassword.getError('minlength').requiredLength}} characters.
+                        {{this.settingsForm.controls['confirmPassword'].getError('minlength').requiredLength}} characters.
                     </span>
-                    <span class="error-message" *ngIf="confirmPassword.errors?.['confirmedPassword']">
+                    <span class="error-message" *ngIf="this.settingsForm.controls['confirmPassword'].errors?.['doesNotMatch']">
                        Password and Confirm Password must be match.
                     </span>
                 </div>
-            </div> -->
+            </div>
             
             <div class="form-control">
                 <button class="save_btn" [disabled]="!settingsForm.valid">Save</button>

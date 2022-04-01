@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
-import { confrimPasswordValidator } from '../../customValidators/confirmPasswordValidator';
-import { GetUserModel, UserModel } from '../../models/user.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize, Subject, takeUntil } from 'rxjs';
+import { ConfirmPasswordValidator } from '../../customValidators/confirmPasswordValidator';
+import { GetUserModel } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
 
@@ -12,6 +12,7 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./profile-settings.component.scss']
 })
 export class ProfileSettingsComponent implements OnInit {
+    private subscription$ = new Subject<void>();
     errors: string[] = [];
     showSpinner = false;
     showEyeIcon = false;
@@ -26,9 +27,11 @@ export class ProfileSettingsComponent implements OnInit {
         lastName: ['', Validators.required],
         email: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
-
-    })
-    // confirmPassword = new FormControl('', confrimPasswordValidator(this.controls['password']))
+        confirmPassword: ['', Validators.required]
+    },
+        {
+            validators: [ConfirmPasswordValidator.mustMatch('password', 'confirmPassword')]
+        });
 
     constructor(
         private formBuilder: FormBuilder,
@@ -39,22 +42,24 @@ export class ProfileSettingsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // console.log("my profile info", this.myProfileInfo, this.usersService.myProfile?.firstName);
-        this.usersService.getMyProfile().subscribe({
-            next: (data) => {
-                this.myProfileInfo = data
-                console.log("my profile", this.myProfileInfo);
+        this.usersService.getMyProfile().pipe(
+            takeUntil(this.subscription$),
+            finalize(() =>
+                this.showSpinner = false))
+            .subscribe({
+                next: (data) => {
+                    this.myProfileInfo = data;
+                    console.log("my profile", this.myProfileInfo);
 
-                this.settingsForm.controls['firstName'].setValue(this.myProfileInfo.firstName);
-                this.settingsForm.controls['lastName'].setValue(this.myProfileInfo?.lastName);
-                this.settingsForm.controls['email'].setValue(this.myProfileInfo?.email);
-                this.settingsForm.controls['profilePicture'].setValue(this.myProfileInfo?.profilePictureUrl);
-                this.targetValue = this.myProfileInfo.profilePictureUrl;
-                console.log("my profile image", this.myProfileInfo.profilePictureUrl);
-
-            }
-        })
-    }
+                    this.settingsForm.controls['firstName'].setValue(this.myProfileInfo.firstName);
+                    this.settingsForm.controls['lastName'].setValue(this.myProfileInfo?.lastName);
+                    this.settingsForm.controls['email'].setValue(this.myProfileInfo?.email);
+                    this.settingsForm.controls['profilePicture'].setValue(this.myProfileInfo?.profilePictureUrl);
+                    this.targetValue = this.myProfileInfo.profilePictureUrl;
+                    console.log("my profile image", this.myProfileInfo.profilePictureUrl);
+                }
+            })
+    };
 
     settingsFormSubmit() {
         if (this.settingsForm.valid) {
@@ -66,15 +71,15 @@ export class ProfileSettingsComponent implements OnInit {
                     next: () => {
                         console.log("updated");
                         this.settingsForm.controls['password'].reset();
+                        this.settingsForm.controls['confirmPassword'].reset()
                     },
                 })
         }
-    }
+    };
 
     onSelectFile(files: any) {
-        if (files.length === 0) 
+        if (files.length === 0)
             return;
-        
 
         let mimeType = files[0].type;
         if (mimeType.match(/image\/*/) == null) {
@@ -90,7 +95,7 @@ export class ProfileSettingsComponent implements OnInit {
         }
         console.log("reader", this.settingsForm.controls['profilePicture'].value);
     }
-    
+
     onImageError(): void {
         this.targetValue = "../../assets/images/user_image.jpg"
     }

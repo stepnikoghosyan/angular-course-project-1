@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,39 +22,32 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     showSpinner = false;
     file: any;
 
-
     constructor(private formBuilder: FormBuilder,
         private postsService: PostsService,
         private router: Router,
         private notifyService: NotificationService
     ) { }
 
-
     createForm: FormGroup = this.formBuilder.group({
         title: ['', Validators.required],
         body: ['', Validators.required],
-        // image: ['null', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
         image: ['', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
-
-    })
+    });
 
     get image() {
         return this.createForm.controls['image'];
-    }
+    };
     ngOnInit(): void { }
 
     onSelectFile(event: any) {
         this.isTargetValue = event.target.files[0].name;
         this.isClose = true;
-
         if (event.target.files[0]) {
-
             this.file = <File>event.target.files[0];
-            
             // this.image.addValidators(imageSizeValidation(this.file));
-
         }
-    }
+    };
+
     createFormSubmit() {
         if (this.createForm.valid) {
             this.postsService.createPost(this.createForm).pipe(
@@ -77,18 +69,16 @@ export class CreatePostComponent implements OnInit, OnDestroy {
             console.log('Form invalid');
             this.notifyService.error("", "No changes")
         }
-    }
+    };
 
     clearFile(e: any) {
         this.isTargetValue = ""
         this.isClose = false;
         this.errorMessage = "";
-
-    }
+    };
 
     ngOnDestroy(): void {
         this.subscription$.next()
         this.subscription$.complete()
     }
-
 }

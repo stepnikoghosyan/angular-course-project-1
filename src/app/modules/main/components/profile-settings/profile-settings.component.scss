@@ -3,13 +3,12 @@
 }
 .wrapper{
     width: 30%;
-    //  background-color: darksalmon;
+    padding-bottom: 100px;
 
     .img_content{
         margin-top: 50px;
         text-align: center;
         width: 230px;
-        // background-color: antiquewhite;
         display: flex;
         flex-direction: column;
 
@@ -20,7 +19,6 @@
             width: 150px;
             height: 150px;
             margin-top: 15px;
-            // background-color: burlywood;
 
             img{
                 max-width: 100%;
