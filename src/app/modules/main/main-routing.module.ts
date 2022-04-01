@@ -8,7 +8,7 @@ import { PostsViewComponent } from 'src/app/modules/main/components/posts/posts-
 import { UsersComponent } from 'src/app/modules/main/components/users/users.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
-import { CommentsComponent } from './components/posts/comments/comments.component';
+
 
 const routes: Routes = [
     {

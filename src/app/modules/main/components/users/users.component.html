@@ -1,1 +1,15 @@
-<p>users works!</p>
+
+<form [formGroup]="filterForm">
+    <input type="text" formControlName="name">
+</form>
+<div class="wrapper" *ngFor="let user of users$ | async">
+    <div class="user_content">
+        <div class="user_img">
+            <img class="img" [src]="user?.profilePicture | setImage" alt="image of the post">
+        </div>
+        <h3> {{user| userName}}</h3>
+        <div class="user_email">
+            <p>{{user?.email}}</p>
+        </div>
+    </div>
+</div>

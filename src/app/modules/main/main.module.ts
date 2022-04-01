@@ -24,6 +24,7 @@ import { ProfileSettingsComponent } from './components/profile-settings/profile-
 import { SetUserImagePipe } from './pipes/set-user-image.pipe';
 import { SetCommentImagePipe } from './pipes/set-comment-image.pipe';
 
+
 @NgModule({
     declarations: [
         HeaderComponent,
@@ -49,6 +50,7 @@ import { SetCommentImagePipe } from './pipes/set-comment-image.pipe';
         ReactiveFormsModule,
         MatIconModule,
         MatProgressSpinnerModule,
+        ReactiveFormsModule
     ]
 })
 export class MainModule { }

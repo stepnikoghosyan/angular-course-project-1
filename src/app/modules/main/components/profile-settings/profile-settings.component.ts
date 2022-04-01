@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize, Subject, takeUntil } from 'rxjs';
 import { ConfirmPasswordValidator } from '../../customValidators/confirmPasswordValidator';
@@ -11,7 +11,7 @@ import { UsersService } from '../../services/users.service';
     templateUrl: './profile-settings.component.html',
     styleUrls: ['./profile-settings.component.scss']
 })
-export class ProfileSettingsComponent implements OnInit {
+export class ProfileSettingsComponent implements OnInit, OnDestroy {
     private subscription$ = new Subject<void>();
     errors: string[] = [];
     showSpinner = false;
@@ -101,7 +101,10 @@ export class ProfileSettingsComponent implements OnInit {
     }
 
     clearImg() {
-        this.settingsForm.controls['profilePicture'].reset();
+        // this.settingsForm.controls['profilePicture'].reset();
+        // console.log("pix");
+        this.targetValue= "../../assets/images/user_image.jpg"
+        
     };
 
     toggleShowPassoword() {
@@ -110,5 +113,10 @@ export class ProfileSettingsComponent implements OnInit {
 
     toggleShowConfirmPassoword() {
         this.showConfirmEyeIcon = !this.showConfirmEyeIcon;
+    } 
+
+    ngOnDestroy(): void {
+        this.subscription$.next()
+        this.subscription$.complete()
     }
 }

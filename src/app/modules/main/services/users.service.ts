@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { map, Observable, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { environment } from 'src/environments/environment';
-import { GetUserModel } from '../models/user.model';
+import { GetUserModel, UserModel } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +12,7 @@ import { GetUserModel } from '../models/user.model';
 export class UsersService {
 
     public myProfile?: GetUserModel
+    searchResult$?: Observable<any>;
 
     constructor(
         private httpClient: HttpClient
@@ -39,4 +40,20 @@ export class UsersService {
                 // this.notifyService.success("Your information has been updated", "Success")
             }))
     }
+
+    getUsers(value?:string) :Observable<any> {
+        let params = {}
+        if(value) {
+        params = {
+            'search' :value!
+        }
+        }
+        return this.httpClient.get<any>(`${environment.apiUrl}/users`,{params}).pipe(
+            tap(()=>{
+                console.log(params);
+                
+            })
+        )
+    }
+ 
 }

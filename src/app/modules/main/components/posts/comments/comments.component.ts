@@ -82,7 +82,6 @@ export class CommentsComponent implements OnInit {
                     })
                 ).subscribe()
             }
-
         }
         )
     }

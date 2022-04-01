@@ -11,7 +11,7 @@
           </li>
           <div class="dropdown">
             <div class="user_img_content">
-                <img [src]="myProfileInfo?.profilePictureUrl | setUserImage " >
+                <img [src]="myProfileInfo?.profilePictureUrl | setUserImage"  (error)="onImageError()" >
             </div>
             <button class="dropbtn">
               <i class="fa fa-caret-down"></i>

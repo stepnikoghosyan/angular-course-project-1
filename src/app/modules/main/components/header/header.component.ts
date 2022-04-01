@@ -23,6 +23,10 @@ export class HeaderComponent implements OnInit {
         this.navItems = getNavigationItems();
         console.log("NAVITEMS", this.navItems)
     }
+    
+    onImageError(): void {
+       this.myProfileInfo!.profilePictureUrl = "../../assets/images/user_image.jpg"
+    }
     onLogOut() {
         this.authService.logout();
     }
