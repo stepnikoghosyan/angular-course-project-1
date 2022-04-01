@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { catchError, finalize, map, Observable, of, switchMap } from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { catchError, finalize, map, Observable, of, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { PostModel } from "../../models/post.model";
 import { PostsService } from "../../services/posts.service";
@@ -7,7 +8,6 @@ import { NotificationService } from "../../../../services/notification.service";
 import { PostsQueryParamsModel } from "../../models/posts-query-params.model";
 import { UserModel } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PaginatedResponseModel } from 'src/app/models/paginated-response.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -16,14 +16,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
   isLoading = true;
   posts$: Observable<PostModel[]> = of([]);
-  users$: Observable<UserModel[]> = of([]);
   selectedUser: UserModel | null = null;
-  myEntity: UserModel | null;
-  private users: UserModel[] = [];
+  currentUser: UserModel | null;
+  users: UserModel[] = [];
 
+  private unsubscribe$ = new Subject<void>();
   constructor(
     private postsService: PostsService,
     private usersService: UsersService,
@@ -31,7 +31,7 @@ export class PostsComponent implements OnInit {
     private notifyService: NotificationService,
     private userService: UserService,
     private router: Router) {
-    this.myEntity = this.userService.getUser();
+    this.currentUser = this.userService.getUser();
   }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class PostsComponent implements OnInit {
 
   private checkQueryParams(): void {
     this.posts$ = this.activatedRoute.queryParams.pipe(
-      switchMap((queryParams:Params) => {
+      switchMap((queryParams: Params) => {
         const userId = queryParams['user'] ? +queryParams['user'] : null;
         if (userId) {
           this.selectedUser = this.users.filter((user) => user.id === userId)?.[0];
@@ -50,13 +50,15 @@ export class PostsComponent implements OnInit {
   }
 
   private getPosts(): Observable<PostModel[]> {
-    this.isLoading = true;
+    if (!this.isLoading)
+      this.isLoading = true;
     let params: PostsQueryParamsModel = {
       showAll: true,
-    }  
-    return this.postsService.getPosts(params,this.selectedUser?.id)
+      userID: this.selectedUser ? this.selectedUser.id : ''
+    }
+    return this.postsService.getPosts(params)
       .pipe(
-        finalize(() => this.isLoading = false),
+        finalize(() => { this.isLoading = false }),
         map(data => data.results),
         catchError((err) => {
           this.notifyService.showError(err.error.message);
@@ -65,21 +67,21 @@ export class PostsComponent implements OnInit {
   }
 
   private getUsers(): void {
-    this.users$ = this.usersService.getUsers()
+    this.usersService.getUsers()
       .pipe(
-        finalize(() => { this.isLoading = false; }),
-        map((data: PaginatedResponseModel<UserModel>) => {
-          data.results = data.results.filter((val) => val.id !== this.myEntity?.id);
-          data.results.unshift(this.myEntity!);
+        takeUntil(this.unsubscribe$),
+        tap((data: PaginatedResponseModel<UserModel>) => {
+          data.results = data.results.filter((val) => val.id !== this.currentUser?.id);
+          data.results.unshift(this.currentUser!);
           this.users = data.results;
           this.checkQueryParams();
-          return data.results;
         }),
         catchError((err) => {
+          this.isLoading = false;
           this.notifyService.showError(err.error.message);
           return of([]);
         })
-      )
+      ).subscribe()
   }
 
   filterByUser(): void {
@@ -87,5 +89,10 @@ export class PostsComponent implements OnInit {
       relativeTo: this.activatedRoute,
       queryParams: { user: this.selectedUser ? this.selectedUser.id : '' }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

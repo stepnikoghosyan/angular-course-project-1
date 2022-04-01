@@ -1,15 +1,15 @@
 <h2 class="text-center">Posts</h2>
-<div *ngIf="users$ | async as users" class="d-flex flex-end top-content">
+<div class="d-flex flex-end top-content">
   <p-dropdown (onChange)="filterByUser()" [options]="users" [(ngModel)]="selectedUser" [filter]="true"
-    filterBy="firstName,lastName" [showClear]="true" placeholder="Select a user">
+    [resetFilterOnHide]="true" filterBy="firstName,lastName" [showClear]="true" placeholder="Select a user">
     <ng-template pTemplate="selectedItem">
       <div class="country-item country-item-value" *ngIf="selectedUser">
-        <div>{{selectedUser | fullName:selectedUser.id === myEntity?.id }}</div>
+        <div>{{selectedUser | fullName:selectedUser.id === currentUser?.id }}</div>
       </div>
     </ng-template>
     <ng-template let-user pTemplate="item">
       <div class="country-item">
-        <div>{{user | fullName:user.id === myEntity?.id }}</div>
+        <div>{{user | fullName:user.id === currentUser?.id }}</div>
       </div>
     </ng-template>
   </p-dropdown>

@@ -14,10 +14,7 @@ export class PostsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getPosts(params?: PostsQueryParamsModel, userId?: number): Observable<PaginatedResponseModel<PostModel>> {
-    if (userId) {
-      params = Object.assign(params, { userID: userId });
-    }
+  getPosts(params?: PostsQueryParamsModel): Observable<PaginatedResponseModel<PostModel>> {
     return this.httpClient.get<PaginatedResponseModel<PostModel>>(`${environment.apiUrl}/posts`, {
       params: params ? paramsToHttpParams(params) : {}
     });
