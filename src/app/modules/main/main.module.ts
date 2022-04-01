@@ -22,6 +22,7 @@ import { CommentsComponent } from './components/posts/comments/comments.componen
 import { PostsComponent } from 'src/app/modules/main/components/posts/posts.component';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 import { SetUserImagePipe } from './pipes/set-user-image.pipe';
+import { SetCommentImagePipe } from './pipes/set-comment-image.pipe';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { SetUserImagePipe } from './pipes/set-user-image.pipe';
         PostsComponent,
         ProfileSettingsComponent,
         SetUserImagePipe,
+        SetCommentImagePipe,
     ],
     imports: [
         CommonModule,

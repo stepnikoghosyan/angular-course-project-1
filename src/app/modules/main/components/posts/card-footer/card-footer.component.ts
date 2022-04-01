@@ -20,12 +20,11 @@ export class CardFooterComponent implements OnInit {
 
     ngOnInit(): void {
         console.log("MY ID, USER ID", this.myProfile.myProfile?.id, );
-        if(this.post?.user.id === this.authService.myProfileId){
-            console.log("profile id", this.authService.myProfileId);
+        if(this.post?.user.id === this.authService.myProfile?.id){
+            console.log("profile id", this.authService.myProfile?.id);
             
             this.isMyPost = true;
         }else{
-            // console.log("profile id", this.authService.myProfileId);
             
             this.isMyPost;
         }

@@ -1,27 +1,29 @@
+<div class="wrapper">
+    <div class="comment_content">
+        <h2>Comments</h2>
+        <div class="create_comment">
+            <div class="user_img_content">
+                <img [src]="myProfileInfo?.profilePictureUrl | setUserImage " (error)="onImageError()">
+            </div>
+            <div class="comment_form">
+                <form [formGroup]="commentsForm" (ngSubmit)="createComment()">
+                    <div class="comment_create">
+                        <textarea type="text" formControlName="message" aria-multiline="true"></textarea>
+                        <button type="submit" class="submit_btn"><i class="far fa-paper-plane"></i></button>
+                    </div>
+                    <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+                </form>
+            </div>
+        </div>
 
- <form [formGroup]="commentsForm" (ngSubmit)="createComment()">
-    <div [ngClass]="currentUserId ===commentCreaterId? 'my-comment' : 'other-comment'">
-        <!-- <p class="name">{{comments?.user. | userName}}</p>
-        <p class="message"> {{comment?.message}}</p> -->
-      </div>
-     <div>
-<!-- <img [src]="comment.user?.profilePicture | setImage" alt="">  
-<span>{{comment?.user | userName}}</span>      -->
-<input type="text" formControlName="message">
-<button>submit</button>
+        <div class="comments" *ngFor="let comment of comments">
+            <div class="user_img_content">
+                <img [src]="comment?.user?.profilePictureUrl | setCommentImage"  (error)="onCommentImageError()">
+            </div>
+            <div [ngClass]="myProfileInfo?.id !== comment?.user.id? 'comment': 'my_comment'">
+                <p class="user_name">{{comment?.user | userName}}</p>
+                <p>{{comment.message}}</p>
+            </div>
+        </div>
+    </div>
 </div>
-<div *ngFor="let comment of comments">
-<mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
-
-    <p> Username
-     <span>{{comment?.user | userName}}</span>
-     <p>
-         comment
-         <span>{{comment.message}}</span> 
-     </p>
-   <p>
-       profilePicture
-       <img [src]="comment?.user?.profilePicture | setImage" alt="">
-   </p>
-</div>
-</form> 

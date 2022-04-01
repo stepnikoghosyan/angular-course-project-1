@@ -5,7 +5,6 @@ export class CommentModel{
     message: string;
     createdAt: string;
     updatedAt: string;
-    userName: UserModel;
     user: UserModel
 
     constructor(data: any){
@@ -13,7 +12,6 @@ export class CommentModel{
         this.message = data.message,
         this.createdAt = data.createdAt,
         this.updatedAt = data.updatedAt,
-        this.userName = data.userName,
         this.user = data.user
     }
 }

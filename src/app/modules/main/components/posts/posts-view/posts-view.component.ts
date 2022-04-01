@@ -12,18 +12,24 @@ import { PostsService } from '../../../services/posts.service';
 })
 export class PostsViewComponent implements OnInit {
     showSpinner = false
-    post$?:Observable<PostModel>;
+    post?: PostModel;
     constructor(private postService: PostsService,
         private activatedRoute: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.showSpinner=true
         const id = this.activatedRoute.snapshot.params['id'];
-        this.post$ = this.postService.getPost(id).pipe(
+        this.postService.getPost(id).pipe(
             finalize(()=>{
                 this.showSpinner=false
             }),
-        )
+        ).subscribe({
+            next:(data)=>{
+                this.post = data;
+                console.log("get post data", this.post);
+                
+            }
+        })
     }
 
     onImageError(): void {

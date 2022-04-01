@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/notification.service';
 import { UsersService } from '../../main/services/users.service';
 import { StorageService } from '../../main/services/storage.service';
+import { GetUserModel } from '../../main/models/user.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     isLoggedIn = false;
-    myProfileId?: number;
+    myProfile?: GetUserModel
 
     constructor(private httpClient: HttpClient,
         private router: Router,
@@ -107,8 +108,8 @@ export class AuthService {
                 .subscribe({
                     next: (user) => {
                         resolve(); 
-                         this.myProfileId = user.id;
-                        //console.log("init data", this.myProfileId, user.id);
+                        this.myProfile = user;
+                        console.log("init data", this.myProfile, user, user.id);
                                
                     },
                     error: (err: HttpErrorResponse) => {
