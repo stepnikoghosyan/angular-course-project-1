@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotificationService} from "../../../../services/notification.service";
 import {Router} from "@angular/router";
@@ -16,7 +16,7 @@ import { fileSizeValidator } from '../../validators/file-size.validator';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit, OnDestroy{
   private unsubscribe$ = new Subject<void>();
   private readonly FILE_EXTENSIONS = ['image/jpg', 'image/jpeg', 'image/png'];
   private readonly FILE_SIZE_MEGABYTE = 2;
@@ -38,19 +38,12 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit() {
     this.user = this.userService.getUser();
-    if(this.user){
-      this.form.patchValue({
-        firstName: this.user.firstName,
-        lastName: this.user.lastName,
-        email: this.user.email
-      });
-      if (this.user.profilePictureUrl) {
-        this.form.patchValue({
-          profilePicture: this.user.profilePictureUrl,
-        });
-        this.previewImage = this.user.profilePictureUrl;
-      }
-    }
+    this.patchForm();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   private formInit(): void {
@@ -65,6 +58,22 @@ export class ProfileComponent implements OnInit{
       {
         validators: ConfirmedValidator('password','confirm_password')
       });
+  }
+
+  private patchForm(): void {
+    if(this.user){
+      this.form.patchValue({
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email
+      });
+      if (this.user.profilePictureUrl) {
+        this.form.patchValue({
+          profilePicture: this.user.profilePictureUrl,
+        });
+        this.previewImage = this.user.profilePictureUrl;
+      }
+    }
   }
 
   onSubmit(): void {
@@ -86,7 +95,8 @@ export class ProfileComponent implements OnInit{
               this.userService.getUserProfile()
               .pipe(takeUntil(this.unsubscribe$))
                .subscribe(data=> {
-                this.user = data
+                this.user = data;
+                this.patchForm();
                 this.userService.pictureChanged.next(data);
               });
             },
