@@ -114,7 +114,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
       this.form.controls['profilePicture'].setValue(file);
     }
     if (this.form.controls['profilePicture'].invalid) {
-      this.deleteImageProperty();
+      this.onDeleteImage();
     } else {
       const reader = new FileReader();
       reader.onload = () => {
@@ -125,12 +125,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   onDeleteImage(): void {
-    this.form.controls['profilePicture'].reset();
     this.form.controls['profilePicture'].setValue(this.defaultImageUrl);
-    this.previewImage = this.defaultImageUrl
-  }
-
-  private deleteImageProperty(): void {
     this.previewImage = this.defaultImageUrl;
   }
 
