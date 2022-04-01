@@ -1,7 +1,47 @@
+.filter-content {
+  .create-btn {
+    margin-left: 20px;
+    height: 55px;
+    margin-top: 20px;
+  }
+}
 .top-content {
-    margin: 20px;
     justify-content: space-between;
 }
+.filter-form {
+  display: flex;
+  align-items: baseline;
+}
+.search-container {
+  background-color: #ffffff;
+  width: 300px;
+  height: 44px;
+  border-radius: 5px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 20px 20px 0px;
+  border: 1px solid #ccc;
+
+  input {
+    all: unset;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+    .disabled {
+
+    }
+  }
+
+  button {
+    background-color: #ffffff;
+    border: none;
+    padding-right: 15px;
+    cursor: pointer;
+  }
+}
+
 @media screen and(max-width:630px) {
     .top-content {
         flex-direction: column;

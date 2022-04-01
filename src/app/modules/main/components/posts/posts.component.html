@@ -1,19 +1,25 @@
 <h2 class="text-center">Posts</h2>
-<div class="d-flex flex-end top-content">
-  <p-dropdown (onChange)="filterByUser()" [options]="users" [(ngModel)]="selectedUser" [filter]="true"
-    [resetFilterOnHide]="true" filterBy="firstName,lastName" [showClear]="true" placeholder="Select a user">
-    <ng-template pTemplate="selectedItem">
-      <div class="country-item country-item-value" *ngIf="selectedUser">
-        <div>{{selectedUser | fullName:selectedUser.id === currentUser?.id }}</div>
-      </div>
-    </ng-template>
-    <ng-template let-user pTemplate="item">
-      <div class="country-item">
-        <div>{{user | fullName:user.id === currentUser?.id }}</div>
-      </div>
-    </ng-template>
-  </p-dropdown>
-  <button class="btn-primary " routerLink="/posts/add">
+<div class="filter-content d-flex flex-end container top-content">
+  <form [formGroup]="filterForm" class="filter-form">
+    <div class="search-container">
+      <input formControlName="title" type="text" placeholder="Search by title" [readOnly]="isLoading">
+      <button type="button" (click)="filterByUser()"><i class="fa fa-search"></i></button>
+    </div>
+    <p-dropdown formControlName="user" (onChange)="filterByUser()" [options]="users" [(ngModel)]="selectedUser" [filter]="true"
+                [resetFilterOnHide]="true" filterBy="firstName,lastName" [showClear]="true" placeholder="Select a user">
+      <ng-template pTemplate="selectedItem">
+        <div class="country-item country-item-value" *ngIf="selectedUser">
+          <div>{{selectedUser | fullName:selectedUser.id === currentUser?.id }}</div>
+        </div>
+      </ng-template>
+      <ng-template let-user pTemplate="item">
+        <div class="country-item">
+          <div>{{user | fullName:user.id === currentUser?.id }}</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+  </form>
+  <button class="create-btn " routerLink="/posts/add">
     Create Post
   </button>
 </div>

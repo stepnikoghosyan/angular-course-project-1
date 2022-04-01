@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, finalize, map, Observable, of, Subject, switchMap, takeUntil, tap } from "rxjs";
+import {catchError, debounceTime, finalize, map, Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { PostModel } from "../../models/post.model";
@@ -10,6 +10,7 @@ import { UserModel } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { PaginatedResponseModel } from 'src/app/models/paginated-response.model';
 import { UserService } from 'src/app/services/user.service';
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-posts',
@@ -22,9 +23,14 @@ export class PostsComponent implements OnInit, OnDestroy {
   selectedUser: UserModel | null = null;
   currentUser: UserModel | null;
   users: UserModel[] = [];
+  filterForm = this.formBuilder.group({
+    title: [''],
+    user: ['']
+  });
 
   private unsubscribe$ = new Subject<void>();
   constructor(
+    private formBuilder: FormBuilder,
     private postsService: PostsService,
     private usersService: UsersService,
     private activatedRoute: ActivatedRoute,
@@ -35,6 +41,9 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.filterForm.valueChanges.pipe(debounceTime(300)).subscribe((values) => {
+      this.filterByUser();
+    })
     this.getUsers();
   }
 
@@ -54,7 +63,8 @@ export class PostsComponent implements OnInit, OnDestroy {
       this.isLoading = true;
     let params: PostsQueryParamsModel = {
       showAll: true,
-      userID: this.selectedUser ? this.selectedUser.id : ''
+      userID: this.selectedUser ? this.selectedUser.id : '',
+      title: this.filterForm.controls['title'].value
     }
     return this.postsService.getPosts(params)
       .pipe(
@@ -87,9 +97,13 @@ export class PostsComponent implements OnInit, OnDestroy {
   filterByUser(): void {
     this.router.navigate(['/posts'], {
       relativeTo: this.activatedRoute,
-      queryParams: { user: this.selectedUser ? this.selectedUser.id : '' }
+      queryParams: {
+        title: this.filterForm.controls['title'] ? this.filterForm.controls['title'].value : '',
+        user: this.selectedUser ? this.selectedUser.id : '',
+      }
     })
   }
+
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
