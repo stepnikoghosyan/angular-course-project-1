@@ -1,7 +1,24 @@
-<h2 class="text-center">Profile settings</h2>
+<h1 class="text-center">Profile settings</h1>
 <div class="form-container profile-container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-<!--    <img [src]="user?.profilePictureUrl" alt="">-->
+   <div>
+    <input type="file" class="file-input" [accept]="extension" (change)="onFileSelected($event)" #fileUpload>
+    <div class="upload-image">
+      <img class="user-avatar" [src]="previewImage | profilePic">
+      <div class="buttton-wrapper">
+        <button type="button" class="icon-pencil" (click)="fileUpload.click()"></button>
+        <button (click)="onDeleteImage()" type="button" class="delete-btn">
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+      <div *ngIf="form.controls['profilePicture'].invalid">
+        <p class="error-message" *ngIf="form.controls['profilePicture'].errors?.['fileType']">The picture must be {{extension}}.</p>
+        <p class="error-message" *ngIf="form.controls['profilePicture'].errors?.['fileSize']">
+          The size of the picture should be smaller than {{form.controls['profilePicture'].errors?.['fileSize'].allowedSize}} MB.
+        </p>
+      </div>
+    </div>
+  </div>
     <div>
       <label class="required">First Name</label>
       <input type="text" formControlName="firstName" placeholder="First Name">

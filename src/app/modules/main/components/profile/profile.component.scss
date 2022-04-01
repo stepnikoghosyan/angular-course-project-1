@@ -6,3 +6,37 @@
   justify-content: flex-end;
   margin-top: 30px;
 }
+
+.upload-image {
+  width: 150px;
+  margin: auto;
+  .buttton-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    button {
+      color: white;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 0;
+      &:hover {
+       opacity: 0.8;
+      }
+      &.icon-pencil {
+        background-color: green;
+      }
+      &.delete-btn {
+        background-color: red
+      }
+    }
+
+  }
+  .user-avatar {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+}
+

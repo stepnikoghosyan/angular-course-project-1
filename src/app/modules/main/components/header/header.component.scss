@@ -28,21 +28,19 @@ header {
     text-align: center;
     font-size: 16px;
     padding: 5px 5px;
-
+    border-bottom: 2px solid transparent;
     img {
-      width: 55px;
-      height: 55px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
     }
     i {
       position: absolute;
       top: 26px;
     }
   }
-  .dropdown{
-    margin-top: -20px;
-  }
   .flex-container > a:hover,.dropdown:hover{
-    border-bottom: 2px solid black;
+    border-color: black;
   }
 
   .flex-container > a.disabled {
@@ -56,6 +54,7 @@ header {
   }
   .push {
     margin-left: auto;
+    align-items: center;
   }
 
   .dropdown-content {

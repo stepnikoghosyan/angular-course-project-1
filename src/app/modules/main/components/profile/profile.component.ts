@@ -8,6 +8,8 @@ import {UserModel} from "../../models/user.model";
 import {UserService} from "../../../../services/user.service";
 import {finalize, Subject, takeUntil} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import { fileTypeValidator } from '../../validators/file-type.validator';
+import { fileSizeValidator } from '../../validators/file-size.validator';
 
 @Component({
   selector: 'app-profile',
@@ -16,17 +18,22 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class ProfileComponent implements OnInit{
   private unsubscribe$ = new Subject<void>();
+  private readonly FILE_EXTENSIONS = ['image/jpg', 'image/jpeg', 'image/png'];
+  private readonly FILE_SIZE_MEGABYTE = 2;
 
   form!: FormGroup;
   isLoading = false;
   submitted = false;
   user?: UserModel | null;
-
+  defaultImageUrl = 'assets/images/profile_picture.jpg';
+  extension: string;
+  previewImage = '';
+  
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private notifyService: NotificationService,
-              private router: Router) {
+              private notifyService: NotificationService) {
     this.formInit();
+    this.extension = this.FILE_EXTENSIONS.map(item => ('.' + item.split('/').pop()).toLowerCase()).join(', ');
   }
 
   ngOnInit() {
@@ -41,6 +48,7 @@ export class ProfileComponent implements OnInit{
         this.form.patchValue({
           profilePicture: this.user.profilePictureUrl,
         });
+        this.previewImage = this.user.profilePictureUrl;
       }
     }
   }
@@ -49,8 +57,8 @@ export class ProfileComponent implements OnInit{
     this.form = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, emailValidator()]],
-      profilePicture:[''],
+      email: [''],
+      profilePicture:[null, [fileTypeValidator(this.FILE_EXTENSIONS), fileSizeValidator(this.FILE_SIZE_MEGABYTE)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirm_password: ['', [Validators.required]],
     },
@@ -75,6 +83,10 @@ export class ProfileComponent implements OnInit{
           .subscribe({
             next: () => {
               this.notifyService.showNotification(true, "Successfully updated.", null, ['profile'])
+              this.userService.getUserProfile().subscribe(data=> {
+                this.user = data
+                this.userService.pictureChanged.next(data);
+              });
             },
             error: (err: HttpErrorResponse) => {
               this.notifyService.showNotification(false, err.error.message);
@@ -83,4 +95,32 @@ export class ProfileComponent implements OnInit{
       }
     }
   }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.form.controls['profilePicture'].setValue(file);
+    }
+    if (this.form.controls['profilePicture'].invalid) {
+      this.deleteImageProperty();
+    } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewImage = reader.result as string;
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  onDeleteImage(): void {
+    this.form.controls['profilePicture'].reset();
+    this.form.controls['profilePicture'].setValue(this.defaultImageUrl);
+
+    this.previewImage = this.defaultImageUrl
+  }
+
+  private deleteImageProperty(): void {
+    this.previewImage = this.defaultImageUrl;
+  }
+
 }

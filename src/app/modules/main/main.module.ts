@@ -44,7 +44,7 @@ import {DropdownModule} from 'primeng/dropdown';
     CommentItemComponent,
     SendMessageComponent,
     ProfileComponent,
-    TextareaAutoresizeDirective,
+    TextareaAutoresizeDirective
   ],
   imports: [
       CommonModule,
@@ -55,7 +55,7 @@ import {DropdownModule} from 'primeng/dropdown';
       FormComponentsModule,
       FormsModule,
       AutosizeModule,
-      DropdownModule
+      DropdownModule,
   ],
   providers: [
     PostsService,
