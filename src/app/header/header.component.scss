@@ -67,16 +67,25 @@ a:visited{
     list-style: none;
     position: absolute;
     right: 2.5%;
-    top: 6%;
+    top: 8%;
+    box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
+    background-color: white;
+    width: 100px;
 }
 
-li {
-    display: flex;
+.menu a {
+  display: flex;
   justify-content: flex-end;
-  margin-top: 3px;
+   margin-top: 3px;
+   padding: 5px;
+   font-size: 16px;
+  border-bottom: 1px solid rgb(221, 218, 218);
+
 }
+
 li>a{
     font-size: 16px;
+    border-bottom: 1px solid rgb(221, 218, 218);
 }
 
 .userImg{

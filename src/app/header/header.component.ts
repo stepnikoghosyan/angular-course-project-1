@@ -10,11 +10,16 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
   faCaretDown=faCaretDown;
+  isMenu = false;
   constructor(private router: Router, private userService: UsersService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   
+  
+  showMenu(){
+    this.isMenu = !this.isMenu
+  }
+
   logout () {
     localStorage.removeItem('auth');
     sessionStorage.removeItem('auth');

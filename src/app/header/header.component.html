@@ -9,18 +9,19 @@
 
         <div class="userMenu">
             <img class="userImg" src="assets/default.png" >
-            <fa-icon class="caretDown open" [icon]="faCaretDown" ></fa-icon>
-            <ul class="menu">
-                <li>
+            <span (click)="showMenu()">
+                <fa-icon class="caretDown open" [icon]="faCaretDown" ></fa-icon>
+            </span>
+            
+             <div class="menu" *ngIf = 'isMenu'>
+            
                     <a  routerLink="/my-profile">My Profile</a>
-                </li>
-                <li>  
-                    <a routerLink="/my-posts">My Posts</a>
-                </li>
-                <li>
+             
+                   <a routerLink="/my-posts">My Posts</a>
+               
                     <a (click)="logout()" class="logout"> Logout </a>
-                </li>
-            </ul>
+                
+            </div>
         </div>
     </div>
 

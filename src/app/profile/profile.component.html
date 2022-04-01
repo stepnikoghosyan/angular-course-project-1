@@ -21,44 +21,45 @@
         <div>     
                                                                                                                                                                  
             <div class="profileBody">
-                <form >
+                <form  [formGroup] = 'form'>
                     <div class="form-control">
                         <label>First Name</label>
                         <input class="inputMargin" type="text" formControlName="firstName" />
-                        <div class="formErr">
-                            <div >
-                                <span class="errors">
+                        <div class="formErr" *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
+                            <div>
+                                <span *ngIf="form.controls['firstName'].hasError('required')" class="errors">
                                     Required
                                 </span>
-                            </div>
+                            </div>   
                         </div>
                     </div>
                     
                     <div class="form-control">
                         <label>Last Name</label>
                         <input class="inputMargin" type="text" formControlName="lastName" /> 
-                        <div class="formErr">
-                            <div >
-                            <span class="errors">
+                        <div class="formErr" *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
+                            <div>
+                                <span *ngIf="form.controls['lastName'].hasError('required')" class="errors">
                                     Required
                                 </span>
-                            </div>
+                            </div>   
                         </div>
                      </div>
                      
                     <div class="form-control">
                         <label>Email</label>
                         <input class="inputMargin" type="email" formControlName="email" /> 
-                         <div class="formErr">
-                         
-                                <span class="errors">
-                                    Invalid Email
-                                </span>
-                                <span class="errors">
-                                    Required
-                                </span>
-                           
-                        </div> 
+                        <div class="formErr">
+                            <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+                            
+                              <span *ngIf="form.controls['email'].hasError('email')" class="errors">
+                              Invalid Email
+                              </span>
+                              <span *ngIf="form.controls['email'].hasError('required')" class="errors">
+                                Required
+                              </span>
+                            </div>
+                          </div>
                    </div>
                     <div class="form-control">
                         <label>Password</label>
@@ -66,29 +67,35 @@
                         <img class="eye" >
 
                         <div class="formErr">
-                           
-                                <span class="errors">
-                                    Required
-                                </span>
-                                <span  class="errors">
-                                    Required more characters
-                                </span>
-                            
+                            <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+                              <span *ngIf="form.controls['password'].hasError('required')" class="errors">
+                                Required
+                              </span>
+                              <span *ngIf="form.controls['password'].hasError('minlength')" class="errors">
+                                Required {{
+                                  form.controls['password'].getError('minlength').requiredLength - 
+                                  form.controls['password'].getError('minlength').actualLength
+                                }} more characters
+                              </span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-control">
                         <label>Confirm password</label>
-                        <input class="inputMargin" formControlName="password" />
+                        <input class="inputMargin" formControlName="confirmPassword" />
                         <img class="eye" > 
 
-                         <div class="formErr">
-                            <div >
-                                <span class="errors">
-                                    Required
-                                </span>
-                                <span  class="errors">
-                                    Required more characters
-                                </span>
+                        <div class="formErr">
+                            <div *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched">
+                              <span *ngIf="form.controls['confirmPassword'].hasError('required')" class="errors">
+                                Required
+                              </span>
+                              <span *ngIf="form.controls['confirmPassword'].hasError('minlength')" class="errors">
+                                Required {{
+                                  form.controls['confirmPassword].getError('minlength').requiredLength - 
+                                  form.controls['confirmPassword'].getError('minlength').actualLength
+                                }} more characters
+                              </span>
                             </div>
                         </div>
                     </div>
