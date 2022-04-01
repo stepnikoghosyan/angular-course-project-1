@@ -1,0 +1,94 @@
+.mainProfile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+}
+.profile {
+    padding: 5px 15px;
+    
+}
+// div{
+//     border: 1px solid black;
+// }
+
+// .profileCard{
+    // width: 100%;
+// }
+
+
+.save{
+    display: flex;
+    justify-content: flex-end;
+    
+}
+button{
+    color: #fff;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1469d9;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 12px;
+}
+
+input {
+    width: 100%;
+    height: 35px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.inputMargin {
+    margin-top: 5px;
+}
+
+.formErr{
+    height: 20px;
+}
+
+.errors{
+    color: rgb(204, 9, 9);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.imgContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icons{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    // padding: 20px;
+}
+.actionEdit {
+    width: 50%;
+    color: green;
+    display: flex;
+    justify-content: flex-start;
+}
+.actionDelete{
+    width: 50%;
+    color: red;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.icon {
+    font-size: 22px;
+}
+.img {
+    height: 150px;
+    width: 150px;  
+    border: 1px solid aqua;
+    border-radius: 50%;
+    margin-top: 20px;    
+}

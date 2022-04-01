@@ -1,2 +1,102 @@
 <app-header></app-header>
-<p>profile works!</p>
+<div class="mainProfile">
+    <div class="profil">
+        <h2>Profile Settings</h2>
+        <div class="profileCard">
+            <div class="imgContent">
+                <img class="img" />
+                <div class="icons">
+                    <div class="actionEdit">
+                        <div class="editIcon">
+                        <fa-icon class="icon action" [icon]='faEdit'></fa-icon>
+                        </div>
+                    </div>
+                    <div class="actionDelete">
+                        <div class="deleteIcon">
+                        <fa-icon class="icon xmark" [icon]="faCircleXmark"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div>     
+                                                                                                                                                                 
+            <div class="profileBody">
+                <form >
+                    <div class="form-control">
+                        <label>First Name</label>
+                        <input class="inputMargin" type="text" formControlName="firstName" />
+                        <div class="formErr">
+                            <div >
+                                <span class="errors">
+                                    Required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label>Last Name</label>
+                        <input class="inputMargin" type="text" formControlName="lastName" /> 
+                        <div class="formErr">
+                            <div >
+                            <span class="errors">
+                                    Required
+                                </span>
+                            </div>
+                        </div>
+                     </div>
+                     
+                    <div class="form-control">
+                        <label>Email</label>
+                        <input class="inputMargin" type="email" formControlName="email" /> 
+                         <div class="formErr">
+                         
+                                <span class="errors">
+                                    Invalid Email
+                                </span>
+                                <span class="errors">
+                                    Required
+                                </span>
+                           
+                        </div> 
+                   </div>
+                    <div class="form-control">
+                        <label>Password</label>
+                        <input class="inputMargin" formControlName="password" />
+                        <img class="eye" >
+
+                        <div class="formErr">
+                           
+                                <span class="errors">
+                                    Required
+                                </span>
+                                <span  class="errors">
+                                    Required more characters
+                                </span>
+                            
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label>Confirm password</label>
+                        <input class="inputMargin" formControlName="password" />
+                        <img class="eye" > 
+
+                         <div class="formErr">
+                            <div >
+                                <span class="errors">
+                                    Required
+                                </span>
+                                <span  class="errors">
+                                    Required more characters
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="save"><button>Save</button></div>
+                     
+                </form>
+            
+        </div>
+
+    </div>
+</div>

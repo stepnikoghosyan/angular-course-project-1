@@ -1,3 +1,7 @@
+.users{
+    padding: 0 25px;
+}
+
 h1 {
     text-align: center;
 }
@@ -5,7 +9,6 @@ h1 {
 .search{
     display: flex;
     justify-content: center;    
-    // position: relative;
 }
 
 input{
@@ -31,12 +34,13 @@ input{
     grid-template-columns:repeat(3,31%);
     grid-gap: 25px;
     white-space: nowrap;
-    // margin-top: 30px;
+    margin-top: 30px;
 }
 
 input:focus-visible{
     outline: none;
 }
+
 
 button {
     border: 1px solid #ccc;

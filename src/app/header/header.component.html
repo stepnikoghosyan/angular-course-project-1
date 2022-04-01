@@ -1,5 +1,5 @@
 <div class="header">
-    <h1>Angular Course</h1>
+    <div class="title"><h1>Angular Course</h1></div>
 
     <div class="routes">
         <a routerLinkActive="active" routerLink="/home" 
@@ -9,7 +9,7 @@
 
         <div class="userMenu">
             <img class="userImg" src="assets/default.png" >
-            <p class="open">^</p>
+            <fa-icon class="caretDown open" [icon]="faCaretDown" ></fa-icon>
             <ul class="menu">
                 <li>
                     <a  routerLink="/my-profile">My Profile</a>
