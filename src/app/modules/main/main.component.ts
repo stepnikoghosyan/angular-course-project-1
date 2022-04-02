@@ -7,9 +7,4 @@ import { UsersService } from './services/users.service';
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
-    
-    constructor(private usersService: UsersService) { }
-    
-    ngOnInit(): void {}
-}
+export class MainComponent {}

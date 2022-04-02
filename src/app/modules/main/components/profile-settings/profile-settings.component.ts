@@ -37,7 +37,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private usersService: UsersService) { }
 
-    get controls() {
+    get form() {
         return this.settingsForm.controls;
     }
 
@@ -51,12 +51,11 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
                     this.myProfileInfo = data;
                     console.log("my profile", this.myProfileInfo);
 
-                    this.settingsForm.controls['firstName'].setValue(this.myProfileInfo.firstName);
-                    this.settingsForm.controls['lastName'].setValue(this.myProfileInfo?.lastName);
-                    this.settingsForm.controls['email'].setValue(this.myProfileInfo?.email);
-                    this.settingsForm.controls['profilePicture'].setValue(this.myProfileInfo?.profilePictureUrl);
+                    this.form['firstName'].setValue(this.myProfileInfo.firstName);
+                    this.form['lastName'].setValue(this.myProfileInfo?.lastName);
+                    this.form['email'].setValue(this.myProfileInfo?.email);
+                    this.form['profilePicture'].setValue(this.myProfileInfo?.profilePictureUrl);
                     this.targetValue = this.myProfileInfo.profilePictureUrl;
-                    console.log("my profile image", this.myProfileInfo.profilePictureUrl);
                 }
             })
     };
@@ -70,8 +69,8 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
                 .subscribe({
                     next: () => {
                         console.log("updated");
-                        this.settingsForm.controls['password'].reset();
-                        this.settingsForm.controls['confirmPassword'].reset()
+                        this.form['password'].reset();
+                        this.form['confirmPassword'].reset()
                     },
                 })
         }
@@ -86,14 +85,14 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
             return;
         }
         this.file = <File>files[0];
-        this.settingsForm.controls['profilePicture'].patchValue(this.file);
+        this.form['profilePicture'].patchValue(this.file);
 
         let reader = new FileReader();
         reader.readAsDataURL(files[0]);
         reader.onload = (_event) => {
             this.targetValue = reader.result; //// ???????????????????????????/
         }
-        console.log("reader", this.settingsForm.controls['profilePicture'].value);
+        console.log("reader", this.form['profilePicture'].value);
     }
 
     onImageError(): void {
@@ -101,10 +100,9 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     }
 
     clearImg() {
-        console.log("pix");
-        this.targetValue= "../../assets/images/user_image.jpg";
-        this.settingsForm.controls['profilePicture'].reset();
-        this.settingsForm.controls['profilePicture'].disable();
+        this.targetValue = "../../assets/images/user_image.jpg";
+        this.form['profilePicture'].reset();
+        this.form['profilePicture'].disable();
     };
 
     toggleShowPassoword() {
@@ -113,7 +111,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
     toggleShowConfirmPassoword() {
         this.showConfirmEyeIcon = !this.showConfirmEyeIcon;
-    } 
+    }
 
     ngOnDestroy(): void {
         this.subscription$.next()

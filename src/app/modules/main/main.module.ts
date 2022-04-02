@@ -24,6 +24,7 @@ import { ProfileSettingsComponent } from './components/profile-settings/profile-
 import { SetUserImagePipe } from './pipes/set-user-image.pipe';
 import { SetCommentImagePipe } from './pipes/set-comment-image.pipe';
 import { UserCardComponent } from './components/users/user-card/user-card.component';
+import { CommentCardComponent } from './components/posts/comments/comment-card/comment-card.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { UserCardComponent } from './components/users/user-card/user-card.compon
         SetUserImagePipe,
         SetCommentImagePipe,
         UserCardComponent,
+        CommentCardComponent,
     ],
     imports: [
         CommonModule,

@@ -44,7 +44,6 @@ export class UsersComponent implements OnInit {
     }
 
     filterUsers() {
-
         this.users$ = this.userService.getUsers(this.filterForm.controls['name'].value)
         .pipe(
             map(data => data.results))
