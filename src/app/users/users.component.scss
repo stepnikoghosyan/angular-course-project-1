@@ -53,9 +53,9 @@ button {
 }
 
 .custom{
-    position: fixed;
     display: flex;
     justify-content: flex-end;
+
 }
 
 .customBtn{
@@ -66,5 +66,7 @@ button {
 }
 
 .customBtn:active{
-    background-color: #ccc;
+    background-color: rgb(151, 148, 148);
 }
+
+
