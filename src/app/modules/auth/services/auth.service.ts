@@ -75,7 +75,8 @@ export class AuthService {
       this.userService.getUserProfile()
         .pipe(take(1))
         .subscribe({
-          next: () => {
+          next: (data) => {
+            this.userService.pictureChanged.next(data);
             resolve();
           },
           error: (err: HttpErrorResponse) => {

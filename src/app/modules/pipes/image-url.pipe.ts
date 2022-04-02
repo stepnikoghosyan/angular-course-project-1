@@ -1,14 +1,13 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {defaultImageUrl} from "../main/helpers/utils";
 
 @Pipe({
   name: 'imageUrl'
 })
 export class ImageUrlPipe implements PipeTransform {
 
-  private defaultImageUrl = 'assets/images/default.jpg';
-
   transform(value: string | null | undefined): string {
-    return value ? value : this.defaultImageUrl;
+    return value ? value : defaultImageUrl;
   }
 
 }

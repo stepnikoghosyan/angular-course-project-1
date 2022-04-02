@@ -1,13 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
+import {defaultImageUrl} from "../main/helpers/utils";
 
 @Pipe({
   name: 'profilePic'
 })
 export class ProfilePicPipe implements PipeTransform {
-  private defaultImageUrl = 'assets/images/profile_picture.jpg';
 
   transform(value: unknown, ...args: unknown[]): unknown {
-    return value ? value : this.defaultImageUrl;
+    return value ? value : defaultImageUrl;
   }
 
 }

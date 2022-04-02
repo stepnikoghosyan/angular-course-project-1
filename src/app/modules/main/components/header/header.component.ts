@@ -3,13 +3,16 @@ import {AuthService} from "../../../auth/services/auth.service";
 import {UserModel} from "../../models/user.model";
 import {UserService} from "../../../../services/user.service";
 import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
+  private unsubscribe$ = new Subject<void>();
+
   user: UserModel | null;
 
   constructor(private authService: AuthService,
@@ -19,7 +22,7 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.profileDataChanged();
+    this.subscribeToProfilePictureChange();
   }
 
   onLogout(e: MouseEvent): void {
@@ -34,10 +37,19 @@ export class HeaderComponent implements OnInit{
       }
     });
   }
-  
-  profileDataChanged(): void {
-    this.userService.pictureChanged.subscribe(data=> {
-      this.user = data;
-    });
+
+  subscribeToProfilePictureChange(): void {
+    this.userService.pictureChanged
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(data => {
+        this.user = data;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

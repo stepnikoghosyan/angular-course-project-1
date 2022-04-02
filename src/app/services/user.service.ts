@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable, tap} from 'rxjs';
+import {environment} from 'src/environments/environment';
 import {UserFormData, UserModel} from '../modules/main/models/user.model';
 import {convertToFormData} from "../modules/main/helpers/json-to-form-data.helper";
 
@@ -10,7 +10,7 @@ import {convertToFormData} from "../modules/main/helpers/json-to-form-data.helpe
 })
 export class UserService {
   private user: UserModel | null = null;
-  public pictureChanged = new BehaviorSubject<any>(null); 
+  public pictureChanged = new BehaviorSubject<any>(null);
 
   constructor(private httpClient: HttpClient) {
     this.getUserProfile();

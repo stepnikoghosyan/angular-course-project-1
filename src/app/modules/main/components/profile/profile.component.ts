@@ -1,39 +1,35 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotificationService} from "../../../../services/notification.service";
-import {Router} from "@angular/router";
-import {emailValidator} from "../../../auth/validators/email-validator";
 import {ConfirmedValidator} from "../../../auth/validators/confirmed-validator";
 import {UserModel} from "../../models/user.model";
 import {UserService} from "../../../../services/user.service";
-import {finalize, Subject, takeUntil} from "rxjs";
+import {catchError, finalize, of, Subject, switchMap, takeUntil} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
-import { fileTypeValidator } from '../../validators/file-type.validator';
-import { fileSizeValidator } from '../../validators/file-size.validator';
+import {fileTypeValidator} from '../../validators/file-type.validator';
+import {fileSizeValidator} from '../../validators/file-size.validator';
+import {defaultImageUrl, FILE_EXTENSIONS, FILE_SIZE_MEGABYTE} from "../../helpers/utils";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, OnDestroy{
+export class ProfileComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  private readonly FILE_EXTENSIONS = ['image/jpg', 'image/jpeg', 'image/png'];
-  private readonly FILE_SIZE_MEGABYTE = 2;
 
   form!: FormGroup;
   isLoading = false;
   submitted = false;
   user?: UserModel | null;
-  defaultImageUrl = 'assets/images/profile_picture.jpg';
   extension: string;
   previewImage = '';
-  
+
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private notifyService: NotificationService) {
     this.formInit();
-    this.extension = this.FILE_EXTENSIONS.map(item => ('.' + item.split('/').pop()).toLowerCase()).join(', ');
+    this.extension = FILE_EXTENSIONS.map(item => ('.' + item.split('/').pop()).toLowerCase()).join(', ');
   }
 
   ngOnInit() {
@@ -48,15 +44,15 @@ export class ProfileComponent implements OnInit, OnDestroy{
 
   private formInit(): void {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: [''],
-      profilePicture:[null, [fileTypeValidator(this.FILE_EXTENSIONS), fileSizeValidator(this.FILE_SIZE_MEGABYTE)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirm_password: ['', [Validators.required]],
-    },
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        email: [''],
+        profilePicture: [null, [fileTypeValidator(FILE_EXTENSIONS), fileSizeValidator(FILE_SIZE_MEGABYTE)]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirm_password: ['', [Validators.required]],
+      },
       {
-        validators: ConfirmedValidator('password','confirm_password')
+        validators: ConfirmedValidator('password', 'confirm_password')
       });
   }
 
@@ -84,25 +80,23 @@ export class ProfileComponent implements OnInit, OnDestroy{
         this.isLoading = true;
         this.submitted = true;
         this.userService.updateProfile(this.form.value)
-          .pipe(takeUntil(this.unsubscribe$),
+          .pipe(
+            takeUntil(this.unsubscribe$),
             finalize(() => {
               this.isLoading = false;
               this.submitted = false;
-            }))
-          .subscribe({
-            next: () => {
-              this.notifyService.showNotification(true, "Successfully updated.", null, ['profile'])
-              this.userService.getUserProfile()
-              .pipe(takeUntil(this.unsubscribe$))
-               .subscribe(data=> {
-                this.user = data;
-                this.patchForm();
-                this.userService.pictureChanged.next(data);
-              });
-            },
-            error: (err: HttpErrorResponse) => {
-              this.notifyService.showNotification(false, err.error.message);
-            }
+            }),
+            switchMap(() => {
+              return this.userService.getUserProfile()
+            }),
+            catchError((err: HttpErrorResponse) => {
+              this.notifyService.showError(err.error.message);
+              return of(null);
+            })
+          )
+          .subscribe(data => {
+            this.user = data;
+            this.userService.pictureChanged.next(data);
           });
       }
     }
@@ -125,8 +119,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   onDeleteImage(): void {
-    this.form.controls['profilePicture'].setValue(this.defaultImageUrl);
-    this.previewImage = this.defaultImageUrl;
+    this.form.controls['profilePicture'].reset();
+    this.previewImage = defaultImageUrl;
   }
 
 }
