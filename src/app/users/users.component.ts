@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { UsersService } from './users.service';
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  
 })
 export class UsersComponent implements OnInit {
   faMagnifyingGlass = faMagnifyingGlass;

@@ -2,18 +2,22 @@
     padding: 0 25px;
 }
 
+.title {
+    display: flex;
+    justify-content: center;
+}
+
   .cards{
       display: grid;
       grid-template-columns:repeat(3,31%);
       grid-gap: 25px;
       white-space: nowrap;
-      // text-overflow: ellipsis;
+      
   }
   
   .btn{
     display: flex;
-    justify-content: end;
-    width: 95%;
+    justify-content: center;
     margin-bottom: 30px;
   }
   

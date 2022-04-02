@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { PostsModel } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/posts/posts.service';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { PostsService } from 'src/app/posts/posts.service';
   styleUrls: ['./post-view.component.scss']
 })
 export class PostViewComponent implements OnInit {
+  faPaperPlane=faPaperPlane;
   postsModel?:PostsModel = {} as PostsModel;
 
   constructor(

@@ -3,7 +3,8 @@
     padding: 0 25px;
 }
 .title{
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .cards{
@@ -15,8 +16,8 @@
 
 .btn{
   display: flex;
-  justify-content: end;
-  width: 95%;
+  justify-content: center;
+  
   margin-bottom: 30px;
 }
 
