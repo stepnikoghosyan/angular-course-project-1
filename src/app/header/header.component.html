@@ -9,9 +9,9 @@
 
         <div class="userMenu">
             <img class="userImg" src="assets/default.png" >
-            <span (click)="showMenu()">
-                <fa-icon class="caretDown open" [icon]="faCaretDown" ></fa-icon>
-            </span>
+            <div class="caretIcon">
+                <fa-icon class="caretDown open" [icon]="faCaretDown" (click)="showMenu()" ></fa-icon>
+            </div>
             
              <div class="menu" *ngIf = 'isMenu'>
             

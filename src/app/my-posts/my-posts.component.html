@@ -1,12 +1,12 @@
 <app-header></app-header>
 <app-loading *ngIf="isLoading"></app-loading>
-<div>
+<div class="myPosts">
   <div class="title">
     <h1>Posts</h1>
   </div> 
   <div class="btn" *ngIf=" !isLoading">
     <a class="routerBtn" routerLink="/posts/create" >
-      create posts
+      Create post
     </a>
   </div>
   <div>

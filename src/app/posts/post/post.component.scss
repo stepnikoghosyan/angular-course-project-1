@@ -34,9 +34,9 @@ form {
 }
 
 .create {
+   
     display: flex;
     justify-content: flex-end;
-
 }
 
 .btn {
@@ -105,8 +105,7 @@ textarea{
 
 .settingErr{
     display: flex;
-    flex-direction: column;
-    width: 140px;
+   justify-content: flex-end;
 }
 
 
