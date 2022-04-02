@@ -25,7 +25,8 @@ input{
     
 }
 .searchIcon {
-    color: rgb(117, 117, 117);   
+    color: rgb(117, 117, 117); 
+    font-size: 16px;  
     cursor: pointer;
 }
 
@@ -48,21 +49,18 @@ button {
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    background-color: white;
-    width: 30px;
-    padding-top: 5px;
+    background-color: white;       
 }
 
 .custom{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .customBtn{
     width: 30px;
     height: 30px;
     cursor: pointer;
     margin: 2px;
-
 }
 
 .customBtn:active{

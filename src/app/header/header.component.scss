@@ -68,13 +68,13 @@ a:visited{
     right: 2.5%;
     top: 8%;
     box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
-    background-color: white;
+    background-color: rgb(247, 247, 247);
     width: 100px;
 }
 
 .caretIcon{
-    height: 13px;
-    width: 13px;
+    // height: 13px;
+    // width: 13px;
 }
 .menu a {
   display: flex;
@@ -88,7 +88,6 @@ a:visited{
 
 li>a{
     font-size: 16px;
-    border-bottom: 1px solid rgb(221, 218, 218);
 }
 
 .userImg{

@@ -1,42 +1,46 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.container{
+    width: 60%;
+    margin: 20px auto;
+}
+.author {
+    margin-left: 10px;
 }
 
-.container{
-    width: 1200px;
-    margin: 0 auto;
+p{
+    margin: 0;
 }
 .user{
-    width: 200px;
+ 
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .userImg{
     width: 50px;
+    height: 50px;
     border-radius: 50%;
-    margin-top: 10px;
+    
 }
 
 .fullName{
-    margin-top: 10px;
+    margin-bottom: 5px;
     font-size: 18px;
     font-weight: 700;
 }
 
-.date{
-    margin-top: 10px;
+.data{    
     font-size: 16px;
-    color: gray;
+    color: rgb(73, 72, 72);
 }
 
 .title{
     margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
 }
 
-h1{
+h2{
     font-weight: 900;
     letter-spacing: 0.2px;
 }
@@ -45,6 +49,7 @@ h1{
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 .bodyImg img{
@@ -53,4 +58,67 @@ h1{
 
 .text{
     text-align: start;
+}
+.commentContainer{
+    display: flex;
+    justify-content: center;
+   
+}
+.commentBody{
+    margin-top: 20px;
+    border-top: 1px solid rgb(167, 167, 167);
+     width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.comment {    
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;   
+}
+.comment h3 {
+    margin: 0;
+}
+
+.commentCard{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.imgContent{
+    margin-right: 10px;
+}
+
+// .message{
+//     background-color: rgb(93, 93, 252);
+// }
+
+textarea {
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    background-color: rgb(139, 152, 224);
+}
+textarea:focus-visible{
+    outline: none;
+    color: white
+    ;
+}
+
+.sendMessage{
+    position: absolute;
+    border: 1px solid blue;
+    border-radius: 4px;
+    padding: 5px;
+    bottom: -10%;
+    right: 40.7%;
+    background-color: transparent;
+}
+
+.sendIcon{
+    color: blue;
+    font-size: 14px;
 }
