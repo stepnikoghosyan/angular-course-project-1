@@ -9,6 +9,7 @@
     justify-content: flex-start;
     align-items: center;
 }
+
 h1{
     margin: 0;
 }
@@ -72,10 +73,6 @@ a:visited{
     width: 100px;
 }
 
-.caretIcon{
-    // height: 13px;
-    // width: 13px;
-}
 .menu a {
   display: flex;
   justify-content: flex-end;
@@ -86,13 +83,13 @@ a:visited{
 
 }
 
-li>a{
-    font-size: 16px;
-}
-
 .userImg{
     height: 30px;
     width: 30px;
     border-radius: 50%;
+}
+
+.menu a:hover{
+    background-color: rgb(231, 225, 225);
 }
 

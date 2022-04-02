@@ -12,7 +12,7 @@
     <app-user-card *ngFor="let user of users$ | async" [user]="user"></app-user-card>
 </div>
 <div class="custom">
-    <div #userCard  *ngFor = "let n of pageArr,let in = index"> 
+    <div *ngFor = "let n of pageArr,let in = index"> 
         <button class="customBtn" (click) = "goToPage(in+1)">{{in+1}}</button>
     </div>
 </div>
