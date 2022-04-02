@@ -1,0 +1,22 @@
+ <div class="commentBody">
+        <div class="comment">
+            <h3>Comments</h3>
+        </div>
+        <div class="commentCard">
+            <div class="imgContent">
+                <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'"/>                
+            </div>
+            <div class="message">
+                <!-- <form> -->
+                    <textarea name="" id="" cols="25" rows="7" [formControl] = 'text'></textarea>
+                    <button class="sendCommnet" (click)="addComments()">
+                        <fa-icon class="sendIcon" [icon]="faPaperPlane"></fa-icon>
+                    </button>
+                <!-- </form> -->
+                
+               
+            </div>
+            <app-comment-card *ngFor = 'let userComment of postsModel?.comments'
+             [userComment] = 'userComment'></app-comment-card>
+        </div>
+    </div>

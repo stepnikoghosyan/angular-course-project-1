@@ -23,18 +23,5 @@
 
 </div>
 <div class="commentContainer">
-    <div class="commentBody">
-        <div class="comment">
-            <h3>Comments</h3>
-        </div>
-        <div class="commentCard">
-            <div class="imgContent">
-                <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'"/>                
-            </div>
-            <div class="message">
-                <textarea name="" id="" cols="25" rows="7"></textarea>
-                <button class="sendMessage"><fa-icon class="sendIcon" [icon]="faPaperPlane"></fa-icon></button>
-            </div>
-        </div>
-    </div>
+    <app-comments [postsModel] = "postsModel"></app-comments>
 </div>

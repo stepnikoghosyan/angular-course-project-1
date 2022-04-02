@@ -17,8 +17,6 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
 import { UserCardComponent } from './users/user-card/user-card.component';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +25,7 @@ import { UserCardComponent } from './users/user-card/user-card.component';
     MyPostsComponent,
     ProfileComponent,
     NotFoundComponent,
-    UserCardComponent,
+    UserCardComponent
   ],
 
   imports: [

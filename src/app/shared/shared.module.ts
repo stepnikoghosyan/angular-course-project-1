@@ -5,12 +5,13 @@ import { HeaderComponent } from '../header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './card/card.component';
 import { CardFooterComponent } from './card-footer/card-footer.component';
 import { DotsPipe } from './dots.pipe';
 import { PostViewComponent } from './post-view/post-view.component';
+import { CommentsComponent } from '../comments/comments.component';
+import { CommentCardComponent } from '../comment-card/comment-card.component';
 
 
 
@@ -23,7 +24,9 @@ import { PostViewComponent } from './post-view/post-view.component';
     CardFooterComponent,
     DotsPipe,
     HeaderComponent,
-    PostViewComponent
+    PostViewComponent,
+    CommentsComponent,
+    CommentCardComponent,
   ],
 
   imports: [
@@ -33,6 +36,7 @@ import { PostViewComponent } from './post-view/post-view.component';
     FontAwesomeModule,
     RouterModule,
     FontAwesomeModule,
+ 
   ],
 
   exports: [
