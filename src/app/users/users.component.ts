@@ -97,7 +97,7 @@ export class UsersComponent implements OnInit {
   }
 
   goToPage(index: number) {
-    index += 1;
+   
     this.users$ = this.getUser(index);
   }
 
