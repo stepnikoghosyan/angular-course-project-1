@@ -53,9 +53,11 @@ button {
 }
 
 .custom{
+    position: fixed;
     display: flex;
     justify-content: flex-end;
 }
+
 .customBtn{
     width: 30px;
     height: 30px;

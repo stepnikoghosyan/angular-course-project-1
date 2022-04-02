@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { UsersService } from './users.service';
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
-  
+
 })
 export class UsersComponent implements OnInit {
   faMagnifyingGlass = faMagnifyingGlass;
@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   search: FormControl;
   isLoading = true;
   pageSize = 12;
-  page = 1;
+  pageCount = 1;
   pageArr?: any[]
 
   constructor(
@@ -34,25 +34,22 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.search.valueChanges.pipe(takeUntil(this.unSubscribe$), debounceTime(300),
       switchMap((res: string) => {
-        
         return this.activatedRoute.queryParams
       })
     ).subscribe({
       next: (params) => {
-        
+
         this.users$ = this.getUser(params['page'],);
       }
     })
 
-
-
     this.activatedRoute.queryParams
       .subscribe({
         next: (params) => {
-       
+
           this.users$ = this.getUser(params['page'], params['search']);
         }
       })
@@ -60,7 +57,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  getUser(index = this.page, search = this.search.value) {
+  getUser(index = this.pageCount, search = this.search.value) {
     return this.usersService.getUsers(this.pageSize, index, search).pipe(
       takeUntil(this.unSubscribe$),
       finalize(() => {
@@ -68,13 +65,14 @@ export class UsersComponent implements OnInit {
       }),
       map((data: any) => {
 
-        this.page = Math.ceil(data.count / this.pageSize);
-        this.pageArr = new Array(this.page);
+        this.pageCount = Math.ceil(data.count / this.pageSize);
+        this.pageArr = new Array(this.pageCount);
         if (search != '') {
           this.router.navigate(['/users'], {
             queryParams: {
-              showAll: false,
               search: search,
+              pageSize: data.count,
+              page: this.pageCount
             }
           })
         } else {
@@ -82,7 +80,6 @@ export class UsersComponent implements OnInit {
             queryParams: {
               pageSize: this.pageSize,
               page: index,
-              showAll: false,
             }
           })
         }
@@ -97,7 +94,7 @@ export class UsersComponent implements OnInit {
   }
 
   goToPage(index: number) {
-   
+    this.isLoading = true;
     this.users$ = this.getUser(index);
   }
 
