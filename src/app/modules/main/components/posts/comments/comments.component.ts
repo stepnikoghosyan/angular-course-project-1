@@ -18,7 +18,7 @@ import { UsersService } from '../../../services/users.service';
 })
 export class CommentsComponent implements OnInit, OnDestroy {
     @Input('myProfile') myProfile?: GetUserModel;
-    @Input('post') post?: PostModel; //?????????????????????????/
+    @Input('post') post?: any; //?????????????????????????/
     
     firstSubscription = new Subject<void>()
     secondSubscription = new Subject<void>()
@@ -65,7 +65,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
         })
     }
     onImageError() {
-        this.myProfileInfo!.profilePictureUrl = "../../assets/images/user_image.jpg"
+        this.myProfileInfo!.profilePictureUrl = "../../assets/images/user_image.jpg";
         
     }
     onCommentImageError(){

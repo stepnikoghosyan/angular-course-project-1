@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <div class="user_content">
+        <div class="user_img">
+            <img class="img" [src]="user?.profilePictureUrl | setCommentImage" (error)="onImageError()" alt="image of the post">
+        </div>
+        <h3>{{user?.firstName + "" + user?.lastName}}</h3>
+        <div class="user_body">
+            <p>{{user?.email}}</p>
+        </div>
+    </div>
+</div>

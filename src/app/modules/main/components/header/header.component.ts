@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     }
     
     onImageError(): void {
-       this.myProfileInfo!.profilePictureUrl = "../../assets/images/user_image.jpg"
+       this.myProfileInfo!.profilePictureUrl = "../../assets/images/user_image.jpg";
     }
     onLogOut() {
         this.authService.logout();

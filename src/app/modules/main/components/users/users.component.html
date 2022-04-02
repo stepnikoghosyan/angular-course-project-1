@@ -1,15 +1,11 @@
-
-<form [formGroup]="filterForm">
-    <input type="text" formControlName="name">
-</form>
-<div class="wrapper" *ngFor="let user of users$ | async">
-    <div class="user_content">
-        <div class="user_img">
-            <img class="img" [src]="user?.profilePicture | setImage" alt="image of the post">
-        </div>
-        <h3> {{user| userName}}</h3>
-        <div class="user_email">
-            <p>{{user?.email}}</p>
-        </div>
+<div class="users-content">
+    <h1 class="title">Users</h1>
+    <form [formGroup]="filterForm">
+        <input type="text" formControlName="name" placeholder="Search" >
+        <i class="fas fa-search" (click)="filterUsers()"></i>
+    </form>
+    <div class="users">
+        <app-user-card *ngFor="let user of users$ | async" [user] ="user"></app-user-card>
     </div>
+    <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
 </div>

@@ -18,7 +18,7 @@
 
         <div class="comments" *ngFor="let comment of comments">
             <div class="user_img_content">
-                <img [src]="comment?.user?.profilePictureUrl | setCommentImage"  (error)="onCommentImageError()">
+                <img [src]="comment?.user?.profilePictureUrl | setCommentImage"  (error)="onImageError()">
             </div>
             <div [ngClass]="myProfileInfo?.id !== comment?.user.id? 'comment': 'my_comment'">
                 <p class="user_name">{{comment?.user | userName}}</p>

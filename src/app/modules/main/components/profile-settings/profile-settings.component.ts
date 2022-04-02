@@ -101,10 +101,10 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     }
 
     clearImg() {
-        // this.settingsForm.controls['profilePicture'].reset();
-        // console.log("pix");
-        this.targetValue= "../../assets/images/user_image.jpg"
-        
+        console.log("pix");
+        this.targetValue= "../../assets/images/user_image.jpg";
+        this.settingsForm.controls['profilePicture'].reset();
+        this.settingsForm.controls['profilePicture'].disable();
     };
 
     toggleShowPassoword() {

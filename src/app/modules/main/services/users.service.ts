@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { environment } from 'src/environments/environment';
-import { GetUserModel, UserModel } from '../models/user.model';
+import { PaginationResponseModel } from '../models/pagination-response';
+import { GetUserModel } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -41,19 +42,18 @@ export class UsersService {
             }))
     }
 
-    getUsers(value?:string) :Observable<any> {
+    getUsers(value?: string): Observable<PaginationResponseModel<GetUserModel>> {
         let params = {}
-        if(value) {
-        params = {
-            'search' :value!
+        if (value) {
+            params = {
+                'search': value!
+            }
         }
-        }
-        return this.httpClient.get<any>(`${environment.apiUrl}/users`,{params}).pipe(
-            tap(()=>{
+        return this.httpClient.get<PaginationResponseModel<GetUserModel>>(`${environment.apiUrl}/users`, { params }).pipe(
+            tap(() => {
                 console.log(params);
-                
-            })
+             })
         )
     }
- 
+
 }
