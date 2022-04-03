@@ -31,7 +31,7 @@ const routes: Routes = [
         component: PostsComponent,
       },
       {
-        path: 'posts/view/:id',
+        path: 'posts/:id',
         component: PostsViewComponent
       },
       {
@@ -39,7 +39,7 @@ const routes: Routes = [
         component: PostsAddEditComponent
       },
       {
-        path: 'posts/:id',
+        path: 'posts/:id/edit',
         component: PostsAddEditComponent
       },
       {

@@ -13,11 +13,11 @@ export class PostCardFooterComponent {
   constructor(private route: Router) { }
 
   editPost(): void {
-    this.route.navigate([`/posts/${this.post?.id}`]);
+    this.route.navigate([`/posts/${this.post?.id}/edit`]);
   }
 
   viewPost(): void {
-    this.route.navigate([`/posts/view/${this.post?.id}`]);
+    this.route.navigate([`/posts/${this.post?.id}`]);
   }
 
 }
