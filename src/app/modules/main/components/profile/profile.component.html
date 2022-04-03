@@ -4,8 +4,8 @@
    <div>
     <input type="file" class="file-input" [accept]="extension" (change)="onFileSelected($event)" #fileUpload>
     <div class="upload-image">
-      <img class="user-avatar" [src]="previewImage | profilePic">
-      <div class="buttton-wrapper">
+      <img #image class="user-avatar" [src]="previewImage | profilePic" (error)="image.src='assets/images/profile_picture.jpg'">
+      <div class="button-wrapper">
         <button type="button" class="icon-pencil" (click)="fileUpload.click()"></button>
         <button (click)="onDeleteImage()" type="button" class="delete-btn">
           <i class="fa fa-close"></i>

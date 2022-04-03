@@ -8,7 +8,7 @@
     <a routerLink="/posts" routerLinkActive="active"> Posts </a>
     <div class="dropdown">
       <a>
-        <img [src]="user?.profilePictureUrl | profilePic" alt="">
+        <img #image [src]="user?.profilePictureUrl | profilePic" (error)="image.src='assets/images/profile_picture.jpg'" alt="">
         <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">

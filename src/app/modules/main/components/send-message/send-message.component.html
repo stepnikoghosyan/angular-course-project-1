@@ -1,5 +1,5 @@
 <div class="comment-item">
-    <img [src]="user?.profilePictureUrl | profilePic" alt="">
+    <img #image [src]="user?.profilePictureUrl | profilePic" alt="" (error)="image.src='assets/images/profile_picture.jpg'">
     <div class="send-message-content">
         <textarea autosize [minRows]="5" [formControl]="messageControl" maxlength="255"></textarea>
         <button type="button" class="send-btn" (click)="sendMessage()"> <i class="fa fa-send"></i> </button>

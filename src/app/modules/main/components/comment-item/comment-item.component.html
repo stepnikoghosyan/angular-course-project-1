@@ -1,5 +1,5 @@
 <div class="comment-item">
-    <img [src]="comment?.user?.profilePictureUrl | profilePic" alt="">
+    <img #image [src]="comment?.user?.profilePictureUrl | profilePic" alt="" (error)="image.src='assets/images/profile_picture.jpg'">
     <div [ngClass]="userId === comment?.user?.id ? 'my-comment' : 'other-comment'" class="message-content">
       <p class="name">{{comment?.user | fullName}}</p>
       <p class="message"> {{comment?.message}}</p>

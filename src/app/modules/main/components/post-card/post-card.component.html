@@ -1,7 +1,7 @@
 <div class="post-card-content">
   <div class="post-card-body">
     <div class="post-top-content">
-      <img [src]="post?.imageUrl | imageUrl" alt="">
+      <img #image [src]="post?.imageUrl | imageUrl" alt="" (error)="image.src='assets/images/default.jpg'">
       <h3 class="post-title">{{post?.title}}</h3>
     </div>
     <p class="description">{{post?.body}}</p>

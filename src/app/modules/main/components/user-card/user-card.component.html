@@ -1,7 +1,7 @@
 <div class="user-card-content">
   <div class="user-card-body">
     <div class="user-top-content">
-      <img [src]="user?.profilePictureUrl | profilePic" alt="">
+      <img #image [src]="user?.profilePictureUrl | profilePic" (error)="image.src='assets/images/profile_picture.jpg'" alt="">
       <h3 class="user-full-name">{{user | fullName}}</h3>
       <div class="user-email">{{user?.email}}</div>
     </div>
