@@ -6,6 +6,7 @@ import {environment} from 'src/environments/environment';
 import {EmailDto, LoginDto, LoginResponse, RegisterDto, ResetPasswordDto} from "../models/auth.model";
 import {UserService} from '../../../services/user.service';
 import {StorageService} from "../../../services/storage.service";
+import {NotificationService} from "../../../services/notification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +84,8 @@ export class AuthService {
             if (err.status === 401) {
               resolve();
             } else {
-              reject(err);
+              this.logout();
+              resolve();
             }
           }
         });
