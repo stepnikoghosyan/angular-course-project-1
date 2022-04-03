@@ -18,5 +18,5 @@ import {CommonModule} from "@angular/common";
     CommonModule
   ],
 })
-export class FormComponentsModule {
+export class AuthComponentsModule {
 }

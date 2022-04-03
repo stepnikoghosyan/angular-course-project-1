@@ -97,6 +97,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .subscribe(data => {
             this.user = data;
             this.userService.pictureChanged.next(data);
+            this.notifyService.showSuccess('Your changes have been successfully saved!')
           });
       }
     }

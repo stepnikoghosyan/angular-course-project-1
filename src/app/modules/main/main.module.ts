@@ -24,7 +24,7 @@ import {CommentsService} from "./services/comments.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {TextareaAutoresizeDirective} from './directives/textarea-autoresize.directive';
 import {AutosizeModule} from "ngx-autosize";
-import {FormComponentsModule} from "../form-components/form-components.module";
+import {AuthComponentsModule} from "../form-components/auth-components.module";
 import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
@@ -52,7 +52,7 @@ import {DropdownModule} from 'primeng/dropdown';
       MainRoutingModule,
       LoaderModule,
       PipesModule,
-      FormComponentsModule,
+      AuthComponentsModule,
       FormsModule,
       AutosizeModule,
       DropdownModule,
