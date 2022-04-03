@@ -33,11 +33,18 @@ header {
       width: 40px;
       height: 40px;
       border-radius: 50%;
+
     }
-    i {
-      position: absolute;
-      top: 20px;
-      left: 55px;
+
+  }
+  .dropdown {
+    a {
+      display: flex;
+      align-items: center;
+      i {
+        margin-left: 5px;
+      }
+
     }
   }
   .flex-container > a:hover,.dropdown:hover{
@@ -66,16 +73,37 @@ header {
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 3;
+    border: 1px solid #d0d0d0;
+    &:before {
+      content:"";
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #fff;
+      position: absolute;
+      right: 10px;
+      top: -8px;
+    }
+    &:after {
+      content:"";
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #d0d0d0;
+      position: absolute;
+      right: 10px;
+      top: -9px;
+      z-index: -1;
+    }
+    a {
+      float: none;
+      color: black;
+      padding: 9px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
   }
+  
 
-  .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
 
   .dropdown-content a:hover {
     background-color: #ddd;
