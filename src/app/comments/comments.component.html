@@ -7,16 +7,12 @@
                 <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'"/>                
             </div>
             <div class="message">
-                <!-- <form> -->
                     <textarea name="" id="" cols="25" rows="7" [formControl] = 'text'></textarea>
                     <button class="sendCommnet" (click)="addComments()">
                         <fa-icon class="sendIcon" [icon]="faPaperPlane"></fa-icon>
                     </button>
-                <!-- </form> -->
-                
-               
             </div>
-            <app-comment-card *ngFor = 'let userComment of postsModel?.comments'
-             [userComment] = 'userComment'></app-comment-card>
+            <app-comment-card *ngFor = 'let userComment of postsModel?.comments,let i = index'
+             [userComment] = 'postsModel!.comments[postsModel?.comments!.length-i-1]'></app-comment-card>
         </div>
     </div>

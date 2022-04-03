@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PostsModel } from '../models/posts.model';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { CommentsService } from '../shared/post-view/comments.service';
 import { FormControl } from '@angular/forms';
-import { debounceTime, Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { createCommentModel } from '../models/coments.model';
+import { PostsService } from '../posts/posts.service';
+
 
 @Component({
   selector: 'app-comments',
@@ -13,28 +14,36 @@ import { createCommentModel } from '../models/coments.model';
 })
 export class CommentsComponent implements OnInit {
   faPaperPlane = faPaperPlane;
-  unSubscribe$ = new Subject()
+  unSubscribe$ = new Subject();
   text = new FormControl('');
+
   @Input() postsModel?: PostsModel = {} as PostsModel;
+  @Input()
+  set resetText(reset: boolean) {
+    if (reset) {
+      this.text.reset()
+
+    }
+  }
+
+  @Output() userComments = new EventEmitter<createCommentModel>();
   constructor(
-    private commentsService: CommentsService
+    private postsService: PostsService,
   ) { }
 
-
   ngOnInit(): void { }
+
+
+  getPost() {
+    this.postsService.getPostById(this.postsModel!.id)
+      .subscribe()
+  }
 
   addComments() {
     const obj: createCommentModel = {
       message: this.text.value
     }
-
-    this.commentsService.addComments(this.postsModel!.id, obj)
-      .pipe(takeUntil(this.unSubscribe$)).subscribe({
-        next: (res) => {
-          console.log('res =',res)
-        }
-      })
-
+    this.userComments?.emit(obj);
   }
 
 }

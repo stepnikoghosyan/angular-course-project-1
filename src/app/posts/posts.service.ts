@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, takeUntil, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationModel } from '../models/pagination.model';
 import { PostDto, PostsModelDto } from '../models/post.model';
@@ -30,7 +30,7 @@ export class PostsService {
       params.userID = userID.toString();
     }
 
-    return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`,{
+    return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`, {
       params
     })
 
@@ -38,10 +38,10 @@ export class PostsService {
 
   createPost(obj: PostDto) {
     const formPost = new FormData();
-    formPost.append('title',obj.title);
-    formPost.append('body',obj.body);
-    formPost.append('image',obj.image);
-   
+    formPost.append('title', obj.title);
+    formPost.append('body', obj.body);
+    formPost.append('image', obj.image);
+
     return this.httpClient.post<PostDto>(`${this.baseUrl}posts`, formPost).pipe(tap(() => {
       this.notifyService.showSuccess('Your post was successfully published', 'success');
       this.router.navigate(['/posts']);
@@ -55,13 +55,14 @@ export class PostsService {
 
   getPostById(id: number) {
     return this.httpClient.get<PostsModelDto>(`${this.baseUrl}posts/${id}`)
+     
   }
-  
+
   updatePost(id: number, obj: PostDto) {
     return this.httpClient.put(`${this.baseUrl}posts/${id}`, obj)
-    .pipe(tap(()=>{
-      this.router.navigate(['/posts'])
-    }))
+      .pipe(tap(() => {
+        this.router.navigate(['/posts'])
+      }))
   }
 }
 

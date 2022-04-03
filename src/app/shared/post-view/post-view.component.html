@@ -23,5 +23,6 @@
 
 </div>
 <div class="commentContainer">
-    <app-comments [postsModel] = "postsModel"></app-comments>
+    <app-comments [postsModel] = "postsModel" [resetText] = "resetText" (userComments)="getComments($event)">
+    </app-comments>
 </div>
