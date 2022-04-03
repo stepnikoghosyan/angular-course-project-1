@@ -1,0 +1,11 @@
+
+<app-loading *ngIf="isLoading"></app-loading>
+<div class="home">
+<div class="title">
+  <h1>Home</h1>
+  <p>Review some of the latest posts in our platform</p>
+</div>
+<div class="cards">
+  <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
+</div>
+</div>

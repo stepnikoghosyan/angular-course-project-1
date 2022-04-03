@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { NotificationService } from 'src/app/notification-service/notification.service';
 
 
 

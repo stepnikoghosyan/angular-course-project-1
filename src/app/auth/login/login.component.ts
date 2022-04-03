@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LoginDto } from 'src/app/models/auth.model';
 import { Subject, takeUntil } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import { UsersService } from 'src/app/users/users.service';
+import { UsersService } from 'src/app/main/users/users.service';
+
 
 @Component({
   selector: 'app-login',

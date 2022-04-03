@@ -5,7 +5,7 @@ import { ActivatedRoute} from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ResetDto } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/auth/auth.service';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { NotificationService } from 'src/app/notification-service/notification.service';
 
 @Component({
   selector: 'app-reset-password',

@@ -4,7 +4,7 @@ import { LoginDto, RegisterDto, ForgotDto, ResetDto, LoginResponse } from '../mo
 import { environment } from '../../environments/environment'
 import { catchError, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { NotificationService } from '../shared/notification.service';
+import { NotificationService } from '../notification-service/notification.service';
 
 
 @Injectable({

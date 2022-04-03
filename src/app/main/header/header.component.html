@@ -1,0 +1,29 @@
+<div class="header">
+    <div class="title"><h1>Angular Course</h1></div>
+
+    <div class="routes">
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+        routerLink="/home">Home</a>
+         
+        <a routerLinkActive="active" routerLink="/users">Users</a>
+        <a routerLinkActive="active" routerLink="/posts">Posts</a>
+
+        <div class="userMenu">
+            <img class="userImg" src="assets/default.png" >
+            <div class="caretIcon">
+                <fa-icon class="caretDown open" [icon]="faCaretDown" (click)="showMenu()" ></fa-icon>
+            </div>
+            
+             <div class="menu" *ngIf = 'isMenu'>
+            
+                    <a  routerLink="/my-profile">My Profile</a>
+             
+                   <a routerLink="/my-posts">My Posts</a>
+               
+                    <a (click)="logout()" class="logout"> Logout </a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
