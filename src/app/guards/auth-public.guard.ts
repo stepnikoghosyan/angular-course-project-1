@@ -39,7 +39,9 @@ export class AuthPublicGuard implements CanActivate {
 
   private checkAuth() {
     const auth = localStorage.getItem('auth');
-    if (auth) {
+    const auth1 = sessionStorage.getItem('auth');
+
+    if (auth || auth1) {
       return this.router.parseUrl('/home');
     }
     return true;

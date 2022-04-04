@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate {
     const auth = localStorage.getItem('auth');
     const auth1 = sessionStorage.getItem('auth');
 
-    if (auth || auth1) {
+    if (auth || auth1) {      
       return this.setCurrentProfile();
     }
     return this.router.parseUrl('auth/login');
