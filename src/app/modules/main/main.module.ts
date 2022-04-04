@@ -7,7 +7,6 @@ import {PostsViewComponent} from "./components/posts-view/posts-view.component";
 import {PostCardComponent} from "./components/post-card/post-card.component";
 import {PostCardFooterComponent} from "./components/post-card-footer/post-card-footer.component";
 import {PostContainerComponent} from "./components/post-container/post-container.component";
-import {MyPostsComponent} from "./components/my-posts/my-posts.component";
 import {MainRoutingModule} from "./main-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoaderModule} from "../loader/loader.module";
@@ -26,7 +25,7 @@ import {TextareaAutoresizeDirective} from './directives/textarea-autoresize.dire
 import {AutosizeModule} from "ngx-autosize";
 import {AuthComponentsModule} from "../form-components/auth-components.module";
 import {NgSelectModule} from "@ng-select/ng-select";
-import { CommentsComponent } from './comments/comments.component';
+import {CommentsComponent} from './comments/comments.component';
 import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
@@ -40,7 +39,6 @@ import {NgxPaginationModule} from "ngx-pagination";
     PostCardComponent,
     PostCardFooterComponent,
     PostContainerComponent,
-    MyPostsComponent,
     UsersComponent,
     UserCardComponent,
     CommentItemComponent,
