@@ -1,0 +1,30 @@
+.commentCard{
+    // border: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    
+}
+
+.commentView{
+    padding-right: 5px;
+    // border: 1px solid blue;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: rgb(133, 146, 228);
+}
+
+.commentView h4{
+    margin: 0;
+}
+
+.imgContent{
+    margin-right: 10px;
+}
+
+.userImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;    
+}

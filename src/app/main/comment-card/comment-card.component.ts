@@ -7,7 +7,7 @@ import { CommentsModel } from '../../models/coments.model';
   styleUrls: ['./comment-card.component.scss']
 })
 export class CommentCardComponent implements OnInit {
-
+  
   @Input()userComment?:CommentsModel
 
   constructor() { }

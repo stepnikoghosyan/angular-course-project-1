@@ -59,24 +59,17 @@ h2{
 .text{
     text-align: start;
 }
-.commentContainer{
+.commentMain{
     display: flex;
     justify-content: center;
-   
+    // border: 1px solid blue;   
 }
 
-textarea {
-    border: none;
-    border-radius: 5px;
-    
-    background-color: rgb(139, 152, 224);
-}
-textarea:focus-visible{
-    outline: none;
-    color: white;
-}
 
-.sendIcon{
-    color: blue;
-    font-size: 14px;
+
+.commentContainer {
+    width: 40%;
+    // border: 1px solid blue;
+    display: flex;
+    justify-content: center;
 }

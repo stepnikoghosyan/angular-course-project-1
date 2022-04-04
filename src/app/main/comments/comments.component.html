@@ -1,20 +1,23 @@
- <div class="commentBody">
-        <div class="comment">
-            <h3>Comments</h3>
-        </div>
-        <div class="commentCard">
-            <div class="imgContent">
-                <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'"/>                
-            </div>
-            <div class="message">
-               
-                    <textarea name="" id="" cols="25" rows="7" [formControl]="text"></textarea>
-                    <button class="sendCommnet" (click)="addComments()">
-                        <fa-icon class="sendIcon" [icon]="faPaperPlane"></fa-icon>
-                    </button>
-                  
-            </div>
-            <app-comment-card *ngFor = 'let userComment of postsModel?.comments,let i = index'
-             [userComment] = 'postsModel!.comments[postsModel?.comments!.length-i-1]'></app-comment-card>
-        </div>
+<div class="commentBody">
+    <div class="commentTitle">
+        <h3>Comments</h3>
     </div>
+    <div class="writeComment">
+        <div class="imgContent">
+            <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'" />
+        </div>
+        <div class="commentMessage">
+            <textarea name="" id="" cols="22" rows="7" [formControl]="text"></textarea>
+            <button class="sendComment" (click)="addComments()">
+                <fa-icon class="sendIcon" [icon]="faPaperPlane"></fa-icon>
+            </button>
+
+        </div>
+
+    </div>
+    <div class="commentsCard">
+        <app-comment-card class="comments" *ngFor='let userComment of postsModel?.comments,let i = index'
+            [userComment]='postsModel!.comments[postsModel?.comments!.length-i-1]'></app-comment-card>
+    </div>
+
+</div>

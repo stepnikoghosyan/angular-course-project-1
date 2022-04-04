@@ -17,11 +17,14 @@
   
   .btn{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin-bottom: 30px;
+    padding-right: 38px;
+    // border: 1px solid black;
   }
   
   .routerBtn{
     background-color: #1469d9;
     color: white;
+    border-radius: 5px;
   }

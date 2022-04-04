@@ -1,4 +1,9 @@
-<div>
-    <h3>{{userComment?.user?.firstName }} {{ userComment?.user?.lastName}}</h3>
-    <p>{{userComment?.message}}</p>
+<div class="commentCard">
+    <div class="imgContent">
+        <img class="userImg" [src]=" 'assets/default.png'" />
+    </div>
+    <div class="commentView">
+        <h4>{{userComment?.user?.firstName }} {{ userComment?.user?.lastName}}</h4>
+        <p>{{userComment?.message}}</p>
+    </div>
 </div>

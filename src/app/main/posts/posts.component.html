@@ -3,12 +3,24 @@
 <div class="posts">
   <div class="title" >
     <h1>Posts</h1>
-  </div> 
-  <div class="btn" *ngIf=" !isLoading">
+  </div > 
+  <div class="searchAndFilter">
+    <div class="search">
+    <input type="text" placeholder="Search By Title" [formControl] = 'search' >
+    <button><fa-icon class="searchIcon" [icon]="faMagnifyingGlass"></fa-icon></button>
+    
+</div>
+<div class="search filter">
+    <input type="text" placeholder="Search By Author" [formControl] = 'search' >
+    <button><fa-icon class="searchIcon" [icon]="faCaretDown"></fa-icon></button>
+    
+</div>
+  </div>
+  <!-- <div class="btn" *ngIf=" !isLoading">
     <a class="routerBtn" routerLink="/posts/create" >
       Create post
     </a>
-  </div>
+  </div> -->
   <div>
     <div>
     <div class="cards">

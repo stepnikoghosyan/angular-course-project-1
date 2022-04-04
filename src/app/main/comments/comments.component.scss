@@ -1,27 +1,42 @@
 .commentBody{
     margin-top: 20px;
     border-top: 1px solid rgb(167, 167, 167);
-     width: 20%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border: 1px solid red;
 }
 
-.comment {    
+.commentTitle {    
     width: 100%;
     display: flex;
     justify-content: flex-start;   
 }
-.comment h3 {
+.commentTitle h3 {
     margin: 0;
 }
 
-.commentCard{
-    width: 100%;
+.writeComment{    
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    // border: 1px solid blue;
+    // box-sizing: border-box;
+}
+.commentsCard{
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // border: 1px solid blue;
+}
+.comments{
+    width: 64%;
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .imgContent{
@@ -31,15 +46,14 @@
 .userImg{
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    
+    border-radius: 50%;    
 }
 
-.message{
+.commentMessage{
     position: relative;
 }
 
-.sendCommnet{
+.sendComment{
     position: absolute;
     border: 1px solid blue;
     border-radius: 4px;
@@ -47,4 +61,21 @@
     bottom: 7%;
     right: 4%;
     background-color: transparent;
+    cursor: pointer;
+    z-index: 1;
+}
+
+textarea {
+    border: none;
+    border-radius: 5px;    
+    background-color: rgb(196, 201, 235);
+}
+textarea:focus-visible{
+    outline: none;
+    color: black;
+}
+
+.sendIcon{
+    color: blue;
+    font-size: 14px;
 }

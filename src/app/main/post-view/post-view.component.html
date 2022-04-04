@@ -20,9 +20,12 @@
     <div>
         <p class="text data">{{postsModel?.body}}</p>
     </div>
+    <div class="commentMain">
+       
+            <app-comments class= "commentContainer" [postsModel] = "postsModel" [resetText] = "resetText" (userComments)="getComments($event)">
+     </app-comments>
+    </div>
+  
 
-</div>
-<div class="commentContainer">
-    <app-comments [postsModel] = "postsModel" [resetText] = "resetText" (userComments)="getComments($event)">
-    </app-comments>
+
 </div>
