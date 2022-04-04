@@ -1,6 +1,5 @@
 .commentCard{
-    // border: 1px solid black;
-    width: 100%;
+    width: 38%;
     display: flex;
     justify-content: center;
     margin-top: 10px;
@@ -9,10 +8,11 @@
 
 .commentView{
     padding-right: 5px;
-    // border: 1px solid blue;
+    width: inherit;
     border-radius: 4px;
     padding: 5px;
     background-color: rgb(133, 146, 228);
+    word-wrap: break-word;
 }
 
 .commentView h4{
