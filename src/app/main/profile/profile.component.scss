@@ -8,14 +8,6 @@
     padding: 5px 15px;
     
 }
-// div{
-//     border: 1px solid black;
-// }
-
-// .profileCard{
-    // width: 100%;
-// }
-
 
 .save{
     display: flex;
@@ -27,7 +19,7 @@ button{
     height: 30px;
     border: none;
     border-radius: 5px;
-    background-color: #1469d9;
+    background-color: #449b23;
     font-size: 14px;
     cursor: pointer;
     padding: 0 12px;
@@ -85,10 +77,15 @@ input {
 .icon {
     font-size: 22px;
 }
+
 .img {
     height: 150px;
     width: 150px;  
     border: 1px solid aqua;
     border-radius: 50%;
     margin-top: 20px;    
+}
+
+.file{
+    display: none;
 }

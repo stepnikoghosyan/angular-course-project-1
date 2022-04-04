@@ -2,26 +2,38 @@
 <div class="mainProfile">
     <div class="profil">
         <h2>Profile Settings</h2>
+
+        
         <div class="profileCard">
-            <div class="imgContent">
-                <img class="img" />
-                <div class="icons">
-                    <div class="actionEdit">
-                        <div class="editIcon">
-                        <fa-icon class="icon action" [icon]='faEdit'></fa-icon>
-                        </div>
-                    </div>
-                    <div class="actionDelete">
-                        <div class="deleteIcon">
-                        <fa-icon class="icon xmark" [icon]="faCircleXmark"></fa-icon>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div>     
-                                                                                                                                                                 
+        <div>                                                                                                                                                         
             <div class="profileBody">
                 <form  [formGroup] = 'form'>
+
+
+                    <div class="imgContent">
+                        <img class="img"    [src] = "img"/>
+                        <div class="icons">
+                            <div class="actionEdit">
+                                <div class="editIcon">
+                                    <input class="file" type="file" id="img" formControlName = 'profilePictureUrl'
+                                    #file (change)="fileUpload($event)">
+                               
+                                    <button  (click)='clickOnFile(file)'>
+                                        <fa-icon class="icon action" [icon]='faEdit'></fa-icon>
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                            <div class="actionDelete">
+                                <div class="deleteIcon" (click)="deleteImg()">
+                                   <fa-icon class="icon xmark" [icon]="faCircleXmark"></fa-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="form-control">
                         <label>First Name</label>
                         <input class="inputMargin" type="text" formControlName="firstName" />
@@ -99,7 +111,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="save"><button>Save</button></div>
+                    <div class="save">
+                        <button (click)="update()">Save</button>
+                    </div>
                      
                 </form>
             

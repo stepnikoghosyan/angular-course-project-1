@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PostsModel } from '../../models/posts.model';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { createCommentModel } from '../../models/coments.model';
 import { PostsService } from '../posts/posts.service';
@@ -31,7 +31,9 @@ export class CommentsComponent implements OnInit {
     private postsService: PostsService,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+   }
 
 
   getPost() {
@@ -40,9 +42,11 @@ export class CommentsComponent implements OnInit {
   }
 
   addComments() {
+    console.log(this.text);
     const obj: createCommentModel = {
       message: this.text.value
     }
+   
     this.userComments?.emit(obj);
   }
 
