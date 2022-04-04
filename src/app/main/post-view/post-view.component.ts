@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Subject, switchMap, takeUntil } from 'rxjs';
 import { createCommentModel } from 'src/app/models/coments.model';
@@ -11,10 +11,10 @@ import { CommentsService } from './comments.service';
   templateUrl: './post-view.component.html',
   styleUrls: ['./post-view.component.scss']
 })
-export class PostViewComponent implements OnInit {
+export class PostViewComponent implements OnInit, OnDestroy {
 
   postsModel?: PostsModel = {} as PostsModel;
-  unSubscribe$ = new Subject();
+  unSubscribe$ = new Subject<void>();
   resetText = false;
   constructor(
     private activeRouter: ActivatedRoute,
@@ -41,17 +41,22 @@ export class PostViewComponent implements OnInit {
       .pipe(takeUntil(this.unSubscribe$), switchMap(() => {
         return this.getPost(this.postsModel!.id)
       })).subscribe({
-        next:()=>{this.resetText = true}
+        next: () => { this.resetText = true }
       })
   }
 
 
   private getPost(id: number) {
     return this.postsService.getPostById(id)
-    .pipe(takeUntil(this.unSubscribe$),
-      map((result: PostsModel) => {
-        this.postsModel = result;
-      }))
+      .pipe(takeUntil(this.unSubscribe$),
+        map((result: PostsModel) => {
+          this.postsModel = result;
+        }))
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
   }
 }
 
