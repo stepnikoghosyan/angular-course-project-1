@@ -40,6 +40,10 @@ export class PostsComponent implements OnInit, OnDestroy {
     user: null
   });
 
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 200;
+
   private unsubscribe$ = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder,
@@ -56,7 +60,15 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.users$ = this.getUsers();
     zip(this.subscribeToQueryParamsChanges(), this.subscribeToFilterFormChanges())
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.posts$ = this.getPosts())
+      .subscribe(() => {
+        this.currentPage = 1;
+        this.posts$ = this.getPosts()
+      });
+  }
+
+  onPageChange(event: number) {
+    this.currentPage = event;
+    this.posts$ = this.getPosts();
   }
 
   private subscribeToQueryParamsChanges() {
@@ -94,16 +106,20 @@ export class PostsComponent implements OnInit, OnDestroy {
     if (!this.isLoading)
       this.isLoading = true;
     let params: PostsQueryParamsModel = {
-      showAll: true,
       userID: this.filterForm.controls['user'].value ? this.filterForm.controls['user'].value : '',
-      title: this.filterForm.controls['title'].value ? this.filterForm.controls['title'].value : ''
+      title: this.filterForm.controls['title'].value ? this.filterForm.controls['title'].value : '',
+      page: this.currentPage,
+      pageSize: this.itemsPerPage
     }
     return this.postsService.getPosts(params)
       .pipe(
         finalize(() => {
           this.isLoading = false
         }),
-        map(data => data.results),
+        map(data => {
+          this.totalItems = data.count;
+          return data.results;
+        }),
         catchError((err) => {
           this.notifyService.showError(err.error.message);
           return of([]);

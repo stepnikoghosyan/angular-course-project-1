@@ -18,6 +18,10 @@
     Create Post
   </button>
 </div>
-<app-post-container [posts$]="posts$">
+<app-post-container [posts$]="posts$"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="itemsPerPage"
+                    [currentPage]="currentPage">
 </app-post-container>
+<pagination-controls *ngIf="!isLoading && totalItems" class="my-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
