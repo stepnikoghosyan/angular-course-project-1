@@ -59,6 +59,7 @@ export class UsersComponent implements OnInit {
         return !(prev !== curr || this.isButtonClicked)
       }),
       switchMap(value => {
+        this.currentPage = 1;
         this.isLoading = true;
         this.isButtonClicked = false;
         this.router.navigate(['/users'], {

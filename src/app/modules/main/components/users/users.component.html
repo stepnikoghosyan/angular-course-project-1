@@ -10,5 +10,5 @@
                    [user]="user" class="col-4"></app-user-card>
   </div>
 </div>
-<pagination-controls *ngIf="!isLoading" class="my-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
+<pagination-controls *ngIf="!isLoading && totalItems" class="my-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
