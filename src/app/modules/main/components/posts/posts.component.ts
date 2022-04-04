@@ -1,16 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {catchError, debounceTime, finalize, map, Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  finalize,
+  map,
+  Observable,
+  of,
+  Subject,
+  takeUntil,
+  zip
+} from "rxjs";
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { PostModel } from "../../models/post.model";
-import { PostsService } from "../../services/posts.service";
-import { NotificationService } from "../../../../services/notification.service";
-import { PostsQueryParamsModel } from "../../models/posts-query-params.model";
-import { UserModel } from '../../models/user.model';
-import { UsersService } from '../../services/users.service';
-import { PaginatedResponseModel } from 'src/app/models/paginated-response.model';
-import { UserService } from 'src/app/services/user.service';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {PostModel} from "../../models/post.model";
+import {PostsService} from "../../services/posts.service";
+import {NotificationService} from "../../../../services/notification.service";
+import {UserModel} from '../../models/user.model';
+import {UsersService} from '../../services/users.service';
+import {UserService} from 'src/app/services/user.service';
+import {FormBuilder} from "@angular/forms";
+import {PaginatedResponseModel} from "../../../../models/paginated-response.model";
+import {PostsQueryParamsModel} from "../../models/posts-query-params.model";
 
 @Component({
   selector: 'app-posts',
@@ -22,40 +33,61 @@ export class PostsComponent implements OnInit, OnDestroy {
   posts$: Observable<PostModel[]> = of([]);
   selectedUser: UserModel | null = null;
   currentUser: UserModel | null;
-  users: UserModel[] = [];
+  users$: Observable<UserModel[]> = of([]);
+
   filterForm = this.formBuilder.group({
-    title: [''],
-    user: ['']
+    title: null,
+    user: null
   });
 
   private unsubscribe$ = new Subject<void>();
-  constructor(
-    private formBuilder: FormBuilder,
-    private postsService: PostsService,
-    private usersService: UsersService,
-    private activatedRoute: ActivatedRoute,
-    private notifyService: NotificationService,
-    private userService: UserService,
-    private router: Router) {
+
+  constructor(private formBuilder: FormBuilder,
+              private postsService: PostsService,
+              private usersService: UsersService,
+              private activatedRoute: ActivatedRoute,
+              private notifyService: NotificationService,
+              private userService: UserService,
+              private router: Router) {
     this.currentUser = this.userService.getUser();
   }
 
   ngOnInit(): void {
-    this.filterForm.valueChanges.pipe(debounceTime(300)).subscribe((values) => {
-      this.filterByUser();
-    })
-    this.getUsers();
+    this.users$ = this.getUsers();
+    zip(this.subscribeToQueryParamsChanges(), this.subscribeToFilterFormChanges())
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.posts$ = this.getPosts())
   }
 
-  private checkQueryParams(): void {
-    this.posts$ = this.activatedRoute.queryParams.pipe(
-      switchMap((queryParams: Params) => {
-        const userId = queryParams['user'] ? +queryParams['user'] : null;
-        if (userId) {
-          this.selectedUser = this.users.filter((user) => user.id === userId)?.[0];
-        }
-        return this.getPosts();
-      }))
+  private subscribeToQueryParamsChanges() {
+    return this.activatedRoute.queryParams
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        map(queryParams => {
+          this.filterForm.setValue({
+            title: queryParams['title'] ? queryParams['title'] : null,
+            user: queryParams['user'] ? +queryParams['user'] : null,
+          });
+          return of(null);
+        }));
+  }
+
+  private subscribeToFilterFormChanges() {
+    return this.filterForm.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        map(values => {
+          this.router.navigate(['/posts'], {
+            relativeTo: this.activatedRoute,
+            queryParams: {
+              title: values.title,
+              user: values.user,
+            },
+          });
+          return of(null);
+        }));
   }
 
   private getPosts(): Observable<PostModel[]> {
@@ -63,12 +95,14 @@ export class PostsComponent implements OnInit, OnDestroy {
       this.isLoading = true;
     let params: PostsQueryParamsModel = {
       showAll: true,
-      userID: this.selectedUser ? this.selectedUser.id : '',
-      title: this.filterForm.controls['title'].value
+      userID: this.filterForm.controls['user'].value ? this.filterForm.controls['user'].value : '',
+      title: this.filterForm.controls['title'].value ? this.filterForm.controls['title'].value : ''
     }
     return this.postsService.getPosts(params)
       .pipe(
-        finalize(() => { this.isLoading = false }),
+        finalize(() => {
+          this.isLoading = false
+        }),
         map(data => data.results),
         catchError((err) => {
           this.notifyService.showError(err.error.message);
@@ -76,34 +110,21 @@ export class PostsComponent implements OnInit, OnDestroy {
         }));
   }
 
-  private getUsers(): void {
-    this.usersService.getUsers()
+  private getUsers(): Observable<UserModel[]> {
+    return this.usersService.getUsers()
       .pipe(
-        takeUntil(this.unsubscribe$),
-        tap((data: PaginatedResponseModel<UserModel>) => {
+        map((data: PaginatedResponseModel<UserModel>) => {
           data.results = data.results.filter((val) => val.id !== this.currentUser?.id);
           data.results.unshift(this.currentUser!);
-          this.users = data.results;
-          this.checkQueryParams();
+          return data.results;
         }),
         catchError((err) => {
           this.isLoading = false;
           this.notifyService.showError(err.error.message);
           return of([]);
         })
-      ).subscribe()
+      );
   }
-
-  filterByUser(): void {
-    this.router.navigate(['/posts'], {
-      relativeTo: this.activatedRoute,
-      queryParams: {
-        title: this.filterForm.controls['title'] ? this.filterForm.controls['title'].value : '',
-        user: this.selectedUser ? this.selectedUser.id : '',
-      }
-    })
-  }
-
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();

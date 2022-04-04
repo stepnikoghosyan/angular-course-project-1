@@ -4,10 +4,11 @@
          [readOnly]="isLoading">
   <button type="button" (click)="onSearchButtonClick()"><i class="fa fa-search"></i></button>
 </div>
-<div class="container">
+<div class="container" *ngIf="users$ | async as users ">
   <div class="row">
-    <app-user-card *ngFor="let user of users$ | async"
+    <app-user-card *ngFor="let user of users | paginate: { itemsPerPage, currentPage, totalItems }"
                    [user]="user" class="col-4"></app-user-card>
   </div>
 </div>
+<pagination-controls *ngIf="!isLoading" class="my-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

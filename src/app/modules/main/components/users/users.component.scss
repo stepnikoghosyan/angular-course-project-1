@@ -27,3 +27,11 @@
     cursor: pointer;
   }
 }
+
+.my-pagination ::ng-deep .ngx-pagination {
+  float: right;
+
+  .current {
+    background-color: grey;
+  }
+}

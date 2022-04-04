@@ -25,8 +25,9 @@ import {ProfileComponent} from "./components/profile/profile.component";
 import {TextareaAutoresizeDirective} from './directives/textarea-autoresize.directive';
 import {AutosizeModule} from "ngx-autosize";
 import {AuthComponentsModule} from "../form-components/auth-components.module";
-import {DropdownModule} from 'primeng/dropdown';
+import {NgSelectModule} from "@ng-select/ng-select";
 import { CommentsComponent } from './comments/comments.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CommentsComponent } from './comments/comments.component';
       AuthComponentsModule,
       FormsModule,
       AutosizeModule,
-      DropdownModule,
+      NgSelectModule,
+      NgxPaginationModule
   ],
   providers: [
     PostsService,

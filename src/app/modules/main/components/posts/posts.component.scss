@@ -10,7 +10,7 @@
 }
 .filter-form {
   display: flex;
-  align-items: baseline;
+  align-items: center;
 }
 .search-container {
   background-color: #ffffff;
@@ -50,4 +50,14 @@
             margin-top: 10px;
         }
     }
+}
+
+.ng-select.custom ::ng-deep .ng-select-container   {
+  height: 44px;
+  width: 250px;
+}
+
+.ng-select.custom ::ng-deep  .ng-input>input {
+  border-radius: 0;
+  font-size: 18px;
 }

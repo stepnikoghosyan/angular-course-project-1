@@ -19,6 +19,10 @@ export class UsersComponent implements OnInit {
   searchTextChanged$: Subject<string> = new Subject<string>();
   isButtonClicked: boolean = false;
 
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private userService: UsersService,
@@ -39,6 +43,12 @@ export class UsersComponent implements OnInit {
 
   onInputChange(event: string) {
     this.searchTextChanged$.next(event);
+  }
+
+  onPageChange(event: number) {
+    this.isLoading = true;
+    this.currentPage = event;
+    this.users$ = this.getUsers(this.searchText);
   }
 
   private onSearchChanged() {
@@ -64,11 +74,14 @@ export class UsersComponent implements OnInit {
   private getUsers(searchValue: string): Observable<UserModel[]> {
     const params: UserQueryParamsModel = {
       search: searchValue,
+      page: this.currentPage,
+      pageSize: this.itemsPerPage
     }
     return this.userService.getUsers(params)
       .pipe(
         map(data => {
           this.isLoading = false;
+          this.totalItems = data.count;
           return data.results
         }),
         catchError((err) => {
