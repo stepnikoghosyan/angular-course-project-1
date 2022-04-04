@@ -26,6 +26,7 @@ import {TextareaAutoresizeDirective} from './directives/textarea-autoresize.dire
 import {AutosizeModule} from "ngx-autosize";
 import {AuthComponentsModule} from "../form-components/auth-components.module";
 import {DropdownModule} from 'primeng/dropdown';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {DropdownModule} from 'primeng/dropdown';
     CommentItemComponent,
     SendMessageComponent,
     ProfileComponent,
-    TextareaAutoresizeDirective
+    TextareaAutoresizeDirective,
+    CommentsComponent
   ],
   imports: [
       CommonModule,
