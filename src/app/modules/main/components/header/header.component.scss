@@ -14,7 +14,7 @@ header {
   padding: 10px 30px;
   //overflow: hidden;
   border-bottom: 1px solid #d0d0d0;
-  z-index: 2;
+  z-index: 4;
 
   .flex-container {
     display: flex;
@@ -102,7 +102,7 @@ header {
       text-align: left;
     }
   }
-  
+
 
 
   .dropdown-content a:hover {
