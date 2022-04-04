@@ -1,4 +1,7 @@
-<h3>Comments</h3>
+<div class="border-bottom">
+    <h3>Comments</h3>
+    <i class="icon-bubble"></i>
+</div>
 <div>
     <app-send-message [user]="user" (send)="sendComment($event)"></app-send-message>
     <app-comment-item *ngFor="let comment of comments$ | async" [comment]="comment" [userId]="user?.id">

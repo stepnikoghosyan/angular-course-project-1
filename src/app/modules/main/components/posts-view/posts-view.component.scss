@@ -18,20 +18,20 @@
     color: #796c6c;
 }
 .post-image-wrapper {
-    display: flex;
-    justify-content: center;
-    max-width: 400px;
     margin: auto;
-    height: 200px;
+    text-align: center;
     img {
-        max-height: 200px;
+        max-height: 160px;
     }
 }
 .post-title {
     margin-top: 20px;
+    text-align: center;
+    text-transform: capitalize;
 }
 .post-body {
     margin: 20px 0;
+    font-size: 16px;
 }
 .post-comment {
     border-top: 1px solid gray;
@@ -45,4 +45,22 @@
 .flex-container {
     display: flex;
     justify-content: flex-end;
+}
+.m-b-15 {
+    margin-bottom: 15px;
+}
+.sticky-wrapper {
+    position: sticky;
+    top: 110px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+.comments-wrapper {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+.back-button {
+    color: #a4a3a3;
 }

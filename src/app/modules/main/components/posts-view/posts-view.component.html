@@ -1,22 +1,30 @@
 <div *ngIf="post$ | async as post" class="container-medium">
-  <div >
-    <div class="post-user d-flex align-items-center">
-      <img class="img-wrapper" [src]="post?.user?.profilePictureUrl | profilePic" alt="">
-      <div class="user-info">
-        <p class="user-name">{{post?.user | fullName}}</p>
-        <p class="post-date">{{post?.createdAt | date: 'mediumDate'}}</p>
+  <div class="row">
+    <div class="col-4">
+      <div class="sticky-wrapper">
+        <div class="m-b-15">
+          <a class="back-button" routerLink="/posts">&laquo;Back</a>
+        </div>
+        <div class="post-user d-flex align-items-center">
+          <img class="img-wrapper" [src]="post?.user?.profilePictureUrl | profilePic" alt="">
+          <div class="user-info">
+            <p class="user-name">{{post?.user | fullName}}</p>
+            <p class="post-date">{{post?.createdAt | date: 'mediumDate'}}</p>
+          </div>
+        </div>
+        <h1 class="post-title">{{post?.title}}</h1>
+        <div class="post-image-wrapper">
+          <img #image [src]="post?.imageUrl | imageUrl" (error)="image.src='assets/images/default.jpg'" alt="">
+        </div>
+        <div class="post-body">{{post?.body}}</div>
       </div>
     </div>
-    <h1 class="post-title">{{post?.title}}</h1>
-    <div class="post-image-wrapper">
-      <img #image [src]="post?.imageUrl | imageUrl" (error)="image.src='assets/images/default.jpg'" alt="">
+    <div class="col-8">
+      <div class="comments-wrapper">
+      <app-comments [postId]="postId" [user]="user"></app-comments>
     </div>
-    <div class="post-body">{{post?.body}}</div>
+    </div>
   </div>
-  <div class="flex-container">
-
-    <button class="cancel-btn" routerLink="/posts">Back</button>
-  </div>
-  <app-comments [postId]="postId" [user]="user"></app-comments>
 </div>
+
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

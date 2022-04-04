@@ -1,4 +1,6 @@
 
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -74,7 +76,9 @@ h2 {
 .m-t-40 {
   margin-top: 40px;
 }
-
+.m-t-10 {
+  margin-top: 10px;
+}
 label {
   color: black;
   margin-bottom: 4px;
@@ -109,7 +113,7 @@ label {
   font-weight: 600;
   text-transform: capitalize;
   border-radius: 4px;
-  background-color: #5ca1e1;
+  background-color: #17a2b8;
   border: none;
   color: #fff;
   text-align: center;
@@ -144,7 +148,8 @@ label {
 }
 
 .btn-secondary {
-  background-color: rgb(93, 202, 239);
+  background-color: #00A4BE;
+  color: #fff;
   padding: 10px 15px;
   font-size: 16px;
 
@@ -271,9 +276,9 @@ textarea {
   cursor: pointer;
   padding: 12px 35px;
   font-size: 16px;
-  background-color: dodgerblue;
+  background-color: #17a2b8;
   border-radius: 8px;
-  border: 2px solid dodgerblue;
+  border: 2px solid #17a2b8;
   color: #fff;
 
   &:hover:enabled {
@@ -290,7 +295,7 @@ textarea {
 
 .cancel-btn {
   cursor: pointer;
-  padding: 12px 35px;
+  padding: 3px 16px;
   font-size: 16px;
   border-radius: 8px;
   border: 2px solid lightgray;
@@ -304,7 +309,7 @@ textarea {
   }
 }
 
-.cancel-btn,.create-btn {
+.create-btn {
   margin-left: 20px;
 }
 
@@ -328,18 +333,19 @@ textarea {
       .name {
           font-weight: bold;
           font-size: 16px;
+          text-transform: capitalize;
       }
       .message {
-          margin-top: 20px;
+          margin-top: 15px;
           font-size: 15px;
           white-space: pre-line;
       }
   }
   .my-comment {
-      background-color: #c6d1f2;
+      background-color: #efefef;
   }
   .other-comment {
-      background-color: #ebeffe;
+      background-color: #e8f1f3;
   }
 }
 @media only screen and (min-width: 556px) {
@@ -353,18 +359,22 @@ textarea {
 @media only screen and (min-width: 768px) {
   .col-4 {
     width: 50%;
-    padding-left: 10px;
-    padding-right: 10px;
   }
+  .col-8 {
+    width: 66.666667%;
+
+  }
+  
 }
 @media only screen and (min-width: 992px) {
   .col-4 {
-    width: 33.3333%;
-    padding-left: 10px;
-    padding-right: 10px;
+    width: 33.33333%;
   }
 }
-
+.col-4, .col-8 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .column {
     display: flex;
     padding: 1rem;
