@@ -31,12 +31,12 @@ const routes: Routes = [
         component: PostsComponent,
       },
       {
-        path: 'posts/:id',
-        component: PostsViewComponent
-      },
-      {
         path: 'posts/add',
         component: PostsAddEditComponent
+      },
+      {
+        path: 'posts/:id',
+        component: PostsViewComponent
       },
       {
         path: 'posts/:id/edit',
