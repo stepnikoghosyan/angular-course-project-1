@@ -348,6 +348,17 @@ textarea {
       background-color: #e8f1f3;
   }
 }
+
+@media only screen and (min-width: 414px) {
+  .col-4 {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .filter-form {
+    flex-wrap: wrap;
+  }
+}
 @media only screen and (min-width: 556px) {
   .col-4 {
     width: 100%;
@@ -355,7 +366,6 @@ textarea {
     padding-right: 10px;
   }
 }
-
 @media only screen and (min-width: 768px) {
   .col-4 {
     width: 50%;
@@ -364,7 +374,6 @@ textarea {
     width: 66.666667%;
 
   }
-  
 }
 @media only screen and (min-width: 992px) {
   .col-4 {
