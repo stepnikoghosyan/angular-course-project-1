@@ -18,7 +18,9 @@ export class ProfileComponent implements OnInit {
   img = ''
   isLoading = false;
   showPassword = true;
+  showConfirmPassword = true;
   inputType = 'password';
+  inputTypeConfirm = 'password';
   form: FormGroup = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -107,6 +109,16 @@ export class ProfileComponent implements OnInit {
   showHidePass(){
     this.showPassword = !this.showPassword;
     if (this.showPassword) {
+      this.inputTypeConfirm = 'password';
+    } else {
+      this.inputTypeConfirm = 'text';
+    }
+  }
+
+
+  showHideConfirmPass(){
+    this.showConfirmPassword  = !this.showConfirmPassword;
+    if (this.showConfirmPassword) {
       this.inputType = 'password';
     } else {
       this.inputType = 'text';

@@ -66,8 +66,9 @@
                    </div>
                     <div class="form-control">
                         <label>Password</label>
-                        <input type="password" class="inputMargin" formControlName="password" />
-                        <img class="eye" >
+                        <input [type]="inputType" class="inputMargin" formControlName="password" />
+                        <img class="eye"  [src] = 'showPassword?"assets/hide.png":"assets/view.png"' 
+                            (click)="showHidePass()">
 
                         <div class="formErr">
                             <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
@@ -83,11 +84,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control confirmPass">
                         <label>Confirm password</label>
-                        <input [type]="inputType" class="inputMargin" formControlName="confirmPassword" />
-                        <img class="eye"  [src] = 'showPassword?"assets/hide.png":"assets/view.png"' 
-                            (click)="showHidePass()">
+                        <input [type]="inputTypeConfirm" class="inputMargin" formControlName="confirmPassword" />
+                        <img class="eyeConfirm"  [src] = 'showConfirmPassword?"assets/hide.png":"assets/view.png"' 
+                            (click)="showHideConfirmPass()">
 
                         <div class="formErr">
                             <div *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched">

@@ -39,9 +39,27 @@ input {
     margin-top: 5px;
 }
 
+
+.eye{
+    position: absolute;
+    left: 59%;
+    top: 86.7%;
+}
+
+.confirmPass{
+    position: relative;
+}
+.eyeConfirm{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 .formErr{
     height: 20px;
 }
+
+
 
 .errors{
     color: rgb(204, 9, 9);
