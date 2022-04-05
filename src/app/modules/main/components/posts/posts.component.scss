@@ -77,7 +77,7 @@
   }
 }
 
-@media only screen and (min-width: 414px) {
+@media only screen and (max-width: 414px) {
   .ng-select.custom ::ng-deep .ng-select-container {
     margin-left: 0px;
   }
