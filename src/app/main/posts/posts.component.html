@@ -1,4 +1,3 @@
-
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="posts">
   <div class="title" >
@@ -6,14 +5,17 @@
   </div > 
   <div class="searchAndFilter">
     <div class="search">
-    <input type="text" placeholder="Search By Title" [formControl] = 'search' >
+    <input type="search" placeholder="Search By Title" [formControl] = 'search' >
     <button><fa-icon class="searchIcon" [icon]="faMagnifyingGlass"></fa-icon></button>
     
 </div>
 <div class="search filter">
-    <input type="text" placeholder="Search By Author" [formControl] = 'search' >
-    <button><fa-icon class="searchIcon" [icon]="faCaretDown"></fa-icon></button>
-    
+    <!-- <input type="text" placeholder="Search By Author" [formControl] = 'search' >
+    <button><fa-icon class="searchIcon" [icon]="faCaretDown"></fa-icon></button> -->
+    <select class="filterBy" name="Search By Author" size="0" #ref>
+      <option value="" disabled selected hidden>Search By Author</option>
+      <option *ngFor="let name of userName">{{name.firstName }} {{name.lastName}}</option>
+    </select>
 </div>
   </div>
   <!-- <div class="btn" *ngIf=" !isLoading">
