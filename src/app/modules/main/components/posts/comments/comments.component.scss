@@ -4,7 +4,7 @@
 
     .comment_content {
         margin: 0 auto;
-        width: 370px;
+        width: 500px;
         margin-top: 60px;
         border-top: 2px solid grey;
 
@@ -20,8 +20,8 @@
             justify-content: space-around;
 
             .user_img_content {
-                width: 40px;
-                height: 40px;
+                width: 50px;
+                height: 50px;
                 background-color: rgb(15, 76, 155);
                 border-radius: 50%;
 
@@ -36,12 +36,12 @@
 
             .comment,
             .comment_form {
-                width: 290px;
+                width: 350px;
                 padding: 10px;
                 border-radius: 4px;
-                background-color: #bbd7e5;
+                background-color: #b5e3f5;
 
-                p{
+                p {
                     word-break: break-word;
                 }
 
@@ -69,23 +69,31 @@ textarea {
     border-style: none;
     resize: none;
     word-break: break-word;
-    background-color: #bbd7e5;
+    background-color: #e2e7e9;
     overflow: hidden;
 }
 
 .my_comment {
 
-    width: 290px;
+    width: 350px;
     padding: 10px;
     border-radius: 4px;
     background-color: #e2e7e9;
 
-    p{
+    p {
         word-break: break-word;
     }
 }
-.comment_create{
+
+.comment_create {
     display: flex;
     align-items: end;
     height: 40px;
+    justify-content: space-between;
+}
+
+.comment_form {
+    background-color: #e2e7e9 !important;
+    border-radius:unset !important;
+    box-shadow: 0px 10px 10px grey;
 }

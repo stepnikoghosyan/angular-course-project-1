@@ -8,10 +8,9 @@
             <div class="comment_form">
                 <form [formGroup]="commentsForm" (ngSubmit)="createComment()">
                     <div class="comment_create">
-                        <textarea type="text" formControlName="message" aria-multiline="true"></textarea>
+                        <textarea type="text" autosize formControlName="message" placeholder="Write a comment..."></textarea>
                         <button type="submit" class="submit_btn"><i class="far fa-paper-plane"></i></button>
                     </div>
-                    <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
                 </form>
             </div>
         </div>
@@ -27,3 +26,4 @@
         </div>
     </div>
 </div>
+<mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>

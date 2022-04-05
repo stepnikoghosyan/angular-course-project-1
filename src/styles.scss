@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-toastr/toastr';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@ng-select/ng-select/themes/ant.design.theme.css";
 *{
     font-family: Arial;
     padding: 0px;
@@ -13,6 +15,9 @@ button{
     &:hover{
         color: black;
     }
+}
+label{
+    display: inline-block;
 }
 .error-message{
     font-size: 12px;

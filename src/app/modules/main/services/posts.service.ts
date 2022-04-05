@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginationResponseModel } from '../models/pagination-response';
 import { commentsResponse, createCommentDto, PostModel } from '../models/post.model';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../../shared/notification.service';
-import { Form, FormGroup } from '@angular/forms';
+import { NotificationService } from '../../../services/notification.service';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -19,14 +19,21 @@ export class PostsService {
         private notifyService: NotificationService) { };
 
 
-    getPosts(): Observable<PaginationResponseModel<PostModel>> {
-
+    getPosts(value?: string): Observable<PaginationResponseModel<PostModel>> {
+        let params = {};
+        if (value) {
+            params = {
+                showAll: true,
+                'title': value!
+            }
+        }
         return this.httpClient
-            .get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`, {
-                params: {
-                    showAll: true,
-                }
-            })
+            .get<PaginationResponseModel<PostModel>>(`${environment.apiUrl}/posts`, {params})
+            .pipe(
+                tap(() => {
+                    console.log(params);
+                 })
+            )
     }
 
     getPost(id: number): Observable<PostModel> {

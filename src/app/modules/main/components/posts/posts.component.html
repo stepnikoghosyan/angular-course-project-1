@@ -1,11 +1,23 @@
 <div class="posts-content">
     <h1 class="title">Posts</h1>
     <div class="create_post">
+        <form [formGroup]="filterForm">
+            <input type="text" placeholder="Search by Title" formControlName="searchByTitle">
+            <!-- <i class="fas fa-search"></i> -->
+            <ng-select placeholder="Search by author"
+             [searchable]="true" clearAllText="Clear"
+             (change)="searchByAuthor($event)">
+                <ng-option [value]="user.firstName" *ngFor="let user of users" #selectOption>
+                    
+                    {{user.firstName}}
+                </ng-option>
+            </ng-select>
+        </form>
         <button type="button" routerLink="../posts/create">Create Post</button>
     </div>
     <div class="posts">
         <app-post-card *ngFor="let post of posts$| async" [post]="post"></app-post-card>
     </div>
-    <mat-spinner  [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+    <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
 </div>
 <router-outlet></router-outlet>

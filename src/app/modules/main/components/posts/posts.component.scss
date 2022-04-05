@@ -9,14 +9,22 @@
     }
     .create_post{
         display: flex;
-        justify-content: end;
+        justify-content: space-between;
         margin-right: 50px;
 
         button{
             color: white;
             background-color: #ffc107;
             padding: 10px 15px;
-        }  
+        } 
+        
+        input {
+            margin-left: 20px;
+            height: 45px;
+            border-radius: 4px;
+            border: 1px solid gray;
+            padding-left: 10px;
+        }
     }
     .posts{
         display: flex;
@@ -27,4 +35,15 @@
 mat-spinner{
     margin: auto;
     margin-top: 50px;
+}
+ng-select{
+    display: inline-block;
+    margin-left: 20px;
+
+    input{
+        height: 45px;
+        border-radius: 4px;
+        border: 1px solid gray;
+        padding-left: 10px;
+    }
 }

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
-import { finalize, Subject, Subscription, takeUntil } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 
 
@@ -56,10 +56,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
                 } 
             })
         }
-    }
+    };
     ngOnDestroy(): void {
        this.subscription$.next()
        this.subscription$.complete()
-    }
-
+    };
 }

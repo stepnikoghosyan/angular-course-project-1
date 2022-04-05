@@ -59,5 +59,4 @@ export class PasswordComponent implements OnInit, ControlValueAccessor {
     toggleShowPassoword(){
         this.showEyeIcon = !this.showEyeIcon;
     };
-
 }

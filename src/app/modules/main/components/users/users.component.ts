@@ -14,14 +14,12 @@ export class UsersComponent implements OnInit {
     showSpinner = false;
     users$?: Observable<GetUserModel[]>;
 
-
     filterForm = this.formBuilder.group({
         name: ['']
     });
 
     constructor(private userService: UsersService,
-        private formBuilder: FormBuilder,
-        private router: Router) { }
+        private formBuilder: FormBuilder) { }
 
     ngOnInit(): void {
         this.showSpinner = true
@@ -29,23 +27,19 @@ export class UsersComponent implements OnInit {
             finalize(() => {
                 this.showSpinner = false
             }),
-            map(data => data.results)
-        )
+            map(data => data.results))
 
         this.filterForm.valueChanges.pipe(
-            debounceTime(300)
-        ).subscribe({
-            next: (filterdValue) => {
-                this.users$ = this.userService.getUsers(filterdValue.name).pipe(
-                    map(data => data.results)
-                )
-            }
-        })
+            debounceTime(300)).subscribe({
+                next: (filterdValue) => {
+                    this.users$ = this.userService.getUsers(filterdValue.name).pipe(
+                        map(data => data.results)
+                    )}
+            })
     }
 
     filterUsers() {
         this.users$ = this.userService.getUsers(this.filterForm.controls['name'].value)
-        .pipe(
-            map(data => data.results))
-    }
+            .pipe(
+                map(data => data.results))}
 }

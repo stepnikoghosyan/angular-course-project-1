@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, finalize, map, Observable, of} from 'rxjs';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { errorResponse } from 'src/utils/error-response.utility';
 import { PostModel } from '../../models/post.model';
-import { AuthService } from '../../../auth/services/auth.service';
 import { PostsService } from '../../services/posts.service';
 
 @Component({

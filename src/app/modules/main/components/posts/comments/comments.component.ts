@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { finalize, map, Subject, takeUntil } from 'rxjs';
-import { PostModel } from 'src/app/models/post.model';
 import { createCommentDto } from '../../../models/post.model';
 import { GetUserModel } from '../../../models/user.model';
 import { PostsService } from '../../../services/posts.service';
@@ -72,7 +71,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
             next: (data) => {
                 this.showSpinner = true
                 this.commentService.getComments(id).pipe(
-                    map(data => this.comments = data.results),
+                    map(data => {this.comments = data.results,
+                    this.commentsForm.reset()}),
                     finalize(() => {
                         this.showSpinner = false
                     })

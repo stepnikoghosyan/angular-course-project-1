@@ -1,5 +1,5 @@
 import { CommentModel } from "./comment.model";
-import { GetUserModel, UserModel } from "./user.model";
+import { UserModel } from "./user.model";
 
 export interface PostModel {
     id: number;

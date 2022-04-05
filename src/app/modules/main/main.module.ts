@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 // import { MultilineDirective } from 'src/app/directives/multiline.directive';
 import { HeaderComponent } from 'src/app/modules/main/components/header/header.component';
@@ -53,7 +55,9 @@ import { CommentCardComponent } from './components/posts/comments/comment-card/c
         ReactiveFormsModule,
         MatIconModule,
         MatProgressSpinnerModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgSelectModule, 
+        FormsModule
     ]
 })
 export class MainModule { }

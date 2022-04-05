@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize, Observable } from 'rxjs';
+import { finalize } from 'rxjs';
 import { PostModel } from 'src/app/modules/main/models/post.model';
 import { PostsService } from '../../../services/posts.service';
 

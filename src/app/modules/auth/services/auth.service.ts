@@ -4,7 +4,7 @@ import { EmailDto, ForgotPasswordDto, LoginDto, LoginResponse, RegisterDto, Rese
 import { Observable, take, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../../shared/notification.service';
+import { NotificationService } from '../../../services/notification.service';
 import { UsersService } from '../../main/services/users.service';
 import { StorageService } from '../../main/services/storage.service';
 import { GetUserModel } from '../../main/models/user.model';
