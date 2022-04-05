@@ -30,17 +30,19 @@
           </button>
         </div>
         <div *ngIf="form.controls['image'].invalid">
-          <p class="error-message" *ngIf="form.controls['image'].errors?.['fileType']">The picture must be {{extension}}.</p>
+          <p class="error-message" *ngIf="form.controls['image'].errors?.['fileType']">The picture must be
+            {{extension}}.</p>
           <p class="error-message" *ngIf="form.controls['image'].errors?.['fileSize']">
-            The size of the picture should be smaller than {{form.controls['image'].errors?.['fileSize'].allowedSize}} MB.
+            The size of the picture should be smaller than {{form.controls['image'].errors?.['fileSize'].allowedSize}}
+            MB.
           </p>
         </div>
       </div>
     </div>
+    <app-loader *ngIf="isLoading"></app-loader>
     <div class="flex-container">
       <button class="cancel-btn" routerLink="/posts">Back</button>
       <button [disabled]="form.invalid || submitted" class="create-btn">{{postId ? 'Update' : 'Create'}} </button>
     </div>
   </form>
 </div>
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

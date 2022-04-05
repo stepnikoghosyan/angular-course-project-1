@@ -7,4 +7,4 @@
     <app-comment-item *ngFor="let comment of comments$ | async" [comment]="comment" [userId]="user?.id">
     </app-comment-item>
 </div>
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-loader *ngIf="isLoading"></app-loader>

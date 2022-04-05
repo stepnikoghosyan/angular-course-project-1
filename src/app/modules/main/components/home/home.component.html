@@ -4,5 +4,4 @@
                     [totalItems]="20"
                     [itemsPerPage]="20">
 </app-post-container>
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-
+<app-loader [bigLoader]="true" *ngIf="isLoading"></app-loader>

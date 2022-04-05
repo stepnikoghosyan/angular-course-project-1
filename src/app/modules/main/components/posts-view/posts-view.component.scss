@@ -66,6 +66,13 @@
 .back-button {
     color: #a4a3a3;
 }
+:host::ng-deep {
+    app-loader {
+        .loader {
+            margin-top: 10%;
+        }
+    }
+}
 @media only screen and (max-width: 991px) {
     .sticky-wrapper {
         margin-bottom: 20px;
