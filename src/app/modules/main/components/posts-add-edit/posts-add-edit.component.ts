@@ -130,7 +130,7 @@ export class PostsAddEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.notifyService.showNotification(true, "Successfully updated.", null,
-            ['posts', 'view', this.postId!.toString()])
+            ['posts', this.postId!.toString()])
         },
         error: (err: HttpErrorResponse) => {
           this.notifyService.showNotification(false, err.error.message);
