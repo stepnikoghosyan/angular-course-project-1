@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
   navigateToMyPosts() {
     this.router.navigate(['posts'], {
       queryParams: {
-        user: this.user?.id
+        user: this.user?.id,
+        page: 1
       }
     });
   }

@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   currentPage: number = 1;
   itemsPerPage: number = 10;
-  totalItems: number = 200;
+  totalItems: number = 0;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -58,17 +58,23 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.users$ = this.getUsers();
+    !this.activatedRoute.snapshot.queryParams['page'] && this.onPageChange(1);
     zip(this.subscribeToQueryParamsChanges(), this.subscribeToFilterFormChanges())
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.currentPage = 1;
         this.posts$ = this.getPosts()
       });
   }
 
   onPageChange(event: number) {
     this.currentPage = event;
-    this.posts$ = this.getPosts();
+    this.router.navigate(['/posts'], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        page: event
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 
   private subscribeToQueryParamsChanges() {
@@ -81,6 +87,7 @@ export class PostsComponent implements OnInit, OnDestroy {
             title: queryParams['title'] ? queryParams['title'] : null,
             user: queryParams['user'] ? +queryParams['user'] : null,
           });
+          this.currentPage = queryParams['page'] ? +queryParams['page'] : this.currentPage;
           return of(null);
         }));
   }
@@ -94,8 +101,9 @@ export class PostsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/posts'], {
             relativeTo: this.activatedRoute,
             queryParams: {
-              title: values.title,
-              user: values.user,
+              title: values.title ? values.title : null,
+              user: values.user ? values.user : null,
+              page: this.currentPage
             },
           });
           return of(null);
