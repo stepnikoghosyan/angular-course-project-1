@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {catchError, debounceTime, distinctUntilChanged, map, Observable, of, startWith, Subject, switchMap} from "rxjs";
+import {catchError, debounceTime, map, Observable, of, startWith, Subject, switchMap} from "rxjs";
 
 import {UserModel} from "../../models/user.model";
 import {UsersService} from "../../services/users.service";
@@ -31,6 +31,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.searchText = queryParams['search'] ? queryParams['search'] : '';
+      this.currentPage = queryParams['page'] ? +queryParams['page'] : this.currentPage;
     })
     this.onSearchChanged();
   }
@@ -60,7 +61,8 @@ export class UsersComponent implements OnInit {
         this.router.navigate(['/users'], {
           relativeTo: this.activatedRoute,
           queryParams: {
-            search: value
+            page: this.currentPage,
+            search: value,
           },
         });
         return this.getUsers(value)
@@ -78,12 +80,13 @@ export class UsersComponent implements OnInit {
         map(data => {
           this.isLoading = false;
           this.totalItems = data.count;
-          // this.router.navigate(['/users'], {
-          //   relativeTo: this.activatedRoute,
-          //   queryParams: {
-          //     page: this.currentPage
-          //   },
-          // });
+          this.router.navigate(['/users'], {
+            relativeTo: this.activatedRoute,
+            queryParams: {
+              page: this.currentPage,
+              search: this.searchText
+            },
+          });
           return data.results
         }),
         catchError((err) => {
