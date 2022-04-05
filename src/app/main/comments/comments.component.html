@@ -7,7 +7,7 @@
             <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'" />
         </div>
         <div class="commentMessage">
-            <textarea name="" id="" cols="22" rows="7" [formControl]="text" maxlength="255"></textarea>
+            <textarea name="" id="" cols="65" rows="7" [formControl]="text" maxlength="255"></textarea>
             <button class="sendComment" (click)="addComments()">
                 <fa-icon class="sendIcon" [icon]="faPaperPlane"></fa-icon>
             </button>
