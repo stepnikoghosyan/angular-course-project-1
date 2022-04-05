@@ -5,8 +5,14 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 30px;
+  align-item: baseline;
 }
-
+.cancel-btn {
+  padding: 12px 16px;
+}
+.create-btn {
+  margin: 0 20px;
+}
 .upload-image {
   width: 150px;
   margin: auto;
