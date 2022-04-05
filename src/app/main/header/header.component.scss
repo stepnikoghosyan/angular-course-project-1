@@ -58,6 +58,7 @@ a:visited{
     margin-left: 10px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .open{
@@ -68,7 +69,7 @@ a:visited{
     list-style: none;
     position: absolute;
     right: 2.5%;
-    top: 8%;
+    top: 100%;
     box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
     background-color: rgb(247, 247, 247);
     width: 100px;
