@@ -1,4 +1,3 @@
-
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="posts">
   <div class="title" >
@@ -13,12 +12,9 @@
 <div class="search filter">
     <!-- <input type="text" placeholder="Search By Author" [formControl] = 'search' >
     <button><fa-icon class="searchIcon" [icon]="faCaretDown"></fa-icon></button> -->
-    
-    <select class="filterBy" name="Search By Author" size="0">
+    <select class="filterBy" name="Search By Author" size="0" #ref>
       <option value="" disabled selected hidden>Search By Author</option>
- 
-      <!-- <option value="@Me">Search By Author</option> -->
-      <option value="Name Surname">Name Surname</option>
+      <option *ngFor="let name of userName">{{name.firstName }} {{name.lastName}}</option>
     </select>
 </div>
   </div>

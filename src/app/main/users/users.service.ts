@@ -36,5 +36,10 @@ export class UsersService {
     })
   }
 
+  getAllUsers() {
+    return this.httpClient.get(`${this.baseUrl}users`)
+  }
+
+
   
 }
