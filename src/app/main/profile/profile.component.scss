@@ -42,18 +42,19 @@ input {
 
 .eye{
     position: absolute;
-    left: 59%;
-    top: 86.7%;
+    left: 90%;
+    bottom: 33%;
 }
 
 .confirmPass{
     position: relative;
+
 }
 
 .eyeConfirm{
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 90%;
+    bottom: 33%;
 }
 
 .formErr{
@@ -108,4 +109,12 @@ input {
 
 .file{
     display: none;
+}
+
+.form-control{
+margin-top: 20px;
+}
+.pass{
+    margin-top: 0;
+    position: relative;
 }
