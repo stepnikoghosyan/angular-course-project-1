@@ -19,6 +19,10 @@ export class UsersComponent implements OnInit {
   searchTextChanged$: Subject<string> = new Subject<string>();
   isButtonClicked: boolean = false;
 
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private userService: UsersService,
@@ -41,6 +45,12 @@ export class UsersComponent implements OnInit {
     this.searchTextChanged$.next(event);
   }
 
+  onPageChange(event: number) {
+    this.isLoading = true;
+    this.currentPage = event;
+    this.users$ = this.getUsers(this.searchText);
+  }
+
   private onSearchChanged() {
     this.users$ = this.searchTextChanged$.pipe(
       startWith(this.searchText),
@@ -49,6 +59,7 @@ export class UsersComponent implements OnInit {
         return !(prev !== curr || this.isButtonClicked)
       }),
       switchMap(value => {
+        this.currentPage = 1;
         this.isLoading = true;
         this.isButtonClicked = false;
         this.router.navigate(['/users'], {
@@ -64,11 +75,14 @@ export class UsersComponent implements OnInit {
   private getUsers(searchValue: string): Observable<UserModel[]> {
     const params: UserQueryParamsModel = {
       search: searchValue,
+      page: this.currentPage,
+      pageSize: this.itemsPerPage
     }
     return this.userService.getUsers(params)
       .pipe(
         map(data => {
           this.isLoading = false;
+          this.totalItems = data.count;
           return data.results
         }),
         catchError((err) => {

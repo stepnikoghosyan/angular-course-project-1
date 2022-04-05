@@ -1,3 +1,4 @@
+
 .active {
   border-bottom: 2px solid black;
 }
@@ -37,6 +38,10 @@ header {
     }
 
   }
+  .flex-container a.active {
+    border-color: #17a2b8;
+
+  }
   .dropdown {
     a {
       display: flex;
@@ -48,13 +53,20 @@ header {
     }
   }
   .flex-container > a:hover,.dropdown:hover{
-    border-color: black;
+    border-color: #17a2b8;
   }
 
-  .flex-container > a.disabled {
-    pointer-events: none;
-    cursor: default;
-    color: #cccccc !important;
+  .flex-container {
+    > a {
+      &:focus {
+        color: #000;
+      }
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: #cccccc !important;
+      }
+    }
   }
 
   .title {
@@ -105,8 +117,14 @@ header {
 
 
 
-  .dropdown-content a:hover {
-    background-color: #ddd;
+  .dropdown-content {
+    a {
+      border-left: 2px solid transparent;
+      &:hover {
+        background-color: #ddd;
+        border-color: #17a2b8;
+      }
+    }
   }
 
   .dropdown:hover .dropdown-content {

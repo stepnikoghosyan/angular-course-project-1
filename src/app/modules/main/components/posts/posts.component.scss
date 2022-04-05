@@ -10,7 +10,7 @@
 }
 .filter-form {
   display: flex;
-  align-items: baseline;
+  align-items: center;
 }
 .search-container {
   background-color: #ffffff;
@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20px 20px 20px 0px;
+  margin: 20px 0;
   border: 1px solid #ccc;
 
   input {
@@ -29,9 +29,6 @@
     height: 100%;
     width: 100%;
     padding: 6px 10px;
-    .disabled {
-
-    }
   }
 
   button {
@@ -50,4 +47,25 @@
             margin-top: 10px;
         }
     }
+}
+
+.ng-select.custom ::ng-deep .ng-select-container   {
+  height: 44px;
+  width: 250px;
+  margin-left: 33px;
+
+}
+
+.ng-select.custom ::ng-deep  .ng-input>input {
+  border-radius: 0;
+  font-size: 18px;
+}
+
+
+.my-pagination ::ng-deep .ngx-pagination {
+  float: right;
+
+  .current {
+    background-color: grey;
+  }
 }

@@ -11,4 +11,13 @@ export class PostContainerComponent {
   @Input()
   posts$: Observable<PostModel[]> = of([]);
 
+  @Input()
+  currentPage: number = 1;
+
+  @Input()
+  itemsPerPage: number = 10;
+
+  @Input()
+  totalItems: number = 0;
+
 }

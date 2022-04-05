@@ -3,26 +3,25 @@
   <form [formGroup]="filterForm" class="filter-form">
     <div class="search-container">
       <input formControlName="title" type="text" placeholder="Search by title" [readOnly]="isLoading">
-      <button type="button" (click)="filterByUser()"><i class="fa fa-search"></i></button>
+      <button type="button"><i class="fa fa-search"></i></button>
     </div>
-    <p-dropdown formControlName="user" (onChange)="filterByUser()" [options]="users" [(ngModel)]="selectedUser" [filter]="true"
-                [resetFilterOnHide]="true" filterBy="firstName,lastName" [showClear]="true" placeholder="Select a user">
-      <ng-template pTemplate="selectedItem">
-        <div class="country-item country-item-value" *ngIf="selectedUser">
-          <div>{{selectedUser | fullName:selectedUser.id === currentUser?.id }}</div>
-        </div>
-      </ng-template>
-      <ng-template let-user pTemplate="item">
-        <div class="country-item">
-          <div>{{user | fullName:user.id === currentUser?.id }}</div>
-        </div>
-      </ng-template>
-    </p-dropdown>
+    <ng-select class="custom" formControlName='user'
+               [searchable]="!filterForm.controls['user'].value"
+               placeholder="Select a user">
+      <ng-option *ngFor="let user of users$ | async"
+                 [value]="user.id">
+        {{user | fullName: user.id === currentUser?.id}}
+      </ng-option>
+    </ng-select>
   </form>
   <button class="create-btn " routerLink="/posts/add">
     Create Post
   </button>
 </div>
-<app-post-container [posts$]="posts$">
+<app-post-container [posts$]="posts$"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="itemsPerPage"
+                    [currentPage]="currentPage">
 </app-post-container>
+<pagination-controls *ngIf="!isLoading && totalItems" class="my-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
