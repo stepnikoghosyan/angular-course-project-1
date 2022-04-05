@@ -35,11 +35,8 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$), debounceTime(300),
-      // switchMap((res: string) => {
-      //   return this.activatedRoute.queryParams
-      // })
-    ).subscribe({
+    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$), debounceTime(300))
+    .subscribe({
       next: (value: string) => {
         this.router.navigate(['/users'], {
           queryParams: {
@@ -48,13 +45,12 @@ export class UsersComponent implements OnInit {
             page: this.page
           }
         })
-        // this.users$ = this.getUser(params['page'],);
       }
     })
 
     this.activatedRoute.queryParams
       .subscribe({
-        next: (params) => {
+        next: (params) => { 
           this.users$ = this.getUser(params['page'], params['pageSize'], params['search']);
         }
       })
@@ -69,25 +65,8 @@ export class UsersComponent implements OnInit {
         this.isLoading = false;
       }),
       map((data: any) => {
-
         const pageCount = Math.ceil(data.count / this.pageSize);
         this.pageArr = new Array(pageCount);
-        // if (search != '') {
-        //   this.router.navigate(['/users'], {
-        //     queryParams: {
-        //       search: search,
-        //       pageSize: data.count,
-        //       page: this.pageCount
-        //     }
-        //   })
-        // } else {
-        //   this.router.navigate(['/users'], {
-        //     queryParams: {
-        //       pageSize: this.pageSize,
-        //       page: index,
-        //     }
-        //   })
-        // }
         return data?.results
       }
       ),

@@ -13,6 +13,7 @@ import { CommentsService } from './comments.service';
 })
 export class PostViewComponent implements OnInit, OnDestroy {
 
+  isLoading: boolean = false;
   postsModel?: PostsModel = {} as PostsModel;
   unSubscribe$ = new Subject<void>();
   resetText = false;
@@ -35,13 +36,17 @@ export class PostViewComponent implements OnInit, OnDestroy {
       })).subscribe()
   }
 
-  getComments(res: createCommentModel) {
+  createComment(res: createCommentModel) {
     this.resetText = false;
+    this.isLoading = true
     this.commentsService.addComments(this.postsModel!.id, res)
       .pipe(takeUntil(this.unSubscribe$), switchMap(() => {
         return this.getPost(this.postsModel!.id)
       })).subscribe({
-        next: () => { this.resetText = true }
+        next: () => { 
+          this.resetText = true,
+          this.isLoading = false
+         }
       })
   }
 

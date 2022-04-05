@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError,  Observable, of, tap } from 'rxjs';
@@ -21,18 +21,22 @@ export class PostsService {
   ) { }
 
   getPosts(userID?: number): Observable<PaginationModel<PostsModel>> {
-    let params: any = {
-      showAll: true
-    }
-
-    if (userID) {
-      params.userID = userID.toString();
-    }
+    const queryParams = this.postsQueryParams(userID)
 
     return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`, {
-      params
+      params: queryParams
     })
 
+  }
+
+  postsQueryParams (userId?: number) {
+    if(userId) {
+      return new HttpParams()
+      .append('userId', userId)
+    }else {
+      return new HttpParams()
+      .append('showAll', true)
+    }
   }
 
   createPost(obj: PostDto) {
