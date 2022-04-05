@@ -1,9 +1,6 @@
 .filter-content {
-  .create-btn {
-    margin-left: 20px;
-    height: 55px;
-    margin-top: 20px;
-  }
+  align-items: center;
+  margin-bottom: 15px;
 }
 .top-content {
     justify-content: space-between;
@@ -14,15 +11,15 @@
 }
 .search-container {
   background-color: #ffffff;
-  width: 300px;
+  max-width: 300px;
   height: 44px;
   border-radius: 5px;
   max-width: 300px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20px 0;
   border: 1px solid #ccc;
+  margin-right: 15px;
 
   input {
     all: unset;
@@ -41,7 +38,7 @@
 
 
 
-@media screen and(max-width:765px) {
+@media screen and(max-width:767px) {
     .top-content {
         flex-direction: column;
         p-dropdown,
@@ -49,18 +46,33 @@
             margin-top: 10px;
         }
     }
+    .filter-content {
+      flex-wrap: wrap;
+      .search-container {
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      .ng-select.custom { 
+        max-width: 100%;
+        width: 100%;
+      }
+      .create-btn {
+        margin-top: 15px;
+      }
+
+    }
 }
 
-.ng-select.custom ::ng-deep .ng-select-container {
-  height: 44px;
+.ng-select.custom {
   width: 250px;
-  margin-left: 33px;
+  ::ng-deep .ng-select-container {
+    height: 44px;
+  }
+  
 }
 
-.ng-select.custom ::ng-deep .ng-dropdown-panel{
-  width: 250px;
-  margin-left: 33px;
-}
 
 .ng-select.custom ::ng-deep  .ng-input>input {
   border-radius: 0;
@@ -69,24 +81,12 @@
 
 
 .my-pagination ::ng-deep .ngx-pagination {
-  margin: 60px 30px;
-  float: right;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
 
   .current {
     background-color: #17a2b8;
   }
 }
 
-@media only screen and (max-width: 414px) {
-  .ng-select.custom ::ng-deep .ng-select-container {
-    margin-left: 0px;
-  }
-
-  .ng-select.custom ::ng-deep .ng-dropdown-panel{
-    margin-left: 0px;
-  }
-  .filter-content .create-btn {
-    margin-left: 0px;
-  }
-
-}

@@ -1,5 +1,6 @@
+<section>
 <h1 class="text-center">Posts</h1>
-<div class="filter-content d-flex flex-end container top-content">
+<div class="filter-content d-flex flex-end top-content">
   <form [formGroup]="filterForm" class="filter-form">
     <div class="search-container">
       <input formControlName="title" type="text" placeholder="Search by title"
@@ -28,4 +29,6 @@
 </app-post-container>
 <pagination-controls *ngIf="!isLoading && totalItems" class="my-pagination"
                      (pageChange)="onPageChange($event)"></pagination-controls>
+                       
+</section>
 <app-loader [bigLoader]="true" *ngIf="isLoading"></app-loader>

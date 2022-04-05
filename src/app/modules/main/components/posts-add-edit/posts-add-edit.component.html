@@ -1,4 +1,4 @@
-<div class="container-medium">
+<section>
   <h2 class="text-center">{{postId ? 'Update Post' : 'Create Post'}}</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
@@ -45,4 +45,4 @@
       <button [disabled]="form.invalid || submitted" class="create-btn">{{postId ? 'Update' : 'Create'}} </button>
     </div>
   </form>
-</div>
+</section>

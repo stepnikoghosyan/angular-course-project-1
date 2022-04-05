@@ -1,5 +1,4 @@
 
-
 header {
   position: fixed;
   flex-wrap: wrap;
@@ -31,7 +30,7 @@ header {
         display: block;
           position: relative;
           text-align: center;
-          font-size: 18px;
+          font-size: 17px;
           padding: 9px 15px;
           border-bottom: 2px solid transparent;
            color: #000;
@@ -50,8 +49,8 @@ header {
   .account-user-avatar {
     margin-left: 10px;
     img {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
     }
     >.nav-item {
@@ -118,14 +117,13 @@ header {
 @media only screen and (max-width: 767px) {
   header {
     .navbar-brand {
-      font-size: 18px;
+      font-size: 15px;
     }
     .navbar-nav {
       .nav-item {
-        margin: 0 4px;
+        margin: 0 2px;
         .nav-link {
-          font-size: 15px;
-          padding: 7px 10px;
+          font-size: 12px;
         }
       }
     }

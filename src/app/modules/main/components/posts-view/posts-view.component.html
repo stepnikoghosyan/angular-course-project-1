@@ -1,5 +1,4 @@
-<div *ngIf="post$ | async as post" class="container">
-  <section>
+<section *ngIf="post$ | async as post" >
     <div class="row">
     <div class="flex-400">
       <div class="sticky-wrapper">
@@ -13,7 +12,7 @@
             <p class="post-date">{{post?.createdAt | date: 'mediumDate'}}</p>
           </div>
         </div>
-        <h1 class="post-title">{{post?.title}}</h1>
+        <h3 class="post-title">{{post?.title}}</h3>
         <div class="post-image-wrapper">
           <img #image [src]="post?.imageUrl | imageUrl" (error)="image.src='assets/images/default.jpg'" alt="">
         </div>
@@ -27,6 +26,6 @@
     </div>
   </div>
 </section>
-</div>
+
 
 <app-loader [bigLoader]="true" *ngIf="isLoading"></app-loader>
