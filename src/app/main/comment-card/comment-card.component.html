@@ -1,6 +1,6 @@
 <div class="commentCard">
     <div class="imgContent">
-        <img class="userImg" [src]=" 'assets/default.png'" />
+        <img class="userImg" [src]="userComment!.user.profilePictureUrl||'assets/default.png'" />
     </div>
     <div class="commentView">
         <h4>{{userComment?.user?.firstName }} {{ userComment?.user?.lastName}}</h4>

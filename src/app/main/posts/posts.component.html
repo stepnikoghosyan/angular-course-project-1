@@ -10,19 +10,14 @@
     
 </div>
 <div class="search filter">
-    <!-- <input type="text" placeholder="Search By Author" [formControl] = 'search' >
-    <button><fa-icon class="searchIcon" [icon]="faCaretDown"></fa-icon></button> -->
-    <select class="filterBy" name="Search By Author" size="0" #ref>
-      <option value="" disabled selected hidden>Search By Author</option>
-      <option *ngFor="let name of userName">{{name.firstName }} {{name.lastName}}</option>
+    <select class="filterBy" name="Search By Author" size="0" [formControl] = "author" >
+      <option disabled selected hidden>Search By Author</option>
+      <option [value]="user.id" *ngFor="let user of users">
+        {{user.firstName }} {{user.lastName}}
+      </option>
     </select>
 </div>
   </div>
-  <!-- <div class="btn" *ngIf=" !isLoading">
-    <a class="routerBtn" routerLink="/posts/create" >
-      Create post
-    </a>
-  </div> -->
   <div>
     <div>
     <div class="cards">

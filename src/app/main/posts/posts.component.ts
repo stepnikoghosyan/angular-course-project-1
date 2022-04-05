@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, finalize, map, Observable, of, Subject, takeUntil } from 'rxjs';
+import { catchError, finalize, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { PostsModel } from 'src/app/models/posts.model';
 import { NotificationService } from 'src/app/notification-service/notification.service';
 import { PostsService } from './posts.service';
@@ -19,15 +19,19 @@ export class PostsComponent implements OnInit, OnDestroy {
   faCaretDown = faCaretDown;
   unSubscribe$ = new Subject<void>();
   isLoading = true;
-  posts$!: Observable<PostsModel[]>;
+  posts$!:any
   search: FormControl;
   usersInfo: any = [];
-  userName: any = [];
+  users: any = [];
+  author: FormControl
   constructor(
     private postsService: PostsService,
     private notifyService: NotificationService,
     private usersService: UsersService
-  ) { this.search = new FormControl(''); }
+  ) {
+    this.search = new FormControl('');
+    this.author = new FormControl('');
+  }
 
   ngOnInit(): void {
     this.posts$ = this.postsService.getPosts().pipe(
@@ -40,16 +44,32 @@ export class PostsComponent implements OnInit, OnDestroy {
         this.notifyService.showError(error.error.message, 'Error');
         return of([]);
       }))
+    this.getUsersName();
 
-    this.givTheNameUsers()
+    this.searchUser()
+
   }
 
-  givTheNameUsers() {
+
+  searchUser(){
+   return this.author.valueChanges.pipe(takeUntil(this.unSubscribe$),
+      switchMap((id: any) => {
+        this.isLoading = false;
+        return this.postsService.getPosts(id)
+      }),
     
+    ) .subscribe({
+      next: (res) => {
+        console.log(res)
+      }
+    })
+   
+  }
+  getUsersName() {
     this.usersService.getAllUsers().subscribe(val => {
       this.usersInfo = val
-      this.userName = this.usersInfo.results
-      this.userName.unshift({firstName:'', lastName:'@ME'})
+      this.users = this.usersInfo.results
+      this.users.unshift({ firstName: '', lastName: '@ME' })
     })
 
   }
