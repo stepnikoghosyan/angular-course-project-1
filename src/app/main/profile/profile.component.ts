@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatchingValidator } from './matching-validator';
 import { UsersService } from '../users/users.service';
 import { UserModelDto } from 'src/app/models/user.model';
-
+import { NotificationService } from 'src/app/notification-service/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,9 @@ export class ProfileComponent implements OnInit {
   faEdit = faEdit;
   faCircleXmark = faCircleXmark;
   img = ''
-
+  isLoading = false;
+  showPassword = true;
+  inputType = 'password';
   form: FormGroup = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -29,11 +32,11 @@ export class ProfileComponent implements OnInit {
       validators: MatchingValidator.mustMatch('password', 'confirmPassword')
     }
   )
-  // MatchingValidator.mustMatch('password', 'confirmPassword')
 
   constructor(
     private fb: FormBuilder,
-    private userService: UsersService
+    private userService: UsersService,
+    private notifyService: NotificationService,
   ) {
   }
 
@@ -81,6 +84,32 @@ export class ProfileComponent implements OnInit {
 
 
   update() {
+    const userPut = new UserModelDto(this.form.value)
+    userPut.id = this.userService.currentProfile!.id
+    if (this.form.valid) {
+      this.isLoading = true;
+      this.userService.putUsers(userPut)
+        .subscribe({
+          next: () => {
+            this.notifyService.showSuccess('The changes were successful', 'Success')
+            this.isLoading = false;
 
+          },
+          error: (error: HttpErrorResponse) => {
+            this.notifyService.showError(error.error.message, 'Error');
+          }
+        })
+    }else{
+      this.notifyService.showError('fill in all the fields', 'Error');
+    }
+  }
+
+  showHidePass(){
+    this.showPassword = !this.showPassword;
+    if (this.showPassword) {
+      this.inputType = 'password';
+    } else {
+      this.inputType = 'text';
+    }
   }
 }

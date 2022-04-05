@@ -1,15 +1,11 @@
-
+<app-loading *ngIf="isLoading"></app-loading>
 <div class="mainProfile">
     <div class="profil">
         <h2>Profile Settings</h2>
-
-        
         <div class="profileCard">
         <div>                                                                                                                                                         
             <div class="profileBody">
                 <form  [formGroup] = 'form'>
-
-
                     <div class="imgContent">
                         <img class="img"    [src] = "img"/>
                         <div class="icons">
@@ -18,9 +14,7 @@
                                     <input class="file" type="file" id="img" formControlName = 'profilePictureUrl'
                                     #file (change)="fileUpload($event)">
                                
-                                    <button  (click)='clickOnFile(file)'>
-                                        <fa-icon class="icon action" [icon]='faEdit'></fa-icon>
-                                    </button>
+                                        <fa-icon class="icon action" [icon]='faEdit' (click)='clickOnFile(file)'></fa-icon>
                                     
                                 </div>
                             </div>
@@ -31,9 +25,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="form-control">
                         <label>First Name</label>
                         <input class="inputMargin" type="text" formControlName="firstName" />
@@ -75,7 +66,7 @@
                    </div>
                     <div class="form-control">
                         <label>Password</label>
-                        <input class="inputMargin" formControlName="password" />
+                        <input type="password" class="inputMargin" formControlName="password" />
                         <img class="eye" >
 
                         <div class="formErr">
@@ -94,8 +85,9 @@
                     </div>
                     <div class="form-control">
                         <label>Confirm password</label>
-                        <input class="inputMargin" formControlName="confirmPassword" />
-                        <img class="eye" > 
+                        <input [type]="inputType" class="inputMargin" formControlName="confirmPassword" />
+                        <img class="eye"  [src] = 'showPassword?"assets/hide.png":"assets/view.png"' 
+                            (click)="showHidePass()">
 
                         <div class="formErr">
                             <div *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched">
@@ -104,9 +96,12 @@
                               </span>
                               <span *ngIf="form.controls['confirmPassword'].hasError('minlength')" class="errors">
                                 Required {{
-                                  form.controls['confirmPassword].getError('minlength').requiredLength - 
+                                  form.controls['confirmPassword'].getError('minlength').requiredLength - 
                                   form.controls['confirmPassword'].getError('minlength').actualLength
                                 }} more characters
+                              </span>
+                              <span *ngIf="form.controls['confirmPassword'].hasError('mustMatch')" class="errors">
+                                You entered incorrectly
                               </span>
                             </div>
                         </div>
