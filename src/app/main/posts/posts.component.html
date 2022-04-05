@@ -1,30 +1,39 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="posts">
-  <div class="title" >
+  <div class="title">
     <h1>Posts</h1>
-  </div > 
-  <div class="searchAndFilter">
-    <div class="search">
-    <input type="search" placeholder="Search By Title" [formControl] = 'search' >
-    <button><fa-icon class="searchIcon" [icon]="faMagnifyingGlass"></fa-icon></button>
-    
-</div>
-<div class="search filter">
-    <select class="filterBy" name="Search By Author" size="0" [formControl] = "author" >
-      <option disabled selected hidden>Search By Author</option>
-      <option [value]="user.id" *ngFor="let user of users">
-        {{user.firstName }} {{user.lastName}}
-      </option>
-    </select>
-</div>
+  </div>
+  <div class="postsHeader">
+    <div class="searchAndFilter">
+      <div class="search">
+        <input type="search" placeholder="Search By Title" [formControl]='search'>
+        <button>
+          <fa-icon class="searchIcon" [icon]="faMagnifyingGlass"></fa-icon>
+        </button>
+
+      </div>
+      <div class="search filter">
+        <select type="search" class="filterBy" name="Search By Author" size="0" [formControl]="author">
+          <option value="" disabled selected hidden>Search By Author</option>
+          <option [value]="user.id" *ngFor="let user of users">
+            {{user.firstName }} {{user.lastName}}
+          </option>
+        </select>
+      </div>
+
+    </div>
+    <div class="createPost">
+      <div class="btn" *ngIf=" !isLoading">
+        <a class="routerBtn" routerLink="/posts/create">
+          Create post
+        </a>
+      </div>
+    </div>
   </div>
   <div>
     <div>
-    <div class="cards">
-      <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
+      <div class="cards">
+        <app-card *ngFor="let post of posts$ | async" [post]="post"> </app-card>
+      </div>
     </div>
-  </div> 
-</div>
-
-
-
+  </div>
