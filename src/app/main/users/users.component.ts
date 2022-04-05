@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
   search: FormControl;
   isLoading = true;
   pageSize = 12;
-  pageCount = 1;
+  page = 1;
   pageArr?: any[]
 
   constructor(
@@ -35,55 +35,38 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$), debounceTime(300),
-      switchMap((res: string) => {
-        return this.activatedRoute.queryParams
-      })
-    ).subscribe({
-      next: (params) => {
-
-        this.users$ = this.getUser(params['page'],);
+    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$), debounceTime(300))
+    .subscribe({
+      next: (value: string) => {
+        this.router.navigate(['/users'], {
+          queryParams: {
+            search: value,
+            pageSize: this.pageSize,
+            page: this.page
+          }
+        })
       }
     })
 
     this.activatedRoute.queryParams
       .subscribe({
-        next: (params) => {
-
-          this.users$ = this.getUser(params['page'], params['search']);
+        next: (params) => { 
+          this.users$ = this.getUser(params['page'], params['pageSize'], params['search']);
         }
       })
 
   }
 
 
-  getUser(index = this.pageCount, search = this.search.value) {
-    return this.usersService.getUsers(this.pageSize, index, search).pipe(
+  getUser(index = this.page, pageSize = this.pageSize, search = this.search.value) {
+    return this.usersService.getUsers(pageSize, index, search).pipe(
       takeUntil(this.unSubscribe$),
       finalize(() => {
         this.isLoading = false;
       }),
       map((data: any) => {
-
-        this.pageCount = Math.ceil(data.count / this.pageSize);
-        this.pageArr = new Array(this.pageCount);
-        if (search != '') {
-          this.router.navigate(['/users'], {
-            queryParams: {
-              search: search,
-              pageSize: data.count,
-              page: this.pageCount
-            }
-          })
-        } else {
-          this.router.navigate(['/users'], {
-            queryParams: {
-              pageSize: this.pageSize,
-              page: index,
-            }
-          })
-        }
+        const pageCount = Math.ceil(data.count / this.pageSize);
+        this.pageArr = new Array(pageCount);
         return data?.results
       }
       ),
@@ -98,5 +81,7 @@ export class UsersComponent implements OnInit {
     this.isLoading = true;
     this.users$ = this.getUser(index);
   }
+
+  
 
 }

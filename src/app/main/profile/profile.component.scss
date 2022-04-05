@@ -46,10 +46,6 @@ input {
     bottom: 33%;
 }
 
-.confirmPass{
-    position: relative;
-
-}
 
 .eyeConfirm{
     position: absolute;
@@ -79,7 +75,6 @@ input {
     width: 40%;
     display: flex;
     justify-content: center;
-    // padding: 20px;
 }
 .actionEdit {
     width: 50%;
@@ -117,4 +112,8 @@ margin-top: 20px;
 .pass{
     margin-top: 0;
     position: relative;
+}
+.confirmPass{
+    position: relative;
+    margin-top: 0;
 }

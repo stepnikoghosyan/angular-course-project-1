@@ -42,7 +42,6 @@ export class CommentsComponent implements OnInit {
   }
 
   addComments() {
-    console.log(this.text);
     const obj: createCommentModel = {
       message: this.text.value
     }

@@ -20,10 +20,14 @@ export class UsersService {
 
   userQueryParams(pageSize: number, page: number, search: string) {
     if(search != ''){
-      return new HttpParams().append('search', search);
+      return new HttpParams()
+      .append('search', search)
+      .append('showAll', true);
     }else{
-      return new HttpParams().append('showAll', false).append('pageSize', pageSize)
-      .append('page', page).append('search', search);
+      return new HttpParams()
+      .append('showAll', false)
+      .append('pageSize', pageSize)
+      .append('page', page);
     }
    
   }
@@ -45,5 +49,4 @@ export class UsersService {
   }
 
 
-  
 }
