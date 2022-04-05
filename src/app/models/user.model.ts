@@ -5,7 +5,7 @@ export class UserModelDto {
   id: number;
   lastName: string;
   profilePictureUrl: string | null;
-  activatedAt?: string;
+  activatedAt?: string | null;
   
   constructor(data:any) {
     this.email = data.email;

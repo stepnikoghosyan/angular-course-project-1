@@ -36,5 +36,14 @@ export class UsersService {
     })
   }
 
+  putUsers(body:UserModelDto){
+    return this.httpClient.put(`${this.baseUrl}users`,body)
+  }
+  
+  getAllUsers() {
+    return this.httpClient.get(`${this.baseUrl}users`)
+  }
+
+
   
 }
