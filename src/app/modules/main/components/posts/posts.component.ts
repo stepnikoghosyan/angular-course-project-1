@@ -80,7 +80,6 @@ export class PostsComponent implements OnInit, OnDestroy {
       },
       queryParamsHandling: 'merge',
     });
-    debugger
   }
 
   private subscribeToQueryParamsChanges() {
