@@ -25,7 +25,7 @@ import {TextareaAutoresizeDirective} from './directives/textarea-autoresize.dire
 import {AutosizeModule} from "ngx-autosize";
 import {AuthComponentsModule} from "../form-components/auth-components.module";
 import {NgSelectModule} from "@ng-select/ng-select";
-import {CommentsComponent} from './comments/comments.component';
+import {CommentsComponent} from './components/comments/comments.component';
 import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({

@@ -3,10 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, map, Observable, of, Subject, takeUntil } from 'rxjs';
 import { PaginatedResponseModel } from 'src/app/models/paginated-response.model';
 import { NotificationService } from 'src/app/services/notification.service';
-import { CommentDto, CommentModel } from '../models/comment.model';
-import { CommentsQueryParamsModel } from '../models/comments-query-params.model';
-import { UserModel } from '../models/user.model';
-import { CommentsService } from '../services/comments.service';
+import { CommentDto, CommentModel } from '../../models/comment.model';
+import { CommentsQueryParamsModel } from '../../models/comments-query-params.model';
+import { UserModel } from '../../models/user.model';
+import { CommentsService } from '../../services/comments.service';
 
 @Component({
   selector: 'app-comments',
