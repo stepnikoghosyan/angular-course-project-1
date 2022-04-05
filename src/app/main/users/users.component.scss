@@ -25,8 +25,8 @@ input{
     
 }
 .searchIcon {
-    color: rgb(117, 117, 117); 
-    font-size: 16px;  
+    color: rgb(39, 118, 221); 
+    font-size: 16px; 
     cursor: pointer;
 }
 
@@ -44,6 +44,7 @@ input:focus-visible{
 
 
 button {
+    padding-top: 7px;
     border: 1px solid #ccc;
     border-radius: 4px;
     border-left: none;

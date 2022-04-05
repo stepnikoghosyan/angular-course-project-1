@@ -18,9 +18,9 @@
                                     <input class="file" type="file" id="img" formControlName = 'profilePictureUrl'
                                     #file (change)="fileUpload($event)">
                                
-                                    <button  (click)='clickOnFile(file)'>
-                                        <fa-icon class="icon action" [icon]='faEdit'></fa-icon>
-                                    </button>
+                                    <!-- <button  (click)='clickOnFile(file)'> -->
+                                        <fa-icon class="icon action" [icon]='faEdit' (click)='clickOnFile(file)' ></fa-icon>
+                                    <!-- </button> -->
                                     
                                 </div>
                             </div>

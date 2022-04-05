@@ -42,15 +42,36 @@ input{
     
 }
 .searchIcon {
-    color: rgb(117, 117, 117); 
-    font-size: 16px;  
+    color: rgb(39, 118, 221); 
+    font-size: 16px; 
     cursor: pointer;
 }
+
+.filterBy{
+    width: 220px;
+    height: 35px;
+    padding-left: 5px;    
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: gray;
+    font-size: 16px;
+    overflow-y: scroll;
+}
+
+.filterBy:focus-visible{
+    outline: none;
+}
+
+option {
+  color: black;
+}
+
 input:focus-visible{
     outline: none;
 }
 
 button {
+    padding-top: 7px;
     border: 1px solid #ccc;
     border-radius: 4px;
     border-left: none;
