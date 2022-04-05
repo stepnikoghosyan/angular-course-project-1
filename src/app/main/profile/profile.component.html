@@ -38,11 +38,11 @@
                         <label>First Name</label>
                         <input class="inputMargin" type="text" formControlName="firstName" />
                         <div class="formErr" *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
-                            <div>
+                          
                                 <span *ngIf="form.controls['firstName'].hasError('required')" class="errors">
                                     Required
                                 </span>
-                            </div>   
+                            
                         </div>
                     </div>
                     
@@ -50,11 +50,11 @@
                         <label>Last Name</label>
                         <input class="inputMargin" type="text" formControlName="lastName" /> 
                         <div class="formErr" *ngIf="form.controls['lastName'].invalid && form.controls['lastName'].touched">
-                            <div>
+                           
                                 <span *ngIf="form.controls['lastName'].hasError('required')" class="errors">
                                     Required
                                 </span>
-                            </div>   
+                             
                         </div>
                      </div>
                      
@@ -73,12 +73,12 @@
                             </div>
                           </div>
                    </div>
-                    <div class="form-control">
+                    <div class="form-control pass">
                         <label>Password</label>
                         <input class="inputMargin" formControlName="password" />
                         <img class="eye" >
 
-                        <div class="formErr">
+                        <div class="formErr ">
                             <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
                               <span *ngIf="form.controls['password'].hasError('required')" class="errors">
                                 Required
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control pass">
                         <label>Confirm password</label>
                         <input class="inputMargin" formControlName="confirmPassword" />
                         <img class="eye" > 
