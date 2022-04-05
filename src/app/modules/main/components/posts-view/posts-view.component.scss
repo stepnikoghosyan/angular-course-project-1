@@ -50,8 +50,10 @@
     margin-bottom: 15px;
 }
 .sticky-wrapper {
-    position: sticky;
-    top: 110px;
+    @media only screen and (min-width: 992px) {
+        position: sticky;
+        top: 95px;
+    }
     background-color: white;
     padding: 15px;
     border-radius: 10px;
@@ -63,4 +65,9 @@
 }
 .back-button {
     color: #a4a3a3;
+}
+@media only screen and (max-width: 991px) {
+    .sticky-wrapper {
+        margin-bottom: 20px;
+    }
 }

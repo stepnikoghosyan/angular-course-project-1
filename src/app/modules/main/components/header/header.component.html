@@ -1,21 +1,39 @@
 <header>
-  <div>
-    <a routerLink="" class="title"> Angular Course</a>
-  </div>
-  <div class="flex-container push">
-    <a routerLink="/home" routerLinkActive="active"> Home </a>
-    <a routerLink="/users" routerLinkActive="active"> Users </a>
-    <a routerLink="/posts" routerLinkActive="active"> Posts </a>
-    <div class="dropdown">
-      <a>
-        <img #image [src]="user?.profilePictureUrl | profilePic" (error)="image.src='assets/images/profile_picture.jpg'" alt="">
-        <i class="fa fa-caret-down"></i>
-      </a>
-      <div class="dropdown-content">
-        <a routerLink="/profile" > Profile </a>
-        <a routerLink=""  (click)="navigateToMyPosts()"> My Posts </a>
-        <a routerLink="" (click)="onLogout($event)"> Logout </a>
+    <div class="navbar-container">
+      <a routerLink="" class="navbar-brand"> Angular Course</a>
+      <div class="m-l-auto align-items-center d-flex">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active"> Home </a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" routerLink="/users" routerLinkActive="active"> Users </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/posts" routerLinkActive="active"> Posts </a>
+          </li>
+        </ul>
+    
+        <ul class="account-user-avatar">
+          <li class="nav-item">
+            <a class="nav-link"> 
+              <img #image [src]="user?.profilePictureUrl | profilePic" (error)="image.src='assets/images/profile_picture.jpg'" alt="">
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-content">
+              <li>
+                <a routerLink="/profile" > Profile </a>
+              </li>
+              <li>
+                <a routerLink=""  (click)="navigateToMyPosts()"> My Posts </a>
+              </li>
+              <li>
+                <a routerLink="" (click)="onLogout($event)"> Logout </a>
+              </li>
+
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
 </header>

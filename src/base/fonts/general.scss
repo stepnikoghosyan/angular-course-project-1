@@ -39,7 +39,9 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-
+.m-l-auto {
+  margin-left: auto;
+}
 .form-control {
   width: 100%;
   border: 1px solid rgb(221, 216, 216);
@@ -204,7 +206,7 @@ input {
 }
 
 main {
- margin-top: 77px;
+ margin-top: 62px;
 }
 
 textarea {
@@ -372,12 +374,20 @@ textarea {
   }
   .col-8 {
     width: 66.666667%;
-
   }
+
 }
 @media only screen and (min-width: 992px) {
   .col-4 {
     width: 33.33333%;
+  }
+  .flex-1 {
+    flex: 1;
+    min-width: 0;
+  }
+  .flex-400 {
+    min-width: 400px;
+    max-width: 400px;
   }
 }
 .col-4, .col-8 {
@@ -402,4 +412,13 @@ textarea {
 .required:after {
   content: " *";
   color: red;
+}
+[class^="flex-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
+section {
+  padding: 30px 0;
 }

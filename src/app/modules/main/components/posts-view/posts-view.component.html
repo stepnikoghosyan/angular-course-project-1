@@ -1,6 +1,7 @@
-<div *ngIf="post$ | async as post" class="container-medium">
-  <div class="row">
-    <div class="col-4">
+<div *ngIf="post$ | async as post" class="container">
+  <section>
+    <div class="row">
+    <div class="flex-400">
       <div class="sticky-wrapper">
         <div class="m-b-15">
           <a class="back-button" routerLink="/posts">&laquo;Back</a>
@@ -19,12 +20,13 @@
         <div class="post-body">{{post?.body}}</div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="flex-1">
       <div class="comments-wrapper">
       <app-comments [postId]="postId" [user]="user"></app-comments>
     </div>
     </div>
   </div>
+</section>
 </div>
 
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
