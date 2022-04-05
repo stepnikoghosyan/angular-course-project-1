@@ -2,11 +2,14 @@
 <div class="filter-content d-flex flex-end container top-content">
   <form [formGroup]="filterForm" class="filter-form">
     <div class="search-container">
-      <input formControlName="title" type="text" placeholder="Search by title" [readOnly]="isLoading">
+      <input formControlName="title" type="text" placeholder="Search by title"
+             [readOnly]="isLoading"
+             (input)="onPageChange(1)">
       <button type="button"><i class="fa fa-search"></i></button>
     </div>
     <ng-select class="custom" formControlName='user'
                [searchable]="!filterForm.controls['user'].value"
+               (change)="onPageChange(1)"
                placeholder="Select a user">
       <ng-option *ngFor="let user of users$ | async"
                  [value]="user.id">
@@ -23,5 +26,6 @@
                     [itemsPerPage]="itemsPerPage"
                     [currentPage]="currentPage">
 </app-post-container>
-<pagination-controls *ngIf="!isLoading && totalItems" class="my-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
+<pagination-controls *ngIf="!isLoading && totalItems" class="my-pagination"
+                     (pageChange)="onPageChange($event)"></pagination-controls>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
