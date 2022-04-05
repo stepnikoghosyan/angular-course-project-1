@@ -1,16 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  finalize,
-  map,
-  Observable,
-  of,
-  Subject,
-  takeUntil,
-  zip
-} from "rxjs";
+import {catchError, debounceTime, distinctUntilChanged, finalize, map, Observable, of, Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {PostModel} from "../../models/post.model";
@@ -59,7 +48,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.users$ = this.getUsers();
     !this.activatedRoute.snapshot.queryParams['page'] && this.onPageChange(1);
-    zip(this.subscribeToQueryParamsChanges(), this.subscribeToFilterFormChanges())
+    this.subscribeToQueryParamsChanges()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.posts$ = this.getPosts()
@@ -68,13 +57,30 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   onPageChange(event: number) {
     this.currentPage = event;
+    this.appendValueToQueryParams('page', event);
+  }
+
+  onSelectChange(event: number) {
+    this.currentPage = 1;
+    this.appendValueToQueryParams('user', event);
+  }
+
+  onInputChange(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.currentPage = 1;
+    this.appendValueToQueryParams('title', value);
+  }
+
+  private appendValueToQueryParams(key: string, value: string | any) {
     this.router.navigate(['/posts'], {
       relativeTo: this.activatedRoute,
       queryParams: {
-        page: event
+        page: this.currentPage,
+        [key]: value
       },
       queryParamsHandling: 'merge',
     });
+    debugger
   }
 
   private subscribeToQueryParamsChanges() {
@@ -88,24 +94,6 @@ export class PostsComponent implements OnInit, OnDestroy {
             user: queryParams['user'] ? +queryParams['user'] : null,
           });
           this.currentPage = queryParams['page'] ? +queryParams['page'] : this.currentPage;
-          return of(null);
-        }));
-  }
-
-  private subscribeToFilterFormChanges() {
-    return this.filterForm.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        map(values => {
-          this.router.navigate(['/posts'], {
-            relativeTo: this.activatedRoute,
-            queryParams: {
-              title: values.title ? values.title : null,
-              user: values.user ? values.user : null,
-              page: this.currentPage
-            },
-          });
           return of(null);
         }));
   }

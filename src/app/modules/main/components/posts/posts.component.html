@@ -4,12 +4,12 @@
     <div class="search-container">
       <input formControlName="title" type="text" placeholder="Search by title"
              [readOnly]="isLoading"
-             (input)="onPageChange(1)">
+             (input)="onInputChange($event)">
       <button type="button"><i class="fa fa-search"></i></button>
     </div>
     <ng-select class="custom" formControlName='user'
                [searchable]="!filterForm.controls['user'].value"
-               (change)="onPageChange(1)"
+               (change)="onSelectChange($event)"
                placeholder="Select a user">
       <ng-option *ngFor="let user of users$ | async"
                  [value]="user.id">
