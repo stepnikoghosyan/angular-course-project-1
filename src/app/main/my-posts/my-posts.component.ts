@@ -26,16 +26,20 @@ export class MyPostsComponent implements OnInit {
   }
 
   private getMyPosts() {
-      this.posts$ = this.postsService.getPosts(this.usersService.currentProfile?.id).pipe(
-        finalize(() => {
-          this.isLoading = false;
-        }),
-        map(data => data.results),
-        catchError((error: HttpErrorResponse) => {
-          this.notifyService.showError(error.error.message, 'Error');
-          return of([]);
-        }))
-    
+    const params = {
+      userID: this.usersService.currentProfile?.id,
+      showAll: true
+    }
+    this.posts$ = this.postsService.getPosts(params).pipe(
+      finalize(() => {
+        this.isLoading = false;
+      }),
+      map(data => data.results),
+      catchError((error: HttpErrorResponse) => {
+        this.notifyService.showError(error.error.message, 'Error');
+        return of([]);
+      }))
+
   }
 
 

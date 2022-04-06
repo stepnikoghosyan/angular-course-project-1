@@ -44,30 +44,18 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.givUsersName();
-    this.changeUserFormControl();
-    this.changeTitleControl();
     this.checkQueryParams()
   }
-  private changeUserFormControl(): void {
-    this.userDate.valueChanges.pipe(takeUntil(this.unSubscribe$),
-      debounceTime(300)
-    ).subscribe({
-      next: () => {
-        this.sendQueryParams()
-      }
-    })
+  changeUserFormControl(): void {
+    this.sendQueryParams('user', this.userDate.value)
   }
-  private changeTitleControl(): void {
-    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$),
-      debounceTime(300)).subscribe({
-        next: () => {
-          this.sendQueryParams()
-        }
-      })
+  changeTitleControl(): void {
+    this.sendQueryParams('search', this.search.value)
   }
   private checkQueryParams(): void {
     this.activatedRoute.queryParams.pipe(
       takeUntil(this.unSubscribe$),
+      debounceTime(300),
       distinctUntilChanged()
     )
       .subscribe((params: any) => {
@@ -93,12 +81,14 @@ export class PostsComponent implements OnInit, OnDestroy {
         return of([]);
       }));
   }
-  sendQueryParams() {
+  sendQueryParams(key: string, value: string | number) {
     this.router.navigate(['/posts'], {
       queryParams: {
-        search: this.search.value,
-        user: this.userDate.value
+        [key]: value
+        // search: this.search.value,
+        // user: this.userDate.value
       },
+      queryParamsHandling: 'merge',
       relativeTo: this.activatedRoute
     })
   }
