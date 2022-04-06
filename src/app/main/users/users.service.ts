@@ -41,7 +41,16 @@ export class UsersService {
   }
 
   putUsers(body:UserModelDto){
-    return this.httpClient.put(`${this.baseUrl}users`,body)
+    const formData = new FormData();
+    formData.append('email', body.email)
+    formData.append('firstName', body.firstName)
+    formData.append('lastName', body.lastName)
+    if (body.profilePictureUrl) {
+      formData.append('profilePicture', body.profilePictureUrl)
+    }
+
+
+    return this.httpClient.put(`${this.baseUrl}users`,formData)
   }
   
   getAllUsers() {

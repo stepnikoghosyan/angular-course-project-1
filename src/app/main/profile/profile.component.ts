@@ -15,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProfileComponent implements OnInit {
   faEdit = faEdit;
   faCircleXmark = faCircleXmark;
-  img = ''
+  img = '';
   isLoading = false;
   showPassword = true;
   showConfirmPassword = true;
@@ -81,7 +81,7 @@ export class ProfileComponent implements OnInit {
 
   deleteImg() {
     this.form.controls['profilePictureUrl'].reset();
-    this.getImg()
+    this.img = 'assets/default.png'
   }
 
 
@@ -109,9 +109,9 @@ export class ProfileComponent implements OnInit {
   showHidePass(){
     this.showPassword = !this.showPassword;
     if (this.showPassword) {
-      this.inputTypeConfirm = 'password';
+      this.inputType = 'password';
     } else {
-      this.inputTypeConfirm = 'text';
+      this.inputType = 'text';
     }
   }
 
@@ -119,9 +119,9 @@ export class ProfileComponent implements OnInit {
   showHideConfirmPass(){
     this.showConfirmPassword  = !this.showConfirmPassword;
     if (this.showConfirmPassword) {
-      this.inputType = 'password';
+      this.inputTypeConfirm = 'password';
     } else {
-      this.inputType = 'text';
+      this.inputTypeConfirm = 'text';
     }
   }
 }
