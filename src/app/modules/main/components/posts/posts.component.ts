@@ -62,7 +62,9 @@ export class PostsComponent implements OnInit {
         };
 
     searchByAuthor(value?: string) {
-
+         this.postService.getPosts().pipe(
+            map(data=>this.posts =data.results),
+        ).subscribe({})
         if (this.posts && value) {
             console.log("search value", value, value);
             return this.posts$ = of(this.posts.filter((post) => post.user.firstName == value))

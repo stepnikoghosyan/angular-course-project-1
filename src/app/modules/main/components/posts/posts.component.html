@@ -7,7 +7,6 @@
             <ng-select placeholder="Search by author" [searchable]="true" clearAllText="Clear"
                 (change)="searchByAuthor($event)">
                 <ng-option [value]="user.firstName" *ngFor="let user of users" #selectOption>
-
                     {{user.firstName}}
                 </ng-option>
             </ng-select>
