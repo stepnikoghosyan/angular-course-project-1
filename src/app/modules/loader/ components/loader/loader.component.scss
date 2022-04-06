@@ -1,20 +1,22 @@
 .loader {
-  border: 5px solid #f3f3f3;
+  border-style: solid;
+  border-color: #f3f3f3;
   border-radius: 50%;
   border-top: 5px solid #3498db;
   animation: spin 2s linear infinite;
-  margin: 3% 45%;
   -webkit-animation: spin 2s linear infinite;
 }
 .sm-loader {
   width: 30px;
   height: 30px;
   border-width: 5px;
+  margin: 3% 45%;
 }
 .bg-loader {
   width: 65px;
   height: 65px;
   border-width: 7px;
+  margin: 3% auto;
 }
 @-webkit-keyframes spin {
   0% {

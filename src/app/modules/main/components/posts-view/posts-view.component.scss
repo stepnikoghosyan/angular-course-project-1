@@ -65,9 +65,9 @@
     color: #a4a3a3;
 }
 :host::ng-deep {
-    app-loader {
+  .loader-content {
         .loader {
-            margin-top: 10%;
+            margin-top: 10vh;
         }
     }
 }

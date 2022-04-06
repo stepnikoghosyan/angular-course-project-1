@@ -4,7 +4,7 @@
 </div>
 <div>
     <app-send-message [user]="user" (send)="sendComment($event)"></app-send-message>
+    <app-loader *ngIf="isLoading"></app-loader>
     <app-comment-item *ngFor="let comment of comments$ | async" [comment]="comment" [userId]="user?.id">
     </app-comment-item>
 </div>
-<app-loader *ngIf="isLoading"></app-loader>
