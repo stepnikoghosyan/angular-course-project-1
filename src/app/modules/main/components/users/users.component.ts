@@ -13,6 +13,9 @@ import { UsersService } from '../../services/users.service';
 export class UsersComponent implements OnInit {
     showSpinner = false;
     users$?: Observable<GetUserModel[]>;
+    users!: GetUserModel[];
+    itemsPerPage = 9;
+    currentPage = 1;
 
     filterForm = this.formBuilder.group({
         name: ['']
@@ -23,23 +26,29 @@ export class UsersComponent implements OnInit {
 
     ngOnInit(): void {
         this.showSpinner = true
-        this.users$ = this.userService.getUsers().pipe(
+        this.users$= this.userService.getUsers().pipe(
             finalize(() => {
                 this.showSpinner = false
-            }),
-            map(data => data.results))
+            }), map(data => data.results))
+
 
         this.filterForm.valueChanges.pipe(
             debounceTime(300)).subscribe({
                 next: (filterdValue) => {
                     this.users$ = this.userService.getUsers(filterdValue.name).pipe(
                         map(data => data.results)
-                    )}
+                    )
+                }
             })
     }
 
     filterUsers() {
         this.users$ = this.userService.getUsers(this.filterForm.controls['name'].value)
             .pipe(
-                map(data => data.results))}
+                map(data => data.results))
+    }
+
+    onChangePage(event: number) {
+        this.currentPage = event;
+    }
 }

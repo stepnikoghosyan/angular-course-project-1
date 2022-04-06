@@ -41,3 +41,17 @@ mat-spinner {
     margin: auto;
     margin-top: 50px;
 }
+.ngx-pagination .current,
+.btn-info {
+  background: #17a2b8 !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+  margin-top: 100px !important; 
+  cursor: pointer;
+}
+.my_pagination ::ng-deep .ngx-pagination {
+    margin-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    font-size: 25px;
+}

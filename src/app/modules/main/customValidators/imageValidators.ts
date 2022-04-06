@@ -1,35 +1,31 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function imageTypeValidation(arr: string[]): ValidatorFn {
-    return function (control: AbstractControl): ValidationErrors | null {
-        const file = control.value;
-        let isImageType: boolean = false;
-        if (file) {
-            const path: string[] = file.split("\\");
-            const imageType: string[] = path[path.length - 1].split(".");
-            let item = imageType[1].toLowerCase();
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i] === item) {
-                    isImageType = true;
-                }
-            }
-            if (isImageType) {
-                return null;
-            } else {
-                return { type: true };
-            }
+export function fileTypeValidator(mimeTypes: string[]): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const file: File = control.value;
+    const fileExtension = file?.type;
+    return (fileExtension && !mimeTypes.includes(fileExtension)) ?
+      {
+        fileType: {
+          allowedTypes: mimeTypes
         }
-
-        return null;
-    }
+      } : null;
+  };
 }
-export function imageSizeValidation(file: File): ValidatorFn {
-    return function (control: AbstractControl): ValidationErrors | null {
-        const fileSize = file.size;
 
-        if (fileSize > 2097152) {
-            return { size: true };
+export function fileSizeValidator(sizeInBytes: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const file: File = control.value;
+      const fileSize = convertByteToMegaByte(file?.size);
+      return fileSize > sizeInBytes ? {
+        fileSize: {
+          allowedSize: sizeInBytes
         }
-        return null;
-    }
-}
+      } : null;
+    };
+  }
+  
+  function convertByteToMegaByte(sizeInBytes: number): number {
+    const bytesInOneMegaByte = 1024 * 1024;
+    return sizeInBytes / bytesInOneMegaByte;
+  }

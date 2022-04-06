@@ -3,11 +3,12 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { imageTypeValidation } from 'src/app/modules/main/customValidators/imageValidators';
-import { imageSizeValidation } from 'src/app/modules/main/customValidators/imageValidators';
+// import { imageTypeValidation } from 'src/app/modules/main/customValidators/imageValidators';
+// import { imageSizeValidation } from 'src/app/modules/main/customValidators/imageValidators';
 import { PostModel } from '../../models/post.model';
 import { NotificationService } from '../../../../services/notification.service';
 import { PostsService } from '../../services/posts.service';
+import { fileTypeValidator } from '../../customValidators/imageValidators';
 
 @Component({
     selector: 'app-edit-post',
@@ -16,6 +17,7 @@ import { PostsService } from '../../services/posts.service';
 })
 export class EditPostComponent implements OnInit, OnDestroy {
     @ViewChild('file') el!: ElementRef;
+    
     private subscription$ = new Subject<void>()
     post!: PostModel;
     targetValue!: string | null;
@@ -28,7 +30,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     updateForm: FormGroup = this.formBuilder.group({
         title: ['', Validators.required],
         body: ['', Validators.required],
-        imageUrl: ['', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
+        imageUrl: ['', [fileTypeValidator(["jpeg", "jpg", "png"]), ]],
     })
 
 
@@ -92,7 +94,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
         }
         if (event.target.files[0]) {
             const file = <File>event.target.files[0]
-            this.updateForm.controls['imageUrl'].addValidators(imageSizeValidation(file));
+            // this.updateForm.controls['imageUrl'].addValidators(imageSizeValidation(file));
         }
     }
     removeFile() {

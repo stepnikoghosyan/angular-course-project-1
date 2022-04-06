@@ -3,7 +3,7 @@
         <h2>Comments</h2>
         <div class="create_comment">
             <div class="user_img_content">
-                <img [src]="myProfileInfo?.profilePictureUrl | setUserImage " (error)="onImageError()">
+                <img [src]="myProfileInfo?.profilePictureUrl | setUserImage ">
             </div>
             <div class="comment_form">
                 <form [formGroup]="commentsForm" (ngSubmit)="createComment()">
@@ -15,9 +15,9 @@
             </div>
         </div>
 
-        <div class="comments" *ngFor="let comment of comments">
+        <div class="comments" *ngFor="let comment of comments | paginate: { id: 'page', itemsPerPage, currentPage}">
             <div class="user_img_content">
-                <img [src]="comment?.user?.profilePictureUrl | setCommentImage"  (error)="onImageError()">
+                <img [src]="comment?.user?.profilePictureUrl | setCommentImage" (error)="onImageError()">
             </div>
             <div [ngClass]="myProfileInfo?.id !== comment?.user.id? 'comment': 'my_comment'">
                 <p class="user_name">{{comment?.user | userName}}</p>
@@ -27,3 +27,5 @@
     </div>
 </div>
 <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+<pagination-controls *ngIf="!showSpinner" class="my_pagination" (pageChange)="onChangePage($event)" id="page" previousLabel="Previous"
+        nextLabel="Next"></pagination-controls>

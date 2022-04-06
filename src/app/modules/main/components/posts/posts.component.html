@@ -4,20 +4,22 @@
         <form [formGroup]="filterForm">
             <input type="text" placeholder="Search by Title" formControlName="searchByTitle">
             <!-- <i class="fas fa-search"></i> -->
-            <ng-select placeholder="Search by author"
-             [searchable]="true" clearAllText="Clear"
-             (change)="searchByAuthor($event)">
+            <ng-select placeholder="Search by author" [searchable]="true" clearAllText="Clear"
+                (change)="searchByAuthor($event)">
                 <ng-option [value]="user.firstName" *ngFor="let user of users" #selectOption>
-                    
+
                     {{user.firstName}}
                 </ng-option>
             </ng-select>
         </form>
         <button type="button" routerLink="../posts/create">Create Post</button>
     </div>
-    <div class="posts">
-        <app-post-card *ngFor="let post of posts$| async" [post]="post"></app-post-card>
+    <div class="posts" *ngIf=" posts$ | async as posts">
+        <app-post-card *ngFor="let post of posts | paginate: { id: 'page' , itemsPerPage, currentPage}" [post]="post">
+        </app-post-card>
     </div>
     <mat-spinner [diameter]="20" *ngIf="showSpinner"></mat-spinner>
+    <pagination-controls *ngIf="!showSpinner" class="my_pagination" (pageChange)="onChangePage($event)" id="page" previousLabel="Previous"
+        nextLabel="Next"></pagination-controls>
 </div>
 <router-outlet></router-outlet>

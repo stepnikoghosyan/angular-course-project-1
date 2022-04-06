@@ -27,6 +27,8 @@ import { SetUserImagePipe } from './pipes/set-user-image.pipe';
 import { SetCommentImagePipe } from './pipes/set-comment-image.pipe';
 import { UserCardComponent } from './components/users/user-card/user-card.component';
 import { CommentCardComponent } from './components/posts/comments/comment-card/comment-card.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
     declarations: [
@@ -57,7 +59,8 @@ import { CommentCardComponent } from './components/posts/comments/comment-card/c
         MatProgressSpinnerModule,
         ReactiveFormsModule,
         NgSelectModule, 
-        FormsModule
+        FormsModule,
+        NgxPaginationModule
     ]
 })
 export class MainModule { }

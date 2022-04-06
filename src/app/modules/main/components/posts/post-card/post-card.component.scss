@@ -1,40 +1,48 @@
-*{
+* {
     margin: auto;
 }
-:host{
+
+:host {
     margin-top: 50px;
     margin-left: 50px;
 }
-.img{
+
+.img {
     max-width: 200px;
     width: 100%;
 }
-.wrapper{
+
+.wrapper {
     width: 500px;
     border: 1px solid gray;
     border-radius: 4px;
     box-shadow: 0 16px 16px -8px rgb(0 0 0 / 30%);
 
-    .post_content{
+    .post_content {
         display: flex;
         flex-direction: column;
         padding: 0px;
 
-        .post_img{
+        .post_img {
             padding-top: 20px;
             min-height: 150px;
         }
 
-        h3{
+        h3 {
             text-align: center;
             font-size: 21px;
             font-weight: 600;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding: 0px 65px;
         }
-        .post_body{
+
+        .post_body {
             width: 90%;
             margin-top: 20px;
 
-            p{  
+            p {
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;

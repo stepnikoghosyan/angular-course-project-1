@@ -23,8 +23,9 @@ export class PostsService {
         let params = {};
         if (value) {
             params = {
-                showAll: true,
-                'title': value!
+                // showAll: true,
+                'title': value!,
+                pageSize: 10
             }
         }
         return this.httpClient

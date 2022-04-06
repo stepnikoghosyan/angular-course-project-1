@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, finalize, of, Subject, takeUntil } from 'rxjs';
-import { imageSizeValidation, imageTypeValidation } from '../../customValidators/imageValidators';
+import { fileSizeValidator, fileTypeValidator } from '../../customValidators/imageValidators';
 import { NotificationService } from 'src/app/services/notification.service';
 import { errorResponse } from '../../../../../utils/error-response.utility';
 import { PostsService } from '../../services/posts.service';
@@ -31,7 +31,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     createForm: FormGroup = this.formBuilder.group({
         title: ['', Validators.required],
         body: ['', Validators.required],
-        image: ['', [imageTypeValidation(["jpeg", "jpg", "png"]), imageSizeValidation]],
+        image: ['', [fileTypeValidator(["jpeg", "jpg", "png"]), fileSizeValidator]],
     });
 
     get image() {
@@ -44,7 +44,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
         this.isClose = true;
         if (event.target.files[0]) {
             this.file = <File>event.target.files[0];
-            // this.image.addValidators(imageSizeValidation(this.file));
+
         }
     };
 

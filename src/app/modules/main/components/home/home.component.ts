@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.showSpinner = true
         this.posts$ = this.postService.getPosts().pipe(
-            map(data => data.results.slice(-20).reverse()),
+            map(data => data.results.slice(-21).reverse()),
             finalize(() => {
                 this.showSpinner = false;
             }),

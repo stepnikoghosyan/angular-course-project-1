@@ -1,23 +1,28 @@
-.posts-content{
+.posts-content {
     margin: 0 auto;
     width: 90%;
 
-    h1{ 
+    h1 {
         text-align: center;
         font-size: 35px;
         margin-top: 25px;
     }
-    .create_post{
+
+    .create_post {
         display: flex;
         justify-content: space-between;
-        margin-right: 50px;
+        padding: 0px 100px;
+        box-sizing: border-box;
+        align-items: center;
+        margin-top: 80px;
 
-        button{
+        button {
             color: white;
             background-color: #ffc107;
             padding: 10px 15px;
-        } 
-        
+            margin-top: unset;
+        }
+
         input {
             margin-left: 20px;
             height: 45px;
@@ -26,24 +31,43 @@
             padding-left: 10px;
         }
     }
-    .posts{
+
+    .posts {
         display: flex;
         flex-wrap: wrap;
         margin-top: 20px;
     }
 }
-mat-spinner{
+
+mat-spinner {
     margin: auto;
     margin-top: 50px;
 }
-ng-select{
+
+ng-select {
     display: inline-block;
     margin-left: 20px;
 
-    input{
+    input {
         height: 45px;
         border-radius: 4px;
         border: 1px solid gray;
         padding-left: 10px;
     }
+}
+
+.ngx-pagination .current,
+.btn-info {
+    background: #31b1a5 !important;
+    border: transparent !important;
+    border-radius: 20px !important;
+    margin-top: 100px !important;
+    cursor: pointer;
+}
+
+.my_pagination ::ng-deep .ngx-pagination {
+    margin-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    font-size: 25px;
 }

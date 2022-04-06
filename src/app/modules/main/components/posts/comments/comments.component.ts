@@ -23,6 +23,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
     commentCreaterId?: number;
     showSpinner = false;
     isMyComment = false;
+    itemsPerPage = 9;
+    currentPage = 1;
 
     commentsForm: FormGroup = this.formBuilder.group({
         message: ['', [Validators.required]]
@@ -82,6 +84,9 @@ export class CommentsComponent implements OnInit, OnDestroy {
             }
         }
         )
+    }
+    onChangePage(event: number){
+
     }
     ngOnDestroy(): void {
         this.firstSubscription.next()
