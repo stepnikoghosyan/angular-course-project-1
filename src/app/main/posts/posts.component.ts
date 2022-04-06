@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   userDate: FormControl;
   usersInfo: any = [];
   userName: any = [];
-  currenUser: any;
+  currentUser: any;
   constructor(
     private postsService: PostsService,
     private notifyService: NotificationService,
@@ -37,37 +37,25 @@ export class PostsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.currenUser = this.usersService.currentProfile;
+    this.currentUser = this.usersService.currentProfile;
     this.search = new FormControl('');
     this.userDate = new FormControl('')
   }
 
   ngOnInit(): void {
     this.givUsersName();
-    this.changeUserFormControl();
-    this.changeTitleControl();
     this.checkQueryParams()
   }
-  private changeUserFormControl(): void {
-    this.userDate.valueChanges.pipe(takeUntil(this.unSubscribe$),
-      debounceTime(300)
-    ).subscribe({
-      next: () => {
-        this.sendQueryParams()
-      }
-    })
+  changeUserFormControl(): void {
+    this.sendQueryParams('user', this.userDate.value)
   }
-  private changeTitleControl(): void {
-    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$),
-      debounceTime(300)).subscribe({
-        next: () => {
-          this.sendQueryParams()
-        }
-      })
+  changeTitleControl(): void {
+    this.sendQueryParams('search', this.search.value)
   }
   private checkQueryParams(): void {
     this.activatedRoute.queryParams.pipe(
       takeUntil(this.unSubscribe$),
+      debounceTime(300),
       distinctUntilChanged()
     )
       .subscribe((params: any) => {
@@ -93,12 +81,14 @@ export class PostsComponent implements OnInit, OnDestroy {
         return of([]);
       }));
   }
-  sendQueryParams() {
+  sendQueryParams(key: string, value: string | number) {
     this.router.navigate(['/posts'], {
       queryParams: {
-        search: this.search.value,
-        user: this.userDate.value
+        [key]: value
+        // search: this.search.value,
+        // user: this.userDate.value
       },
+      queryParamsHandling: 'merge',
       relativeTo: this.activatedRoute
     })
   }
@@ -133,8 +123,8 @@ export class PostsComponent implements OnInit, OnDestroy {
   givUsersName(): void {
     this.users$ = this.usersService.getAllUsers().pipe(
       map((data: any) => {
-        data.results = data.results.filter((val: any) => val.id !== this.currenUser.id);
-        data.results.unshift(this.currenUser);
+        data.results = data.results.filter((val: any) => val.id !== this.currentUser.id);
+        data.results.unshift(this.currentUser);
         return data.results;
       })
     )
