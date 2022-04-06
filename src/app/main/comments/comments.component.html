@@ -4,7 +4,7 @@
     </div>
     <div class="writeComment">
         <div class="imgContent">
-            <img class="userImg" [src]="postsModel?.user?.profilePictureUrl || 'assets/default.png'" />
+            <img class="userImg" [src]="currentUser.profilePictureUrl || 'assets/default.png'" />
         </div>
         <div class="commentMessage">
             <textarea name="" id="" cols="65" rows="7" [formControl]="text" maxlength="255"></textarea>

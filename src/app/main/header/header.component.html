@@ -9,7 +9,7 @@
         <a routerLinkActive="active" routerLink="/posts">Posts</a>
 
         <div class="userMenu">
-            <img class="userImg" src="assets/default.png" >
+            <img class="userImg" [src]="currentUser.profilePictureUrl || 'assets/default.png'" >
             <div class="caretIcon">
                 <fa-icon class="caretDown open" [icon]="faCaretDown" (click)="showMenu()" ></fa-icon>
             </div>
