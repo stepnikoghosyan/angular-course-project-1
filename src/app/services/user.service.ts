@@ -20,6 +20,7 @@ export class UserService {
     return this.httpClient.get<UserModel>(`${environment.apiUrl}/users/my-profile`)
       .pipe(tap((user: UserModel) => {
         this.user = user;
+        this.pictureChanged.next(user);
       }));
   }
 
