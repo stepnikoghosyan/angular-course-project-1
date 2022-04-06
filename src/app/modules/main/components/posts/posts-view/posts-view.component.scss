@@ -54,6 +54,7 @@ p {
         margin: 0 auto;
         width: 450px;
         height: 330px;
+        border: 1px solid lightgrey;
 
         img {
             width: 100%;
@@ -63,7 +64,7 @@ p {
 
     .post_body {
         p {
-            margin-top: 25px;
+            margin-top: 50px;
             font-size: 20px;
         }
     }

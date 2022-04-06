@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize, Subject, takeUntil } from 'rxjs';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ConfirmPasswordValidator } from '../../customValidators/confirmPasswordValidator';
+import { imageSizeValidation, imgTypeValidation } from '../../customValidators/imgValidator';
 import { GetUserModel } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
@@ -35,7 +37,8 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private usersService: UsersService) { }
+        private usersService: UsersService,
+        private notfyService: NotificationService) { }
 
     get form() {
         return this.settingsForm.controls;
@@ -69,6 +72,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
                 .subscribe({
                     next: () => {
                         console.log("updated");
+                        this.notfyService.success('Your information has been updated.', 'Success!!')
                         this.form['password'].reset();
                         this.form['confirmPassword'].reset()
                     },

@@ -4,6 +4,10 @@
         <div class="img_container">
             <img [src]=" targetValue | setUserImage" (error)="onImageError()" alt="image of the user" >
         </div>
+        <div>  
+            <span  class="error-message" *ngIf="form['profilePicture'].errors?.['type']"> The type of image must be jpeg, jpg, png type</span>
+            <span class="error-message"  *ngIf="form['profilePicture'].errors?.['size']"> The size of image is greater then 2 Mg</span>
+        </div>
         <div class="settings_buttons">
             <input  #file id ="profilePicture" hidden formControlName="profilePicture" type="file"
             name ="profilePicture" accept='image/*' (change) = "onSelectFile(file.files)" /> 

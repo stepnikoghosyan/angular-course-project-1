@@ -3,7 +3,7 @@
     <div class="create_post">
         <form [formGroup]="filterForm">
             <input type="text" placeholder="Search by Title" formControlName="searchByTitle">
-            <!-- <i class="fas fa-search"></i> -->
+            <i class="fas fa-search"></i>
             <ng-select placeholder="Search by author" [searchable]="true" clearAllText="Clear"
                 (change)="searchByAuthor($event)">
                 <ng-option [value]="user.firstName" *ngFor="let user of users" #selectOption>

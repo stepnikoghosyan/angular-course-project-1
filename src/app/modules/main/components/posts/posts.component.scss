@@ -30,6 +30,15 @@
             border: 1px solid gray;
             padding-left: 10px;
         }
+        form{
+            position: relative;
+        }
+        i {
+            position: absolute;
+            right: 218px;
+            top: 14px;
+            color: gray;
+        }
     }
 
     .posts {
@@ -58,13 +67,12 @@ ng-select {
 
 .ngx-pagination .current,
 .btn-info {
-    background: #31b1a5 !important;
+    background-color: #31b1a5 !important;
     border: transparent !important;
     border-radius: 20px !important;
     margin-top: 100px !important;
     cursor: pointer;
 }
-
 .my_pagination ::ng-deep .ngx-pagination {
     margin-top: 100px;
     padding-bottom: 100px;
