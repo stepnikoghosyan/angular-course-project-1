@@ -11,7 +11,7 @@
 </div>
 <div class="search filter">
     <select  class="filterBy" name="Search By Author" size="0" [formControl] = "userDate">
-      <option  disabled selected hidden>Search By Author</option>
+      <option value="" disabled selected hidden>Search By Author</option>
       <option [value] = "user.id" *ngFor="let user of users$ | async">
         {{user.id == currenUser.id?'@Me':user.firstName+' '+ user.lastName}}
       </option>

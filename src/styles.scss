@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~ngx-toastr/toastr';
-
+body{
+    font-family: sans-serif;
+}
 .main{
   display: flex;
   height: 100vh;
@@ -19,7 +21,7 @@
     width: 500px;
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: sans-serif;
 }
 
 .main .formErr{

@@ -68,11 +68,12 @@ a:visited{
 .menu{
     list-style: none;
     position: absolute;
-    right: 2.5%;
-    top: 100%;
+    right: -15%;
+    top: 130%;
     box-shadow: rgb(116 124 133 / 20%) -11px 11px 24px;
     background-color: rgb(247, 247, 247);
     width: 100px;
+    padding-right: 10px;
 }
 
 .menu a {
