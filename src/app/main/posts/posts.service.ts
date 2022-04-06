@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError,  Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { PaginationModel } from 'src/app/models/pagination.model';
 import { PostDto, PostsModelDto } from 'src/app/models/post.model';
 import { PostsModel } from 'src/app/models/posts.model';
@@ -20,23 +20,31 @@ export class PostsService {
     private router: Router
   ) { }
 
-  getPosts(userID?: number): Observable<PaginationModel<PostsModel>> {
-    const queryParams = this.postsQueryParams(userID)
+  getPosts(params?: any) {
+    // if (userID) {
+    //   const queryParams = this.postsQueryParams(userID)
+    // } else {
+
+    // }    
+    const httpParams = params ? this.createParams(params) : {};
+    // console.log(httpParams);
 
     return this.httpClient.get<PaginationModel<PostsModel>>(`${this.baseUrl}posts`, {
-      params: queryParams
+      params: httpParams
     })
-
   }
+  createParams(params: any) {
+    let httpParams = new HttpParams();
+    Object.keys(params).forEach((key) => {    
+      httpParams = httpParams.append(key, params[key]);
+    })
+    return httpParams;
+  }
+  postsQueryParams(userID?: any) {
+    return new HttpParams()
+      .append('userId', userID)
+      .append('showAll', false)
 
-  postsQueryParams (userId?: number) {
-    if(userId) {
-      return new HttpParams()
-      .append('userId', userId)
-    }else {
-      return new HttpParams()
-      .append('showAll', true)
-    }
   }
 
   createPost(obj: PostDto) {
@@ -58,7 +66,7 @@ export class PostsService {
 
   getPostById(id: number) {
     return this.httpClient.get<PostsModelDto>(`${this.baseUrl}posts/${id}`)
-     
+
   }
 
   updatePost(id: number, obj: PostDto) {

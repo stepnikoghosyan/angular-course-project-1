@@ -1,12 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, debounceTime, finalize, map, of, Subject, switchMap, takeUntil} from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, finalize, map, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { PostsModel } from 'src/app/models/posts.model';
 import { NotificationService } from 'src/app/notification-service/notification.service';
 import { PostsService } from './posts.service';
 import { faMagnifyingGlass, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
 import { UsersService } from '../users/users.service';
+import { UserModelDto } from 'src/app/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -19,104 +22,122 @@ export class PostsComponent implements OnInit, OnDestroy {
   faCaretDown = faCaretDown;
   unSubscribe$ = new Subject<void>();
   isLoading = true;
-  posts: any;
+  posts$: Observable<PostsModel[]> = of([]);
+  users$: Observable<UserModelDto[]> = of([]);
+
   search: FormControl;
+  userDate: FormControl;
   usersInfo: any = [];
-  users: any = [];
-  author: FormControl;
-  
+  userName: any = [];
+  currenUser: any;
   constructor(
     private postsService: PostsService,
     private notifyService: NotificationService,
     private usersService: UsersService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {
+    this.currenUser = this.usersService.currentProfile;
     this.search = new FormControl('');
-    this.author = new FormControl('');
+    this.userDate = new FormControl('')
   }
 
   ngOnInit(): void {
-    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$),
-    debounceTime(300))
-    .subscribe({
-      next: (value: string) => {
-        this.isLoading = false;
-        this.router.navigate(['/posts'], {
-          queryParams: {
-            userId: value
-          }
-        }
-        )
+    this.givUsersName();
+    this.changeUserFormControl();
+    this.changeTitleControl();
+    this.checkQueryParams()
+  }
+  private changeUserFormControl(): void {
+    this.userDate.valueChanges.pipe(takeUntil(this.unSubscribe$),
+      debounceTime(300)
+    ).subscribe({
+      next: () => {
+        this.sendQueryParams()
       }
     })
+  }
+  private changeTitleControl(): void {
+    this.search.valueChanges.pipe(takeUntil(this.unSubscribe$),
+      debounceTime(300)).subscribe({
+        next: () => {
+          this.sendQueryParams()
+        }
+      })
+  }
+  private checkQueryParams(): void {
+    this.activatedRoute.queryParams.pipe(
+      takeUntil(this.unSubscribe$),
+      distinctUntilChanged()
+    )
+      .subscribe((params: any) => {
+        this.search.setValue(params.search ? params.search : '');
+        this.userDate.setValue(params.user ? params.user : null);
+        this.getPosts();
+      })
+  }
+  private getPosts(): void {
+    const params = {
+      userID: this.userDate.value ? this.userDate.value : '',
+      showAll: true,
+      title: this.search.value ? this.search.value : ''
+    }
+    this.posts$ = this.postsService.getPosts(params).pipe(
+      takeUntil(this.unSubscribe$),
+      finalize(() => {
+        this.isLoading = false;
+      }),
+      map(data => data.results),
+      catchError((error: HttpErrorResponse) => {
+        this.notifyService.showError(error.error.message, 'Error');
+        return of([]);
+      }));
+  }
+  sendQueryParams() {
+    this.router.navigate(['/posts'], {
+      queryParams: {
+        search: this.search.value,
+        user: this.userDate.value
+      },
+      relativeTo: this.activatedRoute
+    })
+  }
+  // getAllUsers() {
+  //   this.postsService.getPosts()
+  //     .pipe(takeUntil(this.unSubscribe$))
+  //     .subscribe({
+  //       next: (res) => {
+  //         this.isLoading = false
+  //         this.posts$ = res.results
+  //       }
+  //     })
 
-    this.activatedRoute.queryParams.pipe(takeUntil(this.unSubscribe$),
-      switchMap((params) => {
-        return this.postsService.getPosts(params['userId'])
+  // }
+
+
+
+  // getUser() {
+  //   this.userDate.valueChanges
+  //     .pipe(takeUntil(this.unSubscribe$))
+  //     .subscribe({
+  //       next: (id: number) => {
+  //         this.postsService.getPosts(id).subscribe((res) => {
+  //           this.posts = res.results
+  //         })
+  //       }
+  //     })
+  // }
+
+
+
+  givUsersName(): void {
+    this.users$ = this.usersService.getAllUsers().pipe(
+      map((data: any) => {
+        data.results = data.results.filter((val: any) => val.id !== this.currenUser.id);
+        data.results.unshift(this.currenUser);
+        return data.results;
       })
     )
-    .subscribe({
-      next: (params) => {
-        this.isLoading = false;
-        this.posts = params.results;
-      }
-    })
-
-    // this.postsService.getPosts().pipe(
-    //   takeUntil(this.unSubscribe$),
-    // ).subscribe({
-    //   next: (data) => {
-    //     this.isLoading = false;
-    //     this.posts = data.results;
-    //   },
-    //   error: (err: HttpErrorResponse) => {
-    //     this.notifyService.showError('error', err.error.message)
-    //   }
-    // })
-
-    this.getUsersName();
-    // this.searchUser();
-
-  }
-
-
-  searchUser(){
-    let userId = 0
-    this.author.valueChanges.pipe(takeUntil(this.unSubscribe$),
-      switchMap((id: number) => {
-        this.isLoading = false;
-        userId = id;
-
-        return this.postsService.getPosts(id);
-      
-      }),
-    ) .subscribe({
-      next: (data) => {
-       this.isLoading = false;
-       this.posts = data.results;
-      
-       this.router.navigate(['/posts'], 
-       {
-         queryParams: {
-           userId: userId
-         }
-       }
-       )
-      }
-    })
-   
-  }
-
-
-
-  getUsersName() {
-    this.usersService.getAllUsers().subscribe(val => {
-      this.usersInfo = val;
-      this.users = this.usersInfo.results;
-      this.users.unshift({ firstName: '', lastName: '@ME'});
-    })
-
   }
 
 
