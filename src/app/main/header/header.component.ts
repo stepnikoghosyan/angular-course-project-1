@@ -11,9 +11,14 @@ import { UsersService } from '../users/users.service';
 export class HeaderComponent implements OnInit {
   faCaretDown=faCaretDown;
   isMenu = false;
-  constructor(private router: Router, private userService: UsersService) { }
+  currentUser: any;
+  constructor(private router: Router, private userService: UsersService) { 
+    this.currentUser = this.userService.currentProfile
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   
   
   showMenu(){

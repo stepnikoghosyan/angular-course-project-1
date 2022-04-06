@@ -5,6 +5,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { createCommentModel } from '../../models/coments.model';
 import { PostsService } from '../posts/posts.service';
+import { UsersService } from '../users/users.service';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -16,6 +18,8 @@ export class CommentsComponent implements OnInit {
   faPaperPlane = faPaperPlane;
   unSubscribe$ = new Subject();
   text = new FormControl('');
+  currentUser: any;
+  
 
   @Input() postsModel?: PostsModel = {} as PostsModel;
   @Input()
@@ -29,10 +33,13 @@ export class CommentsComponent implements OnInit {
   @Output() userComments = new EventEmitter<createCommentModel>();
   constructor(
     private postsService: PostsService,
-  ) { }
+    private usersService: UsersService
+  ) {
+    this.currentUser = this.usersService.currentProfile
+   }
 
   ngOnInit(): void {
-    
+ 
    }
 
 
